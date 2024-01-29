@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class SettingsView extends StatelessWidget {
+  const SettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
           child: Center(
         child: Container(
@@ -13,7 +14,9 @@ class LoginView extends StatelessWidget {
             color: Colors.blue,
           ),
           child: Column(
-            children: [],
+            children: [
+              Text("data"),
+            ],
           ),
         ),
       )),

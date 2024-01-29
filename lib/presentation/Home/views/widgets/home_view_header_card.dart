@@ -1,3 +1,5 @@
+import 'package:easy_erp/core/helper/app_routing.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helper/app_colors.dart';
@@ -56,7 +58,12 @@ class _HomeViewHeaderCardState extends State<HomeViewHeaderCard> {
             Column(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    GlobalMethods.goRouterNavigateTO(
+                      context: context,
+                      router: AppRouters.kSettings,
+                    );
+                  },
                   icon: Icon(Icons.settings),
                 ),
                 IconButton(

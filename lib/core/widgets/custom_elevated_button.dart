@@ -7,6 +7,7 @@ import '../helper/global_methods.dart';
 class CustomElevatedButton extends StatelessWidget {
   final double? width;
   final Color backgroundColor;
+  final Color titleColor;
   final String title;
   final Function()? onPressed;
 
@@ -14,6 +15,7 @@ class CustomElevatedButton extends StatelessWidget {
       {super.key,
       this.width,
       this.backgroundColor = AppColors.primaryColorBlue,
+      this.titleColor = AppColors.whiteColor,
       required this.title,
       this.onPressed});
   @override
@@ -30,6 +32,7 @@ class CustomElevatedButton extends StatelessWidget {
           onPressed: onPressed,
           child: Text(
             title,
+            style: TextStyle(color: titleColor),
           )),
     );
   }

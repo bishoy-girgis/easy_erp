@@ -1,4 +1,5 @@
 import 'package:easy_erp/presentation/Login/views/login_view.dart';
+import 'package:easy_erp/presentation/Settings/views/settings_view.dart';
 import 'package:easy_erp/presentation/Splash/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +10,7 @@ abstract class AppRouters {
   static const kLogin = "/loginView";
 
   static const kHome = "/loginView/home";
+  static const kSettings = "/settings";
   // static const kUserProfileScreen = "/UserProfileScreen";
   // static const kCardScreen = "/CardScreen";
   // static const kAllProductsScreen = "/AllProductsScreen";
@@ -27,12 +29,12 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kHome,
-        builder: (context, state) => HomeView(),
+        builder: (context, state) => const HomeView(),
       ),
-      // GoRoute(
-      //   path: kUserProfileScreen,
-      //   builder: (context, state) => const UserProfileScreen(),
-      // ),
+      GoRoute(
+        path: kSettings,
+        builder: (context, state) => const SettingsView(),
+      ),
       // GoRoute(
       //   path: kCardScreen,
       //   builder: (context, state) => const CardScreen(),
