@@ -16,7 +16,7 @@ class WelcomeMrSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextBuilder(
           AppLocalizations.of(context)!.welcome,
@@ -27,7 +27,7 @@ class WelcomeMrSection extends StatelessWidget {
         TextBuilder(
           name,
           isHeader: true,
-          color: AppColors.blackColor,
+          color: Colors.blueGrey,
           fontSize: 20.sp,
           textAlign: TextAlign.end,
         ),

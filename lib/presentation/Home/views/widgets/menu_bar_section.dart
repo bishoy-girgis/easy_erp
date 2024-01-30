@@ -1,3 +1,4 @@
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +24,7 @@ class MenuBarSection extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
-          color: AppColors.secondColorOrange,
+          color: Colors.blueGrey,
           borderRadius: BorderRadius.circular(16),
         ),
         child: isMenuOpen
@@ -42,7 +43,13 @@ class MenuBarSection extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      SharedPref.remove(key: "userName");
+                      GlobalMethods.goRouterNavigateTOAndReplacement(
+                        context: context,
+                        router: AppRouters.kLogin,
+                      );
+                    },
                     icon: Icon(
                       Icons.logout,
                       color: AppColors.whiteColor,

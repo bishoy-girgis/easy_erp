@@ -22,7 +22,7 @@ class AppNameAndMenuButtonSection extends StatelessWidget {
         IconButton(
           icon: Icon(
             Icons.menu,
-            color: AppColors.primaryColorBlue,
+            color: Colors.blueGrey,
           ),
           onPressed: onMenuPressed,
         ),

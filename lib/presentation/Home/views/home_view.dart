@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../Login/views/widgets/change_language_section.dart';
 import 'widgets/app_name_and_menu_button_section.dart';
 import 'widgets/category_widget.dart';
 import 'widgets/home_view_header_card.dart';
@@ -21,10 +22,13 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     var l = AppLocalizations.of(context)!;
     final List<CategoryWidget> categories = [
-      CategoryWidget(categoryName: l.exchange),
-      CategoryWidget(categoryName: l.invoises),
-      CategoryWidget(categoryName: l.items),
-      CategoryWidget(categoryName: l.exchange),
+      CategoryWidget(icon: Icons.category_rounded, categoryName: l.items),
+      CategoryWidget(icon: Icons.attach_money, categoryName: l.invoises),
+      CategoryWidget(icon: Icons.people_rounded, categoryName: l.customers),
+      CategoryWidget(
+          icon: Icons.keyboard_return_rounded, categoryName: l.returns),
+      CategoryWidget(icon: Icons.receipt_long, categoryName: l.recceipt),
+      CategoryWidget(icon: Icons.payments_rounded, categoryName: l.exchange),
     ];
     var name = SharedPref.get(key: 'userName');
     var size = Utils(context: context).screenSize;
@@ -37,7 +41,7 @@ class HomeView extends StatelessWidget {
           child: Column(
             children: [
               HomeViewHeaderCard(name: name),
-              GapH(h: 3),
+              const GapH(h: 3),
               // HomeViewHeaderCard(name: name),
               // SizedBox(
               //   height: size.height * .5,
@@ -53,17 +57,25 @@ class HomeView extends StatelessWidget {
               //     },
               //   ),
               // ),
-              Expanded(
+              SizedBox(
+                height: size.height * .40,
                 child: GridView(
                   // itemCount: 6,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 20.w,
-                      childAspectRatio: 2.r,
+                      childAspectRatio: 1.9.r,
                       mainAxisSpacing: 20.h),
                   children: categories,
                 ),
               ),
+              const GapH(h: 2),
+              CategoryWidget(
+                categoryName: l.close_shift,
+                icon: Icons.access_time_filled_rounded,
+              ),
+              const Spacer(),
+              const ChangeLanguagesSection(),
             ],
           ),
         ),

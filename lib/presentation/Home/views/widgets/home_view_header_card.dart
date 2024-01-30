@@ -52,7 +52,7 @@ class _HomeViewHeaderCardState extends State<HomeViewHeaderCard> {
                 ),
                 const Divider(
                   thickness: 2,
-                  color: AppColors.primaryColorBlue,
+                  // color: AppColors.primaryColorBlue,
                 ),
                 WelcomeMrSection(
                   name: widget.name,

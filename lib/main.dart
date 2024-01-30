@@ -17,7 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
 
-  String languageCode = SharedPref.get(key: 'languageCode');
+  String languageCode = SharedPref.get(key: 'languageCode') ?? 'en';
 
   runApp(MyApp(
     language: languageCode,
@@ -63,8 +63,10 @@ class MyApp extends StatelessWidget {
                 locale: languagesProvider.locale,
                 title: 'Easy ERP',
                 theme: ThemeData(
-                  scaffoldBackgroundColor: AppColors.primaryColorBlue,
-                  // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                  // primaryColor: Colors.blueGrey,
+                  primarySwatch: Colors.blueGrey,
+                  scaffoldBackgroundColor: Colors.blueGrey,
+                  colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
                   useMaterial3: true,
                 ),
               );
