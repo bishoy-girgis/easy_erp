@@ -20,7 +20,7 @@ class TextBuilder extends StatelessWidget {
     this.isOverflow = false,
     this.isCanceled = false,
     this.color = AppColors.primaryColorBlue,
-    this.fontSize = 20,
+    this.fontSize = 18,
   });
 
   @override

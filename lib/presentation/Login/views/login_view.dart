@@ -110,6 +110,12 @@ class _LoginViewState extends State<LoginView> {
                       //   GlobalMethods.goRouterNavigateTO(
                       //       context: context, router: AppRouters.kHome);
                       // }
+                      // var userName = userNameController.text;
+                      // var password = passwordController.text;
+                      SharedPref.set(
+                          key: 'userName', value: userNameController.text);
+                      SharedPref.set(
+                          key: 'password', value: passwordController.text);
                       GlobalMethods.goRouterNavigateTO(
                           context: context, router: AppRouters.kHome);
                     },

@@ -10,8 +10,9 @@ import '../../../../core/widgets/text_builder.dart';
 class WelcomeMrSection extends StatelessWidget {
   const WelcomeMrSection({
     super.key,
+    required this.name,
   });
-
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +25,7 @@ class WelcomeMrSection extends StatelessWidget {
           isHeader: true,
         ),
         TextBuilder(
-          "User Name",
+          name,
           isHeader: true,
           color: AppColors.blackColor,
           fontSize: 20.sp,
