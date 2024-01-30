@@ -31,6 +31,7 @@ class TextBuilder extends StatelessWidget {
       overflow: isOverflow ? TextOverflow.ellipsis : null,
       textAlign: textAlign,
       style: TextStyle(
+        fontFamily: 'Cairo',
         color: color,
         fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
         fontSize: isCanceled ? 15.sp : fontSize?.sp,

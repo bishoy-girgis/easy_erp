@@ -9,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'widgets/app_name_and_menu_button_icon.dart';
+import 'widgets/app_name_and_menu_button_section.dart';
+import 'widgets/category_widget.dart';
 import 'widgets/home_view_header_card.dart';
 import 'widgets/welcome_mr_section.dart';
 
@@ -18,10 +19,17 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var l = AppLocalizations.of(context)!;
+    final List<CategoryWidget> categories = [
+      CategoryWidget(categoryName: l.exchange),
+      CategoryWidget(categoryName: l.invoises),
+      CategoryWidget(categoryName: l.items),
+      CategoryWidget(categoryName: l.exchange),
+    ];
     var name = SharedPref.get(key: 'userName');
     var size = Utils(context: context).screenSize;
     return Scaffold(
-      appBar: AppBar(),
+      // appBar: AppBar(),
       body: SafeArea(
           child: Center(
         child: Padding(
@@ -31,28 +39,31 @@ class HomeView extends StatelessWidget {
               HomeViewHeaderCard(name: name),
               GapH(h: 3),
               // HomeViewHeaderCard(name: name),
-              Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: AppColors.whiteColor,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.home_max,
-                        // textDirection: TextDirection.RTL,
-                      ),
-                      GapH(h: 1),
-                      TextBuilder(
-                        "Category",
-                        isHeader: true,
-                        // fontSize: ,
-                      ),
-                    ],
-                  )),
+              // SizedBox(
+              //   height: size.height * .5,
+              //   child: GridView.builder(
+              //     itemCount: 6,
+              //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //         crossAxisCount: 2,
+              //         crossAxisSpacing: 20.w,
+              //         childAspectRatio: 1.6.r,
+              //         mainAxisSpacing: 20.h),
+              //     itemBuilder: (context, index) {
+              //       return CategoryWidget();
+              //     },
+              //   ),
+              // ),
+              Expanded(
+                child: GridView(
+                  // itemCount: 6,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 20.w,
+                      childAspectRatio: 2.r,
+                      mainAxisSpacing: 20.h),
+                  children: categories,
+                ),
+              ),
             ],
           ),
         ),

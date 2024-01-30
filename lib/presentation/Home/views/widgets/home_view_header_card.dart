@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helper/app_colors.dart';
-import 'app_name_and_menu_button_icon.dart';
+import 'app_name_and_menu_button_section.dart';
 import 'menu_bar_section.dart';
 import 'welcome_mr_section.dart';
 
@@ -32,7 +32,7 @@ class _HomeViewHeaderCardState extends State<HomeViewHeaderCard> {
           color: AppColors.whiteColor,
           boxShadow: [
             const BoxShadow(
-              color: AppColors.blackColor,
+              color: Colors.black45,
               spreadRadius: 1,
               blurRadius: 10,
               offset: Offset(0, 0),
