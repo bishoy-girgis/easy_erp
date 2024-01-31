@@ -54,6 +54,22 @@ class GlobalMethods {
       extra: extraObject,
     );
   }
+
+  static goRouterPOP(
+    BuildContext context,
+  ) {
+    return GoRouter.of(context).pop();
+  }
+
+  static Future goRouterNavigateTOWithQueryParameters(
+      {required BuildContext context,
+      required String router,
+      required Map<String, dynamic> queryParameters}) {
+    return GoRouter.of(context).pushNamed(
+      router,
+      queryParameters: queryParameters,
+    );
+  }
 }
 
 enum ToastStates { SUCCESS, ERROR, WARNING }

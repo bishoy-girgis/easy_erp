@@ -1,4 +1,6 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/helper/app_routing.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/utils.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
@@ -22,8 +24,25 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     var l = AppLocalizations.of(context)!;
     final List<CategoryWidget> categories = [
-      CategoryWidget(icon: Icons.category_rounded, categoryName: l.items),
-      CategoryWidget(icon: Icons.attach_money, categoryName: l.invoises),
+      CategoryWidget(
+        icon: Icons.category_rounded,
+        categoryName: l.items,
+        onTap: () {
+          GlobalMethods.goRouterNavigateTO(
+            context: context,
+            router: AppRouters.kItems,
+          );
+        },
+      ),
+      CategoryWidget(
+          icon: Icons.attach_money,
+          categoryName: l.invoises,
+          onTap: () {
+            GlobalMethods.goRouterNavigateTO(
+              context: context,
+              router: AppRouters.kInvoices,
+            );
+          }),
       CategoryWidget(icon: Icons.people_rounded, categoryName: l.customers),
       CategoryWidget(
           icon: Icons.keyboard_return_rounded, categoryName: l.returns),
@@ -46,30 +65,33 @@ class HomeView extends StatelessWidget {
               // SizedBox(
               //   height: size.height * .5,
               //   child: GridView.builder(
-              //     itemCount: 6,
+              //     physics: NeverScrollableScrollPhysics(),
+              //     itemCount: categories.length,
               //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               //         crossAxisCount: 2,
               //         crossAxisSpacing: 20.w,
               //         childAspectRatio: 1.6.r,
               //         mainAxisSpacing: 20.h),
               //     itemBuilder: (context, index) {
-              //       return CategoryWidget();
+              //       return categories[index];
               //     },
               //   ),
               // ),
               SizedBox(
                 height: size.height * .40,
                 child: GridView(
+                  physics: NeverScrollableScrollPhysics(),
                   // itemCount: 6,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 20.w,
-                      childAspectRatio: 1.9.r,
-                      mainAxisSpacing: 20.h),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20.w,
+                    childAspectRatio: 1.9.r,
+                    mainAxisSpacing: 20.h,
+                  ),
                   children: categories,
                 ),
               ),
-              const GapH(h: 2),
+              const GapH(h: 1),
               CategoryWidget(
                 categoryName: l.close_shift,
                 icon: Icons.access_time_filled_rounded,

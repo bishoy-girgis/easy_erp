@@ -21,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
   final Color notFocusedBorderColor;
   final Color focusedBorderColor;
   final int? maxLines;
+  final FocusNode? focusNode;
 
   const CustomTextFormField({
     super.key,
@@ -38,11 +39,12 @@ class CustomTextFormField extends StatelessWidget {
     this.isSecure = false,
     this.onSubmit,
     this.maxLines = 1,
+    this.focusNode,
     this.onChange,
     this.onTap,
     this.backgroundOfTextFeild = Colors.transparent,
-    this.notFocusedBorderColor = Colors.black,
-    this.focusedBorderColor = Colors.blue,
+    this.notFocusedBorderColor = Colors.transparent,
+    this.focusedBorderColor = Colors.transparent,
   });
   @override
   Widget build(BuildContext context) {
@@ -53,8 +55,9 @@ class CustomTextFormField extends StatelessWidget {
         validator: validator,
         controller: controller,
         maxLines: maxLines,
+        focusNode: focusNode,
         decoration: InputDecoration(
-          // floatingLabelBehavior: FloatingLabelBehavior.always,
+          floatingLabelBehavior: FloatingLabelBehavior.never,
           floatingLabelStyle: TextStyle(
             color: focusedBorderColor,
             fontWeight: FontWeight.bold,

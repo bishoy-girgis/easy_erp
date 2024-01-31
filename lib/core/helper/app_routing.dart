@@ -4,6 +4,9 @@ import 'package:easy_erp/presentation/Splash/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../presentation/Home/views/home_view.dart';
+import '../../presentation/Home/views/inner_views/invoices_view/invoices_view.dart';
+import '../../presentation/Home/views/inner_views/invoices_view/preview.dart';
+import '../../presentation/Home/views/inner_views/items_view/items_view.dart';
 
 abstract class AppRouters {
   // GoRouter configuration
@@ -11,6 +14,8 @@ abstract class AppRouters {
 
   static const kHome = "/loginView/home";
   static const kSettings = "/settings";
+  static const kItems = "/loginView/home/items";
+  static const kInvoices = "/loginView/home/invoices";
   // static const kUserProfileScreen = "/UserProfileScreen";
   // static const kCardScreen = "/CardScreen";
   // static const kAllProductsScreen = "/AllProductsScreen";
@@ -35,10 +40,14 @@ abstract class AppRouters {
         path: kSettings,
         builder: (context, state) => const SettingsView(),
       ),
-      // GoRoute(
-      //   path: kCardScreen,
-      //   builder: (context, state) => const CardScreen(),
-      // ),
+      GoRoute(
+        path: kItems,
+        builder: (context, state) => ItemsView(),
+      ),
+      GoRoute(
+        path: kInvoices,
+        builder: (context, state) => InvoicesView(),
+      ),
       // GoRoute(
       //   path: kViewAllOnSaleProductsScreen,
       //   // name: "ViewAllOnSaleProductsScreen",

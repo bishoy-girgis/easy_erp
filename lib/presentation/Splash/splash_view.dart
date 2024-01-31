@@ -72,7 +72,6 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     double _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: AppColors.primaryColorBlue,
       body: Stack(
         children: [
           Column(

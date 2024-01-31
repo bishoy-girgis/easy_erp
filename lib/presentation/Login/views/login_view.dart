@@ -40,7 +40,7 @@ class _LoginViewState extends State<LoginView> {
     var loginProvider = Provider.of<LoginProvider>(context);
     var size = Utils(context: context).screenSize;
     return Scaffold(
-      backgroundColor: AppColors.primaryColorBlue,
+      // backgroundColor: AppColors.primaryColorBlue,
       body: SafeArea(
           child: Center(
         child: Container(
@@ -112,12 +112,17 @@ class _LoginViewState extends State<LoginView> {
                       // }
                       // var userName = userNameController.text;
                       // var password = passwordController.text;
-                      SharedPref.set(
-                          key: 'userName', value: userNameController.text);
-                      SharedPref.set(
-                          key: 'password', value: passwordController.text);
-                      GlobalMethods.goRouterNavigateTO(
-                          context: context, router: AppRouters.kHome);
+                      FocusScope.of(context).unfocus();
+                      Future.delayed(
+                        Duration(seconds: 2),
+                      ).then((value) {
+                        SharedPref.set(
+                            key: 'userName', value: userNameController.text);
+                        SharedPref.set(
+                            key: 'password', value: passwordController.text);
+                        GlobalMethods.goRouterNavigateTO(
+                            context: context, router: AppRouters.kHome);
+                      });
                     },
                     width: double.infinity,
                     title: AppLocalizations.of(context)!.login,

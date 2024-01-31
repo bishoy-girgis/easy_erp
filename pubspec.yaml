@@ -29,7 +29,6 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
-  flare_flutter: ^3.0.2
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -40,7 +39,11 @@ dependencies:
   go_router: ^13.1.0
   intl: any
   pdf: ^3.10.7
+  permission_handler: ^11.2.0
+  printing: ^5.11.1
   provider: ^6.1.1
+  qr_code_scanner: ^1.0.1
+  remix: ^0.0.1-dev.1
   shared_preferences: ^2.2.2
 
 dev_dependencies:

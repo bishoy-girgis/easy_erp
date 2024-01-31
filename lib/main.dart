@@ -64,6 +64,9 @@ class MyApp extends StatelessWidget {
                 title: 'Easy ERP',
                 theme: ThemeData(
                   // primaryColor: Colors.blueGrey,
+                  appBarTheme: AppBarTheme(
+                    backgroundColor: Colors.transparent,
+                  ),
                   primarySwatch: Colors.blueGrey,
                   scaffoldBackgroundColor: Colors.blueGrey,
                   colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
