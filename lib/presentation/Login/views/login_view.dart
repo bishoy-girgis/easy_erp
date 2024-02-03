@@ -127,7 +127,17 @@ class _LoginViewState extends State<LoginView> {
                     width: double.infinity,
                     title: AppLocalizations.of(context)!.login,
                   ),
-                  ChangeLanguagesSection()
+                  ChangeLanguagesSection(),
+                  TextButton.icon(
+                    onPressed: () {
+                      GlobalMethods.goRouterNavigateTOAndReplacement(
+                        context: context,
+                        router: AppRouters.kSettings,
+                      );
+                    },
+                    icon: Icon(Icons.arrow_back_ios_new_rounded),
+                    label: Text("Go to Settings"),
+                  ),
                 ],
               ),
             ),

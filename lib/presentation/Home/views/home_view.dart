@@ -54,52 +54,66 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       // appBar: AppBar(),
       body: SafeArea(
-          child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              HomeViewHeaderCard(name: name),
-              const GapH(h: 3),
-              // HomeViewHeaderCard(name: name),
-              // SizedBox(
-              //   height: size.height * .5,
-              //   child: GridView.builder(
-              //     physics: NeverScrollableScrollPhysics(),
-              //     itemCount: categories.length,
-              //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //         crossAxisCount: 2,
-              //         crossAxisSpacing: 20.w,
-              //         childAspectRatio: 1.6.r,
-              //         mainAxisSpacing: 20.h),
-              //     itemBuilder: (context, index) {
-              //       return categories[index];
-              //     },
-              //   ),
-              // ),
-              SizedBox(
-                height: size.height * .40,
-                child: GridView(
-                  physics: NeverScrollableScrollPhysics(),
-                  // itemCount: 6,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20.w,
-                    childAspectRatio: 1.9.r,
-                    mainAxisSpacing: 20.h,
-                  ),
-                  children: categories,
-                ),
+          child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: HomeViewHeaderCard(name: name)),
+            SliverToBoxAdapter(child: GapH(h: 3)),
+            // HomeViewHeaderCard(name: name),
+            // SizedBox(
+            //   height: size.height * .5,
+            //   child: GridView.builder(
+            //     physics: NeverScrollableScrollPhysics(),
+            //     itemCount: categories.length,
+            //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //         crossAxisCount: 2,
+            //         crossAxisSpacing: 20.w,
+            //         childAspectRatio: 1.6.r,
+            //         mainAxisSpacing: 20.h),
+            //     itemBuilder: (context, index) {
+            //       return categories[index];
+            //     },
+            //   ),
+            // ),
+            SliverGrid.builder(
+              //  physics: NeverScrollableScrollPhysics(),
+              itemCount: categories.length,
+              // delegate: SliverChildListDelegate(categories),
+              itemBuilder: (context, index) {
+                return categories[index];
+              },
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 20.w,
+                childAspectRatio: 1.9.r,
+                mainAxisSpacing: 20.h,
               ),
-              const GapH(h: 1),
-              CategoryWidget(
+              // children: categories,
+              // child: GridView(
+              //   physics: NeverScrollableScrollPhysics(),
+              //   // itemCount: 6,
+              //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //     crossAxisCount: 2,
+              //     crossAxisSpacing: 20.w,
+              //     childAspectRatio: 1.9.r,
+              //     mainAxisSpacing: 20.h,
+              //   ),
+              //   children: categories,
+              // ),
+            ),
+            SliverToBoxAdapter(child: GapH(h: 3)),
+
+            SliverToBoxAdapter(
+              child: CategoryWidget(
                 categoryName: l.close_shift,
                 icon: Icons.access_time_filled_rounded,
               ),
-              const Spacer(),
-              const ChangeLanguagesSection(),
-            ],
-          ),
+            ),
+            SliverToBoxAdapter(child: GapH(h: 5)),
+
+            SliverToBoxAdapter(child: ChangeLanguagesSection()),
+          ],
         ),
       )),
     );

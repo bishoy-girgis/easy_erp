@@ -1,8 +1,5 @@
-import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:flutter/material.dart';
-
 import '../helper/app_colors.dart';
-import '../helper/global_methods.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final double? width;
@@ -24,9 +21,12 @@ class CustomElevatedButton extends StatelessWidget {
       width: width,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
+            elevation: 5,
+            animationDuration: Duration(seconds: 1),
+            shadowColor: Colors.black,
             backgroundColor: backgroundColor,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(12),
             ),
           ),
           onPressed: onPressed,

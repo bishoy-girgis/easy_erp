@@ -1,3 +1,4 @@
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Login/views/login_view.dart';
 import 'package:easy_erp/presentation/Settings/views/settings_view.dart';
 import 'package:easy_erp/presentation/Splash/splash_view.dart';
@@ -5,7 +6,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../presentation/Home/views/home_view.dart';
 import '../../presentation/Home/views/inner_views/invoices_view/invoices_view.dart';
-import '../../presentation/Home/views/inner_views/invoices_view/preview.dart';
 import '../../presentation/Home/views/inner_views/items_view/items_view.dart';
 
 abstract class AppRouters {
@@ -16,7 +16,7 @@ abstract class AppRouters {
   static const kSettings = "/settings";
   static const kItems = "/loginView/home/items";
   static const kInvoices = "/loginView/home/invoices";
-  // static const kUserProfileScreen = "/UserProfileScreen";
+  static const kCreateInvoice = "/loginView/home/invoices/createInvoice";
   // static const kCardScreen = "/CardScreen";
   // static const kAllProductsScreen = "/AllProductsScreen";
   // static const kViewAllOnSaleProductsScreen = "/ViewAllOnSaleProductsScreen";
@@ -48,13 +48,13 @@ abstract class AppRouters {
         path: kInvoices,
         builder: (context, state) => InvoicesView(),
       ),
-      // GoRoute(
-      //   path: kViewAllOnSaleProductsScreen,
-      //   // name: "ViewAllOnSaleProductsScreen",
-      //   builder: (context, state) {
-      //     return const ViewAllOnSaleProductsScreen();
-      //   },
-      // ),
+      GoRoute(
+        path: kCreateInvoice,
+        // name: "ViewAllOnSaleProductsScreen",
+        builder: (context, state) {
+          return const CreateInvoiceView();
+        },
+      ),
       // GoRoute(
       //   path: kAllProductsScreen,
       //   // name: "ViewAllOnSaleProductsScreen",

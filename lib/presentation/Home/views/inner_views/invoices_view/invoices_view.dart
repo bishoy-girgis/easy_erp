@@ -1,9 +1,14 @@
-
-
+import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/helper/global_methods.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'details_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InvoicesView extends StatelessWidget {
   InvoicesView({Key? key}) : super(key: key);
@@ -97,44 +102,78 @@ class InvoicesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: _buildBody(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          GlobalMethods.navigateTo(
+            context,
+            CreateInvoiceView(),
+          );
+        },
+        elevation: 10,
+        child: Icon(Icons.add),
+      ),
     );
   }
 
   /// AppBar
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      title: const Text('Bills'),
-      centerTitle: true,
-      // leading:
-      //     IconButton(onPressed: () {}, icon: const Icon(Remix.menu_2_line)),
-      // actions: [
-      //   IconButton(onPressed: () {}, icon: const Icon(Remix.filter_2_line)),
-      //   IconButton(onPressed: () {}, icon: const Icon(Remix.search_2_line)),
-      // ],
+      title: TextBuilder(
+        AppLocalizations.of(context)!.invoises.toLowerCase(),
+        isHeader: true,
+        color: Colors.white,
+      ),
+      foregroundColor: Colors.white,
+      actions: [
+        IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.add_box,
+            ))
+      ],
     );
   }
 
   /// Body
   Widget _buildBody(BuildContext context) {
-    return ListView(
-      children: [
-        ...bills.map(
-          (e) => ListTile(
-            title: Text(e.name),
-            subtitle: Text(e.customer),
-            trailing: Text('\$${e.totalCost().toStringAsFixed(2)}'),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (builder) => DetailPage(singleBillItem: e),
-                ),
-              );
-            },
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        children: [
+          CustomTextFormField(
+            labelText: "Search",
+            hintText: "Search with ID , Code, or Barcode NO",
+            suffixIcon: Icons.search,
+            suffixColor: Colors.blueGrey,
+            prefixIcon: Icons.qr_code_rounded,
+            prefixIconColor: Colors.blueGrey,
+            // backgroundOfTextFeild: Colors.white,
+            prefixPressed: () {},
+            suffixPressed: () {},
           ),
-        ),
-      ],
+          // InvoiceWidget(),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: ListView(
+                padding: EdgeInsets.all(10),
+                children: [
+                  ...bills.map((e) => InvoiceWidget(
+                        e: e,
+                      )),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

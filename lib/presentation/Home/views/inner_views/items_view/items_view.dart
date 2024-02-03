@@ -46,12 +46,14 @@ class ItemsView extends StatelessWidget {
             GapH(h: 1),
             Expanded(
                 child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 color: AppColors.whiteColor,
               ),
               child: ListView.builder(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return ItemWidget();

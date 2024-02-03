@@ -16,15 +16,16 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String)? onSubmit;
   final Function(String)? onChange;
   final Function()? onTap;
-  final bool isClickable = true;
+  final bool isClickable;
   final Color backgroundOfTextFeild;
   final Color notFocusedBorderColor;
   final Color focusedBorderColor;
   final int? maxLines;
   final FocusNode? focusNode;
-
+  final bool readOnly;
   const CustomTextFormField({
     super.key,
+    this.readOnly = false,
     this.controller,
     required this.labelText,
     this.prefixPressed,
@@ -38,11 +39,12 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixPressed,
     this.isSecure = false,
     this.onSubmit,
+    this.isClickable = true,
     this.maxLines = 1,
     this.focusNode,
     this.onChange,
     this.onTap,
-    this.backgroundOfTextFeild = Colors.transparent,
+    this.backgroundOfTextFeild = const Color.fromRGBO(227, 227, 227, 1),
     this.notFocusedBorderColor = Colors.transparent,
     this.focusedBorderColor = Colors.transparent,
   });
@@ -51,12 +53,14 @@ class CustomTextFormField extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+        readOnly: readOnly,
         obscureText: isSecure,
         validator: validator,
         controller: controller,
         maxLines: maxLines,
         focusNode: focusNode,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
           floatingLabelBehavior: FloatingLabelBehavior.never,
           floatingLabelStyle: TextStyle(
             color: focusedBorderColor,
@@ -78,6 +82,7 @@ class CustomTextFormField extends StatelessWidget {
           labelText: labelText,
           labelStyle: const TextStyle(
             // fontSize: 16,
+            fontFamily: "Cairo",
             fontWeight: FontWeight.bold,
           ),
           hintText: hintText,

@@ -70,6 +70,14 @@ class GlobalMethods {
       queryParameters: queryParameters,
     );
   }
+
+  static navigateTo(context, Widget screen) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (builder) => screen,
+      ),
+    );
+  }
 }
 
 enum ToastStates { SUCCESS, ERROR, WARNING }

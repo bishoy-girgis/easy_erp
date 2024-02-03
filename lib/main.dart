@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
@@ -13,15 +14,29 @@ import 'core/helper/app_routing.dart';
 import 'data/providers/localization/localization_provider.dart';
 import 'data/services/local/shared_pref.dart';
 
+// Request necessary permissions
+// var status = await Permission.camera.request();
+
+// // Handle the permission status
+// if (status.isGranted) {
+//   runApp(MyApp());
+// } else {
+//   // Handle permission denied or restricted
+//   print('Permission denied or restricted');
+// }
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
 
   String languageCode = SharedPref.get(key: 'languageCode') ?? 'en';
-
-  runApp(MyApp(
-    language: languageCode,
-  ));
+  var status = await Permission.camera.request();
+  if (status.isGranted) {
+    runApp(MyApp(
+      language: languageCode,
+    ));
+  } else {
+    print("Permission denied or restricted");
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -66,11 +81,13 @@ class MyApp extends StatelessWidget {
                   // primaryColor: Colors.blueGrey,
                   appBarTheme: AppBarTheme(
                     backgroundColor: Colors.transparent,
+                    foregroundColor: Colors.white,
                   ),
                   primarySwatch: Colors.blueGrey,
+
                   scaffoldBackgroundColor: Colors.blueGrey,
                   colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
-                  useMaterial3: true,
+                  // useMaterial3: true,
                 ),
               );
             }),
