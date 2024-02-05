@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -13,6 +14,9 @@ class CustomTextFormField extends StatelessWidget {
   final Function()? suffixPressed;
   final Function()? prefixPressed;
   final bool isSecure;
+  final bool isLabelBold;
+  final bool isContentBold;
+  final bool centerContent;
   final Function(String)? onSubmit;
   final Function(String)? onChange;
   final Function()? onTap;
@@ -26,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     this.readOnly = false,
+    this.centerContent = false,
     this.controller,
     required this.labelText,
     this.prefixPressed,
@@ -38,6 +43,8 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixColor,
     this.suffixPressed,
     this.isSecure = false,
+    this.isLabelBold = false,
+    this.isContentBold = false,
     this.onSubmit,
     this.isClickable = true,
     this.maxLines = 1,
@@ -59,7 +66,13 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         maxLines: maxLines,
         focusNode: focusNode,
+        textAlign: centerContent ? TextAlign.center : TextAlign.justify,
+        style: TextStyle(
+          fontFamily: "Cairo",
+          fontWeight: isContentBold ? FontWeight.bold : FontWeight.normal,
+        ),
         decoration: InputDecoration(
+          alignLabelWithHint: true,
           contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
           floatingLabelBehavior: FloatingLabelBehavior.never,
           floatingLabelStyle: TextStyle(
@@ -79,11 +92,9 @@ class CustomTextFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.0),
             borderSide: BorderSide(color: focusedBorderColor, width: 2),
           ),
-          labelText: labelText,
-          labelStyle: const TextStyle(
-            // fontSize: 16,
-            fontFamily: "Cairo",
-            fontWeight: FontWeight.bold,
+          label: TextBuilder(
+            labelText,
+            isHeader: isLabelBold,
           ),
           hintText: hintText,
           prefixIcon: prefixIcon == null

@@ -10,46 +10,76 @@ class DatePickerWidget extends StatefulWidget {
 }
 
 class _DatePickerWidgetState extends State<DatePickerWidget> {
-  TextEditingController dateController = TextEditingController();
-
-  @override
-  void initState() {
-    dateController.text = ""; //set the initial value of text field
-    super.initState();
-  }
+  TextEditingController dateController = TextEditingController(
+      text: DateFormat('dd/MM/yyyy').format(DateTime.now()));
+  // String date = DateFormat('dd/MM/yyyy').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: CustomTextFormField(
-      labelText: "Date",
-      controller: dateController, //editing controller of this TextField
-      readOnly: true, // when true user cannot edit text
-      onTap: () async {
-        DateTime? pickedDate = await showDatePicker(
+      child: CustomTextFormField(
+        labelText: dateController.text,
+        isContentBold: true,
+        controller: dateController,
+        readOnly: true,
+        onTap: () async {
+          DateTime? pickedDate = await showDatePicker(
             context: context,
-            initialDate: DateTime.now(), //get today's date
-            firstDate: DateTime(
-                2000), //DateTime.now() - not to allow to choose before today.
-            lastDate: DateTime(2101));
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(3000),
+          );
+          if (pickedDate != null) {
+            setState(() {
+              dateController.text = DateFormat('dd/MM/yyyy').format(pickedDate);
+              // date = DateFormat('dd/MM/yyyy').format(pickedDate);
+            });
+          } else {
+            print("Date is not selected");
+          }
+        },
+      ),
+    );
+  }
+}
 
-        if (pickedDate != null) {
-          print(
-              pickedDate); //get the picked date in the format => 2022-07-04 00:00:00.000
-          String formattedDate = DateFormat('yyyy-MM-dd').format(
-              pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
-          print(
-              formattedDate); //formatted date output using intl package =>  2022-07-04
-          //You can format date as per your need
+class HoursAndMinutes extends StatefulWidget {
+  const HoursAndMinutes({super.key});
 
-          setState(() {
-            dateController.text =
-                formattedDate; //set foratted date to TextField value.
-          });
-        } else {
-          print("Date is not selected");
-        }
-      },
-    ));
+  @override
+  State<HoursAndMinutes> createState() => _HoursAndMinutesState();
+}
+
+class _HoursAndMinutesState extends State<HoursAndMinutes> {
+  TextEditingController dateController =
+      TextEditingController(text: DateFormat('HH:MM').format(DateTime.now()));
+  // String date = DateFormat('dd/MM/yyyy').format(DateTime.now());
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CustomTextFormField(
+        labelText: dateController.text,
+        isContentBold: true,
+        controller: dateController,
+        readOnly: true,
+        onTap: () async {
+          DateTime? pickedDate = await showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(3000),
+          );
+          if (pickedDate != null) {
+            setState(() {
+              dateController.text = DateFormat('dd/MM/yyyy').format(pickedDate);
+              // date = DateFormat('dd/MM/yyyy').format(pickedDate);
+            });
+          } else {
+            print("Date is not selected");
+          }
+        },
+      ),
+    );
   }
 }

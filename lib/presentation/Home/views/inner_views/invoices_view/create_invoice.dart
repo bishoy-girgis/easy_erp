@@ -44,7 +44,7 @@ class CreateInvoiceView extends StatelessWidget {
                       children: [
                         Flexible(child: DatePickerWidget()),
                         GapW(w: 1),
-                        Flexible(child: DatePickerWidget()),
+                        Flexible(child: HoursAndMinutes()),
                       ],
                     ),
                   ],
