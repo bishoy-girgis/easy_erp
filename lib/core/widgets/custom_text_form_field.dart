@@ -73,8 +73,6 @@ class CustomTextFormField extends StatelessWidget {
         style: TextStyle(
           fontFamily: "Cairo",
           fontSize: contentSize.sp,
-          // color: backgroundOfTextFeild,
-          // fontWeight: isLabelBold? FontWeight.bold : FontWeight.normal,
           fontWeight: isContentBold ? FontWeight.bold : FontWeight.normal,
         ),
         decoration: InputDecoration(

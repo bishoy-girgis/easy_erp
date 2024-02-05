@@ -28,7 +28,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bloc: ^8.1.2
   cupertino_icons: ^1.0.2
+  dio: ^5.4.0
   dropdown_textfield: ^1.0.8
   flutter:
     sdk: flutter
@@ -44,7 +46,6 @@ dependencies:
   printing: ^5.11.1
   provider: ^6.1.1
   qr_code_scanner: ^1.0.1
-  remix: ^0.0.1-dev.1
   shared_preferences: ^2.2.2
 
 dev_dependencies:

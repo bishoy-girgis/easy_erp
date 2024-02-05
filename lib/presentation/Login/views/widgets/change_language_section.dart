@@ -11,7 +11,6 @@ class ChangeLanguagesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int flag = 0;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

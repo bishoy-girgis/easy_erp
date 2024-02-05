@@ -90,7 +90,7 @@ class _LoginViewState extends State<LoginView> {
                       }
                       return null;
                     },
-                    isSecure: true,
+                    isSecure: loginProvider.isVisability,
                     suffixIcon: loginProvider.isVisability
                         ? Icons.visibility
                         : Icons.visibility_off,
