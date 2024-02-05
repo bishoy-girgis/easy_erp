@@ -1,9 +1,20 @@
-// import 'package:flutter/material.dart';
-// import 'package:get_it/get_it.dart';
-// import 'package:grocery_app/core/helper/utils.dart';
+import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 
-// final getIt = GetIt.instance;
+import '../api_services/api_service.dart';
 
-// void setupForUtils({required BuildContext context}) {
-//   getIt.registerSingleton<Utils>(Utils(context: context));
-// }
+final getIt = GetIt.instance;
+void setupServiceLocatorByGetIt() {
+  getIt.registerSingleton<ApiService>(
+    ApiService(
+      Dio(),
+    ),
+  );
+  getIt.registerSingleton<LoginRepoImplementation>(
+    LoginRepoImplementation(
+      ApiService(
+        Dio(),
+      ),
+    ),
+  );
+}

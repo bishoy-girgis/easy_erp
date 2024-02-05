@@ -5,7 +5,6 @@ import 'package:printing/printing.dart';
 import '../../../../../core/helper/pdf_helper.dart';
 import '../../../../../data/models/invoice_model/invoice_model.dart';
 
-
 class PdfPreviewPage extends StatelessWidget {
   final BillModel bill;
   const PdfPreviewPage({Key? key, required this.bill}) : super(key: key);
