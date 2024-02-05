@@ -22,6 +22,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
         isContentBold: true,
         controller: dateController,
         readOnly: true,
+        centerContent: true,
         onTap: () async {
           DateTime? pickedDate = await showDatePicker(
             context: context,
@@ -32,7 +33,6 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           if (pickedDate != null) {
             setState(() {
               dateController.text = DateFormat('dd/MM/yyyy').format(pickedDate);
-              // date = DateFormat('dd/MM/yyyy').format(pickedDate);
             });
           } else {
             print("Date is not selected");
@@ -43,42 +43,27 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
   }
 }
 
-class HoursAndMinutes extends StatefulWidget {
-  const HoursAndMinutes({super.key});
+class HoursAndMinutes extends StatelessWidget {
+  HoursAndMinutes({super.key});
 
-  @override
-  State<HoursAndMinutes> createState() => _HoursAndMinutesState();
-}
+  TextEditingController timeController = TextEditingController();
 
-class _HoursAndMinutesState extends State<HoursAndMinutes> {
-  TextEditingController dateController =
-      TextEditingController(text: DateFormat('HH:MM').format(DateTime.now()));
-  // String date = DateFormat('dd/MM/yyyy').format(DateTime.now());
+  final DateTime dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
+    int hour = dateTime.hour % 12;
+    int minute = dateTime.minute;
+    String period = dateTime.hour >= 12 ? 'PM' : 'AM';
+    timeController = TextEditingController(text: '$hour:$minute $period');
+
     return Center(
       child: CustomTextFormField(
-        labelText: dateController.text,
+        centerContent: true,
+        labelText: timeController.text,
         isContentBold: true,
-        controller: dateController,
+        controller: timeController,
         readOnly: true,
-        onTap: () async {
-          DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(2000),
-            lastDate: DateTime(3000),
-          );
-          if (pickedDate != null) {
-            setState(() {
-              dateController.text = DateFormat('dd/MM/yyyy').format(pickedDate);
-              // date = DateFormat('dd/MM/yyyy').format(pickedDate);
-            });
-          } else {
-            print("Date is not selected");
-          }
-        },
       ),
     );
   }

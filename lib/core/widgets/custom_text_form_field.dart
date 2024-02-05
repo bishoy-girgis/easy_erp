@@ -1,5 +1,6 @@
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
@@ -17,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool isLabelBold;
   final bool isContentBold;
   final bool centerContent;
+  final double contentSize;
   final Function(String)? onSubmit;
   final Function(String)? onChange;
   final Function()? onTap;
@@ -35,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.labelText,
     this.prefixPressed,
     this.hintText,
+    this.contentSize = 18,
     this.keyboardType,
     this.prefixIcon,
     this.prefixIconColor,
@@ -69,6 +72,9 @@ class CustomTextFormField extends StatelessWidget {
         textAlign: centerContent ? TextAlign.center : TextAlign.justify,
         style: TextStyle(
           fontFamily: "Cairo",
+          fontSize: contentSize.sp,
+          // color: backgroundOfTextFeild,
+          // fontWeight: isLabelBold? FontWeight.bold : FontWeight.normal,
           fontWeight: isContentBold ? FontWeight.bold : FontWeight.normal,
         ),
         decoration: InputDecoration(
@@ -95,6 +101,7 @@ class CustomTextFormField extends StatelessWidget {
           label: TextBuilder(
             labelText,
             isHeader: isLabelBold,
+            // textAlign: TextAlign.center,
           ),
           hintText: hintText,
           prefixIcon: prefixIcon == null
