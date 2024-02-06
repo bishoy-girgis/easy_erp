@@ -1,7 +1,11 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/data/providers/login/login_provider.dart';
+import 'package:easy_erp/data/repositories/login_Repo_imp.dart';
 import 'package:easy_erp/l10n/l10n.dart';
+import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,22 +18,13 @@ import 'core/helper/app_routing.dart';
 import 'data/providers/localization/localization_provider.dart';
 import 'data/services/local/shared_pref.dart';
 
-// Request necessary permissions
-// var status = await Permission.camera.request();
-
-// // Handle the permission status
-// if (status.isGranted) {
-//   runApp(MyApp());
-// } else {
-//   // Handle permission denied or restricted
-//   print('Permission denied or restricted');
-// }
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
 
   String languageCode = SharedPref.get(key: 'languageCode') ?? 'en';
   var status = await Permission.camera.request();
+  setupServiceLocatorByGetIt();
   if (status.isGranted) {
     runApp(MyApp(
       language: languageCode,
@@ -57,8 +52,10 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider(
                 create: (context) => LanguageProvider(),
               ),
-              ChangeNotifierProvider(
-                create: (context) => LoginProvider(),
+              BlocProvider(
+                create: (context) => LoginCubit(
+                  getIt.get<LoginRepoImplementation>(),
+                ),
               ),
             ],
             child: Builder(builder: (context) {

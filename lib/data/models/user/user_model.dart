@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable {
+class UserModel extends Equatable {
   final String? accessToken;
   final String? tokenType;
   final int? expiresIn;
@@ -8,13 +8,13 @@ class User extends Equatable {
   final int? branchId;
   final int? whId;
   final int? ccId;
-  final int? discP;
+  final double? discP;
   final int? empId;
   final int? companyId;
   final int? vatType;
-  final int? vat;
+  final double? vat;
 
-  const User({
+  const UserModel({
     this.accessToken,
     this.tokenType,
     this.expiresIn,
@@ -29,19 +29,19 @@ class User extends Equatable {
     this.vat,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        accessToken: json['access_token'] as String?,
-        tokenType: json['token_type'] as String?,
-        expiresIn: json['expires_in'] as int?,
-        userName: json['UserName'] as String?,
-        branchId: json['BranchId'] as int?,
-        whId: json['whId'] as int?,
-        ccId: json['CCId'] as int?,
-        discP: json['DiscP'] as int?,
-        empId: json['EmpId'] as int?,
-        companyId: json['CompanyId'] as int?,
-        vatType: json['VATType'] as int?,
-        vat: json['VAT'] as int?,
+  factory UserModel.fromJson(dynamic json) => UserModel(
+        accessToken: json['access_token'],
+        tokenType: json['token_type'],
+        expiresIn: json['expires_in'],
+        userName: json['UserName'],
+        branchId: json['BranchId'],
+        whId: json['whId'],
+        ccId: json['CCId'],
+        discP: json['DiscP'],
+        empId: json['EmpId'],
+        companyId: json['CompanyId'],
+        vatType: json['VATType'],
+        vat: json['VAT'],
       );
 
   Map<String, dynamic> toJson() => {

@@ -5,7 +5,7 @@ class CustomElevatedButton extends StatelessWidget {
   final double? width;
   final Color backgroundColor;
   final Color titleColor;
-  final String title;
+  final Widget title;
   final Function()? onPressed;
 
   const CustomElevatedButton(
@@ -18,8 +18,8 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      child: ElevatedButton(
+        width: width,
+        child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 5,
             animationDuration: Duration(seconds: 1),
@@ -30,10 +30,7 @@ class CustomElevatedButton extends StatelessWidget {
             ),
           ),
           onPressed: onPressed,
-          child: Text(
-            title,
-            style: TextStyle(color: titleColor),
-          )),
-    );
+          child: title,
+        ));
   }
 }

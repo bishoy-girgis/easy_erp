@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:easy_erp/data/repositories/login_Repo_imp.dart';
 import 'package:get_it/get_it.dart';
 
 import '../api_services/api_service.dart';
@@ -11,10 +12,6 @@ void setupServiceLocatorByGetIt() {
     ),
   );
   getIt.registerSingleton<LoginRepoImplementation>(
-    LoginRepoImplementation(
-      ApiService(
-        Dio(),
-      ),
-    ),
+    LoginRepoImplementation(getIt.get<ApiService>()),
   );
 }
