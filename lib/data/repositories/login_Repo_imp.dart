@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_erp/core/api_services/api_service.dart';
@@ -28,12 +26,8 @@ class LoginRepoImplementation extends LoginRepo {
       );
 
       UserModel userModel = UserModel.fromJson(data);
-      print('😒😒😒 Token Type : ' + userModel.tokenType.toString());
-      print('😒😒😒 Token: ' + userModel.accessToken.toString());
       return right(userModel);
     } catch (e) {
-      print("ERROR IN CACH ERROR LOGIN REPO IMP😡😡");
-      print('😡😡' + e.toString());
       if (e is DioException) {
         return left(ServerError.fromDioError(e));
       } else {

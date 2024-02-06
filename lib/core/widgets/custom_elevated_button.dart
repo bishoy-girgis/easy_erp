@@ -17,12 +17,12 @@ class CustomElevatedButton extends StatelessWidget {
       this.onPressed});
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         width: width,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 5,
-            animationDuration: Duration(seconds: 1),
+            animationDuration: const Duration(seconds: 1),
             shadowColor: Colors.black,
             backgroundColor: backgroundColor,
             shape: RoundedRectangleBorder(

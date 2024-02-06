@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class Failures {
   final String errorMessage;
@@ -21,7 +22,7 @@ class ServerError extends Failures {
       case DioExceptionType.badCertificate:
         return ServerError("Bad Certificate with Api Server");
       case DioExceptionType.badResponse:
-        print("😡😡😡BAD Response😡😡😡");
+        debugPrint("😡😡😡BAD Response😡😡😡");
         GlobalMethods.buildFlutterToast(
             message: "BAD Response", state: ToastStates.ERROR);
         return ServerError.fromBadResponse(

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import '../../../../../core/helper/global_methods.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../data/models/invoice_model/invoice_model.dart';
-import 'details_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InvoicesView extends StatelessWidget {
@@ -109,11 +108,11 @@ class InvoicesView extends StatelessWidget {
         onPressed: () {
           GlobalMethods.navigateTo(
             context,
-            CreateInvoiceView(),
+            const CreateInvoiceView(),
           );
         },
         elevation: 10,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -130,7 +129,7 @@ class InvoicesView extends StatelessWidget {
       actions: [
         IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.add_box,
             ))
       ],
@@ -157,13 +156,13 @@ class InvoicesView extends StatelessWidget {
           // InvoiceWidget(),
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(
                 color: AppColors.whiteColor,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: ListView(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 children: [
                   ...bills.map((e) => InvoiceWidget(
                         e: e,

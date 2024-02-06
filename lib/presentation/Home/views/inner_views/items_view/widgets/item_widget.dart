@@ -20,8 +20,8 @@ class ItemWidget extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: Colors.blueGrey,
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
               color: Colors.black45,
               spreadRadius: 1,
               blurRadius: 5,
@@ -40,8 +40,8 @@ class ItemWidget extends StatelessWidget {
             ),
           ),
         ),
-        GapW(w: 1),
-        Expanded(
+        const GapW(w: 1),
+        const Expanded(
           flex: 4,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,

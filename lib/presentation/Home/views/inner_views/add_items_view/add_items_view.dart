@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/helper/app_colors.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
-import '../items_view/widgets/item_widget.dart';
 
 class AddItemsView extends StatelessWidget {
   const AddItemsView({super.key});
@@ -34,12 +33,12 @@ class AddItemsView extends StatelessWidget {
           // AddItemWidget(),
           Expanded(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 color: AppColors.whiteColor,
               ),
               child: GridView.builder(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10.w,
@@ -59,19 +58,17 @@ class AddItemsView extends StatelessWidget {
 }
 
 class AddItemWidget extends StatelessWidget {
-  const AddItemWidget({
-    super.key,
-  });
-
+  AddItemWidget({super.key});
+  var priceController = TextEditingController(text: "1");
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Colors.white,
-        boxShadow: [
-          const BoxShadow(
+        boxShadow: const [
+          BoxShadow(
             color: Colors.black45,
             spreadRadius: 1.5,
             blurRadius: 2,
@@ -85,23 +82,23 @@ class AddItemWidget extends StatelessWidget {
         children: [
           Flexible(
             child: CheckboxMenuButton(
-              child: TextBuilder(
-                "data",
-                isHeader: true,
-              ),
               value: false,
               onChanged: (v) {
                 v = !v!;
                 print(v);
               },
+              child: const TextBuilder(
+                "data",
+                isHeader: true,
+              ),
             ),
           ),
-          TextBuilder(
+          const TextBuilder(
             "Test",
             isHeader: true,
             fontSize: 25,
           ),
-          TextBuilder(
+          const TextBuilder(
             "Price",
             isHeader: true,
             fontSize: 16,
@@ -109,32 +106,40 @@ class AddItemWidget extends StatelessWidget {
           ),
           Flexible(
             child: CustomTextFormField(
-              labelText: "",
-              backgroundOfTextFeild: AppColors.primaryColorBlue,
+              labelText: priceController.text,
+              backgroundOfTextFeild: Colors.blueGrey,
+              centerContent: true,
+              contentSize: 20,
+              controller: priceController,
+              isContentBold: true,
+              onChange: (value) {
+                priceController.text = value;
+              },
             ),
           ),
-          TextBuilder(
+          const TextBuilder(
             "Qnt",
             isHeader: true,
             fontSize: 16,
             // color: Colors.,
           ),
-          Flexible(
+          const Flexible(
             child: CustomTextFormField(
               labelText: "",
-              backgroundOfTextFeild: AppColors.primaryColorBlue,
+              backgroundOfTextFeild: Colors.blueGrey,
+              centerContent: true,
             ),
           ),
-          TextBuilder(
+          const TextBuilder(
             "Discount",
             isHeader: true,
             fontSize: 16,
             // color: Colors.,
           ),
-          Flexible(
+          const Flexible(
             child: CustomTextFormField(
               labelText: "",
-              backgroundOfTextFeild: AppColors.primaryColorBlue,
+              backgroundOfTextFeild: Colors.blueGrey,
             ),
           ),
         ],

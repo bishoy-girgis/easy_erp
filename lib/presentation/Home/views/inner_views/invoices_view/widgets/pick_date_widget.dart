@@ -45,14 +45,12 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
 }
 
 class HoursAndMinutes extends StatelessWidget {
-  HoursAndMinutes({super.key});
-
-  TextEditingController timeController = TextEditingController();
-
-  final DateTime dateTime = DateTime.now();
+  const HoursAndMinutes({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final DateTime dateTime = DateTime.now();
+    TextEditingController timeController = TextEditingController();
     int hour = dateTime.hour % 12;
     int minute = dateTime.minute;
     String period = dateTime.hour >= 12 ? 'PM' : 'AM';

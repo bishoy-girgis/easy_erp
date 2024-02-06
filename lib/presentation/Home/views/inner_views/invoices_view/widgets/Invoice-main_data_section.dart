@@ -17,12 +17,12 @@ class InvoiceMainDataSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: AppColors.whiteColor,
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.black,
                 blurRadius: 5,
               )
@@ -30,39 +30,39 @@ class InvoiceMainDataSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextBuilder(
+            const TextBuilder(
               "Invoice ID",
               isHeader: true,
               fontSize: 16,
             ),
-            CustomTextFormField(
+            const CustomTextFormField(
               labelText: "AUTO ",
               centerContent: true,
               isLabelBold: true,
               isClickable: false,
               // readOnly: true,
             ),
-            GapH(h: 1),
-            TextBuilder(
+            const GapH(h: 1),
+            const TextBuilder(
               "Invoice Date",
               isHeader: true,
               fontSize: 16,
             ),
             Row(
               children: [
-                Flexible(child: DatePickerWidget()),
-                GapW(w: 1),
+                const Flexible(child: DatePickerWidget()),
+                const GapW(w: 1),
                 Flexible(child: HoursAndMinutes()),
               ],
             ),
-            SearchOnCustomerNameSection(),
-            GapH(h: 1),
-            TextBuilder(
+            const SearchOnCustomerNameSection(),
+            const GapH(h: 1),
+            const TextBuilder(
               "Invoice Type",
               isHeader: true,
               fontSize: 16,
             ),
-            SellectCashOrPostponeSection(),
+            const SellectCashOrPostponeSection(),
           ],
         ),
       ),
