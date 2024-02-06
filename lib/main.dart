@@ -43,52 +43,49 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(360, 690),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, _) {
-          return MultiProvider(
-            providers: [
-              ChangeNotifierProvider(
-                create: (context) => LanguageProvider(),
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, _) {
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => LanguageProvider(),
+            ),
+            BlocProvider(
+              create: (context) => LoginCubit(
+                getIt.get<LoginRepoImplementation>(),
               ),
-              BlocProvider(
-                create: (context) => LoginCubit(
-                  getIt.get<LoginRepoImplementation>(),
+            ),
+          ],
+          child: Builder(builder: (context) {
+            var languagesProvider = Provider.of<LanguageProvider>(context);
+
+            return MaterialApp.router(
+              routerConfig: AppRouters.router,
+              debugShowCheckedModeBanner: false,
+              supportedLocales: L10n.all,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              locale: languagesProvider.locale,
+              title: 'Easy ERP',
+              theme: ThemeData(
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: Colors.white,
                 ),
+                primarySwatch: Colors.blueGrey,
+                scaffoldBackgroundColor: Colors.blueGrey,
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
               ),
-            ],
-            child: Builder(builder: (context) {
-              var languagesProvider = Provider.of<LanguageProvider>(context);
-
-              return MaterialApp.router(
-                routerConfig: AppRouters.router,
-                debugShowCheckedModeBanner: false,
-                debugShowMaterialGrid: false,
-                supportedLocales: L10n.all,
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                locale: languagesProvider.locale,
-                title: 'Easy ERP',
-                theme: ThemeData(
-                  // primaryColor: Colors.blueGrey,
-                  appBarTheme: AppBarTheme(
-                    backgroundColor: Colors.transparent,
-                    foregroundColor: Colors.white,
-                  ),
-                  primarySwatch: Colors.blueGrey,
-
-                  scaffoldBackgroundColor: Colors.blueGrey,
-                  colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
-                  // useMaterial3: true,
-                ),
-              );
-            }),
-          );
-        });
+            );
+          }),
+        );
+      },
+    );
   }
 }

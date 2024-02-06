@@ -20,9 +20,6 @@ class LoginRepoImplementation extends LoginRepo {
       print("DATA IN LOGIN REPO IMP ✨✨");
       var data = await apiService.post(
         endPoint: AppConstants.LOGIN_AND_TOKEN,
-        // headers: {
-        //   'Content-Type': 'application/x-www-form-urlencoded',
-        // },
         body: {
           'username': userName,
           'password': password,
@@ -30,7 +27,6 @@ class LoginRepoImplementation extends LoginRepo {
         },
       );
 
-      // print("AFTER DATA IN LOGIN REPO IMP  ✨✨" + data['UserName']);
       UserModel userModel = UserModel.fromJson(data);
       print('😒😒😒 Token Type : ' + userModel.tokenType.toString());
       print('😒😒😒 Token: ' + userModel.accessToken.toString());

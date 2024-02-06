@@ -5,11 +5,11 @@ class ApiService {
   final _baseUrl = 'https://www.googleapis.com/books/v1/';
   Dio dio;
   ApiService(this.dio);
-  // Future<Map<String, dynamic>> get({required String endPoint}) async {
-  //   print("In GET API SERVICE");
-  //   var response = await _dio.get('$_baseUrl$endPoint');
-  //   return response.data;
-  // }
+  Future<Map<String, dynamic>> get({required String endPoint}) async {
+    print("In GET API SERVICE");
+    var response = await dio.get('$_baseUrl$endPoint');
+    return response.data;
+  }
 
   Future<Map<String, dynamic>> post({
     required String endPoint,

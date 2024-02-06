@@ -1,4 +1,7 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/helper/app_routing.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
+import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
@@ -29,9 +32,16 @@ class CreateInvoiceView extends StatelessWidget {
             SliverToBoxAdapter(
               child: GapH(h: 1),
             ),
-            // SliverToBoxAdapter(
-            //   child: Container(chi),
-            // ),
+            SliverToBoxAdapter(
+              child: CustomElevatedButton(
+                title: Text("FFF"),
+                onPressed: () {
+                  GlobalMethods.goRouterNavigateTO(
+                      context: context,
+                      router: AppRouters.kAddItemsIntoInvoice);
+                },
+              ),
+            ),
           ]),
         ),
       ),
