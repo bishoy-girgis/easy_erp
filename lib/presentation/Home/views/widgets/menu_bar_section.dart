@@ -45,6 +45,7 @@ class MenuBarSection extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       SharedPref.remove(key: "userName");
+                      SharedPref.remove(key: "accessToken");
                       GlobalMethods.goRouterNavigateTOAndReplacement(
                         context: context,
                         router: AppRouters.kLogin,

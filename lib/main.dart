@@ -1,14 +1,17 @@
+import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/bloc_observer.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/data/repositories/login_repo_imp.dart';
 import 'package:easy_erp/l10n/l10n.dart';
+import 'package:easy_erp/presentation/Home/views/home_view.dart';
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
+import 'package:easy_erp/presentation/Login/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'core/helper/app_routing.dart';
@@ -20,15 +23,12 @@ void main() async {
   await SharedPref.init();
   Bloc.observer = MyBlocObserver();
   String languageCode = SharedPref.get(key: 'languageCode') ?? 'en';
-  var status = await Permission.camera.request();
+  // var status = await Permission.camera.request();
   setupServiceLocatorByGetIt();
-  if (status.isGranted) {
-    runApp(MyApp(
-      language: languageCode,
-    ));
-  } else {
-    print("Permission denied or restricted");
-  }
+
+  runApp(MyApp(
+    language: languageCode,
+  ));
 }
 
 class MyApp extends StatelessWidget {

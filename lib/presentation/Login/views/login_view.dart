@@ -121,14 +121,15 @@ class _LoginViewState extends State<LoginView> {
                                     SharedPref.set(
                                         key: 'accessToken',
                                         value: state.userModel.accessToken);
-                                    GlobalMethods.buildFlutterToast(
-                                      message: "Welcome to Easy ERP App",
-                                      state: ToastStates.SUCCESS,
-                                    );
+
                                     GlobalMethods
                                         .goRouterNavigateTOAndReplacement(
                                             context: context,
                                             router: AppRouters.kHome);
+                                    GlobalMethods.buildFlutterToast(
+                                      message: "Welcome to Easy ERP App",
+                                      state: ToastStates.SUCCESS,
+                                    );
                                   } else if (state is LoginFailureState) {
                                     GlobalMethods.buildFlutterToast(
                                         message: state.error,

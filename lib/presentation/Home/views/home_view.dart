@@ -44,7 +44,12 @@ class HomeView extends StatelessWidget {
                 context: context, router: AppRouters.kCustomers);
           }),
       CategoryWidget(
-          icon: Icons.keyboard_return_rounded, categoryName: l.returns),
+          icon: Icons.keyboard_return_rounded,
+          categoryName: l.returns,
+          onTap: () {
+            GlobalMethods.goRouterNavigateTO(
+                context: context, router: AppRouters.kReturns);
+          }),
       CategoryWidget(icon: Icons.receipt_long, categoryName: l.recceipt),
       CategoryWidget(icon: Icons.payments_rounded, categoryName: l.exchange),
     ];

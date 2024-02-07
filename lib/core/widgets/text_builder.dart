@@ -18,7 +18,7 @@ class TextBuilder extends StatelessWidget {
     this.isHeader = true,
     this.isOverflow = false,
     this.isCanceled = false,
-    this.color = Colors.blueGrey,
+    this.color = Colors.black,
     this.fontSize = 18,
   });
 
