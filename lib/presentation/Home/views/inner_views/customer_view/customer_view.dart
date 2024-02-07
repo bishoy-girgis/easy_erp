@@ -22,10 +22,7 @@ class CustomerView extends StatelessWidget {
               hintText: "Search with Customer name",
               suffixIcon: Icons.search,
               suffixColor: Colors.blueGrey,
-              prefixIcon: Icons.qr_code_rounded,
-              prefixIconColor: Colors.blueGrey,
               backgroundOfTextFeild: Colors.white,
-              prefixPressed: () {},
               suffixPressed: () {},
             ),
             const GapH(h: 1),
@@ -41,7 +38,11 @@ class CustomerView extends StatelessWidget {
                   ),
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return const CustomerWidget();
+                    return const CustomerWidget(
+                      id: 1,
+                      name: "Yusuf",
+                      phone: "445",
+                    );
                   }),
             ))
           ],

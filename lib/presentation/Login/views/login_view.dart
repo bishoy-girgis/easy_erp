@@ -103,41 +103,46 @@ class _LoginViewState extends State<LoginView> {
                         labelText: AppLocalizations.of(context)!.password,
                         hintText: AppLocalizations.of(context)!.passwordHint,
                       ),
-                      CustomElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            await loginCubit.userLogin(
-                              userName: userNameController.text,
-                              password: passwordController.text,
-                            );
-                            if (state is LoginSuccessState) {
-                              SharedPref.set(
-                                  key: 'userName',
-                                  value: state.userModel.userName);
-                              SharedPref.set(
-                                  key: 'accessToken',
-                                  value: state.userModel.accessToken);
-                              GlobalMethods.buildFlutterToast(
-                                message: "Welcome to Easy ERP App",
-                                state: ToastStates.SUCCESS,
-                              );
-
-                              GlobalMethods.goRouterNavigateTOAndReplacement(
-                                  context: context, router: AppRouters.kHome);
-                            } else if (state is LoginFailureState) {
-                              GlobalMethods.buildFlutterToast(
-                                  message: state.error,
-                                  state: ToastStates.ERROR);
-                            }
-                          }
-                          FocusScope.of(context).unfocus();
-                        },
-                        width: double.infinity,
-                        title: TextBuilder(
-                          AppLocalizations.of(context)!.login,
-                          color: AppColors.whiteColor,
-                        ),
-                      ),
+                      state is LoginLoadingState
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : CustomElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  await loginCubit.userLogin(
+                                    userName: userNameController.text,
+                                    password: passwordController.text,
+                                  );
+                                  if (state is LoginSuccessState) {
+                                    SharedPref.set(
+                                        key: 'userName',
+                                        value: state.userModel.userName);
+                                    SharedPref.set(
+                                        key: 'accessToken',
+                                        value: state.userModel.accessToken);
+                                    GlobalMethods.buildFlutterToast(
+                                      message: "Welcome to Easy ERP App",
+                                      state: ToastStates.SUCCESS,
+                                    );
+                                    GlobalMethods
+                                        .goRouterNavigateTOAndReplacement(
+                                            context: context,
+                                            router: AppRouters.kHome);
+                                  } else if (state is LoginFailureState) {
+                                    GlobalMethods.buildFlutterToast(
+                                        message: state.error,
+                                        state: ToastStates.ERROR);
+                                  }
+                                }
+                                FocusScope.of(context).unfocus();
+                              },
+                              width: double.infinity,
+                              title: TextBuilder(
+                                AppLocalizations.of(context)!.login,
+                                color: AppColors.whiteColor,
+                              ),
+                            ),
                       const ChangeLanguagesSection(),
                       TextButton.icon(
                         onPressed: () {

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/helper/app_images.dart';
@@ -6,16 +7,23 @@ import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 
 class CustomerWidget extends StatelessWidget {
+  final int id;
+  final String name;
+  final String phone;
+  final String address;
   const CustomerWidget({
-    super.key,
-  });
-
+    Key? key,
+    required this.id,
+    required this.name,
+    required this.phone,
+    this.address = "",
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var size = Utils(context: context).screenSize;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-      // padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -31,6 +39,7 @@ class CustomerWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
+            padding: EdgeInsets.symmetric(vertical: 5),
             decoration: BoxDecoration(
               color: Colors.blueGrey,
               borderRadius: BorderRadius.circular(16),
@@ -39,6 +48,7 @@ class CustomerWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.numbers_rounded,
+                  color: Colors.white,
                 ),
                 TextBuilder(
                   "1",
@@ -63,14 +73,16 @@ class CustomerWidget extends StatelessWidget {
               TextBuilder("01065666548"),
             ],
           ),
-          Row(
-            children: [
-              Icon(
-                Icons.location_on_rounded,
-              ),
-              TextBuilder("Address"),
-            ],
-          ),
+          address.isNotEmpty
+              ? Row(
+                  children: [
+                    Icon(
+                      Icons.location_on_rounded,
+                    ),
+                    TextBuilder("Address"),
+                  ],
+                )
+              : Container(),
         ],
       ),
     );

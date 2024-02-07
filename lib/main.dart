@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/bloc_observer.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/data/repositories/login_repo_imp.dart';
 import 'package:easy_erp/l10n/l10n.dart';
@@ -17,7 +18,7 @@ import 'data/services/local/shared_pref.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
-
+  Bloc.observer = MyBlocObserver();
   String languageCode = SharedPref.get(key: 'languageCode') ?? 'en';
   var status = await Permission.camera.request();
   setupServiceLocatorByGetIt();
