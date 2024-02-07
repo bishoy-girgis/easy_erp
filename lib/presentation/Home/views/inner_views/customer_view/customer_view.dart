@@ -1,35 +1,25 @@
-import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
-import 'package:easy_erp/core/widgets/gap.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/widgets/customer_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_colors.dart';
-import '../../../../../core/widgets/text_builder.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../core/widgets/gap.dart';
+import '../items_view/widgets/item_widget.dart';
 
-import 'widgets/item_widget.dart';
-
-class ItemsView extends StatelessWidget {
-  const ItemsView({
-    super.key,
-    // required this.title,
-  });
-  // final String title;
+class CustomerView extends StatelessWidget {
+  const CustomerView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: TextBuilder(
-          AppLocalizations.of(context)!.items.toLowerCase(),
-        ),
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             CustomTextFormField(
               labelText: "Search",
-              hintText: "Search with ID , Code, or Barcode NO",
+              hintText: "Search with Customer name",
               suffixIcon: Icons.search,
               suffixColor: Colors.blueGrey,
               prefixIcon: Icons.qr_code_rounded,
@@ -51,7 +41,7 @@ class ItemsView extends StatelessWidget {
                   ),
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return const ItemWidget();
+                    return const CustomerWidget();
                   }),
             ))
           ],

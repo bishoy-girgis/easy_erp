@@ -100,7 +100,6 @@ class CustomTextFormField extends StatelessWidget {
           label: TextBuilder(
             labelText,
             isHeader: isLabelBold,
-            // textAlign: TextAlign.center,
           ),
           hintText: hintText,
           prefixIcon: prefixIcon == null

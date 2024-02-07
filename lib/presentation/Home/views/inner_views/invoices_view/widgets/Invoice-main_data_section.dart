@@ -159,7 +159,6 @@ class _SearchSectionState extends State<SearchSection> {
             floatingLabelStyle: TextStyle(
               color: widget.focusedBorderColor,
               fontWeight: FontWeight.bold,
-              // fontSize: 16,
             ),
             filled: true,
             fillColor: widget.backgroundOfTextFeild,

@@ -15,7 +15,7 @@ class TextBuilder extends StatelessWidget {
     super.key,
     this.maxLines = 1,
     this.textAlign,
-    this.isHeader = false,
+    this.isHeader = true,
     this.isOverflow = false,
     this.isCanceled = false,
     this.color = Colors.blueGrey,

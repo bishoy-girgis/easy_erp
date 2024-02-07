@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../helper/app_colors.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -7,14 +8,20 @@ class CustomElevatedButton extends StatelessWidget {
   final Color titleColor;
   final Widget title;
   final Function()? onPressed;
-
-  const CustomElevatedButton(
-      {super.key,
-      this.width,
-      this.backgroundColor = Colors.blueGrey,
-      this.titleColor = AppColors.whiteColor,
-      required this.title,
-      this.onPressed});
+  final bool hasBorder;
+  final double borderWidth;
+  final Color borderColor;
+  const CustomElevatedButton({
+    super.key,
+    this.width,
+    this.backgroundColor = Colors.blueGrey,
+    this.titleColor = AppColors.whiteColor,
+    required this.title,
+    this.onPressed,
+    this.hasBorder = false,
+    this.borderWidth = 1.0,
+    this.borderColor = Colors.transparent,
+  });
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -25,6 +32,12 @@ class CustomElevatedButton extends StatelessWidget {
             animationDuration: const Duration(seconds: 1),
             shadowColor: Colors.black,
             backgroundColor: backgroundColor,
+            side: hasBorder
+                ? BorderSide(
+                    width: borderWidth.w,
+                    color: borderColor,
+                  )
+                : null,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),

@@ -1,4 +1,5 @@
 import 'package:easy_erp/presentation/Home/views/inner_views/add_items_view/add_items_view.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/customer_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Login/views/login_view.dart';
 import 'package:easy_erp/presentation/Settings/views/settings_view.dart';
@@ -16,6 +17,7 @@ abstract class AppRouters {
   static const kHome = "/loginView/home";
   static const kSettings = "/settings";
   static const kItems = "/loginView/home/items";
+  static const kCustomers = "/loginView/home/customers";
   static const kInvoices = "/loginView/home/invoices";
   static const kCreateInvoice = "/loginView/home/invoices/createInvoice";
   static const kAddItemsIntoInvoice =
@@ -65,17 +67,12 @@ abstract class AppRouters {
           return const AddItemsView();
         },
       ),
-      // GoRoute(
-      //   path: kAllProductsScreen,
-      //   // name: "ViewAllOnSaleProductsScreen",
-      //   builder: (context, state) {
-      //     return AllProductsScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: kSearchView,
-      //   builder: (context, state) => const SearchView(),
-      // ),
+      GoRoute(
+        path: kCustomers,
+        builder: (context, state) {
+          return const CustomerView();
+        },
+      ),
     ],
   );
 }
