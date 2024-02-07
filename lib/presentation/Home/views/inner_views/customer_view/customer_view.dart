@@ -42,7 +42,6 @@ class CustomerView extends StatelessWidget {
                       id: 1,
                       name: "Yusuf",
                       phone: "445",
-                      // address: "ddd",
                     );
                   }),
             ))

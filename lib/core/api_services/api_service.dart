@@ -2,11 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 
 class ApiService {
-  final _baseUrl = 'https://www.googleapis.com/books/v1/';
+  final _baseUrl = AppConstants.baseUrl;
   Dio dio;
   ApiService(this.dio);
-  Future<Map<String, dynamic>> get({required String endPoint}) async {
-    var response = await dio.get('$_baseUrl$endPoint');
+  Future<Map<String, dynamic>> get({
+    required String endPoint,
+    var body,
+  }) async {
+    var response = await dio.get(
+      '$_baseUrl$endPoint',
+      data: body,
+    );
     return response.data;
   }
 
@@ -16,7 +22,7 @@ class ApiService {
     required var body,
   }) async {
     dio = Dio(BaseOptions(
-      baseUrl: AppConstants.baseUrl,
+      baseUrl: _baseUrl,
       headers: headers,
     ));
     var response = await dio.post(endPoint,

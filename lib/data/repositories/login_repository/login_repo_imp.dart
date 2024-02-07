@@ -4,7 +4,7 @@ import 'package:easy_erp/core/api_services/api_service.dart';
 import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/data/models/user/user_model.dart';
-import 'package:easy_erp/data/repositories/login_Repo.dart';
+import 'package:easy_erp/data/repositories/login_repository/login_Repo.dart';
 
 class LoginRepoImplementation extends LoginRepo {
   ApiService apiService;
