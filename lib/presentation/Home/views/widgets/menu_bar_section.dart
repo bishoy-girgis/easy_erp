@@ -20,9 +20,9 @@ class MenuBarSection extends StatelessWidget {
       // opacity: isMenuOpen ? 1.0 : 0.0,
       width: isMenuOpen ? 55.w : 0,
 
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
+        margin: const EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
           color: Colors.blueGrey,
           borderRadius: BorderRadius.circular(16),
@@ -37,7 +37,7 @@ class MenuBarSection extends StatelessWidget {
                         router: AppRouters.kSettings,
                       );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.settings,
                       color: AppColors.whiteColor,
                     ),
@@ -50,7 +50,7 @@ class MenuBarSection extends StatelessWidget {
                         router: AppRouters.kLogin,
                       );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.logout,
                       color: AppColors.whiteColor,
                     ),

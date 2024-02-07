@@ -1,21 +1,14 @@
-import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
-import 'package:easy_erp/core/helper/utils.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
-import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../../Login/views/widgets/change_language_section.dart';
-import 'widgets/app_name_and_menu_button_section.dart';
 import 'widgets/category_widget.dart';
 import 'widgets/home_view_header_card.dart';
-import 'widgets/welcome_mr_section.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -50,36 +43,16 @@ class HomeView extends StatelessWidget {
       CategoryWidget(icon: Icons.payments_rounded, categoryName: l.exchange),
     ];
     var name = SharedPref.get(key: 'userName');
-    var size = Utils(context: context).screenSize;
     return Scaffold(
-      // appBar: AppBar(),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: HomeViewHeaderCard(name: name)),
-            SliverToBoxAdapter(child: GapH(h: 3)),
-            // HomeViewHeaderCard(name: name),
-            // SizedBox(
-            //   height: size.height * .5,
-            //   child: GridView.builder(
-            //     physics: NeverScrollableScrollPhysics(),
-            //     itemCount: categories.length,
-            //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //         crossAxisCount: 2,
-            //         crossAxisSpacing: 20.w,
-            //         childAspectRatio: 1.6.r,
-            //         mainAxisSpacing: 20.h),
-            //     itemBuilder: (context, index) {
-            //       return categories[index];
-            //     },
-            //   ),
-            // ),
+            const SliverToBoxAdapter(child: const GapH(h: 3)),
             SliverGrid.builder(
-              //  physics: NeverScrollableScrollPhysics(),
               itemCount: categories.length,
-              // delegate: SliverChildListDelegate(categories),
               itemBuilder: (context, index) {
                 return categories[index];
               },
@@ -89,30 +62,16 @@ class HomeView extends StatelessWidget {
                 childAspectRatio: 1.9.r,
                 mainAxisSpacing: 20.h,
               ),
-              // children: categories,
-              // child: GridView(
-              //   physics: NeverScrollableScrollPhysics(),
-              //   // itemCount: 6,
-              //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //     crossAxisCount: 2,
-              //     crossAxisSpacing: 20.w,
-              //     childAspectRatio: 1.9.r,
-              //     mainAxisSpacing: 20.h,
-              //   ),
-              //   children: categories,
-              // ),
             ),
-            SliverToBoxAdapter(child: GapH(h: 3)),
-
+            const SliverToBoxAdapter(child: GapH(h: 3)),
             SliverToBoxAdapter(
               child: CategoryWidget(
                 categoryName: l.close_shift,
                 icon: Icons.access_time_filled_rounded,
               ),
             ),
-            SliverToBoxAdapter(child: GapH(h: 5)),
-
-            SliverToBoxAdapter(child: ChangeLanguagesSection()),
+            const SliverToBoxAdapter(child: GapH(h: 5)),
+            const SliverToBoxAdapter(child: ChangeLanguagesSection()),
           ],
         ),
       )),

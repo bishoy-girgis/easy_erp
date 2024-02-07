@@ -3,8 +3,6 @@ import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/utils.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
-import 'package:easy_erp/data/providers/localization/localization_provider.dart';
-import 'package:easy_erp/data/providers/login/login_provider.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
 import 'package:easy_erp/presentation/Login/views/widgets/change_language_section.dart';
@@ -13,14 +11,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../../../core/helper/app_colors.dart';
 import '../../../core/helper/app_images.dart';
 import '../../../core/widgets/custom_elevated_button.dart';
 
 class LoginView extends StatefulWidget {
-  LoginView({super.key});
+  const LoginView({super.key});
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -114,7 +111,6 @@ class _LoginViewState extends State<LoginView> {
                               password: passwordController.text,
                             );
                             if (state is LoginSuccessState) {
-                              print("✨✨✨" + state.userModel.accessToken!);
                               SharedPref.set(
                                   key: 'userName',
                                   value: state.userModel.userName);
@@ -129,7 +125,6 @@ class _LoginViewState extends State<LoginView> {
                               GlobalMethods.goRouterNavigateTOAndReplacement(
                                   context: context, router: AppRouters.kHome);
                             } else if (state is LoginFailureState) {
-                              print("😒😒😒😒");
                               GlobalMethods.buildFlutterToast(
                                   message: state.error,
                                   state: ToastStates.ERROR);
@@ -143,7 +138,7 @@ class _LoginViewState extends State<LoginView> {
                           color: AppColors.whiteColor,
                         ),
                       ),
-                      ChangeLanguagesSection(),
+                      const ChangeLanguagesSection(),
                       TextButton.icon(
                         onPressed: () {
                           GlobalMethods.goRouterNavigateTOAndReplacement(
@@ -151,8 +146,8 @@ class _LoginViewState extends State<LoginView> {
                             router: AppRouters.kSettings,
                           );
                         },
-                        icon: Icon(Icons.arrow_back_ios_new_rounded),
-                        label: Text("Go to Settings"),
+                        icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                        label: const Text("Go to Settings"),
                       ),
                     ],
                   ),

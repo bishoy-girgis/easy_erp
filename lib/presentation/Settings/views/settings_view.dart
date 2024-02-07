@@ -1,5 +1,3 @@
-import 'package:easy_erp/core/helper/app_colors.dart';
-import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/presentation/Settings/views/widgets/choose_print_model_section.dart';

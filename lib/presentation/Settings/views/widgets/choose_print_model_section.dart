@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helper/app_colors.dart';
-import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/text_builder.dart';
 
 class ChoosePrintModelSection extends StatefulWidget {
@@ -20,28 +19,26 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
 
   @override
   Widget build(BuildContext context) {
-    int selectedButtonIndex = -1;
-
     return SliverToBoxAdapter(
       child: Container(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: AppColors.whiteColor,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
           children: [
-            TextBuilder(
+            const TextBuilder(
               "Choose Print Model",
               isHeader: true,
             ),
-            Divider(),
+            const Divider(),
             Card(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   buildTextButton("A4", 0),
-                  VDividerBuilder(),
+                  const VDividerBuilder(),
                   buildTextButton("A5", 1),
                   // TextButton(
                   //   onPressed: () {},
@@ -51,7 +48,7 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
                   //     fontSize: 14,
                   //   ),
                   // ),
-                  VDividerBuilder(),
+                  const VDividerBuilder(),
                   buildTextButton("A6", 2),
                   // TextButton(
                   //   onPressed: () {},
@@ -64,7 +61,7 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
                 ],
               ),
             ),
-            TextBuilder(
+            const TextBuilder(
               "Host URL that connect app with server data \n  ex: https//www.domain.com/",
               isHeader: true,
               maxLines: 2,
@@ -96,7 +93,7 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
         ),
         child: Text(
           text,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
       ),
     );

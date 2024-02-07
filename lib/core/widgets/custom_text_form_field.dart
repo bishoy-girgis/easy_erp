@@ -61,7 +61,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
         readOnly: readOnly,
         obscureText: isSecure,
@@ -77,7 +77,8 @@ class CustomTextFormField extends StatelessWidget {
         ),
         decoration: InputDecoration(
           alignLabelWithHint: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
           floatingLabelBehavior: FloatingLabelBehavior.never,
           floatingLabelStyle: TextStyle(
             color: focusedBorderColor,

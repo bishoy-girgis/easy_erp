@@ -77,7 +77,6 @@ class AddItemWidget extends StatelessWidget {
         ],
       ),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(

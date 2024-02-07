@@ -1,7 +1,5 @@
 import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
-import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helper/app_colors.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -21,8 +19,6 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
 
   @override
   Widget build(BuildContext context) {
-    int selectedButtonIndex = -1;
-
     return SliverToBoxAdapter(
       child: Container(
         padding: EdgeInsets.all(10.0),

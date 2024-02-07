@@ -1,12 +1,9 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
-import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/helper/app_images.dart';
-import '../../../../../../core/helper/utils.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import '../../../../../../data/models/invoice_model/invoice_model.dart';
@@ -19,7 +16,6 @@ class InvoiceWidget extends StatelessWidget {
   final BillModel e;
   @override
   Widget build(BuildContext context) {
-    var size = Utils(context: context).screenSize;
     return GestureDetector(
       onTap: () {
         GlobalMethods.goRouterNavigateTO(
@@ -66,7 +62,7 @@ class InvoiceWidget extends StatelessWidget {
                       isHeader: true,
                       maxLines: 2,
                     ),
-                    GapH(h: 5),
+                    const GapH(h: 5),
                     const TextBuilder(
                       "6 month ago",
                       color: Colors.white,

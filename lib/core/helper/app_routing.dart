@@ -33,7 +33,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kLogin,
-        builder: (context, state) => LoginView(),
+        builder: (context, state) => const LoginView(),
       ),
       GoRoute(
         path: kHome,
@@ -45,7 +45,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kItems,
-        builder: (context, state) => ItemsView(),
+        builder: (context, state) => const ItemsView(),
       ),
       GoRoute(
         path: kInvoices,

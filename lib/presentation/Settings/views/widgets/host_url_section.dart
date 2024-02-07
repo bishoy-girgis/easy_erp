@@ -13,18 +13,18 @@ class HostUrlSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: AppColors.whiteColor,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
           children: [
-            TextBuilder(
+            const TextBuilder(
               "Host URL",
               isHeader: true,
             ),
-            Divider(),
+            const Divider(),
             CustomTextFormField(
               labelText: "Base URL",
               // hintText: "http://148.113.1.230:1201/",
@@ -34,7 +34,7 @@ class HostUrlSection extends StatelessWidget {
                       ? "http://148.113.1.230:1201/"
                       : baseUrlController.text),
             ),
-            TextBuilder(
+            const TextBuilder(
               "Host URL that connect app with server data \n  ex: https//www.domain.com/",
               isHeader: true,
               maxLines: 2,

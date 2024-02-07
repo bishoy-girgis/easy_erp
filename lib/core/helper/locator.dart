@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:easy_erp/data/repositories/login_Repo_imp.dart';
+import 'package:easy_erp/data/repositories/login_repo_imp.dart';
 import 'package:get_it/get_it.dart';
 
 import '../api_services/api_service.dart';

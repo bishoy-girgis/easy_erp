@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/helper/app_colors.dart';
 import '../../../../core/widgets/text_builder.dart';
 
 class AppNameAndMenuButtonSection extends StatelessWidget {
@@ -15,12 +14,12 @@ class AppNameAndMenuButtonSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        TextBuilder(
+        const TextBuilder(
           "Easy Erp App",
           isHeader: true,
         ),
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.menu,
             color: Colors.blueGrey,
           ),

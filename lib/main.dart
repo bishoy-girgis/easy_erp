@@ -1,7 +1,5 @@
-import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/locator.dart';
-import 'package:easy_erp/data/providers/login/login_provider.dart';
-import 'package:easy_erp/data/repositories/login_Repo_imp.dart';
+import 'package:easy_erp/data/repositories/login_repo_imp.dart';
 import 'package:easy_erp/l10n/l10n.dart';
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +9,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart';
 
 import 'core/helper/app_routing.dart';
 import 'data/providers/localization/localization_provider.dart';
