@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => GetCustomerCubit(
                 customerRepo: getIt.get<CustomerRepoImplementation>(),
-              ),
+              )..getCustomers(),
             ),
           ],
           child: Builder(builder: (context) {

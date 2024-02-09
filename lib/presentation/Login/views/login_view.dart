@@ -15,6 +15,7 @@ import 'package:intl/intl.dart';
 import '../../../core/helper/app_colors.dart';
 import '../../../core/helper/app_images.dart';
 import '../../../core/widgets/custom_elevated_button.dart';
+import '../../../data/models/user/user_model.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -114,7 +115,15 @@ class _LoginViewState extends State<LoginView> {
                                     userName: userNameController.text,
                                     password: passwordController.text,
                                   );
+                                  // UserModel? user = await loginCubit.userLogin(
+                                  //   userName: userNameController.text,
+                                  //   password: passwordController.text,
+                                  // );
                                   if (state is LoginSuccessState) {
+                                    debugPrint(
+                                        "🎄🎄" + state.userModel.userName!);
+                                    debugPrint(
+                                        "🎄🎄" + state.userModel.accessToken!);
                                     SharedPref.set(
                                         key: 'userName',
                                         value: state.userModel.userName);
@@ -131,6 +140,8 @@ class _LoginViewState extends State<LoginView> {
                                       state: ToastStates.SUCCESS,
                                     );
                                   } else if (state is LoginFailureState) {
+                                    debugPrint("🎐🎐" + state.error);
+
                                     GlobalMethods.buildFlutterToast(
                                         message: state.error,
                                         state: ToastStates.ERROR);

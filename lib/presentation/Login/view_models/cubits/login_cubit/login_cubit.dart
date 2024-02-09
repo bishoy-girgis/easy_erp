@@ -1,8 +1,7 @@
 import 'package:easy_erp/data/models/user/user_model.dart';
+import 'package:easy_erp/data/repositories/login_repository/login_Repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../data/repositories/login_Repo.dart';
 
 part 'login_state.dart';
 

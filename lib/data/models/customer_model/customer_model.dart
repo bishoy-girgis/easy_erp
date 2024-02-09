@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class CustomerModel extends Equatable {
   final int? custid;
   final int? custcode;
-  final dynamic custname;
+  final String? custname;
   final String? custename;
   final String? manager;
   final String? emanager;
@@ -26,8 +26,8 @@ class CustomerModel extends Equatable {
   factory CustomerModel.fromJson(Map<String, dynamic> json) => CustomerModel(
         custid: json['custid'] as int?,
         custcode: json['custcode'] as int?,
-        custname: json['custname'] as dynamic,
-        custename: json['custename'] as String?,
+        custname: json['custname'],
+        custename: json['custename'],
         manager: json['manager'] as String?,
         emanager: json['emanager'] as String?,
         fax: json['fax'] as String?,

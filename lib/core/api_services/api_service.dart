@@ -1,17 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 
 class ApiService {
   final _baseUrl = AppConstants.baseUrl;
   Dio dio;
   ApiService(this.dio);
-  Future<Map<String, dynamic>> get({
+  Future<dynamic> get({
     required String endPoint,
     var body,
   }) async {
+    dio.options.headers['Authorization'] = 'Bearer ${AppConstants.accessToken}';
     var response = await dio.get(
       '$_baseUrl$endPoint',
       data: body,
+
+      // options: Options().headers!['Authorization'] = '7RvCv0Kq1ZqPXXRWGWZ60ilMw-qVOoPv1DjB9_K54SCFWrKkOqiRt9LVq2cFkfNk4lxJ2cRbKc9t7Tp7GKe3TKSvYLnRDOxUvLOpjRGHPko0tl__4IxM9fa2KHciW3oVTbZfL1PzidQEBKG4XcTnG5hfS4HPeYivrODARQF9noBL6HCvscs3r-Yze8ervAh6a2cVdqttIeLcuo-0Bujzpw',
     );
     return response.data;
   }

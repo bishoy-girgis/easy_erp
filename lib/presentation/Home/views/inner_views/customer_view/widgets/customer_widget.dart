@@ -1,23 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 
 import '../../../../../../core/helper/utils.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 
 class CustomerWidget extends StatelessWidget {
-  final int id;
-  final String name;
-  final String phone;
-  final String address;
-  final String taxNumber;
+  final CustomerModel customerModel;
   const CustomerWidget({
     Key? key,
-    required this.id,
-    required this.name,
-    required this.phone,
-    this.address = "",
-    this.taxNumber = "",
+    required this.customerModel,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,49 +47,58 @@ class CustomerWidget extends StatelessWidget {
                 ),
                 GapW(w: 2),
                 TextBuilder(
-                  id.toString(),
+                  customerModel.custid.toString(),
                   color: Colors.white,
                 ),
               ],
             ),
           ),
-          Row(
-            children: [
-              Icon(
-                Icons.person,
-              ),
-              GapW(w: 2),
-              TextBuilder(name),
-            ],
-          ),
-          taxNumber.isNotEmpty
+          (customerModel.custname != null &&
+                      customerModel.custname!.isNotEmpty) ||
+                  (customerModel.custename != null &&
+                      customerModel.custename!.isNotEmpty)
+              ? Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                    ),
+                    GapW(w: 2),
+                    customerModel.custname == null
+                        ? TextBuilder(customerModel.custename!)
+                        : TextBuilder(customerModel.custname!),
+                  ],
+                )
+              : Container(),
+          customerModel.fax != null || customerModel.fax!.isNotEmpty
               ? Row(
                   children: [
                     Icon(
                       Icons.app_registration_rounded,
                     ),
                     GapW(w: 2),
-                    TextBuilder(taxNumber),
+                    TextBuilder(customerModel.fax ?? ""),
                   ],
                 )
               : Container(),
-          Row(
-            children: [
-              Icon(
-                Icons.phone,
-              ),
-              GapW(w: 2),
-              TextBuilder(phone),
-            ],
-          ),
-          address.isNotEmpty
+          // customerModel. != null || customerModel.fax!.isNotEmpty
+          //     ? Row(
+          //         children: [
+          //           Icon(
+          //             Icons.phone,
+          //           ),
+          //           GapW(w: 2),
+          //           TextBuilder(phone),
+          //         ],
+          //       )
+          //     : Container(),
+          customerModel.address != null
               ? Row(
                   children: [
                     Icon(
                       Icons.location_on_rounded,
                     ),
                     GapW(w: 2),
-                    TextBuilder("Address"),
+                    TextBuilder(customerModel.address ?? ""),
                   ],
                 )
               : Container(),

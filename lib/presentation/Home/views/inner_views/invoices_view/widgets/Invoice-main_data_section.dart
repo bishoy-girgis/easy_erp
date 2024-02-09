@@ -1,4 +1,7 @@
+import 'package:easy_erp/data/models/customer_model/customer_model.dart';
+import 'package:easy_erp/presentation/Home/view_models/customer_cubit/customer_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:textfield_search/textfield_search.dart';
 
@@ -64,10 +67,11 @@ class InvoiceMainDataSection extends StatelessWidget {
             //     showSearch(context: context, delegate: CustomSearchDelegate());
             //   },
             // ),
+
             SearchSection(
-              searchOnList: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],
               labelText: "Customer",
             ),
+
             const GapH(h: 1),
             const TextBuilder(
               "Invoice Type",
@@ -83,7 +87,6 @@ class InvoiceMainDataSection extends StatelessWidget {
 }
 
 class SearchSection extends StatefulWidget {
-  final List searchOnList;
   final String labelText;
   final String? hintText;
   final TextInputType? keyboardType;
@@ -111,7 +114,6 @@ class SearchSection extends StatefulWidget {
 
   SearchSection({
     super.key,
-    required this.searchOnList,
     this.centerContent = false,
     required this.labelText,
     this.prefixPressed,
@@ -148,66 +150,78 @@ class _SearchSectionState extends State<SearchSection> {
   // @override
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      child: TextFieldSearch(
-          decoration: InputDecoration(
-            alignLabelWithHint: true,
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            floatingLabelStyle: TextStyle(
-              color: widget.focusedBorderColor,
-              fontWeight: FontWeight.bold,
-            ),
-            filled: true,
-            fillColor: widget.backgroundOfTextFeild,
-            border: const OutlineInputBorder(
-                // borderSide: BorderSide(width: 3, color: Colors.yellowAccent),
-                borderRadius: BorderRadius.all(Radius.circular(16))),
-            enabledBorder: OutlineInputBorder(
-                borderSide:
-                    BorderSide(width: 2, color: widget.notFocusedBorderColor),
-                borderRadius: const BorderRadius.all(Radius.circular(16))),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.0),
-              borderSide:
-                  BorderSide(color: widget.focusedBorderColor, width: 2),
-            ),
-            label: TextBuilder(
-              widget.labelText,
-              isHeader: widget.isLabelBold,
-              // textAlign: TextAlign.center,
-            ),
-            hintText: widget.hintText,
-            prefixIcon: widget.prefixIcon == null
-                ? null
-                : IconButton(
-                    onPressed: widget.prefixPressed,
-                    icon: Icon(
-                      widget.prefixIcon,
-                      color: widget.prefixIconColor,
-                    ),
-                  ),
-            suffixIcon: widget.suffixIcon == null
-                ? null
-                : IconButton(
-                    onPressed: widget.suffixPressed,
-                    icon: Icon(
-                      widget.suffixIcon,
-                      color: widget.suffixColor,
-                    ),
-                  ),
-          ),
-          initialList: widget.searchOnList,
-          label: widget.labelText,
-          textStyle: TextStyle(
-            fontFamily: "Cairo",
-            fontSize: widget.contentSize.sp,
-            fontWeight:
-                widget.isContentBold ? FontWeight.bold : FontWeight.normal,
-          ),
-          controller: myController),
+    return BlocConsumer<GetCustomerCubit, GetCustomerState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        List<CustomerModel> customers = GetCustomerCubit.get(context).customers;
+        List<String> customersNames = ["Cash"];
+        for (var customer in customers) {
+          customersNames.add(customer.custname ?? customer.custename ?? "");
+        }
+        return Container(
+          margin: const EdgeInsets.symmetric(vertical: 5),
+          child: TextFieldSearch(
+              decoration: InputDecoration(
+                alignLabelWithHint: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                floatingLabelStyle: TextStyle(
+                  color: widget.focusedBorderColor,
+                  fontWeight: FontWeight.bold,
+                ),
+                filled: true,
+                fillColor: widget.backgroundOfTextFeild,
+                border: const OutlineInputBorder(
+                    // borderSide: BorderSide(width: 3, color: Colors.yellowAccent),
+                    borderRadius: BorderRadius.all(Radius.circular(16))),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        width: 2, color: widget.notFocusedBorderColor),
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                  borderSide:
+                      BorderSide(color: widget.focusedBorderColor, width: 2),
+                ),
+                label: TextBuilder(
+                  widget.labelText,
+                  isHeader: widget.isLabelBold,
+                  // textAlign: TextAlign.center,
+                ),
+                hintText: widget.hintText,
+                prefixIcon: widget.prefixIcon == null
+                    ? null
+                    : IconButton(
+                        onPressed: widget.prefixPressed,
+                        icon: Icon(
+                          widget.prefixIcon,
+                          color: widget.prefixIconColor,
+                        ),
+                      ),
+                suffixIcon: widget.suffixIcon == null
+                    ? null
+                    : IconButton(
+                        onPressed: widget.suffixPressed,
+                        icon: Icon(
+                          widget.suffixIcon,
+                          color: widget.suffixColor,
+                        ),
+                      ),
+              ),
+              initialList: customersNames.length == 0
+                  ? ["No Customers"]
+                  : customersNames,
+              label: widget.labelText,
+              textStyle: TextStyle(
+                fontFamily: "Cairo",
+                fontSize: widget.contentSize.sp,
+                fontWeight:
+                    widget.isContentBold ? FontWeight.bold : FontWeight.normal,
+              ),
+              controller: myController),
+        );
+      },
     );
   }
 }

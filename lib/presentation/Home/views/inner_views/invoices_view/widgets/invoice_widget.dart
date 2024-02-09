@@ -25,7 +25,6 @@ class InvoiceWidget extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5),
-        // height: size.height * .13.h,
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
