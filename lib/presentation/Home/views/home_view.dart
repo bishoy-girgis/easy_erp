@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../Login/views/widgets/change_language_section.dart';
+import '../view_models/categories/categories.dart';
 import 'widgets/category_widget.dart';
 import 'widgets/home_view_header_card.dart';
 
@@ -16,43 +17,8 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var l = AppLocalizations.of(context)!;
-    final List<CategoryWidget> categories = [
-      CategoryWidget(
-        icon: Icons.category_rounded,
-        categoryName: l.items,
-        onTap: () {
-          GlobalMethods.goRouterNavigateTO(
-            context: context,
-            router: AppRouters.kItems,
-          );
-        },
-      ),
-      CategoryWidget(
-          icon: Icons.attach_money,
-          categoryName: l.invoises,
-          onTap: () {
-            GlobalMethods.goRouterNavigateTO(
-              context: context,
-              router: AppRouters.kInvoices,
-            );
-          }),
-      CategoryWidget(
-          icon: Icons.people_rounded,
-          categoryName: l.customers,
-          onTap: () {
-            GlobalMethods.goRouterNavigateTO(
-                context: context, router: AppRouters.kCustomers);
-          }),
-      CategoryWidget(
-          icon: Icons.keyboard_return_rounded,
-          categoryName: l.returns,
-          onTap: () {
-            GlobalMethods.goRouterNavigateTO(
-                context: context, router: AppRouters.kReturns);
-          }),
-      CategoryWidget(icon: Icons.receipt_long, categoryName: l.recceipt),
-      CategoryWidget(icon: Icons.payments_rounded, categoryName: l.exchange),
-    ];
+    final List<CategoryWidget> categories =
+        CategoriesViewModel.getCategories(context);
     var name = SharedPref.get(key: 'userName');
     return Scaffold(
       body: SafeArea(

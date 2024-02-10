@@ -1,6 +1,7 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
+import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,9 +12,9 @@ import '../../../../../../data/models/invoice_model/invoice_model.dart';
 class SelectedItem extends StatelessWidget {
   const SelectedItem({
     super.key,
-    required this.e,
+    required this.itemModel,
   });
-  final BillModel e;
+  final ItemModel itemModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

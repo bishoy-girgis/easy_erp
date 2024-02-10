@@ -1,3 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
@@ -6,16 +9,18 @@ import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
-import 'package:flutter/material.dart';
 
+import '../../../../../data/models/item_model/item_model.dart';
 import 'widgets/Invoice-main_data_section.dart';
 import 'widgets/selected_item.dart';
 
 class CreateInvoiceView extends StatelessWidget {
-  const CreateInvoiceView({super.key});
+  const CreateInvoiceView({required this.items, super.key});
+  final List<ItemModel> items;
 
   @override
   Widget build(BuildContext context) {
+    List<ItemModel>? selectedItems = items;
     return Scaffold(
       appBar: AppBar(
         title: const TextBuilder(
@@ -36,33 +41,39 @@ class CreateInvoiceView extends StatelessWidget {
             const SliverToBoxAdapter(
               child: GapH(h: 1),
             ),
-            SliverToBoxAdapter(
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: AppColors.whiteColor,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Column(children: [
-                  SelectedItem(
-                    e: BillModel(
-                        customer: "customer",
-                        address: "address",
-                        items: [LineItem("description", 120.5)],
-                        name: "name"),
-                  ),
-                  SelectedItem(
-                    e: BillModel(
-                        customer: "customer",
-                        address: "address",
-                        items: [LineItem("description", 120.5)],
-                        name: "name"),
-                  ),
-                ]),
-              ),
+            SelectedItemsToInvoice(
+              items: selectedItems ?? [],
             )
           ]),
         ),
+      ),
+    );
+  }
+}
+
+class SelectedItemsToInvoice extends StatelessWidget {
+  final List<ItemModel> items;
+  const SelectedItemsToInvoice({
+    Key? key,
+    required this.items,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: AppColors.whiteColor,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: items.length == 0
+            ? TextBuilder("No items selected")
+            : ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return SelectedItem(itemModel: items[index]);
+                },
+              ),
       ),
     );
   }

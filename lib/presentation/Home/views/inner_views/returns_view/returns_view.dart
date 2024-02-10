@@ -106,10 +106,10 @@ class ReturnsView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          GlobalMethods.navigateTo(
-            context,
-            const CreateInvoiceView(),
-          );
+          // GlobalMethods.navigateTo(
+          //   context,
+          //   const CreateInvoiceView(),
+          // );
         },
         elevation: 10,
         child: const Icon(Icons.add),

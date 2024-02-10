@@ -1,3 +1,4 @@
+import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/add_items_view/add_items_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/customer_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
@@ -60,7 +61,9 @@ abstract class AppRouters {
         path: kCreateInvoice,
         // name: "ViewAllOnSaleProductsScreen",
         builder: (context, state) {
-          return const CreateInvoiceView();
+          return CreateInvoiceView(
+            items: state.extra as List<ItemModel>,
+          );
         },
       ),
       GoRoute(

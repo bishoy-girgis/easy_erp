@@ -20,12 +20,6 @@ class CustomerRepoImplementation extends CustomerRepo {
       print("DATA IN Customer REPO IMP ✨✨");
       var data = await apiService.get(
         endPoint: AppConstants.GET_CUSTOMERS,
-        // options: Options(
-        //   headers: {
-        //     'Authorization':
-        //         "7RvCv0Kq1ZqPXXRWGWZ60ilMw-qVOoPv1DjB9_K54SCFWrKkOqiRt9LVq2cFkfNk4lxJ2cRbKc9t7Tp7GKe3TKSvYLnRDOxUvLOpjRGHPko0tl__4IxM9fa2KHciW3oVTbZfL1PzidQEBKG4XcTnG5hfS4HPeYivrODARQF9noBL6HCvscs3r-Yze8ervAh6a2cVdqttIeLcuo-0Bujzpw"
-        //   },
-        // ),
       );
 
       List<CustomerModel> customers = [];

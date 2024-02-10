@@ -130,6 +130,9 @@ class _LoginViewState extends State<LoginView> {
                                     SharedPref.set(
                                         key: 'accessToken',
                                         value: state.userModel.accessToken);
+                                    SharedPref.set(
+                                        key: 'whId',
+                                        value: state.userModel.whId);
 
                                     GlobalMethods
                                         .goRouterNavigateTOAndReplacement(

@@ -78,7 +78,10 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
             ),
             CustomElevatedButton(
               width: double.infinity,
-              title: TextBuilder("Submit"),
+              title: TextBuilder(
+                "Submit",
+                color: AppColors.whiteColor,
+              ),
               onPressed: () {},
             )
           ],
