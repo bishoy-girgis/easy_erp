@@ -81,7 +81,6 @@ class SelectedItemsToInvoice extends StatelessWidget {
                 : Column(
                     children: [
                       SelectedItem(itemModel: items[0]),
-                      SelectedItem(itemModel: items[1]),
                     ],
                   ),
           );
