@@ -1,20 +1,20 @@
 import 'package:equatable/equatable.dart';
 
-class PayMentTypeModel extends Equatable {
+class PaymentTypeModel extends Equatable {
   final int? payid;
   final String? payname;
   final String? payename;
   final int? bankdtlId;
 
-  const PayMentTypeModel({
+  const PaymentTypeModel({
     this.payid,
     this.payname,
     this.payename,
     this.bankdtlId,
   });
 
-  factory PayMentTypeModel.fromJson(Map<String, dynamic> json) {
-    return PayMentTypeModel(
+  factory PaymentTypeModel.fromJson(Map<String, dynamic> json) {
+    return PaymentTypeModel(
       payid: json['payid'] as int?,
       payname: json['payname'] as String?,
       payename: json['payename'] as String?,
