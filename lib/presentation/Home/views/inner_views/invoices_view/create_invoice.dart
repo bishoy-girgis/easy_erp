@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:easy_erp/core/helper/app_colors.dart';
@@ -9,18 +10,18 @@ import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../data/models/item_model/item_model.dart';
 import 'widgets/Invoice-main_data_section.dart';
 import 'widgets/selected_item.dart';
 
 class CreateInvoiceView extends StatelessWidget {
-  const CreateInvoiceView({required this.items, super.key});
-  final List<ItemModel> items;
+  const CreateInvoiceView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<ItemModel>? selectedItems = items;
     return Scaffold(
       appBar: AppBar(
         title: const TextBuilder(
@@ -42,7 +43,7 @@ class CreateInvoiceView extends StatelessWidget {
               child: GapH(h: 1),
             ),
             SelectedItemsToInvoice(
-              items: selectedItems ?? [],
+              items: [],
             )
           ]),
         ),
@@ -60,20 +61,31 @@ class SelectedItemsToInvoice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: AppColors.whiteColor,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: items.length == 0
-            ? TextBuilder("No items selected")
-            : ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return SelectedItem(itemModel: items[index]);
-                },
-              ),
+      child: BlocConsumer<AddItemCubit, AddItemState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          var items;
+          items = state is AddItemAddedSuccess
+              ? BlocProvider.of<AddItemCubit>(context).addedItems
+              : BlocProvider.of<AddItemCubit>(context).addedItems;
+          return Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: items.length == 0
+                ? TextBuilder("No items selected")
+                : Column(
+                    children: [
+                      SelectedItem(itemModel: items[0]),
+                      SelectedItem(itemModel: items[1]),
+                    ],
+                  ),
+          );
+        },
       ),
     );
   }

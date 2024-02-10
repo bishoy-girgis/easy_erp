@@ -61,16 +61,14 @@ abstract class AppRouters {
         path: kCreateInvoice,
         // name: "ViewAllOnSaleProductsScreen",
         builder: (context, state) {
-          return CreateInvoiceView(
-            items: state.extra as List<ItemModel>,
-          );
+          return CreateInvoiceView();
         },
       ),
       GoRoute(
         path: kAddItemsIntoInvoice,
         // name: "ViewAllOnSaleProductsScreen",
         builder: (context, state) {
-          return const AddItemsView();
+          return AddItemsView();
         },
       ),
       GoRoute(

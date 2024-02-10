@@ -4,6 +4,7 @@ import 'package:easy_erp/data/repositories/customer_repository/customer_repo_imp
 import 'package:easy_erp/data/repositories/item_repository/item_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/login_repository/login_repo_imp.dart';
 import 'package:easy_erp/l10n/l10n.dart';
+import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:easy_erp/presentation/Home/view_models/customer_cubit/customer_cubit.dart';
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,9 @@ class MyApp extends StatelessWidget {
               create: (context) =>
                   GetItemCubit(itemRepo: getIt.get<ItemRepoImplementation>())
                     ..getItems(),
+            ),
+            BlocProvider(
+              create: (context) => AddItemCubit(),
             ),
           ],
           child: Builder(builder: (context) {

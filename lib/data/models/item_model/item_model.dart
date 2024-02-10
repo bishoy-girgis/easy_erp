@@ -9,9 +9,9 @@ class ItemModel extends Equatable {
   final String? unitname;
   final int? unitid;
   final int? untItmIndx;
-  final int? salesprice;
+  final double? salesprice;
   final int? balance;
-  final int? discP;
+  final double? discP;
 
   const ItemModel({
     this.itmid,
@@ -36,9 +36,9 @@ class ItemModel extends Equatable {
         unitname: json['unitname'] as String?,
         unitid: json['unitid'] as int?,
         untItmIndx: json['UntItmIndx'] as int?,
-        salesprice: json['Salesprice'] as int?,
+        salesprice: json['Salesprice'],
         balance: json['Balance'] as int?,
-        discP: json['DiscP'] as int?,
+        discP: json['DiscP'],
       );
 
   Map<String, dynamic> toJson() => {

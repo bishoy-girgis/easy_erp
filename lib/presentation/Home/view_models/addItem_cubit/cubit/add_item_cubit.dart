@@ -8,21 +8,14 @@ part 'add_item_state.dart';
 class AddItemCubit extends Cubit<AddItemState> {
   AddItemCubit() : super(AddItemInitial());
   List<ItemModel> addedItems = [];
-  bool isSelected = false;
-  void addItem(ItemModel item) {
-    addedItems.add(item);
-    changeSelected();
-    emit(AddItemAddedSuccess(addedItems));
-  }
 
-  changeSelected() {
-    isSelected = !isSelected;
-    emit(ChangeSelected());
-  }
-
-  void removeItem(ItemModel item) {
-    addedItems.remove(item);
-    changeSelected();
-    emit(AddItemRemovedSuccess());
+  getAddedItems(ItemModel item) {
+    if (addedItems.contains(item)) {
+      addedItems.remove(item);
+      emit(AddItemRemovedSuccess(addedItems));
+    } else {
+      addedItems.add(item);
+      emit(AddItemAddedSuccess(addedItems));
+    }
   }
 }

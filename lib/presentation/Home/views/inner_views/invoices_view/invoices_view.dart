@@ -108,7 +108,7 @@ class InvoicesView extends StatelessWidget {
         onPressed: () {
           GlobalMethods.navigateTo(
             context,
-            CreateInvoiceView(items: []),
+            CreateInvoiceView(),
           );
         },
         elevation: 10,

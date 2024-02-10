@@ -61,6 +61,10 @@ class GlobalMethods {
     return GoRouter.of(context).pop();
   }
 
+  static goRouterPOPWithData(BuildContext context, var data) {
+    return GoRouter.of(context).pop(data);
+  }
+
   static Future goRouterNavigateTOWithQueryParameters(
       {required BuildContext context,
       required String router,
