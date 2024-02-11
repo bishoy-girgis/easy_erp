@@ -1,3 +1,5 @@
+import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helper/app_colors.dart';
@@ -26,13 +28,25 @@ class HostUrlSection extends StatelessWidget {
             ),
             const Divider(),
             CustomTextFormField(
-              labelText: "Base URL",
-              // hintText: "http://148.113.1.230:1201/",
-              // backgroundOfTextFeild: Colors.black26,
-              controller: TextEditingController(
-                  text: TextEditingController().text.isEmpty
-                      ? "http://148.113.1.230:1201/"
-                      : baseUrlController.text),
+              labelText: AppConstants.baseUrl,
+              hintText: AppConstants.baseUrl,
+              controller: baseUrlController,
+              onChange: (value) {
+                baseUrlController.text = value;
+                AppConstants.baseUrl = baseUrlController.text;
+                debugPrint(AppConstants.baseUrl);
+                debugPrint('😘😘' + baseUrlController.text);
+
+                SharedPref.set(key: "baseUrl", value: baseUrlController.text);
+                debugPrint('😘😘' + SharedPref.get(key: 'baseUrl'));
+              },
+              onSubmit: (value) {
+                baseUrlController.text = value;
+                debugPrint('😘😘😘' + baseUrlController.text);
+
+                // SharedPref.set(key: "baseUrl", value: baseUrlController.text);
+                debugPrint('😘' + SharedPref.get(key: 'baseUrl'));
+              },
             ),
             const TextBuilder(
               "Host URL that connect app with server data \n  ex: https//www.domain.com/",

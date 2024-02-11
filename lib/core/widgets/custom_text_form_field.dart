@@ -1,5 +1,6 @@
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -29,11 +30,15 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final FocusNode? focusNode;
   final bool readOnly;
+  final bool hasInputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
   const CustomTextFormField({
     super.key,
     this.readOnly = false,
+    this.hasInputFormatters = false,
     this.centerContent = false,
     this.controller,
+    this.inputFormatters,
     required this.labelText,
     this.prefixPressed,
     this.hintText,
@@ -126,6 +131,7 @@ class CustomTextFormField extends StatelessWidget {
         onChanged: onChange,
         onTap: onTap,
         enabled: isClickable,
+        inputFormatters: hasInputFormatters ? inputFormatters : null,
       ),
     );
   }

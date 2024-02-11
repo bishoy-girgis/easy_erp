@@ -16,7 +16,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../data/models/item_model/item_model.dart';
 import 'widgets/Invoice-main_data_section.dart';
+import 'widgets/pricing_section.dart';
 import 'widgets/selected_item.dart';
+import 'widgets/selected_items_to_invoice.dart';
 
 class CreateInvoiceView extends StatelessWidget {
   const CreateInvoiceView({super.key});
@@ -33,7 +35,7 @@ class CreateInvoiceView extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(14),
           child: CustomScrollView(slivers: [
             const InvoiceMainDataSection(),
             const SliverToBoxAdapter(
@@ -43,128 +45,22 @@ class CreateInvoiceView extends StatelessWidget {
             const SliverToBoxAdapter(
               child: GapH(h: 1),
             ),
-            // SliverToBoxAdapter(
-            //   child: BlocBuilder<AddItemCubit, AddItemState>(
-            //     builder: (context, state) {
-            //       if (state is AddItemAddedSuccess) {
-            //         return SelectedItemsToInvoice(items: state.items);
-            //       } else {
-            //         return const SizedBox(); // Return an empty widget if no items are added
-            //       }
-            //     },
-            //   ),
-            // )
             BlocBuilder<AddItemCubit, AddItemState>(builder: (context, state) {
               print(state.runtimeType);
               return getIt.get<AddItemCubit>().addedItems.length == 0
                   ? SliverToBoxAdapter(
-                      child: TextBuilder("Not Found"),
+                      child: Card(
+                          elevation: 5,
+                          child: TextBuilder(
+                            "No items added",
+                            textAlign: TextAlign.center,
+                          )),
                     )
                   : SelectedItemsToInvoice(
                       items: BlocProvider.of<AddItemCubit>(context).addedItems,
                     );
             })
           ]),
-        ),
-      ),
-    );
-  }
-}
-
-class SelectedItemsToInvoice extends StatelessWidget {
-  final List<ItemModel> items;
-
-  const SelectedItemsToInvoice({
-    Key? key,
-    required this.items,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return SliverList.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return SelectedItem(
-          itemModel: items[index],
-        );
-      },
-    );
-  }
-}
-
-class PricingSection extends StatelessWidget {
-  const PricingSection({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: AppColors.whiteColor,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          children: [
-            CustomElevatedButton(
-              backgroundColor: Colors.white,
-              borderColor: Colors.blueGrey,
-              hasBorder: true,
-              borderWidth: 2,
-              title: const TextBuilder(
-                "Sellect Items",
-                isHeader: true,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                GlobalMethods.goRouterNavigateTO(
-                    context: context, router: AppRouters.kAddItemsIntoInvoice);
-              },
-            ),
-            GapH(h: 1),
-            TextBuilder(
-              "Total includes tax",
-              color: Colors.black,
-            ),
-            GapH(h: 1),
-            TextBuilder(
-              "87777.85",
-              fontSize: 40,
-              color: Colors.black,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  children: [
-                    TextBuilder(
-                      "Amount before tax",
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                    TextBuilder(
-                      "10.5",
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    TextBuilder(
-                      "Tax amount",
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                    TextBuilder(
-                      "10.5",
-                      color: Colors.black,
-                    ),
-                  ],
-                )
-              ],
-            )
-          ],
         ),
       ),
     );

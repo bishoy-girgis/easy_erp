@@ -15,6 +15,7 @@ import '../../presentation/Home/views/inner_views/items_view/items_view.dart';
 abstract class AppRouters {
   // GoRouter configuration
   static const kLogin = "/loginView";
+  static const kSplash = "/";
 
   static const kHome = "/home";
   static const kSettings = "/settings";
@@ -31,10 +32,10 @@ abstract class AppRouters {
   // static const kViewAllProductsScreen = "/ViewAllProductsScreen";
 
   static final router = GoRouter(
-    initialLocation: '/',
+    initialLocation: kSplash,
     routes: [
       GoRoute(
-        path: '/',
+        path: kSplash,
         builder: (context, state) => SplashView(),
       ),
       GoRoute(

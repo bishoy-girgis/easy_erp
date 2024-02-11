@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/utils.dart';
@@ -124,6 +125,7 @@ class _LoginViewState extends State<LoginView> {
                                         "🎄🎄" + state.userModel.userName!);
                                     debugPrint(
                                         "🎄🎄" + state.userModel.accessToken!);
+
                                     SharedPref.set(
                                         key: 'userName',
                                         value: state.userModel.userName);
@@ -161,7 +163,7 @@ class _LoginViewState extends State<LoginView> {
                       const ChangeLanguagesSection(),
                       TextButton.icon(
                         onPressed: () {
-                          GlobalMethods.goRouterNavigateTOAndReplacement(
+                          GlobalMethods.goRouterNavigateTO(
                             context: context,
                             router: AppRouters.kSettings,
                           );

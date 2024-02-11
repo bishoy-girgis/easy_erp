@@ -31,7 +31,7 @@ class SelectedItem extends StatelessWidget {
               );
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 5),
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
@@ -62,7 +62,7 @@ class SelectedItem extends StatelessWidget {
                             textAlign: TextAlign.center,
                             fontSize: 14,
                           ),
-                          GapH(h: 5),
+                          GapH(h: 5.4),
                           TextBuilder(
                             itemModel.unitname!,
                             color: Colors.white,

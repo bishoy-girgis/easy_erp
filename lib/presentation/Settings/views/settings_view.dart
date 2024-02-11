@@ -1,8 +1,12 @@
+import 'package:easy_erp/core/helper/app_routing.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Settings/views/widgets/choose_print_model_section.dart';
 import 'package:easy_erp/presentation/Settings/views/widgets/company_info_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'widgets/host_url_section.dart';
 
@@ -20,7 +24,9 @@ class SettingsView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              SystemNavigator.pop();
+            },
             icon: Icon(Icons.done),
           )
         ],
