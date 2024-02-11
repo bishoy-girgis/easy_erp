@@ -20,11 +20,19 @@ final class AddItemAddedSuccess extends AddItemState {
 
 final class ChangeSelected extends AddItemState {}
 
-final class AddItemRemovedSuccess extends AddItemState {
+final class ItemRemovedSuccess extends AddItemState {
   final List<ItemModel> items;
 
-  const AddItemRemovedSuccess(this.items);
+  const ItemRemovedSuccess(this.items);
 
   @override
   List<Object> get props => [items];
 }
+
+final class ItemFound extends AddItemState {}
+
+final class ItemNotFound extends AddItemState {}
+
+final class ItemsListEmpty extends AddItemState {}
+
+final class ItemsListNotEmpty extends AddItemState {}

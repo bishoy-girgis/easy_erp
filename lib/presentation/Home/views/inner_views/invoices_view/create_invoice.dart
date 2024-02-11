@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -42,9 +43,27 @@ class CreateInvoiceView extends StatelessWidget {
             const SliverToBoxAdapter(
               child: GapH(h: 1),
             ),
-            SelectedItemsToInvoice(
-              items: [],
-            )
+            // SliverToBoxAdapter(
+            //   child: BlocBuilder<AddItemCubit, AddItemState>(
+            //     builder: (context, state) {
+            //       if (state is AddItemAddedSuccess) {
+            //         return SelectedItemsToInvoice(items: state.items);
+            //       } else {
+            //         return const SizedBox(); // Return an empty widget if no items are added
+            //       }
+            //     },
+            //   ),
+            // )
+            BlocBuilder<AddItemCubit, AddItemState>(builder: (context, state) {
+              print(state.runtimeType);
+              return getIt.get<AddItemCubit>().addedItems.length == 0
+                  ? SliverToBoxAdapter(
+                      child: TextBuilder("Not Found"),
+                    )
+                  : SelectedItemsToInvoice(
+                      items: BlocProvider.of<AddItemCubit>(context).addedItems,
+                    );
+            })
           ]),
         ),
       ),
@@ -54,38 +73,20 @@ class CreateInvoiceView extends StatelessWidget {
 
 class SelectedItemsToInvoice extends StatelessWidget {
   final List<ItemModel> items;
+
   const SelectedItemsToInvoice({
     Key? key,
     required this.items,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: BlocConsumer<AddItemCubit, AddItemState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
-        builder: (context, state) {
-          var items;
-          items = state is AddItemAddedSuccess
-              ? BlocProvider.of<AddItemCubit>(context).addedItems
-              : BlocProvider.of<AddItemCubit>(context).addedItems;
-          return Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: items.length == 0
-                ? TextBuilder("No items selected")
-                : Column(
-                    children: [
-                      SelectedItem(itemModel: items[0]),
-                    ],
-                  ),
-          );
-        },
-      ),
+    return SliverList.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return SelectedItem(
+          itemModel: items[index],
+        );
+      },
     );
   }
 }

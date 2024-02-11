@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
@@ -22,14 +23,14 @@ class GlobalMethods {
     Color color;
     switch (state) {
       case ToastStates.SUCCESS:
-        color = Colors.green;
+        color = AppColors.primaryColorBlue;
         break;
 
       case ToastStates.ERROR:
         color = Colors.red;
         break;
       case ToastStates.WARNING:
-        color = const Color.fromARGB(255, 165, 99, 0);
+        color = AppColors.secondColorOrange;
         break;
     }
     return color;

@@ -9,13 +9,31 @@ class AddItemCubit extends Cubit<AddItemState> {
   AddItemCubit() : super(AddItemInitial());
   List<ItemModel> addedItems = [];
 
-  getAddedItems(ItemModel item) {
+  bool checkItemInList(ItemModel item) {
     if (addedItems.contains(item)) {
-      addedItems.remove(item);
-      emit(AddItemRemovedSuccess(addedItems));
+      // emit(ItemFound());
+      return true;
     } else {
-      addedItems.add(item);
-      emit(AddItemAddedSuccess(addedItems));
+      // emit(ItemNotFound());
+      return false;
     }
+  }
+
+  List<ItemModel> removeItem(ItemModel item) {
+    emit(AddItemInitial());
+    addedItems.removeWhere(
+      (element) {
+        return element.itmid == item.itmid;
+      },
+    );
+    emit(ItemRemovedSuccess(addedItems));
+    return addedItems;
+  }
+
+  List<ItemModel> addItem(ItemModel item) {
+    emit(AddItemInitial());
+    addedItems.add(item);
+    emit(AddItemAddedSuccess(addedItems));
+    return addedItems;
   }
 }

@@ -33,7 +33,7 @@ class AddItemsView extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  GlobalMethods.goRouterPOP(context);
+                  // GlobalMethods.goRouterPOP(context);
                 },
                 icon: Icon(
                   Icons.done,
@@ -78,16 +78,7 @@ class AddItemsView extends StatelessWidget {
                               itemCount: state.items.length,
                               itemBuilder: (context, index) {
                                 return AddItemWidget(
-                                  items: items,
                                   itemModel: state.items[index],
-                                  onItemSelectionChanged: (item) {
-                                    // Update the items list in the parent view
-                                    if (items.contains(item)) {
-                                      items.remove(item);
-                                    } else {
-                                      items.add(item);
-                                    }
-                                  },
                                 );
                               },
                             )
@@ -105,13 +96,13 @@ class AddItemsView extends StatelessWidget {
 
 class AddItemWidget extends StatefulWidget {
   final ItemModel itemModel;
-  final Function(ItemModel) onItemSelectionChanged;
-  final List<ItemModel> items;
+  // final Function(ItemModel) onItemSelectionChanged;
+  // final List<ItemModel> items;
   const AddItemWidget({
     Key? key,
     required this.itemModel,
-    required this.items,
-    required this.onItemSelectionChanged,
+    // required this.items,
+    // required this.onItemSelectionChanged,
   }) : super(key: key);
 
   @override
@@ -119,139 +110,205 @@ class AddItemWidget extends StatefulWidget {
 }
 
 class _AddItemWidgetState extends State<AddItemWidget> {
-  void toggleSelection(ItemModel item) {
-    setState(() {
-      if (widget.items.contains(item)) {
-        widget.items.remove(item);
-      } else {
-        print(item.itmcode);
-        print(item.itmename);
-        print(item.itmename);
-        widget.items.add(item);
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     var priceController =
         TextEditingController(text: widget.itemModel.salesprice.toString());
     var quantityController = TextEditingController(text: "1");
     var discountController = TextEditingController(text: "0");
-    // bool isSelected = BlocProvider.of<AddItemCubit>(context).isSelected;
-    bool isSelected = false;
 
     return BlocBuilder<AddItemCubit, AddItemState>(
       builder: (context, state) {
-        return Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black45,
-                spreadRadius: 1.5,
-                blurRadius: 2,
-                offset: Offset(0, 0),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                child: CheckboxListTile(
-                  title: TextBuilder(
-                    widget.itemModel.unitname ?? "",
-                    // isHeader: true,
+        return InkWell(
+          onTap: () {
+            BlocProvider.of<AddItemCubit>(context)
+                    .checkItemInList(widget.itemModel)
+                ? BlocProvider.of<AddItemCubit>(context)
+                    .removeItem(widget.itemModel)
+                : BlocProvider.of<AddItemCubit>(context)
+                    .addItem(widget.itemModel);
+          },
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black45,
+                  spreadRadius: 1.5,
+                  blurRadius: 2,
+                  offset: Offset(0, 0),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextBuilder(
+                  (widget.itemModel.itmname != null &&
+                          widget.itemModel.itmname!.isNotEmpty)
+                      ? widget.itemModel.itmname!
+                      : "",
+                  isHeader: true,
+                  fontSize: 20,
+                  maxLines: 2,
+                ),
+                // Flexible(
+                //   child: CheckboxListTile(
+                //     value: BlocProvider.of<AddItemCubit>(context)
+                //         .checkItemInList(widget.itemModel),
+                //     onChanged: (bool? isChecked) {
+                //       BlocProvider.of<AddItemCubit>(context)
+                //               .checkItemInList(widget.itemModel)
+                //           ? BlocProvider.of<AddItemCubit>(context)
+                //               .removeItem(widget.itemModel)
+                //           : BlocProvider.of<AddItemCubit>(context)
+                //               .addItem(widget.itemModel);
+                //     },
+                //     title: TextBuilder(
+                //       widget.itemModel.unitname ?? "",
+                //     ),
+                //   ),
+                // ),
+                Flexible(
+                  child: CheckboxMenuButton(
+                    child: TextBuilder(
+                      widget.itemModel.unitname ?? "",
+                    ),
+                    value: BlocProvider.of<AddItemCubit>(context)
+                        .checkItemInList(widget.itemModel),
+                    onChanged: (bool? isChecked) {
+                      BlocProvider.of<AddItemCubit>(context)
+                              .checkItemInList(widget.itemModel)
+                          ? BlocProvider.of<AddItemCubit>(context)
+                              .removeItem(widget.itemModel)
+                          : BlocProvider.of<AddItemCubit>(context)
+                              .addItem(widget.itemModel);
+                    },
                   ),
-                  value: BlocProvider.of<AddItemCubit>(context)
-                      .addedItems
-                      .contains(widget.itemModel),
-                  onChanged: (bool? isChecked) {
-                    BlocProvider.of<AddItemCubit>(
-                      context,
-                    ).getAddedItems(widget.itemModel);
-                  },
                 ),
-              ),
-              TextBuilder(
-                (widget.itemModel.itmname != null &&
-                        widget.itemModel.itmname!.isNotEmpty)
-                    ? widget.itemModel.itmname!
-                    : "",
-                isHeader: true,
-                fontSize: 20,
-              ),
-              TextBuilder(
-                (widget.itemModel.itmename != null &&
-                        widget.itemModel.itmename!.isNotEmpty)
-                    ? widget.itemModel.itmename!
-                    : "",
-                isHeader: true,
-                fontSize: 20,
-              ),
-              TextBuilder(
-                "Price",
-                isHeader: true,
-                fontSize: 16,
-              ),
-              Flexible(
-                child: CustomTextFormField(
-                  labelText: priceController.text,
-                  keyboardType: TextInputType.number,
-                  backgroundOfTextFeild: Colors.blueGrey,
-                  centerContent: true,
-                  contentSize: 20,
-                  controller: priceController,
-                  isContentBold: true,
-                  onChange: (value) {
-                    priceController.text = value;
-                  },
+                // Flexible(
+                //   child: Checkbox(
+                //     // child: TextBuilder(
+                //     //   widget.itemModel.unitname ?? "",
+                //     // ),
+                //     value: BlocProvider.of<AddItemCubit>(context)
+                //         .checkItemInList(widget.itemModel),
+                //     onChanged: (bool? isChecked) {
+                //       BlocProvider.of<AddItemCubit>(context)
+                //               .checkItemInList(widget.itemModel)
+                //           ? BlocProvider.of<AddItemCubit>(context)
+                //               .removeItem(widget.itemModel)
+                //           : BlocProvider.of<AddItemCubit>(context)
+                //               .addItem(widget.itemModel);
+                //     },
+                //   ),
+                // ),
+
+                // TextBuilder(
+                //   (widget.itemModel.itmename != null &&
+                //           widget.itemModel.itmename!.isNotEmpty)
+                //       ? widget.itemModel.itmename!
+                //       : "",
+                //   isHeader: true,
+                //   fontSize: 20,
+                // ),
+                TextBuilder(
+                  "Price",
+                  isHeader: true,
+                  fontSize: 16,
                 ),
-              ),
-              const TextBuilder(
-                "Quantity",
-                isHeader: true,
-                fontSize: 16,
-                // color: Colors.,
-              ),
-              Flexible(
-                child: CustomTextFormField(
-                  labelText: quantityController.text,
-                  backgroundOfTextFeild: Colors.blueGrey,
-                  centerContent: true,
-                  contentSize: 20,
-                  controller: quantityController,
-                  keyboardType: TextInputType.number,
-                  isContentBold: true,
-                  onChange: (value) {
-                    quantityController.text = value;
-                  },
+                Flexible(
+                  child: CustomTextFormField(
+                    labelText: priceController.text,
+                    keyboardType: TextInputType.number,
+                    backgroundOfTextFeild: Colors.blueGrey,
+                    centerContent: true,
+                    contentSize: 20,
+                    controller: priceController,
+                    isContentBold: true,
+                    onChange: (value) {
+                      priceController.text = value;
+                    },
+                  ),
                 ),
-              ),
-              const TextBuilder(
-                "Discount",
-                isHeader: true,
-                fontSize: 16,
-                // color: Colors.,
-              ),
-              Flexible(
-                child: CustomTextFormField(
-                  labelText: discountController.text,
-                  backgroundOfTextFeild: Colors.blueGrey,
-                  contentSize: 20,
-                  centerContent: true,
-                  controller: discountController,
-                  keyboardType: TextInputType.number,
-                  isContentBold: true,
-                  onChange: (value) {
-                    discountController.text = value;
-                  },
+                const TextBuilder(
+                  "Quantity",
+                  isHeader: true,
+                  fontSize: 16,
+                  // color: Colors.,
                 ),
-              ),
-            ],
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        int q;
+                        q = int.parse(quantityController.text);
+                        q++;
+                        quantityController.text = q.toString();
+                      },
+                      icon: Icon(
+                        Icons.add_circle,
+                        color: Colors.green,
+                      ),
+                    ),
+                    Flexible(
+                      child: CustomTextFormField(
+                        labelText: quantityController.text,
+                        backgroundOfTextFeild: Colors.blueGrey,
+                        centerContent: true,
+                        contentSize: 20,
+                        controller: quantityController,
+                        keyboardType: TextInputType.number,
+                        isContentBold: true,
+                        onChange: (value) {
+                          quantityController.text = value;
+                        },
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        int q;
+                        q = int.parse(quantityController.text);
+                        if (q > 1) {
+                          q--;
+                          quantityController.text = q.toString();
+                        } else {
+                          GlobalMethods.buildFlutterToast(
+                              message: "You can't choose less than 1 item",
+                              state: ToastStates.WARNING);
+                        }
+                      },
+                      icon: Icon(
+                        Icons.remove_circle,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+                const TextBuilder(
+                  "Discount",
+                  isHeader: true,
+                  fontSize: 16,
+                  // color: Colors.,
+                ),
+                Flexible(
+                  child: CustomTextFormField(
+                    labelText: discountController.text,
+                    backgroundOfTextFeild: Colors.blueGrey,
+                    contentSize: 20,
+                    centerContent: true,
+                    controller: discountController,
+                    keyboardType: TextInputType.number,
+                    isContentBold: true,
+                    onChange: (value) {
+                      discountController.text = value;
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

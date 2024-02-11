@@ -50,7 +50,7 @@ dependencies:
   # permission_handler: ^11.2.0
   printing: ^5.11.1
   provider: ^6.1.1
-  qr_code_scanner: ^1.0.1
+  # qr_code_scanner: ^1.0.1
   shared_preferences: ^2.2.2
   textfield_search: ^0.10.0
 

@@ -30,7 +30,7 @@ class ServerError extends Failures {
       case DioExceptionType.cancel:
         return ServerError("CANCEL with Api Server");
       case DioExceptionType.connectionError:
-        return ServerError("No Internet Connection Error: SocketException 1 ");
+        return ServerError(DioExceptionType.connectionError.name.toString());
 
       case DioExceptionType.unknown:
         if (dioError.message!.contains('Socket')) {

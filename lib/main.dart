@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
                     ..getItems(),
             ),
             BlocProvider(
-              create: (context) => AddItemCubit(),
+              create: (context) => getIt.get<AddItemCubit>(),
             ),
           ],
           child: Builder(builder: (context) {
