@@ -10,14 +10,14 @@ import '../../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import 'pick_date_widget.dart';
-import 'search_on_customer_name_section.dart';
 import 'sellect_cash_or_postpon_section.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InvoiceMainDataSection extends StatelessWidget {
-  const InvoiceMainDataSection({
+  InvoiceMainDataSection({
     super.key,
   });
-
+  final invoiceIDController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -35,21 +35,21 @@ class InvoiceMainDataSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextBuilder(
-              "Invoice ID",
+            TextBuilder(
+              AppLocalizations.of(context)!.invoice_id,
               isHeader: true,
               fontSize: 16,
             ),
-            const CustomTextFormField(
+            CustomTextFormField(
               labelText: "AUTO ",
               centerContent: true,
               isLabelBold: true,
               isClickable: false,
-              // : true,
+              controller: invoiceIDController,
             ),
             const GapH(h: 1),
-            const TextBuilder(
-              "Invoice Date",
+            TextBuilder(
+              AppLocalizations.of(context)!.invoice_date,
               isHeader: true,
               fontSize: 16,
             ),
@@ -60,21 +60,12 @@ class InvoiceMainDataSection extends StatelessWidget {
                 Flexible(child: HoursAndMinutes()),
               ],
             ),
-            // const SearchOnCustomerNameSection(),
-            // CustomTextFormField(
-            //   labelText: "Customer Name",
-            //   onTap: () {
-            //     showSearch(context: context, delegate: CustomSearchDelegate());
-            //   },
-            // ),
-
             SearchSection(
-              labelText: "Customer",
+              labelText: AppLocalizations.of(context)!.customer,
             ),
-
             const GapH(h: 1),
-            const TextBuilder(
-              "Invoice Type",
+            TextBuilder(
+              AppLocalizations.of(context)!.invoice_type,
               isHeader: true,
               fontSize: 16,
             ),

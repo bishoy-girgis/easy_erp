@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,10 +46,10 @@ class CustomTextFormField extends StatelessWidget {
     this.contentSize = 18,
     this.keyboardType,
     this.prefixIcon,
-    this.prefixIconColor,
+    this.prefixIconColor = AppColors.primaryColorBlue,
     this.validator,
     this.suffixIcon,
-    this.suffixColor,
+    this.suffixColor = AppColors.primaryColorBlue,
     this.suffixPressed,
     this.isSecure = false,
     this.isLabelBold = false,

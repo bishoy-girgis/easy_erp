@@ -143,13 +143,14 @@ class InvoicesView extends StatelessWidget {
       child: Column(
         children: [
           CustomTextFormField(
-            labelText: "Search",
-            hintText: "Search with ID , Code, or Barcode NO",
+            labelText: AppLocalizations.of(context)!.search.toString(),
+            hintText: AppLocalizations.of(context)!
+                .search_with_id_code_barcode
+                .toString(),
             suffixIcon: Icons.search,
             suffixColor: Colors.blueGrey,
             prefixIcon: Icons.qr_code_rounded,
             prefixIconColor: Colors.blueGrey,
-            // backgroundOfTextFeild: Colors.white,
             prefixPressed: () {},
             suffixPressed: () {},
           ),

@@ -6,6 +6,7 @@ import '../../../../../../core/helper/global_methods.dart';
 import '../../../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PricingSection extends StatelessWidget {
   const PricingSection({
@@ -28,8 +29,8 @@ class PricingSection extends StatelessWidget {
               borderColor: Colors.blueGrey,
               hasBorder: true,
               borderWidth: 2,
-              title: const TextBuilder(
-                "Sellect Items",
+              title: TextBuilder(
+                AppLocalizations.of(context)!.select_items,
                 isHeader: true,
                 color: Colors.black,
               ),
@@ -38,14 +39,14 @@ class PricingSection extends StatelessWidget {
                     context: context, router: AppRouters.kAddItemsIntoInvoice);
               },
             ),
-            GapH(h: 1),
+            const GapH(h: 1),
             TextBuilder(
-              "Total includes tax",
+              AppLocalizations.of(context)!.total_icludes_tax,
               color: Colors.black,
             ),
-            GapH(h: 1),
-            TextBuilder(
-              "87777.85",
+            const GapH(h: 1),
+            const TextBuilder(
+              "00.00",
               fontSize: 40,
               color: Colors.black,
             ),
@@ -55,26 +56,23 @@ class PricingSection extends StatelessWidget {
                 Column(
                   children: [
                     TextBuilder(
-                      "Amount before tax",
+                      AppLocalizations.of(context)!.amount_before_tax,
                       color: Colors.black,
                       fontSize: 16,
                     ),
-                    TextBuilder(
-                      "10.5",
-                      color: Colors.black,
+                    const TextBuilder(
+                      "00.00",
                     ),
                   ],
                 ),
                 Column(
                   children: [
                     TextBuilder(
-                      "Tax amount",
-                      color: Colors.black,
+                      AppLocalizations.of(context)!.tax_amount,
                       fontSize: 16,
                     ),
                     TextBuilder(
-                      "10.5",
-                      color: Colors.black,
+                      "00.00",
                     ),
                   ],
                 )

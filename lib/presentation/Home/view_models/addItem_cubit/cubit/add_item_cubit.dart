@@ -36,4 +36,15 @@ class AddItemCubit extends Cubit<AddItemState> {
     emit(AddItemAddedSuccess(addedItems));
     return addedItems;
   }
+
+  // bool checkListEmpty() {
+  //   // emit(AddItemInitial());
+  //   if (addedItems.isEmpty) {
+  //     emit(ItemsListEmpty());
+  //     return true;
+  //   } else {
+  //     emit(ItemsListNotEmpty());
+  //     return false;
+  //   }
+  // }
 }
