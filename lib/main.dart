@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/bloc_observer.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
@@ -89,9 +90,9 @@ class MyApp extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   foregroundColor: Colors.white,
                 ),
-                primarySwatch: Colors.blueGrey,
-                scaffoldBackgroundColor: Colors.blueGrey,
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+                scaffoldBackgroundColor: AppColors.primaryColorBlue,
+                colorScheme:
+                    ColorScheme.fromSeed(seedColor: AppColors.primaryColorBlue),
               ),
             );
           }),

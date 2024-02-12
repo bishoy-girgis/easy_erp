@@ -10,7 +10,8 @@ class HostUrlSection extends StatelessWidget {
   HostUrlSection({
     super.key,
   });
-  final TextEditingController baseUrlController = TextEditingController();
+  final TextEditingController baseUrlController =
+      TextEditingController(text: AppConstants.baseUrl);
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -29,23 +30,20 @@ class HostUrlSection extends StatelessWidget {
             const Divider(),
             CustomTextFormField(
               labelText: AppConstants.baseUrl,
-              hintText: AppConstants.baseUrl,
+              // hintText: AppConstants.baseUrl,
               controller: baseUrlController,
               onChange: (value) {
                 baseUrlController.text = value;
-                AppConstants.baseUrl = baseUrlController.text;
+                SharedPref.set(key: "baseUrl", value: value);
                 debugPrint(AppConstants.baseUrl);
                 debugPrint('😘😘' + baseUrlController.text);
-
-                SharedPref.set(key: "baseUrl", value: baseUrlController.text);
                 debugPrint('😘😘' + SharedPref.get(key: 'baseUrl'));
               },
               onSubmit: (value) {
                 baseUrlController.text = value;
                 debugPrint('😘😘😘' + baseUrlController.text);
-
-                // SharedPref.set(key: "baseUrl", value: baseUrlController.text);
                 debugPrint('😘' + SharedPref.get(key: 'baseUrl'));
+                debugPrint(AppConstants.baseUrl);
               },
             ),
             const TextBuilder(

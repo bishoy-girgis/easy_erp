@@ -5,6 +5,7 @@ import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_i
 import 'package:get_it/get_it.dart';
 
 import '../../data/repositories/item_repository/item_repo_implementation.dart';
+import '../../presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
 import '../api_services/api_service.dart';
 
 final getIt = GetIt.instance;
@@ -25,5 +26,8 @@ void setupServiceLocatorByGetIt() {
   );
   getIt.registerSingleton<AddItemCubit>(
     AddItemCubit(),
+  );
+  getIt.registerSingleton<LoginCubit>(
+    LoginCubit(getIt.get<LoginRepoImplementation>()),
   );
 }

@@ -1,6 +1,7 @@
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
+import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/core/helper/utils.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
@@ -41,10 +42,29 @@ class _LoginViewState extends State<LoginView> {
     var size = Utils(context: context).screenSize;
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state is LoginSuccessState) {
+          debugPrint("🎄🎄" + state.userModel.userName!);
+          debugPrint("🎄🎄" + state.userModel.accessToken!);
+
+          SharedPref.set(key: 'userName', value: state.userModel.userName);
+          SharedPref.set(
+              key: 'accessToken', value: state.userModel.accessToken);
+          SharedPref.set(key: 'whId', value: state.userModel.whId);
+
+          GlobalMethods.goRouterNavigateTOAndReplacement(
+              context: context, router: AppRouters.kHome);
+          GlobalMethods.buildFlutterToast(
+            message: "Welcome to Easy ERP App",
+            state: ToastStates.SUCCESS,
+          );
+        } else if (state is LoginFailureState) {
+          debugPrint("🎐🎐" + state.error);
+
+          GlobalMethods.buildFlutterToast(
+              message: state.error, state: ToastStates.ERROR);
+        }
       },
       builder: (context, state) {
-        var loginCubit = LoginCubit.get(context);
         return Scaffold(
           body: SafeArea(
               child: Center(
@@ -88,6 +108,12 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       CustomTextFormField(
                         controller: passwordController,
+                        onChange: (value) {
+                          passwordController.text = value;
+                        },
+                        onSubmit: (value) {
+                          passwordController.text = value;
+                        },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return AppLocalizations.of(context)!
@@ -95,12 +121,12 @@ class _LoginViewState extends State<LoginView> {
                           }
                           return null;
                         },
-                        isSecure: loginCubit.isPasswordVisible,
-                        suffixIcon: loginCubit.isPasswordVisible
+                        isSecure: getIt.get<LoginCubit>().isPasswordVisible,
+                        suffixIcon: getIt.get<LoginCubit>().isPasswordVisible
                             ? Icons.visibility_off
                             : Icons.visibility,
                         suffixPressed: () {
-                          loginCubit.changeVisability();
+                          getIt.get<LoginCubit>().changeVisability();
                         },
                         labelText: AppLocalizations.of(context)!.password,
                         hintText: AppLocalizations.of(context)!.passwordHint,
@@ -112,45 +138,11 @@ class _LoginViewState extends State<LoginView> {
                           : CustomElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  await loginCubit.userLogin(
-                                    userName: userNameController.text,
-                                    password: passwordController.text,
-                                  );
-                                  // UserModel? user = await loginCubit.userLogin(
-                                  //   userName: userNameController.text,
-                                  //   password: passwordController.text,
-                                  // );
-                                  if (state is LoginSuccessState) {
-                                    debugPrint(
-                                        "🎄🎄" + state.userModel.userName!);
-                                    debugPrint(
-                                        "🎄🎄" + state.userModel.accessToken!);
-
-                                    SharedPref.set(
-                                        key: 'userName',
-                                        value: state.userModel.userName);
-                                    SharedPref.set(
-                                        key: 'accessToken',
-                                        value: state.userModel.accessToken);
-                                    SharedPref.set(
-                                        key: 'whId',
-                                        value: state.userModel.whId);
-
-                                    GlobalMethods
-                                        .goRouterNavigateTOAndReplacement(
-                                            context: context,
-                                            router: AppRouters.kHome);
-                                    GlobalMethods.buildFlutterToast(
-                                      message: "Welcome to Easy ERP App",
-                                      state: ToastStates.SUCCESS,
-                                    );
-                                  } else if (state is LoginFailureState) {
-                                    debugPrint("🎐🎐" + state.error);
-
-                                    GlobalMethods.buildFlutterToast(
-                                        message: state.error,
-                                        state: ToastStates.ERROR);
-                                  }
+                                  // Perform login
+                                  await context.read<LoginCubit>().userLogin(
+                                        userName: userNameController.text,
+                                        password: passwordController.text,
+                                      );
                                 }
                                 FocusScope.of(context).unfocus();
                               },
@@ -163,13 +155,17 @@ class _LoginViewState extends State<LoginView> {
                       const ChangeLanguagesSection(),
                       TextButton.icon(
                         onPressed: () {
-                          GlobalMethods.goRouterNavigateTO(
+                          GlobalMethods.goRouterNavigateTOAndReplacement(
                             context: context,
                             router: AppRouters.kSettings,
                           );
                         },
                         icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                        label: const Text("Go to Settings"),
+                        label: TextBuilder(
+                          AppLocalizations.of(context)!.go_to_settings,
+                          color: AppColors.primaryColorBlue,
+                          isHeader: false,
+                        ),
                       ),
                     ],
                   ),

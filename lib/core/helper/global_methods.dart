@@ -1,4 +1,5 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
@@ -23,14 +24,14 @@ class GlobalMethods {
     Color color;
     switch (state) {
       case ToastStates.SUCCESS:
-        color = AppColors.primaryColorBlue;
+        color = AppColors.secondColorOrange;
         break;
 
       case ToastStates.ERROR:
         color = Colors.red;
         break;
       case ToastStates.WARNING:
-        color = AppColors.secondColorOrange;
+        color = AppColors.blackColor;
         break;
     }
     return color;

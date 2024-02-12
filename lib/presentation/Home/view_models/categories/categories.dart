@@ -26,6 +26,13 @@ class CategoriesViewModel {
         },
       ),
       CategoryWidget(
+          icon: Icons.people_rounded,
+          categoryName: l.customers,
+          onTap: () {
+            GlobalMethods.goRouterNavigateTO(
+                context: context, router: AppRouters.kCustomers);
+          }),
+      CategoryWidget(
           icon: Icons.attach_money,
           categoryName: l.invoises,
           onTap: () {
@@ -33,13 +40,6 @@ class CategoriesViewModel {
               context: context,
               router: AppRouters.kInvoices,
             );
-          }),
-      CategoryWidget(
-          icon: Icons.people_rounded,
-          categoryName: l.customers,
-          onTap: () {
-            GlobalMethods.goRouterNavigateTO(
-                context: context, router: AppRouters.kCustomers);
           }),
       CategoryWidget(
           icon: Icons.keyboard_return_rounded,

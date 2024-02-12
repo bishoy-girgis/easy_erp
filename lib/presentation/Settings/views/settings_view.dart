@@ -25,6 +25,7 @@ class SettingsView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              SharedPref.remove(key: "accessToken");
               SystemNavigator.pop();
             },
             icon: Icon(Icons.done),
