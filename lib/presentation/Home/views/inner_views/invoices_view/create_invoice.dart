@@ -33,7 +33,12 @@ class CreateInvoiceView extends StatelessWidget {
           const SliverToBoxAdapter(
             child: GapH(h: 1),
           ),
-          PricingSection(),
+          BlocBuilder<AddItemCubit, AddItemState>(
+            builder: (context, state) {
+              return PricingSection(
+                  items: BlocProvider.of<AddItemCubit>(context).addedItems);
+            },
+          ),
           const SliverToBoxAdapter(
             child: GapH(h: 1),
           ),
