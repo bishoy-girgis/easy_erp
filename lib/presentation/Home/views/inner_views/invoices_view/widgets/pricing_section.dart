@@ -18,7 +18,7 @@ class PricingSection extends StatelessWidget {
     required this.items,
   });
   final List<ItemModel> items;
-  late double totalAmount;
+  double totalAmount = 0;
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
