@@ -69,6 +69,14 @@ class CreateInvoiceView extends StatelessWidget {
         isHeader: true,
         color: AppColors.whiteColor,
       ),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.done,
+          ),
+        ),
+      ],
     );
   }
 }

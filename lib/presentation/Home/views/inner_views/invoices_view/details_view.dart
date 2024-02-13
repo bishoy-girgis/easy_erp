@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../../data/models/invoice_model/invoice_model.dart';
 
-class DetailPage extends StatelessWidget {
-  final BillModel singleBillItem;
-  const DetailPage({
+class InvoiceDetailsView extends StatelessWidget {
+  final InvoiceModel singleInvoiceItem;
+  const InvoiceDetailsView({
     Key? key,
-    required this.singleBillItem,
+    required this.singleInvoiceItem,
   }) : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class DetailPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 Text(
-                  singleBillItem.customer,
+                  singleInvoiceItem.customer.custname!,
                   style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -57,11 +57,11 @@ class DetailPage extends StatelessWidget {
                     'Bill Details',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  ...singleBillItem.items.map(
-                    (e) => ListTile(
-                      title: Text(e.description),
+                  ...singleInvoiceItem.items.map(
+                    (item) => ListTile(
+                      title: Text(item.itmname!),
                       trailing: Text(
-                        e.cost.toStringAsFixed(2),
+                        item.salesprice!.toStringAsFixed(2),
                       ),
                     ),
                   ),
@@ -72,7 +72,7 @@ class DetailPage extends StatelessWidget {
                       children: [
                         const Text("Total"),
                         Text(
-                          "\$${singleBillItem.totalCost().toStringAsFixed(2)}",
+                          "\$${singleInvoiceItem.totalCost().toStringAsFixed(2)}",
                         ),
                       ],
                     ),
@@ -90,7 +90,7 @@ class DetailPage extends StatelessWidget {
   AppBar _buildAppBar() {
     return AppBar(
       title: Text(
-        singleBillItem.name,
+        singleInvoiceItem.address,
         maxLines: 2,
       ),
     );
@@ -102,7 +102,8 @@ class DetailPage extends StatelessWidget {
       onPressed: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => PdfPreviewPage(bill: singleBillItem),
+            builder: (context) =>
+                PdfPreviewPage(invoiceModel: singleInvoiceItem),
           ),
         );
         // rootBundle.

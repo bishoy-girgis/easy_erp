@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,8 @@ class PricingSection extends StatelessWidget {
     required this.items,
   });
   final List<ItemModel> items;
-  double totalAmount = 0;
+  double totalAmount = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -31,8 +33,10 @@ class PricingSection extends StatelessWidget {
         child: BlocBuilder<AddItemCubit, AddItemState>(
           builder: (context, state) {
             for (int i = 0; i < items.length; i++) {
-              totalAmount += items[i].salesprice!;
+              totalAmount += (items[i].salesprice! * items[i].quantity);
             }
+            double amountBeforeTex = totalAmount -
+                ((AppConstants.vat * totalAmount) / (100 + AppConstants.vat));
             return Column(
               children: [
                 CustomElevatedButton(
@@ -59,14 +63,12 @@ class PricingSection extends StatelessWidget {
                 const GapH(h: 1),
                 getIt.get<AddItemCubit>().addedItems.isEmpty
                     ? TextBuilder(
-                        '00.00',
+                        totalAmount.toString(),
                         fontSize: 40,
-                        color: Colors.black,
                       )
                     : TextBuilder(
                         totalAmount.toString(),
                         fontSize: 40,
-                        color: Colors.black,
                       ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -75,11 +77,11 @@ class PricingSection extends StatelessWidget {
                       children: [
                         TextBuilder(
                           AppLocalizations.of(context)!.amount_before_tax,
-                          color: Colors.black,
                           fontSize: 16,
                         ),
-                        const TextBuilder(
-                          "00.00",
+                        TextBuilder(
+                          amountBeforeTex.toStringAsFixed(3),
+                          maxLines: 2,
                         ),
                       ],
                     ),
@@ -90,7 +92,10 @@ class PricingSection extends StatelessWidget {
                           fontSize: 16,
                         ),
                         TextBuilder(
-                          "00.00",
+                          ((AppConstants.vat * totalAmount) /
+                                  (100 + AppConstants.vat))
+                              .toStringAsFixed(3),
+                          maxLines: 2,
                         ),
                       ],
                     )

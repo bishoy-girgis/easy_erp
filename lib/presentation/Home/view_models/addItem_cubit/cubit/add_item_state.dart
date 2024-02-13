@@ -29,10 +29,12 @@ final class ItemRemovedSuccess extends AddItemState {
   List<Object> get props => [items];
 }
 
-final class ItemFound extends AddItemState {}
+final class RemoveAllItemSuccess extends AddItemState {}
 
-final class ItemNotFound extends AddItemState {}
+// final class ItemFound extends AddItemState {}
 
-final class ItemsListEmpty extends AddItemState {}
+// final class ItemNotFound extends AddItemState {}
 
-final class ItemsListNotEmpty extends AddItemState {}
+// final class ItemsListEmpty extends AddItemState {}
+
+// final class ItemsListNotEmpty extends AddItemState {}

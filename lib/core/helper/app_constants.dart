@@ -3,6 +3,8 @@ import 'package:easy_erp/data/services/local/shared_pref.dart';
 class AppConstants {
   static final String accessToken = SharedPref.get(key: "accessToken");
   static final int whId = SharedPref.get(key: "whId");
+  static final double vat = SharedPref.get(key: "vat");
+
   static String baseUrl =
       SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
 

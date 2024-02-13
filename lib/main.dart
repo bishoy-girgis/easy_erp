@@ -24,7 +24,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
   Bloc.observer = MyBlocObserver();
-  String languageCode = SharedPref.get(key: 'languageCode') ?? 'en';
+  String languageCode = SharedPref.get(key: 'languageCode') ?? 'ar';
   // var status = await Permission.camera.request();
   setupServiceLocatorByGetIt();
 

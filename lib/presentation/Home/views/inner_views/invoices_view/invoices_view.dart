@@ -1,5 +1,8 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/models/customer_model/customer_model.dart';
+import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,89 +15,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class InvoicesView extends StatelessWidget {
   InvoicesView({Key? key}) : super(key: key);
 
-  final bills = <BillModel>[
-    BillModel(
-      customer: 'Alice Johnson',
+  final invoiceModels = <InvoiceModel>[
+    InvoiceModel(
+      customer: CustomerModel(custname: "Yusuf Abdo"),
       address: '456 Mock Ave\nWonderland',
-      items: [
-        LineItem('Consultation Services', 150),
-        LineItem('Custom Software Development', 2500.75),
-        LineItem('Training Session', 180),
-      ],
-      name: 'Software Consultation and Development',
+      items: getIt.get<AddItemCubit>().addedItems,
     ),
-    BillModel(
-      customer: 'Bob Smith',
-      address: '789 Fiction St\nNeverland',
-      items: [
-        LineItem('Graphic Design', 90),
-        LineItem('Hosting Services', 120),
-        LineItem('Mobile App Development', 3500.25),
-      ],
-      name: 'Design and Development Services',
-    ),
-    BillModel(
-      customer: 'Eva Davis',
-      address: '101 Fantasy Blvd\nDreamland',
-      items: [
-        LineItem('System Integration', 200),
-        LineItem('Database Management', 300),
-        LineItem('Content Creation', 180.50),
-      ],
-      name: 'Integrated Solutions Package',
-    ),
-    BillModel(
-        customer: 'David Thomas',
-        address: '123 Fake St\r\nBermuda Triangle',
-        items: [
-          LineItem(
-            'Technical Engagement',
-            120,
-          ),
-          LineItem('Deployment Assistance', 200),
-          LineItem('Develop Software Solution', 3020.45),
-          LineItem('Produce Documentation', 840.50),
-        ],
-        name: 'Create and deploy software package'),
-    BillModel(
-      customer: 'Charlie Brown',
-      address: '321 Cartoon Lane\nToonville',
-      items: [
-        LineItem('Animation Services', 180),
-        LineItem('Storyboarding', 120),
-        LineItem('Character Design', 250.75),
-      ],
-      name: 'Animation and Design Package',
-    ),
-    BillModel(
-      customer: 'Grace Miller',
-      address: '567 Sci-Fi Blvd\nFuture City',
-      items: [
-        LineItem('Robotics Consultation', 300),
-        LineItem('AI Programming', 500),
-        LineItem('Virtual Reality Development', 1200.50),
-      ],
-      name: 'Future Tech Solutions',
-    ),
-    BillModel(
-      customer: 'Frank Johnson',
-      address: '876 Mystery St\nEnigma Town',
-      items: [
-        LineItem('Investigation Services', 150),
-        LineItem('Surveillance Equipment', 200),
-        LineItem('Evidence Analysis', 300.25),
-      ],
-      name: 'Private Investigation Package',
-    ),
-    BillModel(
-      customer: 'Olivia Green',
-      address: '432 Fairy Ave\nMagicland',
-      items: [
-        LineItem('Spell Casting Consultation', 100),
-        LineItem('Enchantment Services', 180),
-        LineItem('Magical Artifact Creation', 450.75),
-      ],
-      name: 'Magical Services Bundle',
+    InvoiceModel(
+      customer: CustomerModel(custname: "Yusuf Abdo"),
+      address: '456 Mock Av',
+      items: getIt.get<AddItemCubit>().addedItems,
     ),
   ];
 
@@ -148,9 +78,7 @@ class InvoicesView extends StatelessWidget {
                 .search_with_id_code_barcode
                 .toString(),
             suffixIcon: Icons.search,
-            suffixColor: Colors.blueGrey,
             prefixIcon: Icons.qr_code_rounded,
-            prefixIconColor: Colors.blueGrey,
             prefixPressed: () {},
             suffixPressed: () {},
           ),
@@ -165,8 +93,8 @@ class InvoicesView extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.all(10),
                 children: [
-                  ...bills.map((e) => InvoiceWidget(
-                        e: e,
+                  ...invoiceModels.map((invoiceModel) => InvoiceWidget(
+                        invoiceModel: invoiceModel,
                       )),
                 ],
               ),

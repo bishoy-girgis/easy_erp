@@ -4,7 +4,7 @@ import 'package:pdf/widgets.dart';
 
 import '../../data/models/invoice_model/invoice_model.dart';
 
-Future<Uint8List> pdfBuilder(BillModel bill) async {
+Future<Uint8List> pdfBuilder(InvoiceModel invoiceModel) async {
   final pdf = Document();
   // final imageLogo = MemoryImage(
   //     (await rootBundle.load('assets/tec-1.png')).buffer.asUint8List());
@@ -19,8 +19,8 @@ Future<Uint8List> pdfBuilder(BillModel bill) async {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Attention to: ${bill.customer}"),
-                    Text(bill.address),
+                    Text("Attention to: ${invoiceModel.customer.custename}"),
+                    Text(invoiceModel.address),
                   ],
                 ),
                 // SizedBox(
@@ -48,34 +48,34 @@ Future<Uint8List> pdfBuilder(BillModel bill) async {
                     ),
                   ],
                 ),
-                ...bill.items.map(
+                ...invoiceModel.items.map(
                   (e) => TableRow(
                     children: [
                       Expanded(
                         flex: 2,
-                        child: textAndPadding(e.description),
+                        child: textAndPadding(e.itmname!),
                       ),
                       Expanded(
                         flex: 1,
-                        child: textAndPadding("\$${e.cost}"),
+                        child: textAndPadding("${e.salesprice}"),
                       )
                     ],
                   ),
                 ),
-                TableRow(
-                  children: [
-                    textAndPadding('TAX', align: TextAlign.right),
-                    textAndPadding(
-                        '\$${(bill.totalCost() * 0.1).toStringAsFixed(2)}'),
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    textAndPadding('TOTAL', align: TextAlign.right),
-                    textAndPadding(
-                        '\$${(bill.totalCost() * 1.1).toStringAsFixed(2)}')
-                  ],
-                )
+                // TableRow(
+                //   children: [
+                //     textAndPadding('TAX', align: TextAlign.right),
+                //     textAndPadding(
+                //         '${(invoiceModel.totalCost() * 0.15).toStringAsFixed(2)}'),
+                //   ],
+                // ),
+                // TableRow(
+                //   children: [
+                //     textAndPadding('TOTAL', align: TextAlign.right),
+                //     textAndPadding(
+                //         '\$${(invoiceModel.totalCost() * 1.1).toStringAsFixed(2)}')
+                //   ],
+                // )
               ],
             ),
             Padding(
@@ -118,7 +118,7 @@ Future<Uint8List> pdfBuilder(BillModel bill) async {
                       'Total Amount to be Paid',
                     ),
                     textAndPadding(
-                        '\$${(bill.totalCost() * 1.1).toStringAsFixed(2)}')
+                        '\$${(invoiceModel.totalCost() * 1.1).toStringAsFixed(2)}')
                   ],
                 )
               ],

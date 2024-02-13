@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/widgets/text_builder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SellectCashOrPostponeSection extends StatefulWidget {
-  const SellectCashOrPostponeSection({super.key});
+class SellectCashOrCreditSection extends StatefulWidget {
+  const SellectCashOrCreditSection({super.key});
 
   @override
-  State<SellectCashOrPostponeSection> createState() =>
-      _SellectCashOrPostponeSectionState();
+  State<SellectCashOrCreditSection> createState() =>
+      _SellectCashOrCreditSectionState();
 }
 
-class _SellectCashOrPostponeSectionState
-    extends State<SellectCashOrPostponeSection> {
-  String selectedOption = 'In-Cash';
-
+class _SellectCashOrCreditSectionState
+    extends State<SellectCashOrCreditSection> {
   @override
   Widget build(BuildContext context) {
+    String selectedOption = AppLocalizations.of(context)!.cash;
+
     return Center(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -29,15 +30,15 @@ class _SellectCashOrPostponeSectionState
             });
           },
           items: <String>[
-            'In-Cash',
-            'Postpone',
+            AppLocalizations.of(context)!.cash,
+            AppLocalizations.of(context)!.credit,
           ].map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: TextBuilder(
                 value,
-                isHeader: true,
-                fontSize: 14,
+                // isHeader: true,
+                fontSize: 18,
                 color: Colors.black,
               ),
             );

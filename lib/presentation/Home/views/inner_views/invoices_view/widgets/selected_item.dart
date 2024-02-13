@@ -15,10 +15,8 @@ class SelectedItem extends StatelessWidget {
   const SelectedItem({
     super.key,
     required this.itemModel,
-    this.quantity = 1,
   });
   final ItemModel itemModel;
-  final int quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +55,7 @@ class SelectedItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextBuilder(
-                            quantity.toString(),
+                            itemModel.quantity.toString(),
                             color: Colors.white,
                             textAlign: TextAlign.center,
                             fontSize: 14,
@@ -118,7 +116,7 @@ class SelectedItem extends StatelessWidget {
                                 color: Colors.black,
                               ),
                               TextBuilder(
-                                "${quantity * itemModel.salesprice!}",
+                                "${itemModel.quantity * itemModel.salesprice!}",
                                 fontSize: 14,
                                 color: Colors.black,
                               ),

@@ -54,12 +54,10 @@ class _AddItemsViewState extends State<AddItemsView> {
         ),
         leading: IconButton(
           onPressed: () {
-            BlocProvider.of<AddItemCubit>(context).addedItems.isNotEmpty
-                ? BlocProvider.of<AddItemCubit>(context).addedItems.clear()
-                : null;
+            BlocProvider.of<AddItemCubit>(context).removeAllItems();
             GlobalMethods.goRouterPOP(context);
           },
-          icon: Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.close),
         ),
         actions: [
           IconButton(

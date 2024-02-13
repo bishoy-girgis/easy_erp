@@ -6,8 +6,9 @@ import '../../../../../core/helper/pdf_helper.dart';
 import '../../../../../data/models/invoice_model/invoice_model.dart';
 
 class PdfPreviewPage extends StatelessWidget {
-  final BillModel bill;
-  const PdfPreviewPage({Key? key, required this.bill}) : super(key: key);
+  final InvoiceModel invoiceModel;
+  const PdfPreviewPage({Key? key, required this.invoiceModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class PdfPreviewPage extends StatelessWidget {
         maxScale: 4,
         child: PdfPreview(
           loadingWidget: const CupertinoActivityIndicator(),
-          build: (context) => pdfBuilder(bill),
+          build: (context) => pdfBuilder(invoiceModel),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/helper/global_methods.dart';
@@ -21,7 +22,9 @@ class AddItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var priceController =
         TextEditingController(text: itemModel.salesprice.toString());
-    var quantityController = TextEditingController(text: "1");
+    var quantityController =
+        TextEditingController(text: itemModel.quantity.toString());
+    // int quantity;
 
     return BlocBuilder<AddItemCubit, AddItemState>(
       builder: (context, state) {
@@ -124,10 +127,20 @@ class AddItemWidget extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        int q;
-                        q = int.parse(quantityController.text);
-                        q++;
-                        quantityController.text = q.toString();
+                        // itemModel.quantity = int.parse(quantityController.text);
+                        // itemModel.quantity++;
+                        // quantityController.text = itemModel.quantity.toString();
+                        if (itemModel.quantity < 500) {
+                          itemModel.quantity =
+                              int.parse(quantityController.text);
+                          itemModel.quantity++;
+                          quantityController.text =
+                              itemModel.quantity.toString();
+                        } else {
+                          GlobalMethods.buildFlutterToast(
+                              message: "You can't choose more than 500 item",
+                              state: ToastStates.WARNING);
+                        }
                       },
                       icon: Icon(
                         Icons.add_circle,
@@ -144,17 +157,31 @@ class AddItemWidget extends StatelessWidget {
                         keyboardType: TextInputType.number,
                         isContentBold: true,
                         onChange: (value) {
-                          quantityController.text = value;
+                          if (value.isEmpty) {
+                            quantityController.text = '1';
+                          } else if (double.parse(quantityController.text) >=
+                              5000) {
+                            quantityController.text = '5000';
+                            itemModel.quantity = int.parse(value);
+                            GlobalMethods.buildFlutterToast(
+                                gravity: ToastGravity.CENTER,
+                                message: "You can't add more than 5000 items",
+                                state: ToastStates.WARNING);
+                          } else {
+                            quantityController.text.replaceAll('1', value);
+                            quantityController.text = value;
+                            itemModel.quantity = int.parse(value);
+                          }
                         },
                       ),
                     ),
                     IconButton(
                       onPressed: () {
-                        int q;
-                        q = int.parse(quantityController.text);
-                        if (q > 1) {
-                          q--;
-                          quantityController.text = q.toString();
+                        itemModel.quantity = int.parse(quantityController.text);
+                        if (itemModel.quantity > 1) {
+                          itemModel.quantity--;
+                          quantityController.text =
+                              itemModel.quantity.toString();
                         } else {
                           GlobalMethods.buildFlutterToast(
                               message: "You can't choose less than 1 item",

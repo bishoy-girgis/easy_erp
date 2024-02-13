@@ -31,6 +31,13 @@ class AddItemCubit extends Cubit<AddItemState> {
     return addedItems;
   }
 
+  removeAllItems() {
+    emit(AddItemInitial());
+    addedItems.clear();
+
+    emit(RemoveAllItemSuccess());
+  }
+
   List<ItemModel> addItem(ItemModel item) {
     emit(AddItemInitial());
     addedItems.add(item);

@@ -76,29 +76,18 @@ class CustomerWidget extends StatelessWidget {
                       Icons.app_registration_rounded,
                     ),
                     GapW(w: 2),
-                    TextBuilder(customerModel.fax ?? ""),
+                    TextBuilder(customerModel.fax!),
                   ],
                 )
               : Container(),
-          // customerModel. != null || customerModel.fax!.isNotEmpty
-          //     ? Row(
-          //         children: [
-          //           Icon(
-          //             Icons.phone,
-          //           ),
-          //           GapW(w: 2),
-          //           TextBuilder(phone),
-          //         ],
-          //       )
-          //     : Container(),
-          customerModel.address != null
+          customerModel.address != null || customerModel.address!.isNotEmpty
               ? Row(
                   children: [
                     Icon(
                       Icons.location_on_rounded,
                     ),
                     GapW(w: 2),
-                    TextBuilder(customerModel.address ?? ""),
+                    TextBuilder(customerModel.address!),
                   ],
                 )
               : Container(),

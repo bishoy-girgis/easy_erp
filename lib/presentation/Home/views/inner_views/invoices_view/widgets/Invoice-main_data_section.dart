@@ -41,7 +41,7 @@ class InvoiceMainDataSection extends StatelessWidget {
               fontSize: 16,
             ),
             CustomTextFormField(
-              labelText: "AUTO ",
+              labelText: "AUTO",
               centerContent: true,
               isLabelBold: true,
               isClickable: false,
@@ -69,7 +69,7 @@ class InvoiceMainDataSection extends StatelessWidget {
               isHeader: true,
               fontSize: 16,
             ),
-            const SellectCashOrPostponeSection(),
+            const SellectCashOrCreditSection(),
           ],
         ),
       ),

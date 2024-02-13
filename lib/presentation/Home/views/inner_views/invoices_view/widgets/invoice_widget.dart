@@ -1,6 +1,7 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,16 +12,21 @@ import '../../../../../../data/models/invoice_model/invoice_model.dart';
 class InvoiceWidget extends StatelessWidget {
   const InvoiceWidget({
     super.key,
-    required this.e,
+    required this.invoiceModel,
   });
-  final BillModel e;
+  final InvoiceModel invoiceModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GlobalMethods.goRouterNavigateTO(
-          context: context,
-          router: AppRouters.kCreateInvoice,
+        // GlobalMethods.goRouterNavigateTOWithExtraObject(
+        //   context: context,
+        //   router: AppRouters.kInvoiceDetailsView,
+        //   extraObject: invoiceModel,
+        // );
+        GlobalMethods.navigateTo(
+          context,
+          InvoiceDetailsView(singleInvoiceItem: invoiceModel),
         );
       },
       child: Container(
@@ -54,7 +60,7 @@ class InvoiceWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextBuilder(
-                      e.name,
+                      invoiceModel.customer.custname!,
                       color: Colors.white,
                       textAlign: TextAlign.center,
                       fontSize: 14,
@@ -99,7 +105,7 @@ class InvoiceWidget extends StatelessWidget {
                       ],
                     ),
                     TextBuilder(
-                      e.customer,
+                      invoiceModel.customer.custname!,
                       color: AppColors.blackColor,
                     ),
                     const Row(
