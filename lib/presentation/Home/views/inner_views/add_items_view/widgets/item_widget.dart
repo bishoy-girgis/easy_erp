@@ -80,23 +80,6 @@ class AddItemWidget extends StatelessWidget {
                     TextBuilder(itemModel.unitname!),
                   ],
                 ),
-                // Flexible(
-                //   child: CheckboxMenuButton(
-                //     child: TextBuilder(
-                //       itemModel.unitname ?? "",
-                //     ),
-                //     value: BlocProvider.of<AddItemCubit>(context)
-                //         .checkItemInList(itemModel),
-                //     onChanged: (bool? isChecked) {
-                //       BlocProvider.of<AddItemCubit>(context)
-                //               .checkItemInList(itemModel)
-                //           ? BlocProvider.of<AddItemCubit>(context)
-                //               .removeItem(itemModel)
-                //           : BlocProvider.of<AddItemCubit>(context)
-                //               .addItem(itemModel);
-                //     },
-                //   ),
-                // ),
                 TextBuilder(
                   AppLocalizations.of(context)!.price,
                   isHeader: true,
@@ -238,21 +221,6 @@ class AddItemWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                // CustomElevatedButton(
-                //   width: double.infinity,
-                //   title: TextBuilder(
-                //     "Add",
-                //     color: AppColors.whiteColor,
-                //   ),
-                //   onPressed: () {
-                //     BlocProvider.of<AddItemCubit>(context)
-                //             .checkItemInList(itemModel)
-                //         ? BlocProvider.of<AddItemCubit>(context)
-                //             .removeItem(itemModel)
-                //         : BlocProvider.of<AddItemCubit>(context)
-                //             .addItem(itemModel);
-                //   },
-                // )
               ],
             ),
           ),

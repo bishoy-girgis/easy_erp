@@ -23,10 +23,10 @@ class SelectedItem extends StatelessWidget {
     return BlocProvider.of<AddItemCubit>(context).addedItems.contains(itemModel)
         ? GestureDetector(
             onTap: () {
-              GlobalMethods.goRouterNavigateTO(
-                context: context,
-                router: AppRouters.kCreateInvoice,
-              );
+              // GlobalMethods.goRouterNavigateTO(
+              //   context: context,
+              //   router: AppRouters.kCreateInvoice,
+              // );
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),

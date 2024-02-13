@@ -16,31 +16,29 @@ class _SellectCashOrCreditSectionState
     extends State<SellectCashOrCreditSection> {
   @override
   Widget build(BuildContext context) {
-    String selectedOption = AppLocalizations.of(context)!.cash;
+    // String selectedOption = AppLocalizations.of(context)!.cash;
+    String dropdownvalue = AppLocalizations.of(context)!.cash;
 
+    var items = [
+      AppLocalizations.of(context)!.cash,
+      AppLocalizations.of(context)!.credit,
+    ];
     return Center(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         width: double.infinity,
-        child: DropdownButton<String>(
-          value: selectedOption,
+        child: DropdownButton(
+          value: dropdownvalue,
+          icon: const Icon(Icons.keyboard_arrow_down),
           onChanged: (String? newValue) {
             setState(() {
-              selectedOption = newValue!;
+              dropdownvalue = newValue!;
             });
           },
-          items: <String>[
-            AppLocalizations.of(context)!.cash,
-            AppLocalizations.of(context)!.credit,
-          ].map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: TextBuilder(
-                value,
-                // isHeader: true,
-                fontSize: 18,
-                color: Colors.black,
-              ),
+          items: items.map((String items) {
+            return DropdownMenuItem(
+              value: items,
+              child: TextBuilder(items),
             );
           }).toList(),
         ),

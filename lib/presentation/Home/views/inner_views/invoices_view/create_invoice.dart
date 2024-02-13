@@ -39,9 +39,7 @@ class CreateInvoiceView extends StatelessWidget {
                   items: BlocProvider.of<AddItemCubit>(context).addedItems);
             },
           ),
-          const SliverToBoxAdapter(
-            child: GapH(h: 1),
-          ),
+          const SliverToBoxAdapter(child: GapH(h: 1)),
           BlocBuilder<AddItemCubit, AddItemState>(builder: (context, state) {
             debugPrint(state.runtimeType.toString());
             return getIt.get<AddItemCubit>().addedItems.isEmpty
