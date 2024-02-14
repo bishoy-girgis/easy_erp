@@ -9,6 +9,8 @@ sealed class InvoiceState extends Equatable {
 
 final class InvoiceInitial extends InvoiceState {}
 
-final class InvoiceAdded extends InvoiceState {}
+final class SaveInvoiceLoading extends InvoiceState {}
 
-final class InvoiceRemoved extends InvoiceState {}
+final class InvoiceSaveSuccess extends InvoiceState {}
+
+final class InvoiceNotSave extends InvoiceState {}
