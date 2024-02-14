@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'widgets/Invoice-main_data_section.dart';
 import 'widgets/pricing_section.dart';
 import 'widgets/selected_items_to_invoice.dart';
