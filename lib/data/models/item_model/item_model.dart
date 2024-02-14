@@ -12,7 +12,8 @@ class ItemModel extends Equatable {
   final double? salesprice;
   final int? balance;
   final double? discP;
-  int quantity;
+  final double? cost;
+  num quantity;
 
   ItemModel({
     this.itmid,
@@ -26,6 +27,7 @@ class ItemModel extends Equatable {
     this.salesprice,
     this.balance,
     this.discP,
+    this.cost,
     this.quantity = 1,
   });
 
@@ -41,6 +43,7 @@ class ItemModel extends Equatable {
         salesprice: json['Salesprice'],
         balance: json['Balance'] as int?,
         discP: json['DiscP'],
+        cost: json['Cost'],
         quantity: 1,
       );
 
@@ -56,6 +59,7 @@ class ItemModel extends Equatable {
         'Salesprice': salesprice,
         'Balance': balance,
         'DiscP': discP,
+        'Cost': cost,
       };
 
   @override

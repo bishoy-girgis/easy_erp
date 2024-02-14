@@ -21,6 +21,7 @@ class GetItemCubit extends Cubit<GetItemState> {
     }, (r) {
       /// r for List of items
       items = r;
+
       emit(GetItemsSuccessState(items: r));
       return items;
     });

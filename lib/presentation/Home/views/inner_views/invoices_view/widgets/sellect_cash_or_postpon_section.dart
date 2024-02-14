@@ -14,11 +14,19 @@ class SellectCashOrCreditSection extends StatefulWidget {
 
 class _SellectCashOrCreditSectionState
     extends State<SellectCashOrCreditSection> {
+  String? _dropdownValue;
+
+  void dropdownCallback(String? selectedValue) {
+    if (selectedValue is String) {
+      setState(() {
+        _dropdownValue = selectedValue;
+        print(_dropdownValue);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // String selectedOption = AppLocalizations.of(context)!.cash;
-    String dropdownvalue = AppLocalizations.of(context)!.cash;
-
     var items = [
       AppLocalizations.of(context)!.cash,
       AppLocalizations.of(context)!.credit,
@@ -28,13 +36,13 @@ class _SellectCashOrCreditSectionState
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         width: double.infinity,
         child: DropdownButton(
-          value: dropdownvalue,
+          hint: TextBuilder(
+            AppLocalizations.of(context)!.cash,
+          ),
+          isExpanded: true,
+          value: _dropdownValue,
           icon: const Icon(Icons.keyboard_arrow_down),
-          onChanged: (String? newValue) {
-            setState(() {
-              dropdownvalue = newValue!;
-            });
-          },
+          onChanged: dropdownCallback,
           items: items.map((String items) {
             return DropdownMenuItem(
               value: items,

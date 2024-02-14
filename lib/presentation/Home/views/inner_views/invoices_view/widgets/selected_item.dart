@@ -1,6 +1,5 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
-import 'package:easy_erp/core/helper/app_routing.dart';
-import 'package:easy_erp/core/helper/global_methods.dart';
+
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
-import '../../../../../../data/models/invoice_model/invoice_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SelectedItem extends StatelessWidget {
   const SelectedItem({
@@ -22,12 +21,7 @@ class SelectedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.of<AddItemCubit>(context).addedItems.contains(itemModel)
         ? GestureDetector(
-            onTap: () {
-              // GlobalMethods.goRouterNavigateTO(
-              //   context: context,
-              //   router: AppRouters.kCreateInvoice,
-              // );
-            },
+            onTap: () {},
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
               width: double.infinity,
@@ -92,12 +86,12 @@ class SelectedItem extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               TextBuilder(
-                                "Price",
+                                AppLocalizations.of(context)!.price,
                                 fontSize: 14,
                                 color: Colors.black,
                               ),
                               TextBuilder(
-                                "Total",
+                                AppLocalizations.of(context)!.total,
                                 fontSize: 14,
                                 color: Colors.black,
                               ),

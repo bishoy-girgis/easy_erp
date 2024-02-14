@@ -33,8 +33,8 @@ class AddItemCubit extends Cubit<AddItemState> {
 
   removeAllItems() {
     emit(AddItemInitial());
-    addedItems.clear();
 
+    addedItems.clear();
     emit(RemoveAllItemSuccess());
   }
 

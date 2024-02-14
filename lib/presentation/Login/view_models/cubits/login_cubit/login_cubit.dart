@@ -1,6 +1,7 @@
 import 'package:easy_erp/data/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import '../../../../../data/repositories/login_repository/login_Repo.dart';
 
@@ -17,9 +18,11 @@ class LoginCubit extends Cubit<LoginState> {
         await loginRepo.userLogin(userName: userName, password: password);
     result.fold((error) {
       emit(LoginFailureState(error: error.errorMessage));
-    }, (userModel) {
-      userModel = userModel;
-      emit(LoginSuccessState(userModel: userModel));
+    }, (r) async {
+      userModel = r;
+      var userBox = Hive.box<UserModel>("userBox");
+      await userBox.add(r);
+      emit(LoginSuccessState(userModel: r));
       return userModel;
     });
   }

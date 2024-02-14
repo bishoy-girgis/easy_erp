@@ -1,10 +1,65 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
 class GlobalMethods {
+  static Future<void> showAlertAdressDialog(BuildContext context,
+      {required String title,
+      TextEditingController? controller,
+      Function()? onPressedButton1,
+      Function()? onPressedButton2,
+      String? titleButton1,
+      String? titleButton2,
+      Widget? content}) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: TextBuilder(title),
+          content: content,
+          actions: [
+            titleButton1 != null
+                ? Container(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: onPressedButton1,
+                      child: TextBuilder(
+                        titleButton1,
+                        color: AppColors.whiteColor,
+                      ),
+                      style: TextButton.styleFrom(
+                        backgroundColor: AppColors.primaryColorBlue,
+                      ),
+                    ),
+                  )
+                : Container(),
+            titleButton2 != null
+                ? Container(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: onPressedButton2,
+                      child: TextBuilder(
+                        titleButton2,
+                        color: AppColors.whiteColor,
+                      ),
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.red,
+                      ),
+                    ),
+                  )
+                : Container(),
+          ],
+        );
+      },
+    );
+  }
+
   static Future<bool?> buildFlutterToast({
     required String message,
     required ToastStates state,
@@ -83,6 +138,10 @@ class GlobalMethods {
         builder: (builder) => screen,
       ),
     );
+  }
+
+  static navigatePOP(context) {
+    Navigator.of(context).pop();
   }
 }
 

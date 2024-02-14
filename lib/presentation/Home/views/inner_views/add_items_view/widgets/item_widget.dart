@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../../../core/helper/app_colors.dart';
@@ -24,7 +25,6 @@ class AddItemWidget extends StatelessWidget {
         TextEditingController(text: itemModel.salesprice.toString());
     var quantityController =
         TextEditingController(text: itemModel.quantity.toString());
-    // int quantity;
 
     return BlocBuilder<AddItemCubit, AddItemState>(
       builder: (context, state) {
@@ -35,7 +35,7 @@ class AddItemWidget extends StatelessWidget {
                 : BlocProvider.of<AddItemCubit>(context).addItem(itemModel);
           },
           child: Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
@@ -46,7 +46,7 @@ class AddItemWidget extends StatelessWidget {
                   width: 3),
               color: BlocProvider.of<AddItemCubit>(context)
                       .checkItemInList(itemModel)
-                  ? AppColors.primaryColorBlue.withOpacity(.3)
+                  ? AppColors.primaryColorBlue.withOpacity(.25)
                   : Colors.white,
               boxShadow: BlocProvider.of<AddItemCubit>(context)
                       .checkItemInList(itemModel)
@@ -61,7 +61,7 @@ class AddItemWidget extends StatelessWidget {
                     ],
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextBuilder(
@@ -103,31 +103,32 @@ class AddItemWidget extends StatelessWidget {
                   AppLocalizations.of(context)!.quantity,
                   isHeader: true,
                   fontSize: 16,
-                  // color: Colors.,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
+                      style: IconButton.styleFrom(
+                        padding: EdgeInsets.all(0),
+                      ),
                       onPressed: () {
-                        // itemModel.quantity = int.parse(quantityController.text);
-                        // itemModel.quantity++;
-                        // quantityController.text = itemModel.quantity.toString();
-                        if (itemModel.quantity < 500) {
+                        if (itemModel.quantity < 5000) {
                           itemModel.quantity =
                               int.parse(quantityController.text);
                           itemModel.quantity++;
                           quantityController.text =
                               itemModel.quantity.toString();
                         } else {
+                          quantityController.text = '4999';
                           GlobalMethods.buildFlutterToast(
-                              message: "You can't choose more than 500 item",
+                              message: "You can't choose more than 4999 item",
                               state: ToastStates.WARNING);
                         }
                       },
                       icon: Icon(
-                        Icons.add_circle,
-                        color: Colors.green,
+                        Icons.arrow_circle_up_outlined,
+                        color: AppColors.primaryColorBlue,
+                        size: 35.sp,
                       ),
                     ),
                     Flexible(
@@ -144,21 +145,26 @@ class AddItemWidget extends StatelessWidget {
                             quantityController.text = '1';
                           } else if (double.parse(quantityController.text) >=
                               5000) {
-                            quantityController.text = '5000';
-                            itemModel.quantity = int.parse(value);
+                            quantityController.text = '4999';
+                            itemModel.quantity =
+                                int.parse(quantityController.text);
                             GlobalMethods.buildFlutterToast(
                                 gravity: ToastGravity.CENTER,
-                                message: "You can't add more than 5000 items",
+                                message: "You can't add more than 4999 items",
                                 state: ToastStates.WARNING);
                           } else {
                             quantityController.text.replaceAll('1', value);
                             quantityController.text = value;
-                            itemModel.quantity = int.parse(value);
+                            itemModel.quantity =
+                                int.parse(quantityController.text);
                           }
                         },
                       ),
                     ),
                     IconButton(
+                      style: IconButton.styleFrom(
+                        padding: EdgeInsets.all(0),
+                      ),
                       onPressed: () {
                         itemModel.quantity = int.parse(quantityController.text);
                         if (itemModel.quantity > 1) {
@@ -172,8 +178,9 @@ class AddItemWidget extends StatelessWidget {
                         }
                       },
                       icon: Icon(
-                        Icons.remove_circle,
-                        color: Colors.red,
+                        Icons.arrow_circle_down_outlined,
+                        color: AppColors.secondColorOrange,
+                        size: 35.sp,
                       ),
                     ),
                   ],

@@ -13,19 +13,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'core/helper/app_routing.dart';
+import 'data/models/user/user_model.dart';
 import 'data/providers/localization/localization_provider.dart';
 import 'data/services/local/shared_pref.dart';
-import 'presentation/Home/view_models/item_cubit/item_cubit.dart';
+import 'presentation/Home/view_models/get_item_cubit/item_cubit.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SharedPref.init();
   Bloc.observer = MyBlocObserver();
+
+  /// Initialize SharedPref
+  await SharedPref.init();
+
   String languageCode = SharedPref.get(key: 'languageCode') ?? 'ar';
-  // var status = await Permission.camera.request();
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(UserModelAdapter());
+  await Hive.openBox<UserModel>('userModel');
+
+  ///setup DI for the App ,
   setupServiceLocatorByGetIt();
 
   runApp(MyApp(

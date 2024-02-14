@@ -15,7 +15,7 @@ import '../../../../../core/helper/app_colors.dart';
 import '../../../../../core/helper/locator.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
-import '../../../view_models/item_cubit/item_cubit.dart';
+import '../../../view_models/get_item_cubit/item_cubit.dart';
 import 'widgets/item_widget.dart';
 
 class AddItemsView extends StatefulWidget {
@@ -32,16 +32,19 @@ class _AddItemsViewState extends State<AddItemsView> {
   TextEditingController searchController = TextEditingController();
 
   Widget buildCubitWidget() {
-    return BlocBuilder<GetItemCubit, GetItemState>(builder: (context, state) {
-      if (state is GetItemsSuccessState) {
-        items = state.items;
-        return buildLoadedListWidgets();
-      } else {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-    });
+    return BlocBuilder<GetItemCubit, GetItemState>(
+      builder: (context, state) {
+        if (state is GetItemsSuccessState) {
+          items = state.items;
+
+          return buildLoadedListWidgets();
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -54,8 +57,23 @@ class _AddItemsViewState extends State<AddItemsView> {
         ),
         leading: IconButton(
           onPressed: () {
-            BlocProvider.of<AddItemCubit>(context).removeAllItems();
-            GlobalMethods.goRouterPOP(context);
+            GlobalMethods.showAlertAdressDialog(
+              context,
+              title: "Exit and dont save ? ",
+              titleButton1: "YES",
+              onPressedButton1: () {
+                BlocProvider.of<AddItemCubit>(context).removeAllItems();
+                for (int i = 0; i < items.length; i++) {
+                  items[i].quantity = 1;
+                }
+                GlobalMethods.goRouterNavigateTOAndReplacement(
+                    context: context, router: AppRouters.kCreateInvoice);
+              },
+              titleButton2: "NO",
+              onPressedButton2: () {
+                GlobalMethods.navigatePOP(context);
+              },
+            );
           },
           icon: Icon(Icons.close),
         ),
@@ -84,20 +102,16 @@ class _AddItemsViewState extends State<AddItemsView> {
             labelText: AppLocalizations.of(context)!.search,
             hintText: AppLocalizations.of(context)!.search_with_id_code_barcode,
             suffixIcon: Icons.search,
-            // suffixColor: Colors.blueGrey,
             controller: searchController,
             prefixIcon: Icons.qr_code_rounded,
-            prefixIconColor: Colors.blueGrey,
             backgroundOfTextFeild: Colors.white,
             onChange: (v) {
               searchController.text = v;
               searchForItems = items
                   .where((item) =>
-                          item.itmname!.toLowerCase().startsWith(v) ||
-                          item.itmename!.toLowerCase().startsWith(v) ||
-                          item.itmid!.toString().startsWith(v)
-                      // item.!.toString().startsWith(v),
-                      )
+                      item.itmname!.toLowerCase().startsWith(v) ||
+                      item.itmename!.toLowerCase().startsWith(v) ||
+                      item.itmid!.toString().startsWith(v))
                   .toList();
               setState(() {});
             },
@@ -107,29 +121,30 @@ class _AddItemsViewState extends State<AddItemsView> {
           const GapH(h: 1),
           Expanded(
             child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                  color: AppColors.whiteColor,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                color: AppColors.whiteColor,
+              ),
+              child: GridView.builder(
+                padding: const EdgeInsets.all(10),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10.w,
+                  mainAxisSpacing: 10.h,
+                  childAspectRatio: 0.38.r,
                 ),
-                child: GridView.builder(
-                  padding: const EdgeInsets.all(10),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10.w,
-                    mainAxisSpacing: 10.h,
-                    childAspectRatio: 0.38.r,
-                  ),
-                  itemCount: searchController.text.isEmpty
-                      ? items.length
-                      : searchForItems.length,
-                  itemBuilder: (context, index) {
-                    return AddItemWidget(
-                      itemModel: searchController.text.isEmpty
-                          ? items[index]
-                          : searchForItems[index],
-                    );
-                  },
-                )),
+                itemCount: searchController.text.isEmpty
+                    ? items.length
+                    : searchForItems.length,
+                itemBuilder: (context, index) {
+                  return AddItemWidget(
+                    itemModel: searchController.text.isEmpty
+                        ? items[index]
+                        : searchForItems[index],
+                  );
+                },
+              ),
+            ),
           )
         ],
       ),
