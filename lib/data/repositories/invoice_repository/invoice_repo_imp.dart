@@ -18,11 +18,26 @@ class InvoiceRepoImplementation extends InvoiceRepo {
       print("DATA IN INVOICE REPO IMP ✨✨");
       var data = await apiService.postBody(
         endPoint: AppConstants.LOGIN_AND_TOKEN,
-        queryParameters: {},
-        body: {},
+        queryParameters: {
+          'date': invoiceModel.date,
+          'custid': invoiceModel.custid,
+          'invtype': invoiceModel.invtype,
+          'user': invoiceModel.user,
+          'whid': invoiceModel.whid,
+          'ccid': invoiceModel.ccid,
+          'branchid': invoiceModel.branchid,
+          'netvalue': invoiceModel.netvalue,
+          'TaxAdd': invoiceModel.taxAdd,
+          'FinalValue': invoiceModel.finalValue,
+          'Payid': invoiceModel.payid,
+          'bankDtlId': invoiceModel.bankDtlId,
+        },
+        body: {
+          'itms': invoiceModel.itms,
+        },
       );
-      InvoiceModel userModel = InvoiceModel.fromJson(data);
-      return right(userModel);
+      InvoiceModel invoice = InvoiceModel.fromJson(data);
+      return right(invoice);
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));

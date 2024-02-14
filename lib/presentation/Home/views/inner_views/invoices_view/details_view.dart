@@ -57,7 +57,7 @@ class InvoiceDetailsView extends StatelessWidget {
                     'Bill Details',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  ...singleInvoiceItem.items!.map(
+                  ...singleInvoiceItem.itms.map(
                     (item) => ListTile(
                       title: Text(item.itmname!),
                       trailing: Text(

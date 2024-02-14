@@ -48,7 +48,7 @@ Future<Uint8List> pdfBuilder(InvoiceModel invoiceModel) async {
                     ),
                   ],
                 ),
-                ...invoiceModel.items!.map(
+                ...invoiceModel.itms.map(
                   (e) => TableRow(
                     children: [
                       Expanded(

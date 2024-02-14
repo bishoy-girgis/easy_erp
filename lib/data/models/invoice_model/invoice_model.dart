@@ -14,7 +14,7 @@ class InvoiceModel {
   final double? finalValue;
   final int? payid;
   final int? bankDtlId;
-  final List<ItemModel> items;
+  final List<ItemModel> itms;
   InvoiceModel({
     required this.date,
     required this.custid,
@@ -28,7 +28,7 @@ class InvoiceModel {
     required this.finalValue,
     required this.payid,
     required this.bankDtlId,
-    required this.items,
+    required this.itms,
   });
   factory InvoiceModel.fromJson(Map<String, dynamic> json) {
     return InvoiceModel(
@@ -44,7 +44,7 @@ class InvoiceModel {
       finalValue: json['finalValue'],
       payid: json['payid'],
       bankDtlId: json['bankDtlId'],
-      items: (json['items'])
+      itms: (json['itms'])
           .map((var itemJson) => ItemModel.fromJson(itemJson))
           .toList(),
     );
@@ -64,12 +64,12 @@ class InvoiceModel {
       'finalValue': finalValue,
       'payid': payid,
       'bankDtlId': bankDtlId,
-      'items': items.map((item) => item.toJson()).toList(),
+      'itms': itms.map((item) => item.toJson()).toList(),
     };
   }
 
   double totalCost() {
-    return items.fold(
+    return itms.fold(
         0, (previousValue, element) => previousValue + element.salesprice!);
   }
 }

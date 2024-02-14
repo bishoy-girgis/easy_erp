@@ -25,7 +25,7 @@ class InvoicesView extends StatelessWidget {
       custid: 1,
       finalValue: 1,
       invtype: 1,
-      items: getIt.get<AddItemCubit>().addedItems,
+      itms: getIt.get<AddItemCubit>().addedItems,
       netvalue: 1,
       payid: 1,
       taxAdd: 1,
