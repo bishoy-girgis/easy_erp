@@ -21,15 +21,14 @@ abstract class AppRouters {
 
   static const kHome = "/home";
   static const kSettings = "/settings";
-  static const kItems = "/loginView/home/items";
-  static const kCustomers = "/loginView/home/customers";
-  static const kReturns = "/loginView/home/returns";
-  static const kInvoices = "/loginView/home/invoices";
-  static const kCreateInvoice = "/loginView/home/invoices/createInvoice";
+  static const kItems = "$kHome/items";
+  static const kCustomers = "$kHome/customers";
+  static const kReturns = "$kHome/returns";
+  static const kInvoices = "$kHome/invoices";
+  static const kCreateInvoice = "$kInvoices/createInvoice";
   static const kAddItemsIntoInvoice =
-      "/loginView/home/invoices/createInvoice/addItemsIntoInvoice";
-  static const kInvoiceDetailsView =
-      "/loginView/home/invoices/invoiceShowDetails";
+      "$kHome/invoices/createInvoice/addItemsIntoInvoice";
+  static const kInvoiceDetailsView = "$kHome/invoices/invoiceShowDetails";
   // static const kCardScreen = "/CardScreen";
   // static const kAllProductsScreen = "/AllProductsScreen";
   // static const kViewAllOnSaleProductsScreen = "/ViewAllOnSaleProductsScreen";
@@ -60,14 +59,13 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kInvoices,
-        builder: (context, state) =>
-            InvoicesView(invoices: state.extra as List<InvoiceModel>),
+        name: kInvoices,
+        builder: (context, state) => InvoicesView(),
       ),
       GoRoute(
         path: kCreateInvoice,
-        // name: "ViewAllOnSaleProductsScreen",
         builder: (context, state) {
-          return CreateInvoiceView();
+          return const CreateInvoiceView();
         },
       ),
       GoRoute(

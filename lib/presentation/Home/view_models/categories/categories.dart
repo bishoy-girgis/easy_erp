@@ -40,17 +40,17 @@ class CategoriesViewModel {
           icon: Icons.attach_money,
           categoryName: l.invoises,
           onTap: () {
-            GlobalMethods.goRouterNavigateTOWithExtraObject(
+            GlobalMethods.goRouterNavigateTO(
               context: context,
               router: AppRouters.kInvoices,
-              extraObject: [
-                InvoiceModel(
-                  items: getIt.get<AddItemCubit>().addedItems,
-                ),
-                InvoiceModel(
-                  items: getIt.get<AddItemCubit>().addedItems,
-                ),
-              ],
+              // extraObject: [
+              //   InvoiceModel(
+              //     items: getIt.get<AddItemCubit>().addedItems,
+              //   ),
+              //   InvoiceModel(
+              //     items: getIt.get<AddItemCubit>().addedItems,
+              //   ),
+              // ],
             );
           }),
       CategoryWidget(

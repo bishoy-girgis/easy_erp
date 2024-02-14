@@ -21,7 +21,6 @@ class InvoiceRepoImplementation extends InvoiceRepo {
         queryParameters: {},
         body: {},
       );
-
       InvoiceModel userModel = InvoiceModel.fromJson(data);
       return right(userModel);
     } catch (e) {

@@ -2,6 +2,7 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
@@ -13,16 +14,25 @@ import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InvoicesView extends StatelessWidget {
-  const InvoicesView({Key? key, required this.invoices}) : super(key: key);
-  final List<InvoiceModel> invoices;
-  // final invoiceModels = <InvoiceModel>[
-  //   InvoiceModel(
-  //     items: getIt.get<AddItemCubit>().addedItems,
-  //   ),
-  //   InvoiceModel(
-  //     items: getIt.get<AddItemCubit>().addedItems,
-  //   ),
-  // ];
+  InvoicesView({Key? key}) : super(key: key);
+
+  final invoiceModels = <InvoiceModel>[
+    InvoiceModel(
+      bankDtlId: 1,
+      date: DateTime.now(),
+      branchid: 1,
+      ccid: 1,
+      custid: 1,
+      finalValue: 1,
+      invtype: 1,
+      items: getIt.get<AddItemCubit>().addedItems,
+      netvalue: 1,
+      payid: 1,
+      taxAdd: 1,
+      user: SharedPref.get(key: 'userName'),
+      whid: SharedPref.get(key: 'whid'),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +99,7 @@ class InvoicesView extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.all(10),
                 children: [
-                  ...invoices.map((invoiceModel) => InvoiceWidget(
+                  ...invoiceModels.map((invoiceModel) => InvoiceWidget(
                         invoiceModel: invoiceModel,
                       )),
                 ],
