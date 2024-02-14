@@ -5,6 +5,7 @@ import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
 
 import '../../../core/helper/app_constants.dart';
+import '../../models/item_model/item_model.dart';
 import 'invoice_repo.dart';
 
 class InvoiceRepoImplementation extends InvoiceRepo {
@@ -12,32 +13,45 @@ class InvoiceRepoImplementation extends InvoiceRepo {
   InvoiceRepoImplementation(this.apiService);
 
   @override
-  Future<Either<Failures, InvoiceModel>> saveInvoice(
-      {required InvoiceModel invoiceModel}) async {
+  Future<Either<Failures, dynamic>> saveInvoice({
+    required DateTime date,
+    required int custid,
+    required int invtype,
+    required String user,
+    required int whid,
+    required int ccid,
+    required int branchid,
+    required double netvalue,
+    required double taxAdd,
+    required double finalValue,
+    required int payid,
+    required int bankDtlId,
+    required List<ItemModel> itms,
+  }) async {
     try {
       print("DATA IN INVOICE REPO IMP ✨✨");
       var data = await apiService.postBody(
-        endPoint: AppConstants.LOGIN_AND_TOKEN,
+        endPoint: AppConstants.POST_INVOICE,
         queryParameters: {
-          'date': invoiceModel.date,
-          'custid': invoiceModel.custid,
-          'invtype': invoiceModel.invtype,
-          'user': invoiceModel.user,
-          'whid': invoiceModel.whid,
-          'ccid': invoiceModel.ccid,
-          'branchid': invoiceModel.branchid,
-          'netvalue': invoiceModel.netvalue,
-          'TaxAdd': invoiceModel.taxAdd,
-          'FinalValue': invoiceModel.finalValue,
-          'Payid': invoiceModel.payid,
-          'bankDtlId': invoiceModel.bankDtlId,
+          'date': date,
+          'custid': custid,
+          'invtype': invtype,
+          'user': user,
+          'whid': whid,
+          'ccid': ccid,
+          'branchid': branchid,
+          'netvalue': netvalue,
+          'TaxAdd': taxAdd,
+          'FinalValue': finalValue,
+          'Payid': payid,
+          'bankDtlId': bankDtlId,
         },
         body: {
-          'itms': invoiceModel.itms,
+          'itms': itms,
         },
       );
-      InvoiceModel invoice = InvoiceModel.fromJson(data);
-      return right(invoice);
+      // InvoiceModel invoice = InvoiceModel.fromJson(data);
+      return right(data);
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));

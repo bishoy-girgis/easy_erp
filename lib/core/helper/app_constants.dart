@@ -9,6 +9,7 @@ class AppConstants {
       SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
 
   static const String LOGIN_AND_TOKEN = "/token";
+  static const String POST_INVOICE = "/api/Invsave/Post";
   static const String GET_CUSTOMERS = "/api/Values/getcustomers";
   static String GET_ITEMS = "/api/Items/getitems?whid=$whId";
 }

@@ -37,7 +37,7 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> postBody({
+  Future<dynamic> postBody({
     required String endPoint,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,

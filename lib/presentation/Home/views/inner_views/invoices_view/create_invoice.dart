@@ -8,6 +8,7 @@ import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'widgets/Invoice-main_data_section.dart';
 import 'widgets/pricing_section.dart';
 import 'widgets/selected_items_to_invoice.dart';
