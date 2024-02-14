@@ -1,6 +1,7 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/bloc_observer.dart';
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/item_repository/item_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/login_repository/login_repo_imp.dart';
@@ -21,8 +22,9 @@ import 'core/helper/app_routing.dart';
 import 'data/models/user/user_model.dart';
 import 'data/providers/localization/localization_provider.dart';
 import 'data/services/local/shared_pref.dart';
-import 'presentation/Home/view_models/get_item_cubit/item_cubit.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
+// import 'package:path_provider/path_provider.dart' as path_provider;
+
+import 'presentation/Home/view_models/item_cubit/item_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +38,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
   await Hive.openBox<UserModel>('userModel');
+  await Hive.openBox<CustomerModel>('customerModel');
 
   ///setup DI for the App ,
   setupServiceLocatorByGetIt();

@@ -13,20 +13,16 @@ import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InvoicesView extends StatelessWidget {
-  InvoicesView({Key? key}) : super(key: key);
-
-  final invoiceModels = <InvoiceModel>[
-    InvoiceModel(
-      customer: CustomerModel(custname: "Yusuf Abdo"),
-      address: '456 Mock Ave\nWonderland',
-      items: getIt.get<AddItemCubit>().addedItems,
-    ),
-    InvoiceModel(
-      customer: CustomerModel(custname: "Yusuf Abdo"),
-      address: '456 Mock Av',
-      items: getIt.get<AddItemCubit>().addedItems,
-    ),
-  ];
+  const InvoicesView({Key? key, required this.invoices}) : super(key: key);
+  final List<InvoiceModel> invoices;
+  // final invoiceModels = <InvoiceModel>[
+  //   InvoiceModel(
+  //     items: getIt.get<AddItemCubit>().addedItems,
+  //   ),
+  //   InvoiceModel(
+  //     items: getIt.get<AddItemCubit>().addedItems,
+  //   ),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +89,7 @@ class InvoicesView extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.all(10),
                 children: [
-                  ...invoiceModels.map((invoiceModel) => InvoiceWidget(
+                  ...invoices.map((invoiceModel) => InvoiceWidget(
                         invoiceModel: invoiceModel,
                       )),
                 ],

@@ -60,7 +60,8 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kInvoices,
-        builder: (context, state) => InvoicesView(),
+        builder: (context, state) =>
+            InvoicesView(invoices: state.extra as List<InvoiceModel>),
       ),
       GoRoute(
         path: kCreateInvoice,

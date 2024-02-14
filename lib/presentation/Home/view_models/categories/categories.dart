@@ -7,6 +7,10 @@ import '../../../../core/helper/app_routing.dart';
 import '../../../../core/helper/global_methods.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../core/helper/locator.dart';
+import '../../../../data/models/invoice_model/invoice_model.dart';
+import '../addItem_cubit/cubit/add_item_cubit.dart';
+
 class CategoriesViewModel {
   // BuildContext context;
   // CategoriesViewModel({
@@ -36,9 +40,17 @@ class CategoriesViewModel {
           icon: Icons.attach_money,
           categoryName: l.invoises,
           onTap: () {
-            GlobalMethods.goRouterNavigateTO(
+            GlobalMethods.goRouterNavigateTOWithExtraObject(
               context: context,
               router: AppRouters.kInvoices,
+              extraObject: [
+                InvoiceModel(
+                  items: getIt.get<AddItemCubit>().addedItems,
+                ),
+                InvoiceModel(
+                  items: getIt.get<AddItemCubit>().addedItems,
+                ),
+              ],
             );
           }),
       CategoryWidget(

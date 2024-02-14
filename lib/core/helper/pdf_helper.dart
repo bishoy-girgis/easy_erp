@@ -19,8 +19,8 @@ Future<Uint8List> pdfBuilder(InvoiceModel invoiceModel) async {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Attention to: ${invoiceModel.customer.custename}"),
-                    Text(invoiceModel.address),
+                    Text("Attention to: ${invoiceModel.custid}"),
+                    Text(invoiceModel.bankDtlId.toString()),
                   ],
                 ),
                 // SizedBox(
@@ -48,7 +48,7 @@ Future<Uint8List> pdfBuilder(InvoiceModel invoiceModel) async {
                     ),
                   ],
                 ),
-                ...invoiceModel.items.map(
+                ...invoiceModel.items!.map(
                   (e) => TableRow(
                     children: [
                       Expanded(

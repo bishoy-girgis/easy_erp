@@ -3,6 +3,7 @@ import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
+import 'package:easy_erp/presentation/Home/view_models/item_cubit/item_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +16,6 @@ import '../../../../../core/helper/app_colors.dart';
 import '../../../../../core/helper/locator.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
-import '../../../view_models/get_item_cubit/item_cubit.dart';
 import 'widgets/item_widget.dart';
 
 class AddItemsView extends StatefulWidget {

@@ -60,7 +60,7 @@ class InvoiceWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextBuilder(
-                      invoiceModel.customer.custname!,
+                      invoiceModel.payid.toString(),
                       color: Colors.white,
                       textAlign: TextAlign.center,
                       fontSize: 14,
@@ -105,7 +105,7 @@ class InvoiceWidget extends StatelessWidget {
                       ],
                     ),
                     TextBuilder(
-                      invoiceModel.customer.custname!,
+                      invoiceModel.user!,
                       color: AppColors.blackColor,
                     ),
                     const Row(

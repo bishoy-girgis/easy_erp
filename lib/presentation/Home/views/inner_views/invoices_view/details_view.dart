@@ -37,7 +37,7 @@ class InvoiceDetailsView extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 Text(
-                  singleInvoiceItem.customer.custname!,
+                  singleInvoiceItem.user!,
                   style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -57,7 +57,7 @@ class InvoiceDetailsView extends StatelessWidget {
                     'Bill Details',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  ...singleInvoiceItem.items.map(
+                  ...singleInvoiceItem.items!.map(
                     (item) => ListTile(
                       title: Text(item.itmname!),
                       trailing: Text(
@@ -90,7 +90,7 @@ class InvoiceDetailsView extends StatelessWidget {
   AppBar _buildAppBar() {
     return AppBar(
       title: Text(
-        singleInvoiceItem.address,
+        singleInvoiceItem.user!,
         maxLines: 2,
       ),
     );
