@@ -1,3 +1,4 @@
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +21,14 @@ class _SellectCashOrCreditSectionState
     if (selectedValue is String) {
       setState(() {
         _dropdownValue = selectedValue;
-        print(_dropdownValue);
+
+        if (_dropdownValue == AppLocalizations.of(context)!.cash) {
+          SharedPref.set(key: 'invoiceID', value: 0);
+          print(SharedPref.get(key: 'invoiceID'));
+        } else {
+          SharedPref.set(key: 'invoiceID', value: 2);
+          print(SharedPref.get(key: 'invoiceID'));
+        }
       });
     }
   }

@@ -20,8 +20,6 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginFailureState(error: error.errorMessage));
     }, (r) async {
       userModel = r;
-      var userBox = Hive.box<UserModel>("userBox");
-      await userBox.add(r);
       emit(LoginSuccessState(userModel: r));
       return userModel;
     });

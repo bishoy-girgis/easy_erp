@@ -1,5 +1,8 @@
+import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
+import 'package:easy_erp/presentation/Home/view_models/invoice_cubit/cubit/invoice_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:easy_erp/core/helper/app_colors.dart';
@@ -67,11 +70,53 @@ class CreateInvoiceView extends StatelessWidget {
         color: AppColors.whiteColor,
       ),
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.done,
-          ),
+        BlocBuilder<InvoiceCubit, InvoiceState>(
+          builder: (context, state) {
+            var items = getIt.get<AddItemCubit>().addedItems;
+            return IconButton(
+              onPressed: () async {
+                GlobalMethods.showAlertAdressDialog(
+                  context,
+                  title: "Save Invoice ? ",
+                  titleButton1: "Save",
+                  titleButton2: "No",
+                  onPressedButton1: () async {
+                    getIt.get<AddItemCubit>().addedItems.isNotEmpty
+                        ? await BlocProvider.of<InvoiceCubit>(context)
+                            .saveInvoice(
+                            bankDtlId: 1,
+                            branchid: 1,
+                            ccid: 1,
+                            custid: 1,
+                            date: DateTime.now(),
+                            finalValue: 30,
+                            invtype: 2,
+                            netvalue: 30,
+                            payid: 1,
+                            taxAdd: 20,
+                            whid: 1,
+                            user: SharedPref.get(key: 'userName'),
+                            itms: getIt.get<AddItemCubit>().addedItems,
+                          )
+                        : {
+                            GlobalMethods.navigatePOP(context),
+                            GlobalMethods.buildFlutterToast(
+                              message:
+                                  "You should select items to save invoice",
+                              state: ToastStates.ERROR,
+                            ),
+                          };
+                  },
+                  onPressedButton2: () {
+                    GlobalMethods.navigatePOP(context);
+                  },
+                );
+              },
+              icon: Icon(
+                Icons.done,
+              ),
+            );
+          },
         ),
       ],
     );

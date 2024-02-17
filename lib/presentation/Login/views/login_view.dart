@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/helper/app_colors.dart';
@@ -51,7 +52,7 @@ class _LoginViewState extends State<LoginView> {
               key: 'accessToken', value: state.userModel.accessToken);
           SharedPref.set(key: 'whId', value: state.userModel.whId);
           SharedPref.set(key: 'vat', value: state.userModel.vat);
-
+          Hive.box<UserModel>("userBox").put("userName", state.userModel);
           GlobalMethods.goRouterNavigateTOAndReplacement(
               context: context, router: AppRouters.kHome);
           GlobalMethods.buildFlutterToast(

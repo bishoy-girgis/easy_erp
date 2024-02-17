@@ -43,7 +43,8 @@ class ApiService {
     Map<String, dynamic>? queryParameters,
     required var body,
   }) async {
-    dio.options.headers['Authorization'] = 'Bearer ${AppConstants.accessToken}';
+    // dio.options.headers['Authorization'] =
+    //     'Bearer bQApN9QUn-o2ODfStWvzlzKF3b4Iv30v-Uvp8TXY5Z6dFYbTNSP--W1kY4AxInAqVCarH6xjgL9S0Wg5ooprPTWDpYQ6_nEjv-7t0m8cp90buSEq84YcG-LehNT6axxm2FnRHDbv-1ahmVh3eRuoNE75aBaeXeFTP_hqLIimEAk4kzgrEQqHF9w37dRuHG_qJRaDgAhSeWR43AV13AEQ7YCrADbDoxjnbiR9jZVAANA';
     dio = Dio(BaseOptions(
       baseUrl: _baseUrl,
       headers: headers,
@@ -52,6 +53,9 @@ class ApiService {
     var response = await dio.post(
       endPoint,
       data: body,
+      options: Options(
+          headers: {'Authorization': 'Bearer ${AppConstants.accessToken}'}),
+      queryParameters: queryParameters,
     );
     return response.data;
   }

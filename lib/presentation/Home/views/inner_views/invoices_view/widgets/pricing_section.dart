@@ -1,6 +1,8 @@
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
+import 'package:easy_erp/presentation/Home/view_models/invoice_cubit/cubit/invoice_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,6 +39,12 @@ class PricingSection extends StatelessWidget {
             }
             double amountBeforeTex = totalAmount -
                 ((AppConstants.vat * totalAmount) / (100 + AppConstants.vat));
+            double taxAmount =
+                ((AppConstants.vat * totalAmount) / (100 + AppConstants.vat));
+            SharedPref.set(key: 'totalAmount', value: totalAmount);
+            SharedPref.set(key: 'amountBeforeTex', value: amountBeforeTex);
+            SharedPref.set(key: 'taxAmount', value: taxAmount);
+
             return Column(
               children: [
                 CustomElevatedButton(
@@ -80,7 +88,7 @@ class PricingSection extends StatelessWidget {
                           fontSize: 16,
                         ),
                         TextBuilder(
-                          amountBeforeTex.toStringAsFixed(3),
+                          amountBeforeTex.toStringAsFixed(2),
                           maxLines: 2,
                         ),
                       ],
@@ -92,9 +100,7 @@ class PricingSection extends StatelessWidget {
                           fontSize: 16,
                         ),
                         TextBuilder(
-                          ((AppConstants.vat * totalAmount) /
-                                  (100 + AppConstants.vat))
-                              .toStringAsFixed(3),
+                          taxAmount.toStringAsFixed(2),
                           maxLines: 2,
                         ),
                       ],

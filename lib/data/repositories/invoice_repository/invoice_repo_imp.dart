@@ -30,6 +30,7 @@ class InvoiceRepoImplementation extends InvoiceRepo {
   }) async {
     try {
       print("DATA IN INVOICE REPO IMP ✨✨");
+      print(itms.map((item) => item.toJson()).toList());
       var data = await apiService.postBody(
         endPoint: AppConstants.POST_INVOICE,
         queryParameters: {
@@ -47,10 +48,9 @@ class InvoiceRepoImplementation extends InvoiceRepo {
           'bankDtlId': bankDtlId,
         },
         body: {
-          'itms': itms,
+          'itms': itms.map((item) => item.toJson()).toList(),
         },
       );
-      // InvoiceModel invoice = InvoiceModel.fromJson(data);
       return right(data);
     } catch (e) {
       if (e is DioException) {

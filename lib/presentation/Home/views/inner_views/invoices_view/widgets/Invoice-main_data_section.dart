@@ -1,5 +1,8 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/view_models/customer_cubit/customer_cubit.dart';
+import 'package:easy_erp/presentation/Home/view_models/invoice_cubit/cubit/invoice_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,7 +63,7 @@ class InvoiceMainDataSection extends StatelessWidget {
                 Flexible(child: HoursAndMinutes()),
               ],
             ),
-            SearchSection(
+            SearchOnCustomerSection(
               labelText: AppLocalizations.of(context)!.customer,
             ),
             const GapH(h: 1),
@@ -77,7 +80,7 @@ class InvoiceMainDataSection extends StatelessWidget {
   }
 }
 
-class SearchSection extends StatefulWidget {
+class SearchOnCustomerSection extends StatefulWidget {
   final String labelText;
   final String? hintText;
   final TextInputType? keyboardType;
@@ -103,7 +106,7 @@ class SearchSection extends StatefulWidget {
   final int? maxLines;
   final FocusNode? focusNode;
 
-  SearchSection({
+  SearchOnCustomerSection({
     super.key,
     this.centerContent = false,
     required this.labelText,
@@ -132,10 +135,11 @@ class SearchSection extends StatefulWidget {
   });
 
   @override
-  State<SearchSection> createState() => _SearchSectionState();
+  State<SearchOnCustomerSection> createState() =>
+      _SearchOnCustomerSectionState();
 }
 
-class _SearchSectionState extends State<SearchSection> {
+class _SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
   TextEditingController myController = TextEditingController();
 
   // @override
@@ -145,72 +149,116 @@ class _SearchSectionState extends State<SearchSection> {
       listener: (context, state) {},
       builder: (context, state) {
         List<CustomerModel> customers = GetCustomerCubit.get(context).customers;
-        List<String> customersNames = ["Cash"];
-        for (var customer in customers) {
-          customersNames.add(customer.custname ?? customer.custename ?? "");
-        }
+        // List<String> customersNames = [
+        //   AppLocalizations.of(context)!.cash,
+
+        // ];
+        // String itemSelected = '';
+        // for (var customer in customers) {
+        //   customersNames.add(customer.custname ?? customer.custename ?? "");
+        // }
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 5),
-          child: TextFieldSearch(
-              decoration: InputDecoration(
-                alignLabelWithHint: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                floatingLabelStyle: TextStyle(
-                  color: widget.focusedBorderColor,
-                  fontWeight: FontWeight.bold,
-                ),
-                filled: true,
-                fillColor: widget.backgroundOfTextFeild,
-                border: const OutlineInputBorder(
-                    // borderSide: BorderSide(width: 3, color: Colors.yellowAccent),
-                    borderRadius: BorderRadius.all(Radius.circular(16))),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: widget.notFocusedBorderColor),
-                    borderRadius: const BorderRadius.all(Radius.circular(16))),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                  borderSide:
-                      BorderSide(color: widget.focusedBorderColor, width: 2),
-                ),
-                label: TextBuilder(
-                  widget.labelText,
-                  isHeader: widget.isLabelBold,
-                  // textAlign: TextAlign.center,
-                ),
-                hintText: widget.hintText,
-                prefixIcon: widget.prefixIcon == null
-                    ? null
-                    : IconButton(
-                        onPressed: widget.prefixPressed,
-                        icon: Icon(
-                          widget.prefixIcon,
-                          color: widget.prefixIconColor,
-                        ),
-                      ),
-                suffixIcon: widget.suffixIcon == null
-                    ? null
-                    : IconButton(
-                        onPressed: widget.suffixPressed,
-                        icon: Icon(
-                          widget.suffixIcon,
-                          color: widget.suffixColor,
-                        ),
-                      ),
+          child: DropdownSearch<CustomerModel>(
+            items: customers,
+            itemAsString: (CustomerModel cust) => cust.custname!,
+            popupProps: PopupProps.menu(
+              showSearchBox: true,
+            ),
+            dropdownButtonProps: DropdownButtonProps(
+              color: AppColors.primaryColorBlue,
+            ),
+            validator: (value) {},
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              textAlign: TextAlign.center,
+              baseStyle: TextStyle(
+                fontFamily: 'Cairo',
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
               ),
-              initialList: customersNames.length == 0
-                  ? ["No Customers"]
-                  : customersNames,
-              label: widget.labelText,
-              textStyle: TextStyle(
-                fontFamily: "Cairo",
-                fontSize: widget.contentSize.sp,
-                fontWeight:
-                    widget.isContentBold ? FontWeight.bold : FontWeight.normal,
-              ),
-              controller: myController),
+              textAlignVertical: TextAlignVertical.center,
+              dropdownSearchDecoration: InputDecoration(
+                  label: TextBuilder(widget.labelText),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  )),
+            ),
+            onChanged: (CustomerModel? data) {
+              print(data!.custid);
+              print(data.custname);
+              print(data.custename);
+              setState(() {
+                SharedPref.set(key: "custID", value: data.custid);
+              });
+              print(
+                SharedPref.get(key: "custID"),
+              );
+            },
+            // selectedItem: itemSelected,
+          ),
+          // child: TextFieldSearch(
+          //   decoration: InputDecoration(
+          //     alignLabelWithHint: true,
+          //     contentPadding:
+          //         const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+          //     floatingLabelBehavior: FloatingLabelBehavior.never,
+          //     floatingLabelStyle: TextStyle(
+          //       color: widget.focusedBorderColor,
+          //       fontWeight: FontWeight.bold,
+          //     ),
+          //     filled: true,
+          //     fillColor: widget.backgroundOfTextFeild,
+          //     border: const OutlineInputBorder(
+          //         // borderSide: BorderSide(width: 3, color: Colors.yellowAccent),
+          //         borderRadius: BorderRadius.all(Radius.circular(16))),
+          //     enabledBorder: OutlineInputBorder(
+          //         borderSide:
+          //             BorderSide(width: 2, color: widget.notFocusedBorderColor),
+          //         borderRadius: const BorderRadius.all(Radius.circular(16))),
+          //     focusedBorder: OutlineInputBorder(
+          //       borderRadius: BorderRadius.circular(16.0),
+          //       borderSide:
+          //           BorderSide(color: widget.focusedBorderColor, width: 2),
+          //     ),
+          //     label: TextBuilder(
+          //       widget.labelText,
+          //       isHeader: widget.isLabelBold,
+          //       // textAlign: TextAlign.center,
+          //     ),
+          //     hintText: widget.hintText,
+          //     prefixIcon: widget.prefixIcon == null
+          //         ? null
+          //         : IconButton(
+          //             onPressed: widget.prefixPressed,
+          //             icon: Icon(
+          //               widget.prefixIcon,
+          //               color: widget.prefixIconColor,
+          //             ),
+          //           ),
+          //     suffixIcon: widget.suffixIcon == null
+          //         ? null
+          //         : IconButton(
+          //             onPressed: widget.suffixPressed,
+          //             icon: Icon(
+          //               widget.suffixIcon,
+          //               color: widget.suffixColor,
+          //             ),
+          //           ),
+          //   ),
+          //   initialList:
+          //       customersNames.length == 0 ? ["No Customers"] : customersNames,
+          //   label: widget.labelText,
+          //   textStyle: TextStyle(
+          //     fontFamily: "Cairo",
+          //     fontSize: widget.contentSize.sp,
+          //     fontWeight:
+          //         widget.isContentBold ? FontWeight.bold : FontWeight.normal,
+          //   ),
+          //   controller: myController,
+          //   getSelectedValue: (v) {
+          //     print(v);
+          //   },
+          // ),
         );
       },
     );
