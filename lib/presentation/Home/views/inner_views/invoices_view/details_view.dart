@@ -37,7 +37,7 @@ class InvoiceDetailsView extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 Text(
-                  singleInvoiceItem.user!,
+                  singleInvoiceItem.custInvname!,
                   style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -57,14 +57,14 @@ class InvoiceDetailsView extends StatelessWidget {
                     'Bill Details',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  ...singleInvoiceItem.itms.map(
-                    (item) => ListTile(
-                      title: Text(item.itmname!),
-                      trailing: Text(
-                        item.salesprice!.toStringAsFixed(2),
-                      ),
-                    ),
-                  ),
+                  // ...singleInvoiceItem..map(
+                  //   (item) => ListTile(
+                  //     title: Text(item.itmname!),
+                  //     trailing: Text(
+                  //       item.salesprice!.toStringAsFixed(2),
+                  //     ),
+                  //   ),
+                  // ),
                   DefaultTextStyle.merge(
                     style: Theme.of(context).textTheme.headlineMedium,
                     child: Row(
@@ -72,7 +72,7 @@ class InvoiceDetailsView extends StatelessWidget {
                       children: [
                         const Text("Total"),
                         Text(
-                          "\$${singleInvoiceItem.totalCost().toStringAsFixed(2)}",
+                          "\$${singleInvoiceItem.finalValue}",
                         ),
                       ],
                     ),
@@ -90,7 +90,7 @@ class InvoiceDetailsView extends StatelessWidget {
   AppBar _buildAppBar() {
     return AppBar(
       title: Text(
-        singleInvoiceItem.user!,
+        singleInvoiceItem.custInvname!,
         maxLines: 2,
       ),
     );

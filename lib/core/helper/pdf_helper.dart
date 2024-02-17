@@ -19,8 +19,8 @@ Future<Uint8List> pdfBuilder(InvoiceModel invoiceModel) async {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Attention to: ${invoiceModel.custid}"),
-                    Text(invoiceModel.bankDtlId.toString()),
+                    Text("Attention to: ${invoiceModel.custInvname}"),
+                    Text(invoiceModel.custInvname.toString()),
                   ],
                 ),
                 // SizedBox(
@@ -48,20 +48,20 @@ Future<Uint8List> pdfBuilder(InvoiceModel invoiceModel) async {
                     ),
                   ],
                 ),
-                ...invoiceModel.itms.map(
-                  (e) => TableRow(
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: textAndPadding(e.itmname!),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: textAndPadding("${e.salesprice}"),
-                      )
-                    ],
-                  ),
-                ),
+                // ...invoiceModel.itms.map(
+                //   (e) => TableRow(
+                //     children: [
+                //       Expanded(
+                //         flex: 2,
+                //         child: textAndPadding(e.itmname!),
+                //       ),
+                //       Expanded(
+                //         flex: 1,
+                //         child: textAndPadding("${e.salesprice}"),
+                //       )
+                //     ],
+                //   ),
+                // ),
                 // TableRow(
                 //   children: [
                 //     textAndPadding('TAX', align: TextAlign.right),
@@ -117,8 +117,7 @@ Future<Uint8List> pdfBuilder(InvoiceModel invoiceModel) async {
                     textAndPadding(
                       'Total Amount to be Paid',
                     ),
-                    textAndPadding(
-                        '\$${(invoiceModel.totalCost() * 1.1).toStringAsFixed(2)}')
+                    textAndPadding('\$${(invoiceModel.custInvname)}')
                   ],
                 )
               ],

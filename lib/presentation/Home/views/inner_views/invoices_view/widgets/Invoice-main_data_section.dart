@@ -141,7 +141,7 @@ class SearchOnCustomerSection extends StatefulWidget {
 
 class _SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
   TextEditingController myController = TextEditingController();
-
+  var customerKey = GlobalKey<DropdownSearchState>();
   // @override
   @override
   Widget build(BuildContext context) {
@@ -149,17 +149,11 @@ class _SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
       listener: (context, state) {},
       builder: (context, state) {
         List<CustomerModel> customers = GetCustomerCubit.get(context).customers;
-        // List<String> customersNames = [
-        //   AppLocalizations.of(context)!.cash,
 
-        // ];
-        // String itemSelected = '';
-        // for (var customer in customers) {
-        //   customersNames.add(customer.custname ?? customer.custename ?? "");
-        // }
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 5),
           child: DropdownSearch<CustomerModel>(
+            key: customerKey,
             items: customers,
             itemAsString: (CustomerModel cust) => cust.custname!,
             popupProps: PopupProps.menu(
@@ -168,7 +162,12 @@ class _SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
             dropdownButtonProps: DropdownButtonProps(
               color: AppColors.primaryColorBlue,
             ),
-            validator: (value) {},
+            validator: (value) {
+              if (value == null) {
+                return "please select a customer";
+              }
+              return null;
+            },
             dropdownDecoratorProps: DropDownDecoratorProps(
               textAlign: TextAlign.center,
               baseStyle: TextStyle(

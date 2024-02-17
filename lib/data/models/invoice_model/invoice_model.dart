@@ -1,75 +1,64 @@
-import 'package:easy_erp/data/models/customer_model/customer_model.dart';
-import 'package:easy_erp/data/models/item_model/item_model.dart';
+import 'package:equatable/equatable.dart';
 
-class InvoiceModel {
-  final DateTime? date;
-  final int? custid;
+class InvoiceModel extends Equatable {
+  final int? invid;
+  final String? invNo;
+  final String? invdate;
+  final String? invtime;
+  final String? custInvname;
   final int? invtype;
-  final String? user;
-  final int? whid;
-  final int? ccid;
-  final int? branchid;
-  final double? netvalue;
-  final double? taxAdd;
-  final double? finalValue;
-  final int? payid;
-  final int? bankDtlId;
-  final List<ItemModel> itms;
-  InvoiceModel({
-    required this.date,
-    required this.custid,
-    required this.invtype,
-    required this.user,
-    required this.whid,
-    required this.ccid,
-    required this.branchid,
-    required this.netvalue,
-    required this.taxAdd,
-    required this.finalValue,
-    required this.payid,
-    required this.bankDtlId,
-    required this.itms,
+  final int? netvalue;
+  final int? taxAdd;
+  final int? finalValue;
+
+  const InvoiceModel({
+    this.invid,
+    this.invNo,
+    this.invdate,
+    this.invtime,
+    this.custInvname,
+    this.invtype,
+    this.netvalue,
+    this.taxAdd,
+    this.finalValue,
   });
-  factory InvoiceModel.fromJson(Map<String, dynamic> json) {
-    return InvoiceModel(
-      date: DateTime.parse(json['date']),
-      custid: json['custid'],
-      invtype: json['invtype'],
-      user: json['user'],
-      whid: json['whid'],
-      ccid: json['ccid'],
-      branchid: json['branchid'],
-      netvalue: json['netvalue'],
-      taxAdd: json['taxAdd'],
-      finalValue: json['finalValue'],
-      payid: json['payid'],
-      bankDtlId: json['bankDtlId'],
-      itms: (json['itms'])
-          .map((var itemJson) => ItemModel.fromJson(itemJson))
-          .toList(),
-    );
-  }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'date': date,
-      'custid': custid,
-      'invtype': invtype,
-      'user': user,
-      'whid': whid,
-      'ccid': ccid,
-      'branchid': branchid,
-      'netvalue': netvalue,
-      'taxAdd': taxAdd,
-      'finalValue': finalValue,
-      'payid': payid,
-      'bankDtlId': bankDtlId,
-      'itms': itms.map((item) => item.toJson()).toList(),
-    };
-  }
+  factory InvoiceModel.fromJson(Map<String, dynamic> json) => InvoiceModel(
+        invid: json['Invid'] as int?,
+        invNo: json['InvNo'] as String?,
+        invdate: json['invdate'] as String?,
+        invtime: json['invtime'] as String?,
+        custInvname: json['CustInvname'] as String?,
+        invtype: json['invtype'] as int?,
+        netvalue: json['netvalue'] as int?,
+        taxAdd: json['TaxAdd'] as int?,
+        finalValue: json['FinalValue'] as int?,
+      );
 
-  double totalCost() {
-    return itms.fold(
-        0, (previousValue, element) => previousValue + element.salesprice!);
+  Map<String, dynamic> toJson() => {
+        'Invid': invid,
+        'InvNo': invNo,
+        'invdate': invdate,
+        'invtime': invtime,
+        'CustInvname': custInvname,
+        'invtype': invtype,
+        'netvalue': netvalue,
+        'TaxAdd': taxAdd,
+        'FinalValue': finalValue,
+      };
+
+  @override
+  List<Object?> get props {
+    return [
+      invid,
+      invNo,
+      invdate,
+      invtime,
+      custInvname,
+      invtype,
+      netvalue,
+      taxAdd,
+      finalValue,
+    ];
   }
 }

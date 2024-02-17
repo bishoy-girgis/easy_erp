@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
-import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
 import 'package:easy_erp/data/repositories/invoice_repository/invoice_repo.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:equatable/equatable.dart';

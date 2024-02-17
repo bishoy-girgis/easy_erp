@@ -18,19 +18,11 @@ class InvoicesView extends StatelessWidget {
 
   final invoiceModels = <InvoiceModel>[
     InvoiceModel(
-      bankDtlId: 1,
-      date: DateTime.now(),
-      branchid: 1,
-      ccid: 1,
-      custid: 1,
       finalValue: 1,
       invtype: 1,
-      itms: getIt.get<AddItemCubit>().addedItems,
       netvalue: 1,
-      payid: 1,
       taxAdd: 1,
-      user: SharedPref.get(key: 'userName'),
-      whid: SharedPref.get(key: 'whid'),
+      custInvname: "ddddddd",
     ),
   ];
 
