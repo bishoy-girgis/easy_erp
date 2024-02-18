@@ -1,4 +1,5 @@
 import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
@@ -106,7 +107,25 @@ class PricingSection extends StatelessWidget {
                       ],
                     )
                   ],
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Flexible(
+                      child: CustomTextFormField(labelText: "Price"),
+                    ),
+                    Flexible(
+                        child: DropdownButton<String>(
+                      items: <String>['A', 'B', 'C', 'D'].map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (_) {},
+                    )),
+                  ],
+                ),
               ],
             );
           },

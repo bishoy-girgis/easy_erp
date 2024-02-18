@@ -12,4 +12,5 @@ class AppConstants {
   static const String POST_INVOICE = "/api/Invsave/Post";
   static const String GET_CUSTOMERS = "/api/Values/getcustomers";
   static String GET_ITEMS = "/api/Items/getitems?whid=$whId";
+  static const String GET_PAYMENT_TYPE = "/api/Payments/getpaymentstypes";
 }
