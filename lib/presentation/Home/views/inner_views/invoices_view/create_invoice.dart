@@ -72,7 +72,6 @@ class CreateInvoiceView extends StatelessWidget {
       actions: [
         BlocBuilder<InvoiceCubit, InvoiceState>(
           builder: (context, state) {
-            var items = getIt.get<AddItemCubit>().addedItems;
             return IconButton(
               onPressed: () async {
                 GlobalMethods.showAlertAdressDialog(
@@ -82,52 +81,29 @@ class CreateInvoiceView extends StatelessWidget {
                   titleButton2: "No",
                   onPressedButton1: () async {
                     var s = await context.read<InvoiceCubit>().saveInvoice(
-                          bankDtlId: 1,
-                          branchid: 1,
-                          ccid: 1,
+                          date: '02/08/2024',
                           custid: 1,
-                          date: DateTime.now(),
-                          finalValue: 30,
-                          invtype: 2,
-                          netvalue: 30,
+                          invtype: 0,
+                          user: 'mostafa',
+                          whid: 2,
+                          ccid: 1,
+                          branchid: 1,
+                          netvalue: 20.00,
+                          taxAdd: 20.00,
+                          finalValue: 20.00,
                           payid: 1,
-                          taxAdd: 20,
-                          whid: 1,
-                          user: SharedPref.get(key: 'userName'),
-                          itms: getIt.get<AddItemCubit>().addedItems,
+                          bankDtlId: 1,
+                          itms:
+                              BlocProvider.of<AddItemCubit>(context).addedItems,
                         );
-                    print(s);
-                    print("ffffffffffffffffffffff");
-                    print(s);
-                    print("ffffffffffffffffffffff");
-                    print(s);
-                    print("ffffffffffffffffffffff");
-                    print(s);
-                    getIt.get<AddItemCubit>().addedItems.isNotEmpty
-                        ? await BlocProvider.of<InvoiceCubit>(context)
-                            .saveInvoice(
-                            bankDtlId: 1,
-                            branchid: 1,
-                            ccid: 1,
-                            custid: 1,
-                            date: DateTime.now(),
-                            finalValue: 30,
-                            invtype: 2,
-                            netvalue: 30,
-                            payid: 1,
-                            taxAdd: 20,
-                            whid: 1,
-                            user: SharedPref.get(key: 'userName'),
-                            itms: getIt.get<AddItemCubit>().addedItems,
-                          )
-                        : {
-                            GlobalMethods.navigatePOP(context),
-                            GlobalMethods.buildFlutterToast(
-                              message:
-                                  "You should select items to save invoice",
-                              state: ToastStates.ERROR,
-                            ),
-                          };
+                    print(s.toString());
+                    print("ssssssssssssssssssssss");
+                    print(s.toString());
+                    if (state is InvoiceSavedSuccess) {
+                      print(state.sendInvoiceModel);
+                    } else if (state is InvoiceNotSave) {
+                      print(state.error.toString());
+                    }
                   },
                   onPressedButton2: () {
                     GlobalMethods.navigatePOP(context);

@@ -12,11 +12,11 @@ final class InvoiceInitial extends InvoiceState {}
 final class SaveInvoiceLoading extends InvoiceState {}
 
 final class InvoiceSavedSuccess extends InvoiceState {
-  dynamic response;
-  InvoiceSavedSuccess(this.response);
+  final dynamic sendInvoiceModel;
+  const InvoiceSavedSuccess(this.sendInvoiceModel);
 }
 
 final class InvoiceNotSave extends InvoiceState {
-  dynamic error;
-  InvoiceNotSave(this.error);
+  final String error;
+  const InvoiceNotSave(this.error);
 }

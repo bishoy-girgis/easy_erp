@@ -9,6 +9,7 @@ import 'package:hive/hive.dart';
 
 import '../../../../../core/helper/locator.dart';
 import '../../../../../data/models/item_model/item_model.dart';
+import '../../../../../data/models/send_invoice_model/send_invoice_model.dart';
 import '../../../../../data/models/user/user_model.dart';
 import '../../addItem_cubit/cubit/add_item_cubit.dart';
 
@@ -23,12 +24,11 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   static InvoiceCubit get(context) => BlocProvider.of(context);
   // var userBox = Hive.box<UserModel>("userBox");
   // var customerBox = Hive.box<CustomerModel>("customerBox");
-  final DateTime date = DateTime.now();
+  // final DateTime date = DateTime.now();
 
-  List<ItemModel>? itms;
   saveInvoice({
-    required DateTime date,
-    required int custid,
+    required String date,
+    int? custid,
     required int invtype,
     required String user,
     required int whid,
@@ -42,31 +42,44 @@ class InvoiceCubit extends Cubit<InvoiceState> {
     required List<ItemModel> itms,
   }) async {
     emit(SaveInvoiceLoading());
+    print(DateTime.now());
+    // "mm/dd/yyyy "
+    print("INV CUBITTTTT OOOOOOOOOOO");
+    print('Date: $date');
+    print('Custid: $custid');
+    print('Invtype: $invtype');
+    print('User: $user');
+    print('Whid: $whid');
+    print('Ccid: $ccid');
+    print('Branchid: $branchid');
+    print('Netvalue: $netvalue');
+    print('TaxAdd: $taxAdd');
+    print('FinalValue: $finalValue');
+    print('Payid: $payid');
+    print('BankDtlId: $bankDtlId');
     var result = await invoiceRepo.saveInvoice(
-      bankDtlId: bankDtlId,
-      invtype: invtype,
-      user: user,
-      whid: whid,
-      ccid: ccid,
-      branchid: branchid,
-      custid: custid,
-      date: date,
-      netvalue: netvalue,
-      taxAdd: taxAdd,
-      finalValue: finalValue,
-      payid: payid,
-      itms: itms,
-    );
+        date: date,
+        custid: custid ?? 0,
+        invtype: invtype,
+        user: user,
+        whid: whid,
+        ccid: ccid,
+        branchid: branchid,
+        netvalue: netvalue,
+        taxAdd: taxAdd,
+        finalValue: finalValue,
+        payid: payid,
+        bankDtlId: bankDtlId,
+        itms: itms);
     result.fold((l) {
       print(l.errorMessage);
-      print("---------------------------------");
-
+      print("-----------FFFFFFFFFFFFFFFFFFFFFFFFF------------");
       emit(InvoiceNotSave(l.errorMessage));
     }, (r) {
-      print("-------------ssssssssss--------------------");
-      emit(
-        InvoiceSavedSuccess(r),
-      );
+      // SendInvoiceModel s =
+      print("-----------SSSSSSSSSSSSSSSSSSSSSSSSS---------------");
+      emit(InvoiceSavedSuccess(r));
+      return r;
     });
   }
 }

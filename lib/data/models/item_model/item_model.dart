@@ -48,27 +48,15 @@ class ItemModel extends Equatable {
       );
 
   Map<String, dynamic> toJson() => {
-        'itmid': itmid,
-        // 'subgrpid': subgrpid,
-        // 'itmcode': itmcode,
-        // 'itmname': itmname,
-        // 'itmename': itmename,
-        // 'unitname': unitname,
-        // 'unitid': unitid,
-        // 'UntItmIndx': untItmIndx,
-        // 'Salesprice': salesprice,
-        // 'Balance': balance,
-        // 'DiscP': discP,
-        // 'Cost': cost,
         "itemid": itmid,
         "Unitid": unitid,
-        "index": 3,
-        "Cost": 3.0,
+        "index": untItmIndx,
+        "Cost": cost,
         "Qty": quantity,
         "price": salesprice,
-        "Value": 1,
-        "DiscVal": discP,
-        "NetValue": 20.0
+        "Value": salesprice! * quantity,
+        "DiscVal": salesprice! * (discP! / 100),
+        "NetValue": salesprice! - (salesprice! * (discP! / 100))
       };
 
   @override

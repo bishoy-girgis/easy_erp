@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:http/http.dart' as http;
 
 class ApiService {
   final _baseUrl = AppConstants.baseUrl;
@@ -37,28 +41,64 @@ class ApiService {
     return response.data;
   }
 
-  Future<dynamic> postBody({
+  Future<Map<String, dynamic>> postBody({
     required String endPoint,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
-    required var body,
+    dynamic body,
   }) async {
-    // dio.options.headers['Authorization'] =
-    //     'Bearer bQApN9QUn-o2ODfStWvzlzKF3b4Iv30v-Uvp8TXY5Z6dFYbTNSP--W1kY4AxInAqVCarH6xjgL9S0Wg5ooprPTWDpYQ6_nEjv-7t0m8cp90buSEq84YcG-LehNT6axxm2FnRHDbv-1ahmVh3eRuoNE75aBaeXeFTP_hqLIimEAk4kzgrEQqHF9w37dRuHG_qJRaDgAhSeWR43AV13AEQ7YCrADbDoxjnbiR9jZVAANA';
     dio = Dio(BaseOptions(
       baseUrl: _baseUrl,
-      headers: headers,
-      queryParameters: queryParameters,
     ));
+    print('BODY❤️❤️❤️❤️' + body.toString());
     var response = await dio.post(
       endPoint,
       data: body,
       options: Options(
-          headers: {'Authorization': 'Bearer ${AppConstants.accessToken}'}),
-      queryParameters: queryParameters,
+        headers: {
+          'Authorization': 'Bearer ${AppConstants.accessToken}',
+        },
+        contentType: 'application/json',
+      ),
+      // queryParameters: queryParameters,
     );
     return response.data;
   }
+
+  // Future<dynamic> postData({
+  //   // required String apiUrl,
+  //   dynamic body,
+  //   // String? token,
+  // }) async {
+  //   Map<String, String> headers = {};
+
+  //   headers = {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer ${AppConstants.accessToken}'
+  //   };
+  //   //headers.addAll({'Authorization': 'Bearer $token'});
+
+  //   http.Response response = await http.post(
+  //     Uri.parse(
+  //         'http://95.216.193.252:600/api/Invsave/Post?date=05/28/2024&custid=1&invtype=2&user=mostafa&whid=1&ccid=1&branchid=1&netvalue=40.00&TaxAdd=20.00&FinalValue=60.00&Payid=1&bankDtlId=1'),
+  //     body: body,
+  //     headers: headers,
+  //   );
+  //   print("in api file on post method................................ ");
+  //   print(response.statusCode);
+  //   print(response.headers);
+  //   print(response.body);
+  //   print(".......................................................... ");
+
+  //   if (response.statusCode == 200) {
+  //     Map<String, dynamic> data = jsonDecode(response.body);
+
+  //     return data;
+  //   } else {
+  //     return throw Exception(
+  //         "There is PROBLEM in Status Code in POST Method is =! 200 ====>>>>>${response.statusCode} ,,,,, ${jsonDecode(response.body)} ");
+  //   }
+  // }
 
   // Future<Map<String, dynamic>> put({
   //   required String endPoint,
