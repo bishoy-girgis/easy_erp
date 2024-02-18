@@ -14,67 +14,22 @@ class InvoiceRepoImplementation extends InvoiceRepo {
   InvoiceRepoImplementation(this.apiService);
 
   @override
-  Future<Either<Failures, Map<String, dynamic>>> saveInvoice({
-    required String date,
-    int? custid,
-    required int invtype,
-    required String user,
-    required int whid,
-    required int ccid,
-    required int branchid,
-    required double netvalue,
-    required double taxAdd,
-    required double finalValue,
-    required int payid,
-    required int bankDtlId,
-    required List<ItemModel> itms,
-  }) async {
+  Future<Either<Failures, SendInvoiceModel>> saveInvoice(
+      {required List<ItemModel> items}) async {
+    print("LIST OF ITEMS  === > ${items.map((e) => e.toJson()).toList()} \n");
     try {
-      print("INV REPO OOOOOOOOOOO");
-      print('Date: $date');
-      print('Custid: $custid');
-      print('Invtype: $invtype');
-      print('User: $user');
-      print('Whid: $whid');
-      print('Ccid: $ccid');
-      print('Branchid: $branchid');
-      print('Netvalue: $netvalue');
-      print('TaxAdd: $taxAdd');
-      print('FinalValue: $finalValue');
-      print('Payid: $payid');
-      print('BankDtlId: $bankDtlId');
-      List<Map<String, dynamic>> itemJsonList =
-          itms.map((item) => item.toJson()).toList();
-      print("DATA IN INVOICE REPO IMP ✨✨");
-
-      DateTime dateTime = DateFormat('MM/dd/yyyy').parse(date);
-      print(dateTime);
-      var data = await apiService.postBody(
-        endPoint:
-            '/api/Invsave/Post?date=01/28/2024&custid=1&invtype=2&user=mostafa&whid=1&ccid=1&branchid=1&netvalue=40.00&TaxAdd=20.00&FinalValue=60.00&Payid=1&bankDtlId=1',
-        // queryParameters: {
-        //   'date': dateTime,
-        //   'custid': custid,
-        //   'invtype': invtype,
-        //   'user': user,
-        //   'whid': whid,
-        //   'ccid': ccid,
-        //   'branchid': branchid,
-        //   'netvalue': netvalue,
-        //   'TaxAdd': taxAdd,
-        //   'FinalValue': finalValue,
-        //   'Payid': payid,
-        //   'bankDtlId': bankDtlId,
-        // },
-        body: itemJsonList,
+      Map<String, dynamic> data = await apiService.postBody(
+        data: items.map((e) => e.toJson()).toList(),
       );
-      print(data['massage']);
-      print(data['invno']);
-      return right(data);
+      print('DATATA IN INV REPO' + data.toString());
+      SendInvoiceModel sendInvoiceModel = SendInvoiceModel.fromJson(data);
+      return right(sendInvoiceModel);
     } catch (e) {
+      print(e.toString());
       if (e is DioException) {
         return left(ServerError.fromDioError(e));
       } else {
+        print(e.toString());
         return left(
           ServerError(
             e.toString(),

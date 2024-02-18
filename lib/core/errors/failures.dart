@@ -23,9 +23,6 @@ class ServerError extends Failures {
         return ServerError("Bad Certificate with Api Server");
       case DioExceptionType.badResponse:
         debugPrint("😡😡😡BAD Response😡😡😡");
-        debugPrint("😡😡😡😡😡😡" + DioExceptionType.badResponse.name);
-        // GlobalMethods.buildFlutterToast(
-        //     message: "BAD Response", state: ToastStates.ERROR);
         return ServerError.fromBadResponse(
             dioError.response!.statusCode!, dioError.response!.data);
       case DioExceptionType.cancel:
@@ -46,6 +43,7 @@ class ServerError extends Failures {
   }
   factory ServerError.fromBadResponse(statusCode, dynamic response) {
     if (statusCode == 400 || statusCode == 403) {
+      print(response['massage']);
       return ServerError(response['massage']);
     } else if (statusCode == 401) {
       // return ServerError("ERROR RRRR 401");

@@ -1,5 +1,6 @@
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/data/models/send_invoice_model/send_invoice_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:easy_erp/presentation/Home/view_models/invoice_cubit/cubit/invoice_cubit.dart';
@@ -76,31 +77,17 @@ class CreateInvoiceView extends StatelessWidget {
               onPressed: () async {
                 GlobalMethods.showAlertAdressDialog(
                   context,
-                  title: "Save Invoice ? ",
+                  title: "Save Invoice ?",
                   titleButton1: "Save",
                   titleButton2: "No",
                   onPressedButton1: () async {
-                    var s = await context.read<InvoiceCubit>().saveInvoice(
-                          date: '02/08/2024',
-                          custid: 1,
-                          invtype: 0,
-                          user: 'mostafa',
-                          whid: 2,
-                          ccid: 1,
-                          branchid: 1,
-                          netvalue: 20.00,
-                          taxAdd: 20.00,
-                          finalValue: 20.00,
-                          payid: 1,
-                          bankDtlId: 1,
-                          itms:
-                              BlocProvider.of<AddItemCubit>(context).addedItems,
-                        );
-                    print(s.toString());
-                    print("ssssssssssssssssssssss");
-                    print(s.toString());
+                    await BlocProvider.of<InvoiceCubit>(context).saveInvoice(
+                      items: getIt.get<AddItemCubit>().addedItems,
+                    );
                     if (state is InvoiceSavedSuccess) {
                       print(state.sendInvoiceModel);
+                      print("=============================");
+                      print(state.sendInvoiceModel.massage);
                     } else if (state is InvoiceNotSave) {
                       print(state.error.toString());
                     }

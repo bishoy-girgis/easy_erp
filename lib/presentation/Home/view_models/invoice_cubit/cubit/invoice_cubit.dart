@@ -22,64 +22,27 @@ class InvoiceCubit extends Cubit<InvoiceState> {
 
   InvoiceRepo invoiceRepo;
   static InvoiceCubit get(context) => BlocProvider.of(context);
-  // var userBox = Hive.box<UserModel>("userBox");
-  // var customerBox = Hive.box<CustomerModel>("customerBox");
-  // final DateTime date = DateTime.now();
-
   saveInvoice({
-    required String date,
-    int? custid,
-    required int invtype,
-    required String user,
-    required int whid,
-    required int ccid,
-    required int branchid,
-    required double netvalue,
-    required double taxAdd,
-    required double finalValue,
-    required int payid,
-    required int bankDtlId,
-    required List<ItemModel> itms,
+    required List<ItemModel> items,
   }) async {
     emit(SaveInvoiceLoading());
-    print(DateTime.now());
-    // "mm/dd/yyyy "
-    print("INV CUBITTTTT OOOOOOOOOOO");
-    print('Date: $date');
-    print('Custid: $custid');
-    print('Invtype: $invtype');
-    print('User: $user');
-    print('Whid: $whid');
-    print('Ccid: $ccid');
-    print('Branchid: $branchid');
-    print('Netvalue: $netvalue');
-    print('TaxAdd: $taxAdd');
-    print('FinalValue: $finalValue');
-    print('Payid: $payid');
-    print('BankDtlId: $bankDtlId');
-    var result = await invoiceRepo.saveInvoice(
-        date: date,
-        custid: custid ?? 0,
-        invtype: invtype,
-        user: user,
-        whid: whid,
-        ccid: ccid,
-        branchid: branchid,
-        netvalue: netvalue,
-        taxAdd: taxAdd,
-        finalValue: finalValue,
-        payid: payid,
-        bankDtlId: bankDtlId,
-        itms: itms);
-    result.fold((l) {
-      print(l.errorMessage);
-      print("-----------FFFFFFFFFFFFFFFFFFFFFFFFF------------");
-      emit(InvoiceNotSave(l.errorMessage));
-    }, (r) {
-      // SendInvoiceModel s =
-      print("-----------SSSSSSSSSSSSSSSSSSSSSSSSS---------------");
-      emit(InvoiceSavedSuccess(r));
-      return r;
-    });
+    var result = await invoiceRepo.saveInvoice(items: items);
+    if (result != null) {
+      result.fold((l) {
+        print("ERROR IN INV CUBIT " + l.errorMessage);
+        emit(InvoiceNotSave(l.errorMessage));
+      }, (r) {
+        print(r);
+        var sendInvoiceModel = r; // This line should be within the null check
+        print(sendInvoiceModel);
+        print('DATACUBI(TTTT)' + r.toString());
+
+        emit(InvoiceSavedSuccess(r));
+      });
+    } else {
+      // Handle the case where invoiceRepo.saveInvoice() returns null
+
+      emit(InvoiceNotSave("Invoice data is null"));
+    }
   }
 }

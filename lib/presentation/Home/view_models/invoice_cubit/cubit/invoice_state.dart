@@ -12,7 +12,7 @@ final class InvoiceInitial extends InvoiceState {}
 final class SaveInvoiceLoading extends InvoiceState {}
 
 final class InvoiceSavedSuccess extends InvoiceState {
-  final dynamic sendInvoiceModel;
+  final SendInvoiceModel sendInvoiceModel;
   const InvoiceSavedSuccess(this.sendInvoiceModel);
 }
 

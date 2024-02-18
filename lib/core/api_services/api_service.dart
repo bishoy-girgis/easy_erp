@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:http/http.dart' as http;
 
+import '../../data/models/item_model/item_model.dart';
+
 class ApiService {
   final _baseUrl = AppConstants.baseUrl;
   Dio dio;
@@ -41,28 +43,40 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> postBody({
-    required String endPoint,
-    // Map<String, dynamic>? headers,
-    Map<String, dynamic>? queryParameters,
-    dynamic body,
+  Future<dynamic> postBody({
+    Object? data,
   }) async {
-    dio = Dio(BaseOptions(
-      baseUrl: _baseUrl,
-      queryParameters: queryParameters,
-    ));
-    print('BODY❤️❤️❤️❤️' + body.toString());
-    var response = await dio.post(
-      endPoint,
-      data: body,
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer ${AppConstants.accessToken}',
-        },
-        contentType: 'application/json',
-      ),
-      // queryParameters: queryParameters,
-    );
+    var dataa = json.encode([
+      {
+        "itemid": 1,
+        "Unitid": 1,
+        "index": 0,
+        "Cost": 10.529,
+        "Qty": 1,
+        "price": 15,
+        "Value": 15,
+        "DiscVal": 0,
+        "NetValue": 15
+      },
+    ]);
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+          'Bearer 7RvCv0Kq1ZqPXXRWGWZ60ilMw-qVOoPv1DjB9_K54SCFWrKkOqiRt9LVq2cFkfNk4lxJ2cRbKc9t7Tp7GKe3TKSvYLnRDOxUvLOpjRGHPko0tl__4IxM9fa2KHciW3oVTbZfL1PzidQEBKG4XcTnG5hfS4HPeYivrODARQF9noBL6HCvscs3r-Yze8ervAh6a2cVdqttIeLcuo-0Bujzpw'
+    };
+    var response = await dio.request(
+        'http://95.216.193.252:600/api/Invsave/Post?date=04/04/2024&custid=1&invtype=2&user=mostafa&whid=1&ccid=1&branchid=1&netvalue=20.0&TaxAdd=20.0&FinalValue=20.0&Payid=1&bankDtlId=1',
+        options: Options(
+          method: 'POST',
+          headers: headers,
+        ),
+        data: data);
+    if (response.statusCode == 200) {
+      print("json.encode(response.data)");
+      print(json.encode(response.data));
+    } else {
+      print(response.statusMessage);
+    }
     return response.data;
   }
 

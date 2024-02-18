@@ -6,13 +6,12 @@ class SendInvoiceModel extends Equatable {
 
   const SendInvoiceModel({this.massage, this.invno});
 
-  factory SendInvoiceModel.fromJson(dynamic json) {
+  factory SendInvoiceModel.fromJson(Map<String, dynamic> json) {
     return SendInvoiceModel(
-      massage: json['massage'],
+      massage: json['massage'] as String?,
       invno: json['invno'] as int?,
     );
   }
-
   Map<String, dynamic> toJson() => {
         'massage': massage,
         'customercode': invno,
