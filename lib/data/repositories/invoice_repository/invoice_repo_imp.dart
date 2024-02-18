@@ -14,7 +14,7 @@ class InvoiceRepoImplementation extends InvoiceRepo {
   InvoiceRepoImplementation(this.apiService);
 
   @override
-  Future<Either<Failures, SendInvoiceModel>> saveInvoice({
+  Future<Either<Failures, Map<String, dynamic>>> saveInvoice({
     required String date,
     int? custid,
     required int invtype,
@@ -68,11 +68,9 @@ class InvoiceRepoImplementation extends InvoiceRepo {
         // },
         body: itemJsonList,
       );
-      SendInvoiceModel sendInvoiceModel = SendInvoiceModel.fromJson(data);
-      print(sendInvoiceModel.massage);
-      print(sendInvoiceModel.invno);
-      // print(data['massage']);
-      return right(sendInvoiceModel);
+      print(data['massage']);
+      print(data['invno']);
+      return right(data);
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));

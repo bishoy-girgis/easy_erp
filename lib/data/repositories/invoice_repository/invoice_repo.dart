@@ -5,7 +5,7 @@ import '../../models/item_model/item_model.dart';
 import '../../models/send_invoice_model/send_invoice_model.dart';
 
 abstract class InvoiceRepo {
-  Future<Either<Failures, SendInvoiceModel>> saveInvoice({
+  Future<Either<Failures, Map<String, dynamic>>> saveInvoice({
     required String date,
     int? custid,
     required int invtype,

@@ -43,12 +43,13 @@ class ApiService {
 
   Future<Map<String, dynamic>> postBody({
     required String endPoint,
-    Map<String, dynamic>? headers,
+    // Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
     dynamic body,
   }) async {
     dio = Dio(BaseOptions(
       baseUrl: _baseUrl,
+      queryParameters: queryParameters,
     ));
     print('BODY❤️❤️❤️❤️' + body.toString());
     var response = await dio.post(
