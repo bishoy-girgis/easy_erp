@@ -4,6 +4,8 @@ class AppConstants {
   static final String accessToken = SharedPref.get(key: "accessToken");
   static final int whId = SharedPref.get(key: "whId");
   static final double vat = SharedPref.get(key: "vat");
+  static final String userName = SharedPref.get(key: "userName");
+  static final int branchID = SharedPref.get(key: "branchID");
 
   static String baseUrl =
       SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
@@ -15,4 +17,6 @@ class AppConstants {
   static const String GET_CUSTOMERS = "/api/Values/getcustomers";
   static String GET_ITEMS = "/api/Items/getitems?whid=$whId";
   static const String GET_PAYMENT_TYPE = "/api/Payments/getpaymentstypes";
+  static String GET_INVOICES =
+      "/api/Invoices/getinvoices?username=$userName&Branchid=$branchID";
 }

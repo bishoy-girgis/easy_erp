@@ -19,11 +19,6 @@ class InvoiceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // GlobalMethods.goRouterNavigateTOWithExtraObject(
-        //   context: context,
-        //   router: AppRouters.kInvoiceDetailsView,
-        //   extraObject: invoiceModel,
-        // );
         GlobalMethods.navigateTo(
           context,
           InvoiceDetailsView(singleInvoiceItem: invoiceModel),
@@ -49,11 +44,9 @@ class InvoiceWidget extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
-                // width: size.height * 0.11,
-                // margin: const EdgeInsets.symmetric(vertical: 5),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey,
+                  // color: Colors.blueGrey,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(

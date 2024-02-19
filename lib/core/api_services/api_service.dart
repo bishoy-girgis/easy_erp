@@ -45,32 +45,24 @@ class ApiService {
 
   Future<dynamic> postBody({
     Object? data,
+    Map<String, dynamic>? queryParameters,
+    required String endPoint,
   }) async {
-    var dataa = json.encode([
-      {
-        "itemid": 1,
-        "Unitid": 1,
-        "index": 0,
-        "Cost": 10.529,
-        "Qty": 1,
-        "price": 15,
-        "Value": 15,
-        "DiscVal": 0,
-        "NetValue": 15
-      },
-    ]);
+    var dataa = json.encode(data);
+    print('dataa');
+    print(dataa);
     var headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-          'Bearer 7RvCv0Kq1ZqPXXRWGWZ60ilMw-qVOoPv1DjB9_K54SCFWrKkOqiRt9LVq2cFkfNk4lxJ2cRbKc9t7Tp7GKe3TKSvYLnRDOxUvLOpjRGHPko0tl__4IxM9fa2KHciW3oVTbZfL1PzidQEBKG4XcTnG5hfS4HPeYivrODARQF9noBL6HCvscs3r-Yze8ervAh6a2cVdqttIeLcuo-0Bujzpw'
+      'Authorization': 'Bearer ${AppConstants.accessToken}',
     };
     var response = await dio.request(
-        'http://95.216.193.252:600/api/Invsave/Post?date=04/04/2024&custid=1&invtype=2&user=mostafa&whid=1&ccid=1&branchid=1&netvalue=20.0&TaxAdd=20.0&FinalValue=20.0&Payid=1&bankDtlId=1',
-        options: Options(
-          method: 'POST',
-          headers: headers,
-        ),
-        data: data);
+      '${AppConstants.baseUrl + endPoint}',
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+      queryParameters: queryParameters,
+      data: dataa,
+    );
     if (response.statusCode == 200) {
       print("json.encode(response.data)");
       print(json.encode(response.data));

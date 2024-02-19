@@ -7,9 +7,9 @@ class InvoiceModel extends Equatable {
   final String? invtime;
   final String? custInvname;
   final int? invtype;
-  final int? netvalue;
-  final int? taxAdd;
-  final int? finalValue;
+  final double? netvalue;
+  final double? taxAdd;
+  final double? finalValue;
 
   const InvoiceModel({
     this.invid,
@@ -30,9 +30,9 @@ class InvoiceModel extends Equatable {
         invtime: json['invtime'] as String?,
         custInvname: json['CustInvname'] as String?,
         invtype: json['invtype'] as int?,
-        netvalue: json['netvalue'] as int?,
-        taxAdd: json['TaxAdd'] as int?,
-        finalValue: json['FinalValue'] as int?,
+        netvalue: json['netvalue'] as double?,
+        taxAdd: json['TaxAdd'] as double?,
+        finalValue: json['FinalValue'] as double?,
       );
 
   Map<String, dynamic> toJson() => {

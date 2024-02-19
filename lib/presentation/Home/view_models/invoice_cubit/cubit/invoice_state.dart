@@ -20,3 +20,15 @@ final class InvoiceNotSave extends InvoiceState {
   final String error;
   const InvoiceNotSave(this.error);
 }
+
+final class GetInvoiceLoading extends InvoiceState {}
+
+final class GetInvoiceSuccess extends InvoiceState {
+  final List<InvoiceModel> invoiceModels;
+  const GetInvoiceSuccess(this.invoiceModels);
+}
+
+final class GetInvoiceFailure extends InvoiceState {
+  final String error;
+  const GetInvoiceFailure(this.error);
+}

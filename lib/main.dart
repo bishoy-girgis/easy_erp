@@ -84,9 +84,10 @@ class MyApp extends StatelessWidget {
                     ..getItems(),
             ),
             BlocProvider(
-                create: (context) => InvoiceCubit(
-                      invoiceRepo: getIt.get<InvoiceRepoImplementation>(),
-                    )),
+              create: (context) => InvoiceCubit(
+                invoiceRepo: getIt.get<InvoiceRepoImplementation>(),
+              )..getInvoices(),
+            ),
             BlocProvider(
               create: (context) => getIt.get<AddItemCubit>(),
             ),

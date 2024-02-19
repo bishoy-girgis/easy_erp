@@ -81,15 +81,23 @@ class CreateInvoiceView extends StatelessWidget {
                   titleButton1: "Save",
                   titleButton2: "No",
                   onPressedButton1: () async {
+                    var items = getIt.get<AddItemCubit>().addedItems;
+                    print('Items in On pressed : ' + items.toString());
                     await BlocProvider.of<InvoiceCubit>(context).saveInvoice(
-                      items: getIt.get<AddItemCubit>().addedItems,
+                      items: items,
                     );
                     if (state is InvoiceSavedSuccess) {
                       print(state.sendInvoiceModel);
                       print("=============================");
                       print(state.sendInvoiceModel.massage);
                     } else if (state is InvoiceNotSave) {
+                      print("=============================");
+
                       print(state.error.toString());
+                    } else {
+                      print("=============================");
+
+                      print('Dont Know');
                     }
                   },
                   onPressedButton2: () {
