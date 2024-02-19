@@ -24,9 +24,9 @@ class InvoicesView extends StatefulWidget {
 }
 
 class _InvoicesViewState extends State<InvoicesView> {
-  late List<InvoiceModel> invoices = [];
+  List<InvoiceModel> invoices = [];
 
-  late List<InvoiceModel> searchForInvoices;
+  List<InvoiceModel> searchForInvoices = [];
 
   TextEditingController searchController = TextEditingController();
 
@@ -38,18 +38,27 @@ class _InvoicesViewState extends State<InvoicesView> {
         child: Column(
           children: [
             CustomTextFormField(
-              labelText: "Search",
-              hintText: "Search with Customer name",
+              labelText: AppLocalizations.of(context)!.search,
+              // hintText: "Search with Customer name",
               suffixIcon: Icons.search,
-              suffixColor: Colors.blueGrey,
               backgroundOfTextFeild: Colors.white,
-              suffixPressed: () {},
+              onChange: (v) {
+                searchController.text = v;
+                searchForInvoices = invoices
+                    .where((invoice) =>
+                        invoice.custInvname!.toLowerCase().startsWith(v) ||
+                        invoice.invNo!.toLowerCase().startsWith(v) ||
+                        invoice.invdate!.toString().startsWith(v))
+                    .toList();
+                setState(() {});
+              },
             ),
             const GapH(h: 1),
             BlocConsumer<InvoiceCubit, InvoiceState>(
               listener: (context, state) {},
               builder: (context, state) {
                 if (state is GetInvoiceSuccess) {
+                  invoices = state.invoiceModels;
                   return Expanded(
                       child: Container(
                     decoration: BoxDecoration(
@@ -59,10 +68,14 @@ class _InvoicesViewState extends State<InvoicesView> {
                     child: ListView.builder(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 10),
-                        itemCount: state.invoiceModels.length,
+                        itemCount: searchForInvoices.isNotEmpty
+                            ? searchForInvoices.length
+                            : state.invoiceModels.length,
                         itemBuilder: (context, index) {
                           return InvoiceWidget(
-                            invoiceModel: state.invoiceModels[index],
+                            invoiceModel: searchForInvoices.isNotEmpty
+                                ? searchForInvoices[index]
+                                : state.invoiceModels[index],
                           );
                         }),
                   ));

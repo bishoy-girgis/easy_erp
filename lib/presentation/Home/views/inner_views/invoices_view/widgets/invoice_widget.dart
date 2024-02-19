@@ -4,6 +4,8 @@ import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
@@ -15,6 +17,12 @@ class InvoiceWidget extends StatelessWidget {
     required this.invoiceModel,
   });
   final InvoiceModel invoiceModel;
+  String formatDate(String dateTimeString) {
+    DateTime dateTime = DateTime.parse(dateTimeString);
+    DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+    return dateFormat.format(dateTime);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,98 +46,75 @@ class InvoiceWidget extends StatelessWidget {
                 offset: Offset(1, 1),
               ),
             ]),
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              flex: 1,
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  // color: Colors.blueGrey,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextBuilder(
-                      invoiceModel.custInvname.toString(),
-                      color: Colors.white,
-                      textAlign: TextAlign.center,
-                      fontSize: 14,
-                      isHeader: true,
-                      maxLines: 2,
-                    ),
-                    const GapH(h: 5),
-                    const TextBuilder(
-                      "6 month ago",
-                      color: Colors.white,
-                      textAlign: TextAlign.center,
-                      fontSize: 14,
-                      isHeader: true,
-                      maxLines: 2,
-                    ),
-                  ],
-                ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: AppColors.secondColorOrange,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              child: TextBuilder(
+                formatDate(invoiceModel.invdate!),
+                textAlign: TextAlign.center,
+                fontSize: 18,
+                color: AppColors.whiteColor,
+                maxLines: 2,
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 5.h,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.outlined_flag_rounded,
-                        ),
-                        TextBuilder(
-                          "123456789",
-                          isHeader: true,
-                          color: AppColors.blackColor,
-                        ),
-                      ],
-                    ),
-                    TextBuilder(
-                      invoiceModel.custInvname!,
-                      color: AppColors.blackColor,
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            TextBuilder(
-                              "Total",
-                              textAlign: TextAlign.center,
-                              fontSize: 16,
-                              isHeader: true,
-                            ),
-                            TextBuilder("1750.5"),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            TextBuilder(
-                              "Tax",
-                              textAlign: TextAlign.center,
-                              fontSize: 16,
-                              isHeader: true,
-                            ),
-                            TextBuilder("1750.5"),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 5,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.all_inbox_sharp,
+                        size: 30.sp,
+                      ),
+                      GapW(w: 8),
+                      TextBuilder(
+                        invoiceModel.invNo!,
+                        fontSize: 20,
+                      ),
+                    ],
+                  ),
+                  Divider(),
+                  TextBuilder(
+                    invoiceModel.custInvname!,
+                    fontSize: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          TextBuilder(
+                            AppLocalizations.of(context)!.total,
+                            textAlign: TextAlign.center,
+                          ),
+                          TextBuilder(
+                            invoiceModel.finalValue.toString(),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          TextBuilder(
+                            AppLocalizations.of(context)!.tax_amount,
+                            textAlign: TextAlign.center,
+                          ),
+                          TextBuilder(invoiceModel.taxAdd.toString()),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
