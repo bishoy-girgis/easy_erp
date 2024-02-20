@@ -3,10 +3,16 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/cubits/customer_cubit/customer_cubit.dart';
+import 'package:easy_erp/data/models/group_model/group_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../data/models/payment_type_model/pay_ment_type_model.dart';
+import '../../../../../data/services/local/shared_pref.dart';
+import 'widgets/select_group_section.dart';
 
 class AddCustomerView extends StatelessWidget {
   const AddCustomerView({super.key});
@@ -48,70 +54,12 @@ class AddCustomerView extends StatelessWidget {
                   CustomTextFormField(labelText: 'Address en'),
                   CustomTextFormField(labelText: 'Managet name ar'),
                   CustomTextFormField(labelText: 'Managet name en'),
+                  GapH(h: 2),
+                  ChooseGroup()
                 ],
               ),
             )),
           ),
-          GapH(h: 2),
-          //   Card(child: Flexible(
-          //   child: DropdownSearch<PaymentTypeModel>(
-          //     items: widget.payTypes,
-          //     itemAsString: (PaymentTypeModel paymentTypeModel) =>
-          //         paymentTypeModel.payname!,
-          //     popupProps: PopupProps.dialog(
-          //       itemBuilder: (context, item, isSelected) {
-          //         return Container(
-          //             padding: EdgeInsets.all(10),
-          //             // alignment: Alignment.center,
-          //             child: TextBuilder(
-          //               item.payname!,
-          //               textAlign: TextAlign.center,
-          //               color: isSelected
-          //                   ? AppColors.secondColorOrange
-          //                   : AppColors.primaryColorBlue,
-          //             ));
-          //       },
-          //     ),
-          //     dropdownButtonProps: DropdownButtonProps(
-          //       color: AppColors.primaryColorBlue,
-          //     ),
-
-          //     dropdownDecoratorProps: DropDownDecoratorProps(
-          //       textAlign: TextAlign.center,
-          //       baseStyle: TextStyle(
-          //         fontFamily: 'Cairo',
-          //         fontSize: 16.sp,
-          //         fontWeight: FontWeight.bold,
-          //       ),
-          //       textAlignVertical: TextAlignVertical.center,
-          //       dropdownSearchDecoration: InputDecoration(
-          //           label: TextBuilder(
-          //             AppLocalizations.of(context)!.payment_types,
-          //             fontSize: 14,
-          //             maxLines: 2,
-          //           ),
-          //           border: OutlineInputBorder(
-          //             borderRadius: BorderRadius.circular(16),
-          //           )),
-          //     ),
-          //     onChanged: (PaymentTypeModel? data) {
-          //       print(data!.payid);
-          //       print(data.payname);
-          //       print(data.payename);
-
-          //       print(data.bankdtlId);
-
-          //       setState(() {
-          //         SharedPref.set(key: "paymentTypeID", value: data.payid ?? 1);
-          //         SharedPref.set(key: "bankdtlId", value: data.bankdtlId ?? 1);
-          //       });
-          //       print(
-          //         SharedPref.get(key: "paymentTypeID"),
-          //       );
-          //     },
-          //     // selectedItem: itemSelected,
-          //   ),
-          // ), ,)
         ],
       ),
     );

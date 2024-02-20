@@ -24,6 +24,7 @@ class CustomerView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          CustomerCubit.get(context).getCustomerGroups();
           GlobalMethods.goRouterNavigateTO(
               context: context, router: AppRouters.kCreateNewCustomer);
         },

@@ -76,7 +76,10 @@ class AddItemWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextBuilder(itemModel.itmid.toString()),
+                    TextBuilder(
+                      itemModel.itmcode.toString(),
+                      fontSize: 14,
+                    ),
                     TextBuilder(itemModel.unitname!),
                   ],
                 ),

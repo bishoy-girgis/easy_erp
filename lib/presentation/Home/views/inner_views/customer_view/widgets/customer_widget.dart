@@ -43,7 +43,7 @@ class CustomerWidget extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  Icons.numbers_rounded,
+                  Icons.near_me_rounded,
                   color: Colors.white,
                 ),
                 GapW(w: 2),
