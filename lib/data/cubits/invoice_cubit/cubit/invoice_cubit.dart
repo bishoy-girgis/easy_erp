@@ -26,34 +26,10 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   InvoiceRepo invoiceRepo;
   static InvoiceCubit get(context) => BlocProvider.of(context);
   saveInvoice({
-    // required DateTime date,
-    // required int? custid,
-    // required int? invtype,
-    // required String user,
-    // required int whid,
-    // required int? ccid,
-    // required int? branchid,
-    // required double? netvalue,
-    // required double? taxAdd,
-    // required double? finalValue,
-    // required int? payid,
-    // required int? bankDtlId,
     required List<ItemModel> items,
   }) async {
     emit(SaveInvoiceLoading());
     print("ALL DATA IN INVOICE CUBIT");
-    // print('date: $date');
-    // print('custid: $custid');
-    // print('invtype: $invtype');
-    // print('user: $user');
-    // print('whid: $whid');
-    // print('ccid: $ccid');
-    // print('branchid: $branchid');
-    // print('netvalue: $netvalue');
-    // print('taxAdd: $taxAdd');
-    // print('finalValue: $finalValue');
-    // print('payid: $payid');
-    // print('bankDtlId: $bankDtlId');
     print('items:');
     items.forEach((item) {
       print('  ${item.toJson()}');
@@ -87,8 +63,6 @@ class InvoiceCubit extends Cubit<InvoiceState> {
         removeInvoiceData();
       });
     } else {
-      // Handle the case where invoiceRepo.saveInvoice() returns null
-
       emit(InvoiceNotSave("Invoice data is null"));
     }
   }

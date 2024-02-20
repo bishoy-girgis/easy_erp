@@ -79,7 +79,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => CustomerCubit(
                 customerRepo: getIt.get<CustomerRepoImplementation>(),
-              )..getCustomers(),
+              )
+                ..getCustomers()
+                ..getCustomerGroups(),
             ),
             BlocProvider(
               create: (context) =>

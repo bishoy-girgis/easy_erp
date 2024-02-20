@@ -20,3 +20,27 @@ final class GetCustomerFailureState extends CustomerState {
 }
 
 final class GetCustomerLoadingState extends CustomerState {}
+
+final class GetCustomerGroupSuccess extends CustomerState {
+  final List<GroupModel> groups;
+  const GetCustomerGroupSuccess({required this.groups});
+}
+
+final class GetCustomerGroupFailure extends CustomerState {
+  final String error;
+  const GetCustomerGroupFailure({required this.error});
+}
+
+final class GetCustomerGroupLoading extends CustomerState {}
+
+final class AddCustomerSuccess extends CustomerState {
+  final AddCustomerResponseModel addCustomerResponseModel;
+  const AddCustomerSuccess({required this.addCustomerResponseModel});
+}
+
+final class AddCustomerFailure extends CustomerState {
+  final String error;
+  const AddCustomerFailure({required this.error});
+}
+
+final class AddCustomerLoading extends CustomerState {}
