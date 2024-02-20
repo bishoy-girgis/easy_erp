@@ -5,10 +5,12 @@ import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/item_repository/item_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/login_repository/login_repo_imp.dart';
+import 'package:easy_erp/data/repositories/payment_type_repository/payment_type_repo.dart';
 import 'package:easy_erp/l10n/l10n.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:easy_erp/presentation/Home/view_models/customer_cubit/customer_cubit.dart';
 import 'package:easy_erp/presentation/Home/view_models/invoice_cubit/cubit/invoice_cubit.dart';
+import 'package:easy_erp/presentation/Home/view_models/payment_type_cubit/cubit/payment_type_cubit.dart';
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,7 @@ import 'core/helper/app_routing.dart';
 import 'data/models/user/user_model.dart';
 import 'data/providers/localization/localization_provider.dart';
 import 'data/repositories/invoice_repository/invoice_repo_imp.dart';
+import 'data/repositories/payment_type_repository/payment_type_repo_implementation.dart';
 import 'data/services/local/shared_pref.dart';
 // import 'package:path_provider/path_provider.dart' as path_provider;
 
@@ -91,6 +94,10 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => getIt.get<AddItemCubit>(),
             ),
+            BlocProvider(
+                create: (context) =>
+                    PaymentTypeCubit(getIt.get<PaymentTypeRepoImp>())
+                      ..getItems()),
           ],
           child: Builder(builder: (context) {
             var languagesProvider = Provider.of<LanguageProvider>(context);

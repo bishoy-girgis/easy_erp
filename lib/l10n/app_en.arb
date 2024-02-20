@@ -57,6 +57,8 @@
     "no_items_added": "No items added",
     "add": "Add",
     "search_with_id_code_barcode": "Search with id , code or barcode",
+    "auto":"AUTO",
+    "payment_types":"Payment Types",
     "cash": "Cash" ,
     "credit": "Credit" ,
     "close_shift": "CLOSE SHIFT",

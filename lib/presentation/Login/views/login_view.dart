@@ -52,6 +52,7 @@ class _LoginViewState extends State<LoginView> {
               key: 'accessToken', value: state.userModel.accessToken);
           SharedPref.set(key: 'whId', value: state.userModel.whId);
           SharedPref.set(key: 'vat', value: state.userModel.vat);
+          SharedPref.set(key: 'ccid', value: state.userModel.ccId);
           SharedPref.set(key: 'branchID', value: state.userModel.branchId);
           Hive.box<UserModel>("userBox").put("userName", state.userModel);
           GlobalMethods.goRouterNavigateTOAndReplacement(

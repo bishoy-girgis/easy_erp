@@ -1,3 +1,5 @@
+import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/data/models/send_invoice_model/send_invoice_model.dart';
@@ -10,6 +12,7 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import 'widgets/Invoice-main_data_section.dart';
 import 'widgets/pricing_section.dart';
@@ -71,7 +74,31 @@ class CreateInvoiceView extends StatelessWidget {
         color: AppColors.whiteColor,
       ),
       actions: [
-        BlocBuilder<InvoiceCubit, InvoiceState>(
+        BlocConsumer<InvoiceCubit, InvoiceState>(
+          listener: (context, state) {
+            if (state is InvoiceSavedSuccess) {
+              print(state.sendInvoiceModel);
+              print("=============================");
+              print(state.sendInvoiceModel.massage);
+              GlobalMethods.buildFlutterToast(
+                message: state.sendInvoiceModel.massage!,
+                state: ToastStates.SUCCESS,
+              );
+              InvoiceCubit.get(context).getInvoices();
+              getIt.get<AddItemCubit>().addedItems.clear();
+              GlobalMethods.goRouterNavigateTOAndReplacement(
+                  context: context, router: AppRouters.kInvoices);
+            } else if (state is InvoiceNotSave) {
+              GlobalMethods.navigatePOP(context);
+              GlobalMethods.buildFlutterToast(
+                  message: state.error, state: ToastStates.ERROR);
+              print(state.error);
+            } else {
+              print("=============================");
+
+              print('Dont Know');
+            }
+          },
           builder: (context, state) {
             return IconButton(
               onPressed: () async {
@@ -83,21 +110,26 @@ class CreateInvoiceView extends StatelessWidget {
                   onPressedButton1: () async {
                     var items = getIt.get<AddItemCubit>().addedItems;
                     print('Items in On pressed : ' + items.toString());
-                    await BlocProvider.of<InvoiceCubit>(context).saveInvoice(
-                      items: items,
-                    );
-                    if (state is InvoiceSavedSuccess) {
-                      print(state.sendInvoiceModel);
-                      print("=============================");
-                      print(state.sendInvoiceModel.massage);
-                    } else if (state is InvoiceNotSave) {
-                      print("=============================");
 
-                      print(state.error.toString());
+                    if ((SharedPref.get(key: 'custID') == null ||
+                            SharedPref.get(key: 'custID') == 0) &&
+                        (SharedPref.get(key: 'invoiceTypeID')) == 2) {
+                      GlobalMethods.navigatePOP(context);
+                      GlobalMethods.buildFlutterToast(
+                          message:
+                              'Cant save invoice  please choose your invoice type and Customer to Save',
+                          state: ToastStates.ERROR);
+                      return;
+                    } else if (getIt.get<AddItemCubit>().addedItems.isEmpty) {
+                      GlobalMethods.navigatePOP(context);
+                      GlobalMethods.buildFlutterToast(
+                          message:
+                              'Cant save invoice please choose your Items to Save',
+                          state: ToastStates.ERROR);
                     } else {
-                      print("=============================");
-
-                      print('Dont Know');
+                      await BlocProvider.of<InvoiceCubit>(context).saveInvoice(
+                        items: items,
+                      );
                     }
                   },
                   onPressedButton2: () {

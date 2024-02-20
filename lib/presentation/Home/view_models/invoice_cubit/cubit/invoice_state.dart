@@ -23,6 +23,8 @@ final class InvoiceNotSave extends InvoiceState {
 
 final class GetInvoiceLoading extends InvoiceState {}
 
+final class RemoveData extends InvoiceState {}
+
 final class GetInvoiceSuccess extends InvoiceState {
   final List<InvoiceModel> invoiceModels;
   const GetInvoiceSuccess(this.invoiceModels);

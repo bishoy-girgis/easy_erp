@@ -5,6 +5,7 @@ import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:easy_erp/presentation/Home/view_models/invoice_cubit/cubit/invoice_cubit.dart';
+import 'package:easy_erp/presentation/Home/view_models/item_cubit/item_cubit.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,18 @@ class _InvoicesViewState extends State<InvoicesView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await GetItemCubit.get(context).getItems();
+          GlobalMethods.navigateTo(
+            context,
+            const CreateInvoiceView(),
+          );
+        },
+        elevation: 10,
+        child: const Icon(Icons.add),
+      ),
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -66,6 +79,8 @@ class _InvoicesViewState extends State<InvoicesView> {
                       color: AppColors.whiteColor,
                     ),
                     child: ListView.builder(
+                        // reverse: true,
+                        physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 10),
                         itemCount: searchForInvoices.isNotEmpty
@@ -81,12 +96,12 @@ class _InvoicesViewState extends State<InvoicesView> {
                   ));
                 } else if (state is GetInvoiceFailure) {
                   debugPrint(state.error);
-                  return Center(
-                    child: TextBuilder(
+                  return const Center(
+                    child: const TextBuilder(
                         "Sorry there is error , we will work on it "),
                   );
                 } else {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -114,15 +129,15 @@ class _InvoicesViewState extends State<InvoicesView> {
   //   );
   // }
 
-  // // final invoiceModels = <InvoiceModel>[
-  // //   InvoiceModel(
-  // //     finalValue: 1,
-  // //     invtype: 1,
-  // //     netvalue: 1,
-  // //     taxAdd: 1,
-  // //     custInvname: "ddddddd",
-  // //   ),
-  // // ];
+  // final invoiceModels = <InvoiceModel>[
+  //   InvoiceModel(
+  //     finalValue: 1,
+  //     invtype: 1,
+  //     netvalue: 1,
+  //     taxAdd: 1,
+  //     custInvname: "ddddddd",
+  //   ),
+  // ];
 
   // @override
   // Widget build(BuildContext context) {

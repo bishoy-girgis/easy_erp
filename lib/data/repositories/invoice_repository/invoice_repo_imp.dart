@@ -17,8 +17,21 @@ class InvoiceRepoImplementation extends InvoiceRepo {
   InvoiceRepoImplementation(this.apiService);
 
   @override
-  Future<Either<Failures, SendInvoiceModel>> saveInvoice(
-      {required List<ItemModel> items}) async {
+  Future<Either<Failures, SendInvoiceModel>> saveInvoice({
+    required DateTime date,
+    required int? custid,
+    required int? invtype,
+    required String user,
+    required int whid,
+    required int? ccid,
+    required int? branchid,
+    required double? netvalue,
+    required double? taxAdd,
+    required double? finalValue,
+    required int? payid,
+    required int? bankDtlId,
+    required List<ItemModel> items,
+  }) async {
     print("LIST OF ITEMS  === > ${items.map((e) => e.toJson()).toList()} \n");
     List<Map<String, dynamic>> itemsJson =
         items.map((item) => item.toJson()).toList();
@@ -27,6 +40,20 @@ class InvoiceRepoImplementation extends InvoiceRepo {
       Map<String, dynamic> data = await apiService.postBody(
         data: itemsJson,
         endPoint: AppConstants.POST_INVOICE,
+        queryParameters: {
+          'date': date,
+          'custid': custid,
+          'invtype': invtype,
+          'user': user,
+          'whid': whid,
+          'ccid': ccid,
+          'branchid': branchid,
+          'netvalue': netvalue,
+          'TaxAdd': taxAdd,
+          'FinalValue': finalValue,
+          'Payid': payid,
+          'bankDtlId': bankDtlId,
+        },
       );
       print('DATATA IN INV REPO' + data.toString());
       SendInvoiceModel sendInvoiceModel = SendInvoiceModel.fromJson(data);

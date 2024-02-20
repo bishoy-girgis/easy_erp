@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../core/helper/locator.dart';
 import '../../../../../data/models/item_model/item_model.dart';
@@ -25,10 +26,54 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   InvoiceRepo invoiceRepo;
   static InvoiceCubit get(context) => BlocProvider.of(context);
   saveInvoice({
+    // required DateTime date,
+    // required int? custid,
+    // required int? invtype,
+    // required String user,
+    // required int whid,
+    // required int? ccid,
+    // required int? branchid,
+    // required double? netvalue,
+    // required double? taxAdd,
+    // required double? finalValue,
+    // required int? payid,
+    // required int? bankDtlId,
     required List<ItemModel> items,
   }) async {
     emit(SaveInvoiceLoading());
-    var result = await invoiceRepo.saveInvoice(items: items);
+    print("ALL DATA IN INVOICE CUBIT");
+    // print('date: $date');
+    // print('custid: $custid');
+    // print('invtype: $invtype');
+    // print('user: $user');
+    // print('whid: $whid');
+    // print('ccid: $ccid');
+    // print('branchid: $branchid');
+    // print('netvalue: $netvalue');
+    // print('taxAdd: $taxAdd');
+    // print('finalValue: $finalValue');
+    // print('payid: $payid');
+    // print('bankDtlId: $bankDtlId');
+    print('items:');
+    items.forEach((item) {
+      print('  ${item.toJson()}');
+    });
+    var result = await invoiceRepo.saveInvoice(
+      date: DateFormat('dd/MM/yyyy').parse(SharedPref.get(key: 'invoiceDate') ??
+          DateFormat('dd/MM/yyyy').format(DateTime.now())),
+      custid: SharedPref.get(key: 'custID') ?? 0,
+      invtype: SharedPref.get(key: 'invoiceTypeID') ?? 0,
+      user: SharedPref.get(key: 'userName'),
+      whid: AppConstants.whId,
+      ccid: SharedPref.get(key: 'ccid'),
+      branchid: SharedPref.get(key: 'branchID') ?? 1,
+      netvalue: SharedPref.get(key: 'amountBeforeTex') ?? 0,
+      taxAdd: SharedPref.get(key: 'taxAmount') ?? 0,
+      finalValue: SharedPref.get(key: 'totalAmount') ?? 0,
+      payid: SharedPref.get(key: 'paymentTypeID') ?? 1,
+      bankDtlId: SharedPref.get(key: 'bankdtlId') ?? 1,
+      items: items,
+    );
     if (result != null) {
       result.fold((l) {
         print("ERROR IN INV CUBIT " + l.errorMessage);
@@ -39,6 +84,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
         print(sendInvoiceModel);
         print('DATACUBI(TTTT)' + r.toString());
         emit(InvoiceSavedSuccess(r));
+        removeInvoiceData();
       });
     } else {
       // Handle the case where invoiceRepo.saveInvoice() returns null
@@ -57,7 +103,21 @@ class InvoiceCubit extends Cubit<InvoiceState> {
     }, (r) {
       /// r for List of customers
       invoices = r;
+      removeInvoiceData();
+
       emit(GetInvoiceSuccess(r));
     });
+  }
+
+  removeInvoiceData() {
+    SharedPref.remove(key: 'invoiceDate');
+    SharedPref.remove(key: 'custID');
+    SharedPref.remove(key: 'invoiceTypeID');
+    SharedPref.remove(key: 'amountBeforeTex');
+    SharedPref.remove(key: 'taxAmount');
+    SharedPref.remove(key: 'totalAmount');
+    SharedPref.remove(key: 'paymentTypeID');
+    SharedPref.remove(key: 'bankdtlId');
+    emit(RemoveData());
   }
 }

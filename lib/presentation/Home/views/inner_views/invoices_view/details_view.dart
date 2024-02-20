@@ -1,7 +1,10 @@
+import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/preview.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../data/models/invoice_model/invoice_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InvoiceDetailsView extends StatelessWidget {
   final InvoiceModel singleInvoiceItem;
@@ -14,83 +17,78 @@ class InvoiceDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: _fab(context),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: _buildBody(context),
     );
   }
 
   /// Body
   Widget _buildBody(BuildContext context) {
-    return ListView(
-      children: [
-        Card(
-          color: Colors.white,
-          margin: const EdgeInsets.all(12.0),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'Customer',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                Text(
-                  singleInvoiceItem.custInvname!,
-                  style: Theme.of(context).textTheme.titleMedium,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Card(
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: ListView(
+        children: [
+          Card(
             color: Colors.white,
+            margin: const EdgeInsets.all(10.0),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              child: Column(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    'Bill Details',
-                    style: Theme.of(context).textTheme.titleLarge,
+                  TextBuilder(
+                    AppLocalizations.of(context)!.customer + ' :',
+                    fontSize: 20,
                   ),
-                  // ...singleInvoiceItem..map(
-                  //   (item) => ListTile(
-                  //     title: Text(item.itmname!),
-                  //     trailing: Text(
-                  //       item.salesprice!.toStringAsFixed(2),
-                  //     ),
-                  //   ),
-                  // ),
-                  DefaultTextStyle.merge(
-                    style: Theme.of(context).textTheme.headlineMedium,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Text("Total"),
-                        Text(
-                          "\$${singleInvoiceItem.finalValue}",
-                        ),
-                      ],
-                    ),
-                  )
+                  TextBuilder(
+                    singleInvoiceItem.custInvname!,
+                  ),
                 ],
               ),
             ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Card(
+              color: Colors.white,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Column(
+                  children: [
+                    TextBuilder(
+                      'Invoice Details',
+                      fontSize: 25,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextBuilder(
+                          AppLocalizations.of(context)!.total,
+                          fontSize: 25,
+                        ),
+                        TextBuilder(
+                          "${singleInvoiceItem.finalValue}",
+                          fontSize: 25,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   /// AppBar
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(context) {
     return AppBar(
-      title: Text(
-        singleInvoiceItem.custInvname!,
+      title: TextBuilder(
+        AppLocalizations.of(context)!.invoises,
+        color: AppColors.whiteColor,
         maxLines: 2,
       ),
     );

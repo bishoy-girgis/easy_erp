@@ -23,11 +23,11 @@ class _SellectCashOrCreditSectionState
         _dropdownValue = selectedValue;
 
         if (_dropdownValue == AppLocalizations.of(context)!.cash) {
-          SharedPref.set(key: 'invoiceID', value: 0);
-          print(SharedPref.get(key: 'invoiceID'));
+          SharedPref.set(key: 'invoiceTypeID', value: 0);
+          print(SharedPref.get(key: 'invoiceTypeID'));
         } else {
-          SharedPref.set(key: 'invoiceID', value: 2);
-          print(SharedPref.get(key: 'invoiceID'));
+          SharedPref.set(key: 'invoiceTypeID', value: 2);
+          print(SharedPref.get(key: 'invoiceTypeID'));
         }
       });
     }

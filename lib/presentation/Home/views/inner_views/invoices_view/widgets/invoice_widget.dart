@@ -74,10 +74,10 @@ class InvoiceWidget extends StatelessWidget {
                   Row(
                     children: [
                       Icon(
-                        Icons.all_inbox_sharp,
-                        size: 30.sp,
+                        Icons.inventory_2_outlined,
+                        size: 25.sp,
                       ),
-                      GapW(w: 8),
+                      GapW(w: 5),
                       TextBuilder(
                         invoiceModel.invNo!,
                         fontSize: 20,
@@ -89,14 +89,16 @@ class InvoiceWidget extends StatelessWidget {
                     invoiceModel.custInvname!,
                     fontSize: 20,
                   ),
+                  GapH(h: 3),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         children: [
                           TextBuilder(
-                            AppLocalizations.of(context)!.total,
+                            AppLocalizations.of(context)!.total_icludes_tax,
                             textAlign: TextAlign.center,
+                            fontSize: 14,
                           ),
                           TextBuilder(
                             invoiceModel.finalValue.toString(),
@@ -108,6 +110,7 @@ class InvoiceWidget extends StatelessWidget {
                           TextBuilder(
                             AppLocalizations.of(context)!.tax_amount,
                             textAlign: TextAlign.center,
+                            fontSize: 14,
                           ),
                           TextBuilder(invoiceModel.taxAdd.toString()),
                         ],

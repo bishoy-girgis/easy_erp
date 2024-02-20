@@ -1,4 +1,5 @@
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -34,6 +35,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           if (pickedDate != null) {
             setState(() {
               dateController.text = DateFormat('dd/MM/yyyy').format(pickedDate);
+              SharedPref.set(key: 'invoiceDate', value: dateController.text);
             });
           } else {
             print("Date is not selected");
