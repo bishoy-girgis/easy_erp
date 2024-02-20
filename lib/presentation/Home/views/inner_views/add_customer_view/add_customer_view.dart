@@ -1,5 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
@@ -32,35 +33,43 @@ class AddCustomerView extends StatelessWidget {
 
   Widget buildBody() {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          TextBuilder(
-            "ADD Customer Data",
-            color: AppColors.whiteColor,
-          ),
-          GapH(h: 5),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-            child: Form(
-                child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  CustomTextFormField(labelText: 'Customer name AR'),
-                  CustomTextFormField(labelText: 'Customer name EN'),
-                  CustomTextFormField(labelText: 'Fax'),
-                  CustomTextFormField(labelText: 'Mobile number'),
-                  CustomTextFormField(labelText: 'Address ar'),
-                  CustomTextFormField(labelText: 'Address en'),
-                  CustomTextFormField(labelText: 'Managet name ar'),
-                  CustomTextFormField(labelText: 'Managet name en'),
-                  GapH(h: 2),
-                  ChooseGroup()
-                ],
+      child: Form(
+        child: Column(
+          children: [
+            TextBuilder(
+              "ADD Customer Data",
+              color: AppColors.whiteColor,
+            ),
+            GapH(h: 5),
+            Card(
+              margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    CustomTextFormField(labelText: 'Customer name AR'),
+                    CustomTextFormField(labelText: 'Customer name EN'),
+                    CustomTextFormField(labelText: 'Fax'),
+                    CustomTextFormField(labelText: 'Mobile number'),
+                    CustomTextFormField(labelText: 'Address ar'),
+                    CustomTextFormField(labelText: 'Address en'),
+                    CustomTextFormField(labelText: 'Managet name ar'),
+                    CustomTextFormField(labelText: 'Managet name en'),
+                    GapH(h: 2),
+                    ChooseGroup()
+                  ],
+                ),
               ),
-            )),
-          ),
-        ],
+            ),
+            GapH(h: 5),
+            CustomElevatedButton(
+              backgroundColor: Colors.white,
+              title: TextBuilder(
+                "Add Customer",
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

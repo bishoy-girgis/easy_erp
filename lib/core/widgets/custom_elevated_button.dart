@@ -5,7 +5,6 @@ import '../helper/app_colors.dart';
 class CustomElevatedButton extends StatelessWidget {
   final double? width;
   final Color backgroundColor;
-  final Color titleColor;
   final Widget title;
   final Function()? onPressed;
   final bool hasBorder;
@@ -15,7 +14,6 @@ class CustomElevatedButton extends StatelessWidget {
     super.key,
     this.width,
     this.backgroundColor = AppColors.primaryColorBlue,
-    this.titleColor = AppColors.whiteColor,
     required this.title,
     this.onPressed,
     this.hasBorder = false,
@@ -24,7 +22,7 @@ class CustomElevatedButton extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
         width: width,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
