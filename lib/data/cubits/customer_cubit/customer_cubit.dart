@@ -38,7 +38,6 @@ class CustomerCubit extends Cubit<CustomerState> {
       debugPrint("🎈🎈🎈🎈" + error.errorMessage);
       emit(GetCustomerGroupFailure(error: error.errorMessage));
     }, (r) {
-      /// r for List of groups
       groups = r;
       emit(GetCustomerGroupSuccess(groups: r));
       return groups;

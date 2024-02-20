@@ -1,10 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 
 import '../../../../../../core/helper/app_colors.dart';
-import '../../../../../../core/helper/utils.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 
@@ -35,18 +33,18 @@ class CustomerWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             decoration: BoxDecoration(
               color: AppColors.primaryColorBlue,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.near_me_rounded,
                   color: Colors.white,
                 ),
-                GapW(w: 2),
+                const GapW(w: 2),
                 TextBuilder(
                   customerModel.custcode.toString(),
                   color: Colors.white,
@@ -60,10 +58,10 @@ class CustomerWidget extends StatelessWidget {
                       customerModel.custename!.isNotEmpty)
               ? Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.person,
                     ),
-                    GapW(w: 2),
+                    const GapW(w: 2),
                     customerModel.custname == null
                         ? TextBuilder(customerModel.custename!)
                         : TextBuilder(customerModel.custname!),
@@ -73,10 +71,10 @@ class CustomerWidget extends StatelessWidget {
           customerModel.fax != null || customerModel.fax!.isNotEmpty
               ? Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.app_registration_rounded,
                     ),
-                    GapW(w: 2),
+                    const GapW(w: 2),
                     TextBuilder(customerModel.fax!),
                   ],
                 )
@@ -84,10 +82,10 @@ class CustomerWidget extends StatelessWidget {
           customerModel.address != null || customerModel.address!.isNotEmpty
               ? Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.location_on_rounded,
                     ),
-                    GapW(w: 2),
+                    const GapW(w: 2),
                     TextBuilder(customerModel.address!),
                   ],
                 )
