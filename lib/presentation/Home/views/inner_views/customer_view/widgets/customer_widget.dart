@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 
+import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/helper/utils.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
@@ -36,7 +37,7 @@ class CustomerWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(vertical: 5),
             decoration: BoxDecoration(
-              color: Colors.blueGrey,
+              color: AppColors.primaryColorBlue,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Row(
@@ -47,7 +48,7 @@ class CustomerWidget extends StatelessWidget {
                 ),
                 GapW(w: 2),
                 TextBuilder(
-                  customerModel.custid.toString(),
+                  customerModel.custcode.toString(),
                   color: Colors.white,
                 ),
               ],

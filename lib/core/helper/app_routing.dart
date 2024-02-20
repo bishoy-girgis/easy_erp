@@ -1,5 +1,6 @@
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/add_customer_view/add_customer_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/add_items_view/add_items_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/customer_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
@@ -29,10 +30,7 @@ abstract class AppRouters {
   static const kAddItemsIntoInvoice =
       "$kHome/invoices/createInvoice/addItemsIntoInvoice";
   static const kInvoiceDetailsView = "$kHome/invoices/invoiceShowDetails";
-  // static const kCardScreen = "/CardScreen";
-  // static const kAllProductsScreen = "/AllProductsScreen";
-  // static const kViewAllOnSaleProductsScreen = "/ViewAllOnSaleProductsScreen";
-  // static const kViewAllProductsScreen = "/ViewAllProductsScreen";
+  static const kCreateNewCustomer = "$kCustomers/createNewCustomer";
 
   static final router = GoRouter(
     initialLocation: kSplash,
@@ -93,6 +91,12 @@ abstract class AppRouters {
           return InvoiceDetailsView(
             singleInvoiceItem: state.extra as InvoiceModel,
           );
+        },
+      ),
+      GoRoute(
+        path: kCreateNewCustomer,
+        builder: (context, state) {
+          return const AddCustomerView();
         },
       ),
     ],

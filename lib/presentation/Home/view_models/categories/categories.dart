@@ -8,7 +8,6 @@ import '../../../../core/helper/global_methods.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/helper/locator.dart';
-import '../addItem_cubit/cubit/add_item_cubit.dart';
 
 class CategoriesViewModel {
   // BuildContext context;

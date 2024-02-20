@@ -4,8 +4,6 @@ import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/data/models/send_invoice_model/send_invoice_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
-import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
-import 'package:easy_erp/presentation/Home/view_models/invoice_cubit/cubit/invoice_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:easy_erp/core/helper/app_colors.dart';
@@ -14,6 +12,8 @@ import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import '../../../../../data/cubits/invoice_cubit/cubit/invoice_cubit.dart';
 import 'widgets/Invoice-main_data_section.dart';
 import 'widgets/pricing_section.dart';
 import 'widgets/selected_items_to_invoice.dart';

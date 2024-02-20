@@ -1,7 +1,6 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 
 import 'package:easy_erp/data/models/item_model/item_model.dart';
-import 'package:easy_erp/presentation/Home/view_models/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../../data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
 
 class SelectedItem extends StatelessWidget {
   const SelectedItem({

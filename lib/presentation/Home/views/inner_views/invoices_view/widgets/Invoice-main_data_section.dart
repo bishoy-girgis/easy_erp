@@ -1,8 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:easy_erp/data/cubits/customer_cubit/customer_cubit.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
-import 'package:easy_erp/presentation/Home/view_models/customer_cubit/customer_cubit.dart';
-import 'package:easy_erp/presentation/Home/view_models/invoice_cubit/cubit/invoice_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -145,10 +144,10 @@ class _SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
   // @override
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<GetCustomerCubit, GetCustomerState>(
+    return BlocConsumer<CustomerCubit, CustomerState>(
       listener: (context, state) {},
       builder: (context, state) {
-        List<CustomerModel> customers = GetCustomerCubit.get(context).customers;
+        List<CustomerModel> customers = CustomerCubit.get(context).customers;
 
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 5),

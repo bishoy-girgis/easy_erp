@@ -6,9 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'customer_state.dart';
 
-class GetCustomerCubit extends Cubit<GetCustomerState> {
-  GetCustomerCubit({required this.customerRepo}) : super(GetCustomerInitial());
-  static GetCustomerCubit get(context) => BlocProvider.of(context);
+class CustomerCubit extends Cubit<CustomerState> {
+  CustomerCubit({required this.customerRepo}) : super(CustomerInitial());
+  static CustomerCubit get(context) => BlocProvider.of(context);
   final CustomerRepo customerRepo;
   List<CustomerModel> customers = [];
   getCustomers() async {
@@ -24,4 +24,6 @@ class GetCustomerCubit extends Cubit<GetCustomerState> {
       emit(GetCustomerSuccessState(customers: r));
     });
   }
+
+  addCustomer() {}
 }

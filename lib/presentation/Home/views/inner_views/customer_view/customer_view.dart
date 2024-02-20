@@ -1,15 +1,19 @@
+import 'package:easy_erp/core/helper/app_routing.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
-import 'package:easy_erp/presentation/Home/view_models/customer_cubit/customer_cubit.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/widgets/customer_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helper/app_colors.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
+import '../../../../../data/cubits/customer_cubit/customer_cubit.dart';
 import '../items_view/widgets/item_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomerView extends StatelessWidget {
   const CustomerView({super.key});
@@ -17,7 +21,24 @@ class CustomerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          GlobalMethods.goRouterNavigateTO(
+              context: context, router: AppRouters.kCreateNewCustomer);
+        },
+        child: Icon(
+          Icons.person_add_alt_rounded,
+          size: 25.sp,
+          color: AppColors.primaryColorBlue,
+        ),
+      ),
+      appBar: AppBar(
+        title: TextBuilder(
+          AppLocalizations.of(context)!.customers,
+          color: AppColors.whiteColor,
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -31,7 +52,7 @@ class CustomerView extends StatelessWidget {
               suffixPressed: () {},
             ),
             const GapH(h: 1),
-            BlocConsumer<GetCustomerCubit, GetCustomerState>(
+            BlocConsumer<CustomerCubit, CustomerState>(
               listener: (context, state) {},
               builder: (context, state) {
                 if (state is GetCustomerSuccessState) {
