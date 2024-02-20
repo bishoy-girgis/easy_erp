@@ -2,7 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import 'package:easy_erp/core/api_services/api_service.dart';
+import 'package:easy_erp/core/api/api_service.dart';
 import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/data/models/payment_type_model/pay_ment_type_model.dart';
 import 'package:easy_erp/data/repositories/payment_type_repository/payment_type_repo.dart';
