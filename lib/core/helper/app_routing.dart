@@ -96,7 +96,7 @@ abstract class AppRouters {
       GoRoute(
         path: kCreateNewCustomer,
         builder: (context, state) {
-          return const AddCustomerView();
+          return AddCustomerView();
         },
       ),
     ],

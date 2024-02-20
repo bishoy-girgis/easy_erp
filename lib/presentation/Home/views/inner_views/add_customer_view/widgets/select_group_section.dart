@@ -20,59 +20,62 @@ class ChooseGroup extends StatelessWidget {
       builder: (context, state) {
         if (state is GetCustomerGroupSuccess) {
           return Card(
-            child: DropdownSearch<GroupModel>(
-              items: state.groups,
-              itemAsString: (GroupModel group) =>
-                  group.custCategoryName ?? group.custCategoryEname ?? 'None',
-              popupProps: PopupProps.menu(
-                fit: FlexFit.loose, // << change this
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownSearch<GroupModel>(
+                items: state.groups,
+                itemAsString: (GroupModel group) =>
+                    group.custCategoryName ?? group.custCategoryEname ?? 'None',
+                popupProps: PopupProps.menu(
+                  fit: FlexFit.loose, // << change this
 
-                itemBuilder: (context, group, isSelected) {
-                  return Container(
-                      padding: EdgeInsets.all(10),
-                      // alignment: Alignment.center,
-                      child: TextBuilder(
-                        group.custCategoryName ??
-                            group.custCategoryEname ??
-                            'None',
-                        textAlign: TextAlign.center,
-                        color: isSelected
-                            ? AppColors.secondColorOrange
-                            : AppColors.primaryColorBlue,
-                      ));
+                  itemBuilder: (context, group, isSelected) {
+                    return Container(
+                        padding: EdgeInsets.all(20),
+                        // alignment: Alignment.center,
+                        child: TextBuilder(
+                          group.custCategoryName ??
+                              group.custCategoryEname ??
+                              'None',
+                          textAlign: TextAlign.center,
+                          color: isSelected
+                              ? AppColors.secondColorOrange
+                              : AppColors.primaryColorBlue,
+                        ));
+                  },
+                ),
+                dropdownButtonProps: DropdownButtonProps(
+                  color: AppColors.primaryColorBlue,
+                ),
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  textAlign: TextAlign.center,
+                  baseStyle: TextStyle(
+                    fontFamily: 'Cairo',
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlignVertical: TextAlignVertical.center,
+                  dropdownSearchDecoration: InputDecoration(
+                      label: TextBuilder(
+                        'Group',
+                        fontSize: 14,
+                        maxLines: 2,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      )),
+                ),
+                onChanged: (GroupModel? data) {
+                  debugPrint(data!.custCategoryId.toString());
+                  debugPrint(data.custCategoryName);
+                  debugPrint(data.custCategoryEname);
+
+                  SharedPref.set(
+                      key: "custCategoryId", value: data.custCategoryId);
+
+                  debugPrint(SharedPref.get(key: "custCategoryId").toString());
                 },
               ),
-              dropdownButtonProps: DropdownButtonProps(
-                color: AppColors.primaryColorBlue,
-              ),
-              dropdownDecoratorProps: DropDownDecoratorProps(
-                textAlign: TextAlign.center,
-                baseStyle: TextStyle(
-                  fontFamily: 'Cairo',
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlignVertical: TextAlignVertical.center,
-                dropdownSearchDecoration: InputDecoration(
-                    label: TextBuilder(
-                      'Group',
-                      fontSize: 14,
-                      maxLines: 2,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    )),
-              ),
-              onChanged: (GroupModel? data) {
-                debugPrint(data!.custCategoryId.toString());
-                debugPrint(data.custCategoryName);
-                debugPrint(data.custCategoryEname);
-
-                SharedPref.set(
-                    key: "custCategoryId", value: data.custCategoryId);
-
-                debugPrint(SharedPref.get(key: "custCategoryId").toString());
-              },
             ),
           );
         } else if (state is GetCustomerGroupLoading) {

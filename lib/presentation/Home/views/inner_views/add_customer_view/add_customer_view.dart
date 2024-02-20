@@ -1,5 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/helper/app_routing.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
@@ -16,8 +18,18 @@ import '../../../../../data/services/local/shared_pref.dart';
 import 'widgets/select_group_section.dart';
 
 class AddCustomerView extends StatelessWidget {
-  const AddCustomerView({super.key});
-
+  AddCustomerView({super.key});
+  final TextEditingController _custNameArController = TextEditingController();
+  final TextEditingController _custNameEnController = TextEditingController();
+  final TextEditingController _faxController = TextEditingController();
+  final TextEditingController _mobileNumberController = TextEditingController();
+  final TextEditingController _managerNameArController =
+      TextEditingController();
+  final TextEditingController _managerNameEnController =
+      TextEditingController();
+  final TextEditingController _addressEnController = TextEditingController();
+  final TextEditingController _addressArController = TextEditingController();
+  GlobalKey _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,43 +45,132 @@ class AddCustomerView extends StatelessWidget {
 
   Widget buildBody() {
     return SingleChildScrollView(
-      child: Form(
-        child: Column(
-          children: [
-            TextBuilder(
-              "ADD Customer Data",
-              color: AppColors.whiteColor,
-            ),
-            GapH(h: 5),
-            Card(
-              margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    CustomTextFormField(labelText: 'Customer name AR'),
-                    CustomTextFormField(labelText: 'Customer name EN'),
-                    CustomTextFormField(labelText: 'Fax'),
-                    CustomTextFormField(labelText: 'Mobile number'),
-                    CustomTextFormField(labelText: 'Address ar'),
-                    CustomTextFormField(labelText: 'Address en'),
-                    CustomTextFormField(labelText: 'Managet name ar'),
-                    CustomTextFormField(labelText: 'Managet name en'),
-                    GapH(h: 2),
-                    ChooseGroup()
-                  ],
+      child: BlocConsumer<CustomerCubit, CustomerState>(
+        listener: (context, state) {
+          if (state is AddCustomerSuccess) {
+            GlobalMethods.buildFlutterToast(
+              message: state.addCustomerResponseModel.massage!,
+              state: ToastStates.SUCCESS,
+            );
+            CustomerCubit.get(context).getCustomers();
+            GlobalMethods.goRouterNavigateTOAndReplacement(
+              context: context,
+              router: AppRouters.kCustomers,
+            );
+          } else if (state is AddCustomerFailure) {
+            GlobalMethods.buildFlutterToast(
+              message: state.error,
+              state: ToastStates.ERROR,
+            );
+          } else {
+            GlobalMethods.buildFlutterToast(
+              message: "Loading ... ",
+              state: ToastStates.WARNING,
+            );
+          }
+        },
+        builder: (context, state) {
+          return Form(
+            child: Column(
+              children: [
+                GapH(h: 5),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      CustomTextFormField(
+                        labelText: 'Customer name AR',
+                        controller: _custNameArController,
+                        onChange: (value) {
+                          _custNameArController.text = value;
+                        },
+                        validator: (p0) {},
+                      ),
+                      CustomTextFormField(
+                        labelText: 'Customer name EN',
+                        controller: _custNameEnController,
+                        onChange: (value) {
+                          _custNameEnController.text = value;
+                        },
+                      ),
+                      CustomTextFormField(
+                        labelText: 'Fax',
+                        controller: _faxController,
+                        onChange: (value) {
+                          _faxController.text = value;
+                        },
+                      ),
+                      CustomTextFormField(
+                        labelText: 'Mobile number',
+                        controller: _mobileNumberController,
+                        onChange: (value) {
+                          _mobileNumberController.text = value;
+                        },
+                      ),
+                      CustomTextFormField(
+                        labelText: 'Address ar',
+                        controller: _addressArController,
+                        onChange: (value) {
+                          _addressArController.text = value;
+                        },
+                      ),
+                      CustomTextFormField(
+                        labelText: 'Address en',
+                        controller: _addressEnController,
+                        onChange: (value) {
+                          _addressEnController.text = value;
+                        },
+                      ),
+                      CustomTextFormField(
+                        labelText: 'Managet name ar',
+                        controller: _managerNameArController,
+                        onChange: (value) {
+                          _managerNameArController.text = value;
+                        },
+                      ),
+                      CustomTextFormField(
+                        labelText: 'Managet name ar',
+                        controller: _managerNameEnController,
+                        onChange: (value) {
+                          _managerNameEnController.text = value;
+                        },
+                      ),
+                      GapH(h: 2),
+                      ChooseGroup()
+                    ],
+                  ),
                 ),
-              ),
+                GapH(h: 5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: CustomElevatedButton(
+                    width: double.infinity,
+                    onPressed: () async {
+                      if (_formKey.currentState.validate)
+                        var customer = context
+                            .read<CustomerCubit>()
+                            .addCustomer(
+                              custNameAr: _custNameArController.text,
+                              custNameEn: _custNameEnController.text,
+                              fax: _faxController.text,
+                              mobileNumber: _mobileNumberController.text,
+                              addressAr: _addressArController.text,
+                              addressEn: _addressEnController.text,
+                              mangNameAr: _managerNameArController.text,
+                              mangNameEn: _managerNameEnController.text,
+                              groupID: SharedPref.get(key: 'custCategoryId'),
+                            );
+                    },
+                    backgroundColor: AppColors.whiteColor,
+                    title: TextBuilder(
+                      "Add Customer",
+                    ),
+                  ),
+                )
+              ],
             ),
-            GapH(h: 5),
-            CustomElevatedButton(
-              backgroundColor: Colors.white,
-              title: TextBuilder(
-                "Add Customer",
-              ),
-            )
-          ],
-        ),
+          );
+        },
       ),
     );
   }

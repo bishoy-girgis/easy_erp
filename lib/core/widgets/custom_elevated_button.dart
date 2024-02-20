@@ -6,7 +6,7 @@ class CustomElevatedButton extends StatelessWidget {
   final double? width;
   final Color backgroundColor;
   final Widget title;
-  final Function()? onPressed;
+  final Function() onPressed;
   final bool hasBorder;
   final double borderWidth;
   final Color borderColor;
@@ -15,7 +15,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.width,
     this.backgroundColor = AppColors.primaryColorBlue,
     required this.title,
-    this.onPressed,
+    required this.onPressed,
     this.hasBorder = false,
     this.borderWidth = 1.0,
     this.borderColor = Colors.transparent,
