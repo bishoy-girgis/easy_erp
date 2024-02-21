@@ -179,32 +179,41 @@ Future<void> generateAndPrintArabicPdf(
                 children: [
               buildPDFText(invoiceType),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                buildPDFText('رقم الفاتورة : '),
                 buildPDFText(invoiceModel.invNo.toString()),
+                buildPDFText('رقم الفاتورة : '),
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                buildPDFText(invoiceModel.invdate.toString()),
                 buildPDFText('التاريخ : '),
-                buildPDFText(invoiceModel.invdate.toString()),
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                buildPDFText('العميل : '),
                 buildPDFText(invoiceModel.invdate.toString()),
+                buildPDFText('العميل : '),
               ]),
-              Directionality(
-                  textDirection: TextDirection.rtl,
-                  child:
-                      Text('المشتريات', style: const TextStyle(fontSize: 10))),
+              buildPDFText('الأصناف : '),
               Container(
                 margin: const EdgeInsets.fromLTRB(22, 5, 22, 5),
                 child: Directionality(
                   textDirection: TextDirection.rtl,
-                  child: Table.fromTextArray(
-                    headerStyle: const TextStyle(fontSize: 6),
-                    headers: <dynamic>['الإجمالي', 'العدد', 'الخدمة', 'القطعة'],
+                  child: TableHelper.fromTextArray(
+                    headerStyle: const TextStyle(fontSize: 15),
+                    headers: <dynamic>[
+                      'الإجمالي',
+                      'الخصم',
+                      'السعر',
+                      'الكمية',
+                      'الصنف'
+                    ],
                     cellAlignment: Alignment.center,
                     cellStyle: const TextStyle(fontSize: 5),
                     data: <List<dynamic>>[
-                      <dynamic>['50', '10', 'كوي', 'قميص'],
+                      [
+                        items[0].salesprice.toString(),
+                        items[0].discP.toString(),
+                        items[0].cost.toString(),
+                        items[0].quantity.toString(),
+                        items[0].itmname ?? items[0].itmename ?? "None",
+                      ],
                     ],
                   ),
                 ),

@@ -98,11 +98,13 @@ class CreateInvoiceView extends StatelessWidget {
               //   //   // items: [],
               //   // ),
               // );
+              var items = getIt.get<AddItemCubit>().addedItems;
+              print(items);
               generateAndPrintArabicPdf(context,
                   invoiceModel: InvoiceModel(custInvname: "Yusuf"),
                   invoiceType: "فاتورة مبسطة",
-                  items: getIt.get<AddItemCubit>().addedItems);
-              getIt.get<AddItemCubit>().addedItems.clear();
+                  items: items);
+              // getIt.get<AddItemCubit>().addedItems.clear();
             } else if (state is InvoiceNotSave) {
               GlobalMethods.navigatePOP(context);
               GlobalMethods.buildFlutterToast(
