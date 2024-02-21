@@ -29,7 +29,7 @@ class AddCustomerView extends StatelessWidget {
       TextEditingController();
   final TextEditingController _addressEnController = TextEditingController();
   final TextEditingController _addressArController = TextEditingController();
-  GlobalKey _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +71,7 @@ class AddCustomerView extends StatelessWidget {
         },
         builder: (context, state) {
           return Form(
+            key: _formKey,
             child: Column(
               children: [
                 GapH(h: 5),
@@ -84,13 +85,24 @@ class AddCustomerView extends StatelessWidget {
                         onChange: (value) {
                           _custNameArController.text = value;
                         },
-                        validator: (p0) {},
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return 'Please enter customer name';
+                          }
+                          return null;
+                        },
                       ),
                       CustomTextFormField(
                         labelText: 'Customer name EN',
                         controller: _custNameEnController,
                         onChange: (value) {
                           _custNameEnController.text = value;
+                        },
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return 'Please enter customer name';
+                          }
+                          return null;
                         },
                       ),
                       CustomTextFormField(
@@ -99,12 +111,24 @@ class AddCustomerView extends StatelessWidget {
                         onChange: (value) {
                           _faxController.text = value;
                         },
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return 'Please enter customer name';
+                          }
+                          return null;
+                        },
                       ),
                       CustomTextFormField(
                         labelText: 'Mobile number',
                         controller: _mobileNumberController,
                         onChange: (value) {
                           _mobileNumberController.text = value;
+                        },
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return 'Please enter customer name';
+                          }
+                          return null;
                         },
                       ),
                       CustomTextFormField(
@@ -113,12 +137,24 @@ class AddCustomerView extends StatelessWidget {
                         onChange: (value) {
                           _addressArController.text = value;
                         },
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return 'Please enter customer name';
+                          }
+                          return null;
+                        },
                       ),
                       CustomTextFormField(
                         labelText: 'Address en',
                         controller: _addressEnController,
                         onChange: (value) {
                           _addressEnController.text = value;
+                        },
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return 'Please enter customer name';
+                          }
+                          return null;
                         },
                       ),
                       CustomTextFormField(
@@ -127,12 +163,24 @@ class AddCustomerView extends StatelessWidget {
                         onChange: (value) {
                           _managerNameArController.text = value;
                         },
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return 'Please enter customer name';
+                          }
+                          return null;
+                        },
                       ),
                       CustomTextFormField(
-                        labelText: 'Managet name ar',
+                        labelText: 'Managet name en',
                         controller: _managerNameEnController,
                         onChange: (value) {
                           _managerNameEnController.text = value;
+                        },
+                        validator: (p0) {
+                          if (p0 == null || p0.isEmpty) {
+                            return 'Please enter customer name';
+                          }
+                          return null;
                         },
                       ),
                       GapH(h: 2),
@@ -146,7 +194,7 @@ class AddCustomerView extends StatelessWidget {
                   child: CustomElevatedButton(
                     width: double.infinity,
                     onPressed: () async {
-                      if (_formKey.currentState.validate)
+                      if (_formKey.currentState!.validate()) {
                         var customer = context
                             .read<CustomerCubit>()
                             .addCustomer(
@@ -160,6 +208,8 @@ class AddCustomerView extends StatelessWidget {
                               mangNameEn: _managerNameEnController.text,
                               groupID: SharedPref.get(key: 'custCategoryId'),
                             );
+                        FocusScope.of(context).unfocus();
+                      }
                     },
                     backgroundColor: AppColors.whiteColor,
                     title: TextBuilder(

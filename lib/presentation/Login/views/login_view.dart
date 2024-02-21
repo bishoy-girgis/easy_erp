@@ -142,7 +142,7 @@ class _LoginViewState extends State<LoginView> {
                           : CustomElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  // Perform login
+                                  /// Perform login
                                   await context.read<LoginCubit>().userLogin(
                                         userName: userNameController.text,
                                         password: passwordController.text,
