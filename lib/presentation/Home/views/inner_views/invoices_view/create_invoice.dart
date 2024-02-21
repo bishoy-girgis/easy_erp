@@ -1,17 +1,16 @@
-import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
-import 'package:easy_erp/data/models/send_invoice_model/send_invoice_model.dart';
+import 'package:easy_erp/data/models/customer_model/customer_model.dart';
+import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/preview.dart';
 import 'package:flutter/material.dart';
-
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-
+import '../../../../../core/helper/pdf_helper.dart';
 import '../../../../../data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
 import '../../../../../data/cubits/invoice_cubit/cubit/invoice_cubit.dart';
 import 'widgets/Invoice-main_data_section.dart';
@@ -81,13 +80,29 @@ class CreateInvoiceView extends StatelessWidget {
               print("=============================");
               print(state.sendInvoiceModel.massage);
               GlobalMethods.buildFlutterToast(
-                message: state.sendInvoiceModel.massage!,
-                state: ToastStates.SUCCESS,
-              );
+                  message: state.sendInvoiceModel.massage!,
+                  state: ToastStates.SUCCESS);
               InvoiceCubit.get(context).getInvoices();
+              // GlobalMethods.navigateTo(
+              //   context,
+              //   PrintBillInArabic(),
+              //   // PdfPreviewScreen(
+              //   //   invoiceModel: InvoiceModel(
+              //   //     custInvname: "ss",
+              //   //     finalValue: 1212,
+              //   //     invNo: '12',
+              //   //     invdate: '12/2/2024',
+              //   //     invid: 12,
+              //   //   ),
+              //   //   items: getIt.get<AddItemCubit>().addedItems,
+              //   //   // items: [],
+              //   // ),
+              // );
+              generateAndPrintArabicPdf(context,
+                  invoiceModel: InvoiceModel(custInvname: "Yusuf"),
+                  invoiceType: "فاتورة مبسطة",
+                  items: getIt.get<AddItemCubit>().addedItems);
               getIt.get<AddItemCubit>().addedItems.clear();
-              GlobalMethods.goRouterNavigateTOAndReplacement(
-                  context: context, router: AppRouters.kInvoices);
             } else if (state is InvoiceNotSave) {
               GlobalMethods.navigatePOP(context);
               GlobalMethods.buildFlutterToast(
@@ -95,7 +110,6 @@ class CreateInvoiceView extends StatelessWidget {
               print(state.error);
             } else {
               print("=============================");
-
               print('Dont Know');
             }
           },

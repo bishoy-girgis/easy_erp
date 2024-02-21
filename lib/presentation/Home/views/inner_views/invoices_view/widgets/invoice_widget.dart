@@ -2,6 +2,7 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/details_view.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -26,12 +27,7 @@ class InvoiceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        GlobalMethods.navigateTo(
-          context,
-          InvoiceDetailsView(singleInvoiceItem: invoiceModel),
-        );
-      },
+      onTap: () {},
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5),
         width: double.infinity,

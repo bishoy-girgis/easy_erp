@@ -13,6 +13,7 @@ import 'package:go_router/go_router.dart';
 import '../../presentation/Home/views/home_view.dart';
 import '../../presentation/Home/views/inner_views/invoices_view/details_view.dart';
 import '../../presentation/Home/views/inner_views/invoices_view/invoices_view.dart';
+import '../../presentation/Home/views/inner_views/invoices_view/preview.dart';
 import '../../presentation/Home/views/inner_views/items_view/items_view.dart';
 
 abstract class AppRouters {
@@ -29,7 +30,7 @@ abstract class AppRouters {
   static const kCreateInvoice = "$kInvoices/createInvoice";
   static const kAddItemsIntoInvoice =
       "$kHome/invoices/createInvoice/addItemsIntoInvoice";
-  static const kInvoiceDetailsView = "$kHome/invoices/invoiceShowDetails";
+  static const kInvoicePreviewPDFView = "$kHome/invoices/invoiceShowDetailsPDF";
   static const kCreateNewCustomer = "$kCustomers/createNewCustomer";
 
   static final router = GoRouter(
@@ -85,14 +86,14 @@ abstract class AppRouters {
           return ReturnsView();
         },
       ),
-      GoRoute(
-        path: kInvoiceDetailsView,
-        builder: (context, state) {
-          return InvoiceDetailsView(
-            singleInvoiceItem: state.extra as InvoiceModel,
-          );
-        },
-      ),
+      // GoRoute(
+      //   path: kInvoicePreviewPDFView,
+      //   builder: (context, state) {
+      //     return PdfPreviewScreen(
+      //       invoiceModel: state.invoiceModel,
+      //     );
+      //   },
+      // ),
       GoRoute(
         path: kCreateNewCustomer,
         builder: (context, state) {
