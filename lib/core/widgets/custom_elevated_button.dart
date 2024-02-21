@@ -28,7 +28,7 @@ class CustomElevatedButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             elevation: 5,
             animationDuration: const Duration(seconds: 1),
-            shadowColor: Colors.black,
+            shadowColor: Colors.white,
             backgroundColor: backgroundColor,
             side: hasBorder
                 ? BorderSide(

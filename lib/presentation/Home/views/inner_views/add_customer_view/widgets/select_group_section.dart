@@ -8,6 +8,7 @@ import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import '../../../../../../data/cubits/customer_cubit/customer_cubit.dart';
 import '../../../../../../data/services/local/shared_pref.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChooseGroup extends StatelessWidget {
   const ChooseGroup({
@@ -19,63 +20,61 @@ class ChooseGroup extends StatelessWidget {
     return BlocBuilder<CustomerCubit, CustomerState>(
       builder: (context, state) {
         if (state is GetCustomerGroupSuccess) {
-          return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DropdownSearch<GroupModel>(
-                items: state.groups,
-                itemAsString: (GroupModel group) =>
-                    group.custCategoryName ?? group.custCategoryEname ?? 'None',
-                popupProps: PopupProps.menu(
-                  fit: FlexFit.loose, // << change this
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownSearch<GroupModel>(
+              items: state.groups,
+              itemAsString: (GroupModel group) =>
+                  group.custCategoryName ?? group.custCategoryEname ?? 'None',
+              popupProps: PopupProps.menu(
+                fit: FlexFit.loose, // << change this
 
-                  itemBuilder: (context, group, isSelected) {
-                    return Container(
-                        padding: EdgeInsets.all(20),
-                        // alignment: Alignment.center,
-                        child: TextBuilder(
-                          group.custCategoryName ??
-                              group.custCategoryEname ??
-                              'None',
-                          textAlign: TextAlign.center,
-                          color: isSelected
-                              ? AppColors.secondColorOrange
-                              : AppColors.primaryColorBlue,
-                        ));
-                  },
-                ),
-                dropdownButtonProps: DropdownButtonProps(
-                  color: AppColors.primaryColorBlue,
-                ),
-                dropdownDecoratorProps: DropDownDecoratorProps(
-                  textAlign: TextAlign.center,
-                  baseStyle: TextStyle(
-                    fontFamily: 'Cairo',
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlignVertical: TextAlignVertical.center,
-                  dropdownSearchDecoration: InputDecoration(
-                      label: TextBuilder(
-                        'Group',
-                        fontSize: 14,
-                        maxLines: 2,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      )),
-                ),
-                onChanged: (GroupModel? data) {
-                  debugPrint(data!.custCategoryId.toString());
-                  debugPrint(data.custCategoryName);
-                  debugPrint(data.custCategoryEname);
-
-                  SharedPref.set(
-                      key: "custCategoryId", value: data.custCategoryId);
-
-                  debugPrint(SharedPref.get(key: "custCategoryId").toString());
+                itemBuilder: (context, group, isSelected) {
+                  return Container(
+                      padding: EdgeInsets.all(20),
+                      // alignment: Alignment.center,
+                      child: TextBuilder(
+                        group.custCategoryName ??
+                            group.custCategoryEname ??
+                            'None',
+                        textAlign: TextAlign.center,
+                        color: isSelected
+                            ? AppColors.secondColorOrange
+                            : AppColors.primaryColorBlue,
+                      ));
                 },
               ),
+              dropdownButtonProps: DropdownButtonProps(
+                color: AppColors.primaryColorBlue,
+              ),
+              dropdownDecoratorProps: DropDownDecoratorProps(
+                textAlign: TextAlign.center,
+                baseStyle: TextStyle(
+                  fontFamily: 'Cairo',
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlignVertical: TextAlignVertical.center,
+                dropdownSearchDecoration: InputDecoration(
+                    label: TextBuilder(
+                      AppLocalizations.of(context)!.group,
+                      fontSize: 14,
+                      maxLines: 2,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    )),
+              ),
+              onChanged: (GroupModel? data) {
+                debugPrint(data!.custCategoryId.toString());
+                debugPrint(data.custCategoryName);
+                debugPrint(data.custCategoryEname);
+
+                SharedPref.set(
+                    key: "custCategoryId", value: data.custCategoryId);
+
+                debugPrint(SharedPref.get(key: "custCategoryId").toString());
+              },
             ),
           );
         } else if (state is GetCustomerGroupLoading) {

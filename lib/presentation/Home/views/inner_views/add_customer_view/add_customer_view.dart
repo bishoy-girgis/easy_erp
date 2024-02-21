@@ -35,9 +35,15 @@ class AddCustomerView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: TextBuilder(
-          "Add Customer",
+          AppLocalizations.of(context)!.add_customer,
           color: AppColors.whiteColor,
         ),
+        leading: IconButton(
+            onPressed: () {
+              CustomerCubit.get(context).getCustomers();
+              GlobalMethods.navigatePOP(context);
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: buildBody(),
     );
@@ -57,6 +63,7 @@ class AddCustomerView extends StatelessWidget {
               context: context,
               router: AppRouters.kCustomers,
             );
+            SharedPref.remove(key: 'custCategoryId');
           } else if (state is AddCustomerFailure) {
             GlobalMethods.buildFlutterToast(
               message: state.error,
@@ -72,152 +79,169 @@ class AddCustomerView extends StatelessWidget {
         builder: (context, state) {
           return Form(
             key: _formKey,
-            child: Column(
-              children: [
-                GapH(h: 5),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      CustomTextFormField(
-                        labelText: 'Customer name AR',
-                        controller: _custNameArController,
-                        onChange: (value) {
-                          _custNameArController.text = value;
-                        },
-                        validator: (p0) {
-                          if (p0 == null || p0.isEmpty) {
-                            return 'Please enter customer name';
-                          }
-                          return null;
-                        },
-                      ),
-                      CustomTextFormField(
-                        labelText: 'Customer name EN',
-                        controller: _custNameEnController,
-                        onChange: (value) {
-                          _custNameEnController.text = value;
-                        },
-                        validator: (p0) {
-                          if (p0 == null || p0.isEmpty) {
-                            return 'Please enter customer name';
-                          }
-                          return null;
-                        },
-                      ),
-                      CustomTextFormField(
-                        labelText: 'Fax',
-                        controller: _faxController,
-                        onChange: (value) {
-                          _faxController.text = value;
-                        },
-                        validator: (p0) {
-                          if (p0 == null || p0.isEmpty) {
-                            return 'Please enter customer name';
-                          }
-                          return null;
-                        },
-                      ),
-                      CustomTextFormField(
-                        labelText: 'Mobile number',
-                        controller: _mobileNumberController,
-                        onChange: (value) {
-                          _mobileNumberController.text = value;
-                        },
-                        validator: (p0) {
-                          if (p0 == null || p0.isEmpty) {
-                            return 'Please enter customer name';
-                          }
-                          return null;
-                        },
-                      ),
-                      CustomTextFormField(
-                        labelText: 'Address ar',
-                        controller: _addressArController,
-                        onChange: (value) {
-                          _addressArController.text = value;
-                        },
-                        validator: (p0) {
-                          if (p0 == null || p0.isEmpty) {
-                            return 'Please enter customer name';
-                          }
-                          return null;
-                        },
-                      ),
-                      CustomTextFormField(
-                        labelText: 'Address en',
-                        controller: _addressEnController,
-                        onChange: (value) {
-                          _addressEnController.text = value;
-                        },
-                        validator: (p0) {
-                          if (p0 == null || p0.isEmpty) {
-                            return 'Please enter customer name';
-                          }
-                          return null;
-                        },
-                      ),
-                      CustomTextFormField(
-                        labelText: 'Managet name ar',
-                        controller: _managerNameArController,
-                        onChange: (value) {
-                          _managerNameArController.text = value;
-                        },
-                        validator: (p0) {
-                          if (p0 == null || p0.isEmpty) {
-                            return 'Please enter customer name';
-                          }
-                          return null;
-                        },
-                      ),
-                      CustomTextFormField(
-                        labelText: 'Managet name en',
-                        controller: _managerNameEnController,
-                        onChange: (value) {
-                          _managerNameEnController.text = value;
-                        },
-                        validator: (p0) {
-                          if (p0 == null || p0.isEmpty) {
-                            return 'Please enter customer name';
-                          }
-                          return null;
-                        },
-                      ),
-                      GapH(h: 2),
-                      ChooseGroup()
-                    ],
-                  ),
-                ),
-                GapH(h: 5),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: CustomElevatedButton(
-                    width: double.infinity,
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        var customer = context
-                            .read<CustomerCubit>()
-                            .addCustomer(
-                              custNameAr: _custNameArController.text,
-                              custNameEn: _custNameEnController.text,
-                              fax: _faxController.text,
-                              mobileNumber: _mobileNumberController.text,
-                              addressAr: _addressArController.text,
-                              addressEn: _addressEnController.text,
-                              mangNameAr: _managerNameArController.text,
-                              mangNameEn: _managerNameEnController.text,
-                              groupID: SharedPref.get(key: 'custCategoryId'),
-                            );
-                        FocusScope.of(context).unfocus();
-                      }
-                    },
-                    backgroundColor: AppColors.whiteColor,
-                    title: TextBuilder(
-                      "Add Customer",
+            child: Card(
+              child: Column(
+                children: [
+                  // GapH(h: 1),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        CustomTextFormField(
+                          labelText:
+                              AppLocalizations.of(context)!.customer_name_ar,
+                          controller: _custNameArController,
+                          onChange: (value) {
+                            _custNameArController.text = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .please_enter_customer_name;
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextFormField(
+                          labelText:
+                              AppLocalizations.of(context)!.customer_name_en,
+                          controller: _custNameEnController,
+                          onChange: (value) {
+                            _custNameEnController.text = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .please_enter_customer_name;
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextFormField(
+                          labelText: AppLocalizations.of(context)!.fax,
+                          controller: _faxController,
+                          onChange: (value) {
+                            _faxController.text = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .please_enter_fax;
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextFormField(
+                          labelText:
+                              AppLocalizations.of(context)!.mobile_number,
+                          controller: _mobileNumberController,
+                          onChange: (value) {
+                            _mobileNumberController.text = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .please_enter_mobile_number;
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextFormField(
+                          labelText: AppLocalizations.of(context)!.address_ar,
+                          controller: _addressArController,
+                          onChange: (value) {
+                            _addressArController.text = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .please_enter_address;
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextFormField(
+                          labelText: AppLocalizations.of(context)!.address_en,
+                          controller: _addressEnController,
+                          onChange: (value) {
+                            _addressEnController.text = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .please_enter_address;
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextFormField(
+                          labelText:
+                              AppLocalizations.of(context)!.manager_name_ar,
+                          controller: _managerNameArController,
+                          onChange: (value) {
+                            _managerNameArController.text = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .please_enter_manager_name;
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextFormField(
+                          labelText:
+                              AppLocalizations.of(context)!.manager_name_en,
+                          controller: _managerNameEnController,
+                          onChange: (value) {
+                            _managerNameEnController.text = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .please_enter_manager_name;
+                            }
+                            return null;
+                          },
+                        ),
+                        const GapH(h: 1),
+                        const ChooseGroup()
+                      ],
                     ),
                   ),
-                )
-              ],
+                  const GapH(h: 1),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: CustomElevatedButton(
+                      width: double.infinity,
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          var customer = await context
+                              .read<CustomerCubit>()
+                              .addCustomer(
+                                custNameAr: _custNameArController.text,
+                                custNameEn: _custNameEnController.text,
+                                fax: _faxController.text,
+                                mobileNumber: _mobileNumberController.text,
+                                addressAr: _addressArController.text,
+                                addressEn: _addressEnController.text,
+                                mangNameAr: _managerNameArController.text,
+                                mangNameEn: _managerNameEnController.text,
+                                groupID: SharedPref.get(key: 'custCategoryId'),
+                              );
+                          FocusScope.of(context).unfocus();
+                        }
+                      },
+                      // backgroundColor: AppColors.whiteColor,
+                      title: TextBuilder(
+                        AppLocalizations.of(context)!.add_customer,
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
+                  ),
+                  const GapH(h: 5)
+                ],
+              ),
             ),
           );
         },
