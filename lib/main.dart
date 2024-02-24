@@ -24,6 +24,7 @@ import 'package:provider/provider.dart';
 import 'core/helper/app_routing.dart';
 import 'data/cubits/customer_cubit/customer_cubit.dart';
 import 'data/cubits/invoice_cubit/cubit/invoice_cubit.dart';
+import 'data/models/item_model/item_model.dart';
 import 'data/models/user/user_model.dart';
 import 'data/providers/localization/localization_provider.dart';
 import 'data/repositories/invoice_repository/invoice_repo_imp.dart';
@@ -41,9 +42,8 @@ void main() async {
   String languageCode = SharedPref.get(key: 'languageCode') ?? 'ar';
 
   await Hive.initFlutter();
-  Hive.registerAdapter(UserModelAdapter());
-  await Hive.openBox<UserModel>('userBox');
-  await Hive.openBox<CustomerModel>('customerBox');
+  Hive.registerAdapter(ItemModelAdapter());
+  await Hive.openBox<ItemModel>('itemBox');
 
   ///setup DI for the App ,
   setupServiceLocatorByGetIt();

@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 part 'customer_model.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class CustomerModel extends Equatable {
   @HiveField(0)
   final int? custid;

@@ -1,22 +1,38 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'item_model.g.dart';
 
+///this line to enable Hive for this class
+@HiveType(typeId: 2)
 @JsonSerializable()
-class ItemModel extends Equatable {
+class ItemModel extends HiveObject {
+  @HiveField(0)
   final int? itmid;
+  @HiveField(1)
   final int? subgrpid;
+  @HiveField(2)
   final String? itmcode;
+  @HiveField(3)
   final String? itmname;
+  @HiveField(4)
   final String? itmename;
+  @HiveField(5)
   final String? unitname;
+  @HiveField(6)
   final int? unitid;
+  @HiveField(7)
   final int? untItmIndx;
+  @HiveField(8)
   final double? salesprice;
+  @HiveField(9)
   final int? balance;
+  @HiveField(10)
   final double? discP;
+  @HiveField(11)
   final double? cost;
+  @HiveField(12)
   num quantity;
 
   ItemModel({

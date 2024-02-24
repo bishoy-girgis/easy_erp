@@ -14,15 +14,25 @@ class ServerError extends Failures {
   factory ServerError.fromDioError(DioException dioError) {
     switch (dioError.type) {
       case DioExceptionType.connectionTimeout:
+        GlobalMethods.buildFlutterToast(
+            message: 'Connection Timeout', state: ToastStates.ERROR);
         return ServerError("Connection Timeout with Api Server");
       case DioExceptionType.sendTimeout:
+        GlobalMethods.buildFlutterToast(
+            message: 'Send Timeout', state: ToastStates.ERROR);
         return ServerError("Send Timeout with Api Server");
       case DioExceptionType.receiveTimeout:
+        GlobalMethods.buildFlutterToast(
+            message: 'Receive Timeout', state: ToastStates.ERROR);
         return ServerError("Receive Timeout with Api Server");
       case DioExceptionType.badCertificate:
+        GlobalMethods.buildFlutterToast(
+            message: 'Bad Certificate', state: ToastStates.ERROR);
         return ServerError("Bad Certificate with Api Server");
       case DioExceptionType.badResponse:
         debugPrint("😡😡😡BAD Response😡😡😡");
+        GlobalMethods.buildFlutterToast(
+            message: dioError.response!.data, state: ToastStates.ERROR);
         return ServerError.fromBadResponse(
             dioError.response!.statusCode!, dioError.response!.data);
       case DioExceptionType.cancel:
@@ -33,9 +43,9 @@ class ServerError extends Failures {
 
       case DioExceptionType.unknown:
         if (dioError.message!.contains('Socket')) {
-          return ServerError("No Internet Connection 2 ");
+          return ServerError("No Internet Connection");
         } else {
-          return ServerError("Try AGAIN");
+          return ServerError("TRY AGAIN");
         }
       default:
         return ServerError("DEFAULT ERROR TRY AGIAN LATER ");

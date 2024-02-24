@@ -46,7 +46,6 @@ class _LoginViewState extends State<LoginView> {
         if (state is LoginSuccessState) {
           debugPrint("🎄🎄" + state.userModel.userName!);
           debugPrint("🎄🎄" + state.userModel.accessToken!);
-
           SharedPref.set(key: 'userName', value: state.userModel.userName);
           SharedPref.set(
               key: 'accessToken', value: state.userModel.accessToken);

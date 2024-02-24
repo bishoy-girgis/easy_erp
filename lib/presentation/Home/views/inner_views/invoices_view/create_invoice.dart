@@ -3,6 +3,7 @@ import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
+import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/preview.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import '../../../../../core/helper/pdf_helper.dart';
 import '../../../../../data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
 import '../../../../../data/cubits/invoice_cubit/cubit/invoice_cubit.dart';
@@ -76,29 +78,36 @@ class CreateInvoiceView extends StatelessWidget {
         BlocConsumer<InvoiceCubit, InvoiceState>(
           listener: (context, state) {
             if (state is InvoiceSavedSuccess) {
-              print(state.sendInvoiceModel);
-              print("=============================");
-              print(state.sendInvoiceModel.massage);
+              debugPrint("=============================");
+              debugPrint(state.sendInvoiceModel.massage);
               GlobalMethods.buildFlutterToast(
                   message: state.sendInvoiceModel.massage!,
                   state: ToastStates.SUCCESS);
               InvoiceCubit.get(context).getInvoices();
 
-              var items = getIt.get<AddItemCubit>().addedItems;
-              print(items);
+              final itemBox = Hive.box<ItemModel>('itemBox');
+              itemBox.addAll(getIt.get<AddItemCubit>().addedItems);
               generateAndPrintArabicPdf(context,
-                  invoiceModel: InvoiceModel(custInvname: "Yusuf"),
+                  invoiceModel: InvoiceModel(
+                    custInvname: "Yusuf",
+                    invdate: SharedPref.get(key: 'invoiceDate') ??
+                        DateTime.now().toIso8601String(),
+                    netvalue: SharedPref.get(key: 'amountBeforeTex') ?? 0,
+                    taxAdd: SharedPref.get(key: 'taxAmount') ?? 0,
+                    finalValue: SharedPref.get(key: 'totalAmount') ?? 0,
+                  ),
                   invoiceType: "فاتورة مبسطة",
-                  items: items);
+                  items: itemBox.values.toList());
               getIt.get<AddItemCubit>().addedItems.clear();
+              itemBox.clear();
             } else if (state is InvoiceNotSave) {
               GlobalMethods.navigatePOP(context);
               GlobalMethods.buildFlutterToast(
                   message: state.error, state: ToastStates.ERROR);
-              print(state.error);
+              debugPrint(state.error);
             } else {
-              print("=============================");
-              print('Dont Know');
+              debugPrint("=============================");
+              debugPrint('Dont Know');
             }
           },
           builder: (context, state) {

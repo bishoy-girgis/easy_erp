@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pdf/pdf.dart';
 
 import '../../../../core/helper/app_colors.dart';
 import '../../../../core/widgets/text_builder.dart';
+import '../../../../data/models/printerModel/printer_model.dart';
 
 class ChoosePrintModelSection extends StatefulWidget {
   const ChoosePrintModelSection({
@@ -37,36 +39,21 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  buildTextButton("A4", 0),
+                  buildTextButton(PrinterModel(
+                      name: 'A4', id: 0, format: PdfPageFormat.a4)),
                   const VDividerBuilder(),
-                  buildTextButton("A5", 1),
-                  // TextButton(
-                  //   onPressed: () {},
-                  //   child: TextBuilder(
-                  //     "RECEIPT",
-                  //     isHeader: true,
-                  //     fontSize: 14,
-                  //   ),
-                  // ),
+                  buildTextButton(PrinterModel(
+                      name: 'POS', id: 1, format: PdfPageFormat.roll57)),
                   const VDividerBuilder(),
-                  buildTextButton("A6", 2),
-                  // TextButton(
-                  //   onPressed: () {},
-                  //   child: TextBuilder(
-                  //     "MACHINE",
-                  //     fontSize: 14,
-                  //     isHeader: true,
-                  //   ),
-                  // ),
+                  buildTextButton(PrinterModel(
+                      name: 'RECEIPT', id: 1, format: PdfPageFormat.roll80)),
                 ],
               ),
             ),
             const TextBuilder(
-              "Host URL that connect app with server data \n  ex: https//www.domain.com/",
-              isHeader: true,
+              "You have selected the Print Model \n example : POS",
               maxLines: 2,
               fontSize: 12,
-              color: Colors.black45,
               textAlign: TextAlign.center,
             ),
           ],
@@ -75,24 +62,25 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
     );
   }
 
-  Widget buildTextButton(String text, int index) {
+  Widget buildTextButton(PrinterModel printerModel) {
     return Expanded(
       child: TextButton(
         onPressed: () {
           setState(() {
-            selectedButtonIndex = index;
+            selectedButtonIndex = printerModel.id;
           });
         },
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
-              // Change the color based on the selected state
-              return selectedButtonIndex == index ? Colors.red : Colors.black;
+              return selectedButtonIndex == printerModel.id
+                  ? AppColors.primaryColorBlue
+                  : AppColors.secondColorOrange;
             },
           ),
         ),
         child: Text(
-          text,
+          printerModel.name,
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
       ),
