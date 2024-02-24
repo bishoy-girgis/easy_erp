@@ -1,11 +1,11 @@
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/data/cubits/customer_cubit/customer_cubit.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
-import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/preview.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
@@ -68,6 +68,21 @@ class CreateInvoiceView extends StatelessWidget {
   }
 
   AppBar _buildAppBar(context) {
+    // String getCustomerName() {
+    //   for (var cust in CustomerCubit.get(context).customers) {
+    //     if (cust.custid == 0) {
+    //       return 'Cash';
+    //     } else if (cust.custid == SharedPref.get(key: 'custID')) {
+    //       print(cust.custname ?? cust.custename ?? "");
+    //       print(cust.custname ?? cust.custename ?? "");
+    //       print(cust.custname ?? cust.custename ?? "");
+    //       print(cust.custname ?? cust.custename ?? "");
+    //       return cust.custname ?? cust.custename ?? "";
+    //     }
+    //   }
+    //   return "nine";
+    // }
+
     return AppBar(
       title: TextBuilder(
         AppLocalizations.of(context)!.create_invoice,
@@ -84,22 +99,14 @@ class CreateInvoiceView extends StatelessWidget {
                   message: state.sendInvoiceModel.massage!,
                   state: ToastStates.SUCCESS);
               InvoiceCubit.get(context).getInvoices();
-
               final itemBox = Hive.box<ItemModel>('itemBox');
               itemBox.addAll(getIt.get<AddItemCubit>().addedItems);
+
               generateAndPrintArabicPdf(context,
-                  invoiceModel: InvoiceModel(
-                    custInvname: "Yusuf",
-                    invdate: SharedPref.get(key: 'invoiceDate') ??
-                        DateTime.now().toIso8601String(),
-                    netvalue: SharedPref.get(key: 'amountBeforeTex') ?? 0,
-                    taxAdd: SharedPref.get(key: 'taxAmount') ?? 0,
-                    finalValue: SharedPref.get(key: 'totalAmount') ?? 0,
-                  ),
+                  invNo: state.sendInvoiceModel.invno,
                   invoiceType: "فاتورة مبسطة",
                   items: itemBox.values.toList());
               getIt.get<AddItemCubit>().addedItems.clear();
-              itemBox.clear();
             } else if (state is InvoiceNotSave) {
               GlobalMethods.navigatePOP(context);
               GlobalMethods.buildFlutterToast(

@@ -27,6 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   bool isPasswordVisible = true;
   void changeVisability() {
+    emit(LoginInitial());
     isPasswordVisible = !isPasswordVisible;
     emit(ChangePasswordVisability());
   }

@@ -11,9 +11,7 @@ import 'package:easy_erp/presentation/Splash/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../presentation/Home/views/home_view.dart';
-import '../../presentation/Home/views/inner_views/invoices_view/details_view.dart';
 import '../../presentation/Home/views/inner_views/invoices_view/invoices_view.dart';
-import '../../presentation/Home/views/inner_views/invoices_view/preview.dart';
 import '../../presentation/Home/views/inner_views/items_view/items_view.dart';
 
 abstract class AppRouters {

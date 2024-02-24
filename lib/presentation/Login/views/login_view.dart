@@ -53,7 +53,6 @@ class _LoginViewState extends State<LoginView> {
           SharedPref.set(key: 'vat', value: state.userModel.vat);
           SharedPref.set(key: 'ccid', value: state.userModel.ccId);
           SharedPref.set(key: 'branchID', value: state.userModel.branchId);
-          Hive.box<UserModel>("userBox").put("userName", state.userModel);
           GlobalMethods.goRouterNavigateTOAndReplacement(
               context: context, router: AppRouters.kHome);
           GlobalMethods.buildFlutterToast(
@@ -62,9 +61,11 @@ class _LoginViewState extends State<LoginView> {
           );
         } else if (state is LoginFailureState) {
           debugPrint("🎐🎐" + state.error);
-
           GlobalMethods.buildFlutterToast(
               message: state.error, state: ToastStates.ERROR);
+        } else {
+          GlobalMethods.buildFlutterToast(
+              message: 'Loading ... ', state: ToastStates.WARNING);
         }
       },
       builder: (context, state) {
@@ -124,12 +125,14 @@ class _LoginViewState extends State<LoginView> {
                           }
                           return null;
                         },
-                        isSecure: getIt.get<LoginCubit>().isPasswordVisible,
-                        suffixIcon: getIt.get<LoginCubit>().isPasswordVisible
+                        isSecure: LoginCubit.get(context).isPasswordVisible,
+                        suffixIcon: LoginCubit.get(context).isPasswordVisible
                             ? Icons.visibility_off
                             : Icons.visibility,
                         suffixPressed: () {
-                          getIt.get<LoginCubit>().changeVisability();
+                          // LoginCubit.get(context).isPasswordVisible !=
+                          //     LoginCubit.get(context).isPasswordVisible;
+                          LoginCubit.get(context).changeVisability();
                         },
                         labelText: AppLocalizations.of(context)!.password,
                         hintText: AppLocalizations.of(context)!.passwordHint,

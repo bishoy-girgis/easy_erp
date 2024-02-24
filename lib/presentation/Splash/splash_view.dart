@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/app_images.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
@@ -58,7 +59,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
 
     Timer(const Duration(seconds: 3), () {
       setState(() {
-        String accessToken = SharedPref.get(key: 'accessToken') ?? "";
+        String? accessToken = AppConstants.accessToken;
         if (accessToken.isNotEmpty) {
           GlobalMethods.goRouterNavigateTOAndReplacement(
               context: context, router: AppRouters.kHome);

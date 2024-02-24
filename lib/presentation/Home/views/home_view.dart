@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
@@ -19,7 +20,7 @@ class HomeView extends StatelessWidget {
     var l = AppLocalizations.of(context)!;
     final List<CategoryWidget> categories =
         CategoriesViewModel.getCategories(context);
-    var name = SharedPref.get(key: 'userName');
+    var name = AppConstants.userName;
     return Scaffold(
       body: SafeArea(
           child: Padding(

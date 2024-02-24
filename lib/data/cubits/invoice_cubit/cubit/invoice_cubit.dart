@@ -41,7 +41,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
       invtype: SharedPref.get(key: 'invoiceTypeID') ?? 0,
       user: SharedPref.get(key: 'userName'),
       whid: AppConstants.whId,
-      ccid: SharedPref.get(key: 'ccid'),
+      ccid: AppConstants.ccid,
       branchid: SharedPref.get(key: 'branchID') ?? 1,
       netvalue: SharedPref.get(key: 'amountBeforeTex') ?? 0,
       taxAdd: SharedPref.get(key: 'taxAmount') ?? 0,

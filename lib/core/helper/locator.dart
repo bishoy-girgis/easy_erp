@@ -32,9 +32,9 @@ void setupServiceLocatorByGetIt() {
   getIt.registerSingleton<AddItemCubit>(
     AddItemCubit(),
   );
-  getIt.registerSingleton<LoginCubit>(
-    LoginCubit(getIt.get<LoginRepoImplementation>()),
-  );
+  // getIt.registerSingleton<LoginCubit>(
+  //   LoginCubit(getIt.get<LoginRepoImplementation>()),
+  // );
   getIt.registerSingleton<InvoiceRepoImplementation>(
     InvoiceRepoImplementation(getIt.get<ApiService>()),
   );

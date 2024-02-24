@@ -5,6 +5,7 @@ import 'package:easy_erp/data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
 import 'package:easy_erp/data/cubits/item_cubit/item_cubit.dart';
 import 'package:easy_erp/data/cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
+import 'package:easy_erp/data/models/printerModel/printer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/item_repository/item_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/login_repository/login_repo_imp.dart';
@@ -41,9 +42,16 @@ void main() async {
 
   String languageCode = SharedPref.get(key: 'languageCode') ?? 'ar';
 
+  ///Initialize Hive
   await Hive.initFlutter();
   Hive.registerAdapter(ItemModelAdapter());
   await Hive.openBox<ItemModel>('itemBox');
+  Hive.registerAdapter(CustomerModelAdapter());
+  await Hive.openBox<CustomerModel>('customerBox');
+  Hive.registerAdapter(UserModelAdapter());
+  await Hive.openBox<UserModel>('userBox');
+  Hive.registerAdapter(PrinterModelAdapter());
+  await Hive.openBox<PrinterModel>('printerBox');
 
   ///setup DI for the App ,
   setupServiceLocatorByGetIt();

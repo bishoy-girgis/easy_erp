@@ -1,7 +1,10 @@
 import 'dart:io';
 
 import 'package:easy_erp/core/widgets/gap.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -12,35 +15,43 @@ import '../../data/models/item_model/item_model.dart';
 
 Future<void> generateAndPrintArabicPdf(
   context, {
-  required InvoiceModel invoiceModel,
+  invNo,
   required String invoiceType,
   required List<ItemModel> items,
 }) async {
+  String custInvname = SharedPref.get(key: 'custName');
+  String netvalue = SharedPref.get(key: 'amountBeforeTex');
+  String taxAdd = context.get(key: 'taxAmount');
+  String finalValue = SharedPref.get(key: 'totalAmount');
+  String custName = SharedPref.get(key: 'custName') ?? 'cash';
+  String invoiceDate = SharedPref.get(key: 'invoiceDate');
+
   final Document pdf = Document();
 
   var arabicFont = Font.ttf(
       await rootBundle.load("assets/fonts/Cairo/static/Cairo-Regular.ttf"));
-  pdf.addPage(Page(
+  pdf.addPage(
+    Page(
       theme: ThemeData.withFont(
         base: arabicFont,
       ),
       pageFormat: PdfPageFormat.a4,
       build: (Context context) {
         return Center(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
               buildPDFText(invoiceType, fontSize: 20),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                buildPDFText(invoiceModel.invNo.toString()),
+                buildPDFText(invNo),
                 buildPDFText('رقم الفاتورة : '),
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                buildPDFText(invoiceModel.invdate.toString()),
+                buildPDFText(finalValue),
                 buildPDFText('التاريخ : '),
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                buildPDFText(invoiceModel.invdate.toString()),
+                buildPDFText(custName),
                 buildPDFText('العميل : '),
               ]),
               buildPDFText('الأصناف : '),
@@ -174,21 +185,24 @@ Future<void> generateAndPrintArabicPdf(
                               fontSize: 10,
                             )))),
               ]),
-            ]));
-      }));
+            ],
+          ),
+        );
+      },
+    ),
+  );
+  Hive.box<ItemModel>('itemBox').clear();
+  debugPrint("ffff");
   final String dir = (await getApplicationDocumentsDirectory()).path;
   final String path = '$dir/1.pdf';
   final File file = File(path);
   await Printing.layoutPdf(
       onLayout: (PdfPageFormat format) async => pdf.save());
-  // final directory = await getExternalStorageDirectory();
-  // final filee = File("${directory?.path}/example.pdf");
-
   final pdfBytes = await pdf.save();
   await file.writeAsBytes(pdfBytes.toList());
 }
 
-Directionality buildPDFText(String text, {double fontSize = 10}) {
+Directionality buildPDFText(String text, {double fontSize = 15}) {
   return Directionality(
       textDirection: TextDirection.rtl,
       child: Center(

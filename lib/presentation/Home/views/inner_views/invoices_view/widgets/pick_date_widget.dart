@@ -13,7 +13,6 @@ class DatePickerWidget extends StatefulWidget {
 class _DatePickerWidgetState extends State<DatePickerWidget> {
   TextEditingController dateController = TextEditingController(
       text: DateFormat('dd/MM/yyyy').format(DateTime.now()));
-  // String date = DateFormat('dd/MM/yyyy').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +34,13 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           if (pickedDate != null) {
             setState(() {
               dateController.text = DateFormat('dd/MM/yyyy').format(pickedDate);
-              SharedPref.set(key: 'invoiceDate', value: dateController.text);
+              String formatedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
+              SharedPref.set(key: 'invoiceDate', value: formatedDate);
             });
           } else {
+            String formatedDate =
+                DateFormat('dd/MM/yyyy').format(DateTime.now());
+            SharedPref.set(key: 'invoiceDate', value: formatedDate);
             print("Date is not selected");
           }
         },

@@ -1,8 +1,6 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
-import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/details_view.dart';
-import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';

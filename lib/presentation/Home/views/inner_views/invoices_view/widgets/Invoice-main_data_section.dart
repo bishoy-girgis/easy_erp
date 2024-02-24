@@ -187,6 +187,9 @@ class _SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
               print(data.custename);
               setState(() {
                 SharedPref.set(key: "custID", value: data.custid);
+                SharedPref.set(
+                    key: "custName",
+                    value: data.custname ?? data.custename ?? 'cash');
               });
               print(
                 SharedPref.get(key: "custID"),
