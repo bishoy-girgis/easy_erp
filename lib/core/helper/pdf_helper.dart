@@ -1,10 +1,7 @@
 import 'dart:io';
 
-import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/locator.dart';
-import 'package:easy_erp/core/widgets/gap.dart';
-import 'package:easy_erp/data/models/printerModel/printer_model.dart';
-import 'package:easy_erp/data/services/local/shared_pref.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
@@ -14,7 +11,6 @@ import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 
 import '../../data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
-import '../../data/models/invoice_model/invoice_model.dart';
 import '../../data/models/item_model/item_model.dart';
 
 Future<void> generateAndPrintArabicPdf(
@@ -27,10 +23,6 @@ Future<void> generateAndPrintArabicPdf(
   required String invoiceType,
   required List<ItemModel> items,
 }) async {
-  // double netvalue = SharedPref.get(key: 'amountBeforeTex');
-  // double taxAdd = SharedPref.get(key: 'taxAmount');
-  // double finalValue = SharedPref.get(key: 'totalAmount');
-  // String custName = SharedPref.get(key: 'custName') ?? 'cash';
   List<dynamic> getItems() {
     List<dynamic> finalItems = [];
     var length = items.length;
