@@ -1,5 +1,7 @@
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pdf/pdf.dart';
 
 import '../../../../core/helper/app_colors.dart';
@@ -46,7 +48,7 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
                       name: 'POS', id: 1, format: PdfPageFormat.roll57)),
                   const VDividerBuilder(),
                   buildTextButton(PrinterModel(
-                      name: 'RECEIPT', id: 1, format: PdfPageFormat.roll80)),
+                      name: 'RECEIPT', id: 2, format: PdfPageFormat.roll80)),
                 ],
               ),
             ),
@@ -68,7 +70,10 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
         onPressed: () {
           setState(() {
             selectedButtonIndex = printerModel.id;
+            SharedPref.set(key: 'printerFormat', value: selectedButtonIndex);
           });
+          print(SharedPref.get(key: 'printerFormat'));
+          print("ppppppp" + selectedButtonIndex.toString());
         },
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.resolveWith<Color>(

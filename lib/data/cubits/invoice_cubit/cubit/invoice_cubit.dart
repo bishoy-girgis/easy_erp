@@ -50,6 +50,11 @@ class InvoiceCubit extends Cubit<InvoiceState> {
       bankDtlId: SharedPref.get(key: 'bankdtlId') ?? 1,
       items: items,
     );
+    print(
+        'itemssssssssssssssssssssssssssssssssssssssssssssssssssssssss: 🎶🎶🎶');
+    items.forEach((item) {
+      print('  ${item.toJson()}');
+    });
     if (result != null) {
       result.fold((l) {
         print("ERROR IN INV CUBIT " + l.errorMessage);
@@ -60,7 +65,6 @@ class InvoiceCubit extends Cubit<InvoiceState> {
         print(sendInvoiceModel);
         print('DATACUBI(TTTT)' + r.toString());
         emit(InvoiceSavedSuccess(r));
-        removeInvoiceData();
       });
     } else {
       emit(InvoiceNotSave("Invoice data is null"));

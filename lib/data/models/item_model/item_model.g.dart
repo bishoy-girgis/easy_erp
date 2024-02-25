@@ -97,17 +97,14 @@ ItemModel _$ItemModelFromJson(Map<String, dynamic> json) => ItemModel(
     );
 
 Map<String, dynamic> _$ItemModelToJson(ItemModel instance) => <String, dynamic>{
-      'itmid': instance.itmid,
-      'subgrpid': instance.subgrpid,
-      'itmcode': instance.itmcode,
-      'itmname': instance.itmname,
-      'itmename': instance.itmename,
-      'unitname': instance.unitname,
-      'unitid': instance.unitid,
-      'untItmIndx': instance.untItmIndx,
-      'salesprice': instance.salesprice,
-      'balance': instance.balance,
-      'discP': instance.discP,
-      'cost': instance.cost,
-      'quantity': instance.quantity,
+      "itemid": instance.itmid,
+      "Unitid": instance.unitid,
+      "index": instance.untItmIndx,
+      "Cost": instance.cost,
+      "Qty": instance.quantity,
+      "price": instance.salesprice,
+      "Value": (instance.salesprice! * instance.quantity),
+      "DiscVal": instance.salesprice! * (instance.discP! / 100),
+      "NetValue": instance.salesprice! -
+          (instance.salesprice! * (instance.discP! / 100)),
     };

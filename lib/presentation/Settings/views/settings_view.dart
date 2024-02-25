@@ -17,7 +17,7 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextBuilder(
+        title: const TextBuilder(
           "Settings",
           color: Colors.white,
           isHeader: true,
@@ -28,7 +28,7 @@ class SettingsView extends StatelessWidget {
               SharedPref.remove(key: "accessToken");
               SystemNavigator.pop();
             },
-            icon: Icon(Icons.done),
+            icon: const Icon(Icons.done),
           )
         ],
       ),
@@ -38,14 +38,14 @@ class SettingsView extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: CustomScrollView(slivers: [
             HostUrlSection(),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: GapH(h: 1),
             ),
-            ChoosePrintModelSection(),
-            SliverToBoxAdapter(
+            const ChoosePrintModelSection(),
+            const SliverToBoxAdapter(
               child: GapH(h: 1),
             ),
-            CompanyInfoSection(),
+            const CompanyInfoSection(),
           ]),
         ),
       )),

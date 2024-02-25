@@ -13,6 +13,16 @@ class DatePickerWidget extends StatefulWidget {
 class _DatePickerWidgetState extends State<DatePickerWidget> {
   TextEditingController dateController = TextEditingController(
       text: DateFormat('dd/MM/yyyy').format(DateTime.now()));
+  DateTime? selectedDate = DateTime.now();
+  Future<DateTime?> picktDate() async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(3000),
+    );
+    return pickedDate;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +35,15 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
         centerContent: true,
         contentSize: 16,
         onTap: () async {
-          DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(2000),
-            lastDate: DateTime(3000),
-          );
-          if (pickedDate != null) {
+          selectedDate = await picktDate();
+          if (selectedDate != null) {
             setState(() {
-              dateController.text = DateFormat('dd/MM/yyyy').format(pickedDate);
-              String formatedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
+              dateController.text =
+                  DateFormat('dd/MM/yyyy').format(selectedDate!);
+              String formatedDate =
+                  DateFormat('dd/MM/yyyy').format(selectedDate!);
               SharedPref.set(key: 'invoiceDate', value: formatedDate);
+              print(formatedDate);
             });
           } else {
             String formatedDate =

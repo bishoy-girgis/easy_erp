@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class AppConstants {
   static final int whId = SharedPref.get(key: "whId");
+  static final int printerFormat = SharedPref.get(key: 'printerFormat');
   static final double vat = SharedPref.get(key: "vat");
   static final String userName = SharedPref.get(key: "userName");
   static final int branchID = SharedPref.get(key: "branchID");

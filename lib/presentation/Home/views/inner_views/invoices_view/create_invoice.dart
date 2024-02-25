@@ -82,6 +82,26 @@ class CreateInvoiceView extends StatelessWidget {
     //   }
     //   return "nine";
     // }
+    checkCustomer() {
+      if ((SharedPref.get(key: 'custID') == null ||
+              SharedPref.get(key: 'custID') == 0) &&
+          (SharedPref.get(key: 'invoiceTypeID')) == 2) {
+        GlobalMethods.navigatePOP(context);
+        GlobalMethods.buildFlutterToast(
+            message:
+                'Cant save invoice  please choose your invoice type and Customer to Save',
+            state: ToastStates.ERROR);
+      }
+    }
+
+    checkItems() {
+      if (getIt.get<AddItemCubit>().addedItems.isEmpty) {
+        GlobalMethods.navigatePOP(context);
+        GlobalMethods.buildFlutterToast(
+            message: 'Cant save invoice please choose your Items to Save',
+            state: ToastStates.ERROR);
+      }
+    }
 
     return AppBar(
       title: TextBuilder(
@@ -101,12 +121,12 @@ class CreateInvoiceView extends StatelessWidget {
               InvoiceCubit.get(context).getInvoices();
               final itemBox = Hive.box<ItemModel>('itemBox');
               itemBox.addAll(getIt.get<AddItemCubit>().addedItems);
-
+              GlobalMethods.goRouterNavigateTOAndReplacement(
+                  context: context, router: AppRouters.kInvoices);
               generateAndPrintArabicPdf(context,
                   invNo: state.sendInvoiceModel.invno,
-                  invoiceType: "فاتورة مبسطة",
+                  invoiceType: "فاتورة ضريبية مبسطة",
                   items: itemBox.values.toList());
-              getIt.get<AddItemCubit>().addedItems.clear();
             } else if (state is InvoiceNotSave) {
               GlobalMethods.navigatePOP(context);
               GlobalMethods.buildFlutterToast(
@@ -126,29 +146,11 @@ class CreateInvoiceView extends StatelessWidget {
                   titleButton1: "Save",
                   titleButton2: "No",
                   onPressedButton1: () async {
-                    var items = getIt.get<AddItemCubit>().addedItems;
-                    print('Items in On pressed : ' + items.toString());
-
-                    if ((SharedPref.get(key: 'custID') == null ||
-                            SharedPref.get(key: 'custID') == 0) &&
-                        (SharedPref.get(key: 'invoiceTypeID')) == 2) {
-                      GlobalMethods.navigatePOP(context);
-                      GlobalMethods.buildFlutterToast(
-                          message:
-                              'Cant save invoice  please choose your invoice type and Customer to Save',
-                          state: ToastStates.ERROR);
-                      return;
-                    } else if (getIt.get<AddItemCubit>().addedItems.isEmpty) {
-                      GlobalMethods.navigatePOP(context);
-                      GlobalMethods.buildFlutterToast(
-                          message:
-                              'Cant save invoice please choose your Items to Save',
-                          state: ToastStates.ERROR);
-                    } else {
-                      await BlocProvider.of<InvoiceCubit>(context).saveInvoice(
-                        items: items,
-                      );
-                    }
+                    checkCustomer();
+                    checkItems();
+                    await BlocProvider.of<InvoiceCubit>(context).saveInvoice(
+                      items: getIt.get<AddItemCubit>().addedItems,
+                    );
                   },
                   onPressedButton2: () {
                     GlobalMethods.navigatePOP(context);

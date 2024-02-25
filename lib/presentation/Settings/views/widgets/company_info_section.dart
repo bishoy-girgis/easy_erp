@@ -1,6 +1,5 @@
 import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/helper/app_colors.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/text_builder.dart';
@@ -57,11 +56,7 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
                 ],
               ),
             ),
-            // TextBuilder(
-            //   "Branch name",
-            //   isHeader: true,
-            //   fontSize: 16,
-            // ),
+
             CustomTextFormField(
               labelText: "Branch name",
               focusedBorderColor: Colors.blueGrey,
