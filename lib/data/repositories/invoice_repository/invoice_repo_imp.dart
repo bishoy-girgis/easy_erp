@@ -5,10 +5,12 @@ import 'package:dio/dio.dart';
 import 'package:easy_erp/core/api/api_service.dart';
 import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/helper/app_constants.dart';
 import '../../models/item_model/item_model.dart';
+import '../../models/print_invoice_model/print_invoice_model/print_invoice_model.dart';
 import '../../models/send_invoice_model/send_invoice_model.dart';
 import 'invoice_repo.dart';
 
@@ -76,7 +78,7 @@ class InvoiceRepoImplementation extends InvoiceRepo {
   @override
   Future<Either<Failures, List<InvoiceModel>>> getInvoices() async {
     try {
-      print("DATA IN Customer REPO IMP ✨✨");
+      debugPrint("DATA IN Customer REPO IMP ✨✨");
       var data = await apiService.get(
         endPoint: AppConstants.GET_INVOICES,
       );
@@ -86,6 +88,33 @@ class InvoiceRepoImplementation extends InvoiceRepo {
         invoices.add(InvoiceModel.fromJson(customer));
       }
       return right(invoices);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerError.fromDioError(e));
+      } else {
+        return left(
+          ServerError(
+            e.toString(),
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failures, PrintInvoiceModel>> getInvoiceDataAndItems(
+      {required String invNo}) async {
+    try {
+      debugPrint("DATA IN Customer REPO IMP ✨✨");
+      var data = await apiService.get(
+        endPoint: AppConstants.PRINT_INVOICE_WITH_ITEMS,
+        queryParameters: {
+          'invNo': invNo,
+        },
+      );
+      PrintInvoiceModel printInvoiceModel = PrintInvoiceModel.fromJson(data);
+      debugPrint(printInvoiceModel.toString());
+      return right(printInvoiceModel);
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));

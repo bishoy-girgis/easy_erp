@@ -34,3 +34,15 @@ final class GetInvoiceFailure extends InvoiceState {
   final String error;
   const GetInvoiceFailure(this.error);
 }
+
+final class GetInvoiceDataLoading extends InvoiceState {}
+
+final class GetInvoiceDataSuccess extends InvoiceState {
+  final PrintInvoiceModel printInvoiceModel;
+  const GetInvoiceDataSuccess(this.printInvoiceModel);
+}
+
+final class GetInvoiceDataFailure extends InvoiceState {
+  final String error;
+  const GetInvoiceDataFailure(this.error);
+}

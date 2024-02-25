@@ -20,13 +20,17 @@ import '../../data/models/item_model/item_model.dart';
 Future<void> generateAndPrintArabicPdf(
   context, {
   invNo,
+  required double netvalue,
+  required double taxAdd,
+  required double finalValue,
+  required String custName,
   required String invoiceType,
   required List<ItemModel> items,
 }) async {
-  double netvalue = SharedPref.get(key: 'amountBeforeTex');
-  double taxAdd = SharedPref.get(key: 'taxAmount');
-  double finalValue = SharedPref.get(key: 'totalAmount');
-  String custName = SharedPref.get(key: 'custName') ?? 'cash';
+  // double netvalue = SharedPref.get(key: 'amountBeforeTex');
+  // double taxAdd = SharedPref.get(key: 'taxAmount');
+  // double finalValue = SharedPref.get(key: 'totalAmount');
+  // String custName = SharedPref.get(key: 'custName') ?? 'cash';
   List<dynamic> getItems() {
     List<dynamic> finalItems = [];
     var length = items.length;

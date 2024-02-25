@@ -6,7 +6,7 @@ class InvoiceModel extends Equatable {
   final String? invdate;
   final String? invtime;
   final String? custInvname;
-  final int? invtype;
+  final dynamic invtype;
   final double? netvalue;
   final double? taxAdd;
   final double? finalValue;
@@ -29,7 +29,7 @@ class InvoiceModel extends Equatable {
         invdate: json['invdate'] as String?,
         invtime: json['invtime'] as String?,
         custInvname: json['CustInvname'] as String?,
-        invtype: json['invtype'] as int?,
+        invtype: json['invtype'] as dynamic,
         netvalue: json['netvalue'] as double?,
         taxAdd: json['TaxAdd'] as double?,
         finalValue: json['FinalValue'] as double?,

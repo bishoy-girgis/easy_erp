@@ -86,10 +86,18 @@ class _InvoicesViewState extends State<InvoicesView> {
                             ? searchForInvoices.length
                             : state.invoiceModels.length,
                         itemBuilder: (context, index) {
-                          return InvoiceWidget(
-                            invoiceModel: searchForInvoices.isNotEmpty
-                                ? searchForInvoices[index]
-                                : state.invoiceModels[index],
+                          return InkWell(
+                            onTap: () {
+                              InvoiceCubit.get(context).getInvoiceDataAndItems(
+                                  context,
+                                  invNo: state.invoiceModels[index].invNo!);
+                              //InvoiceCubit.get(context).getInvoices();
+                            },
+                            child: InvoiceWidget(
+                              invoiceModel: searchForInvoices.isNotEmpty
+                                  ? searchForInvoices[index]
+                                  : state.invoiceModels[index],
+                            ),
                           );
                         }),
                   ));

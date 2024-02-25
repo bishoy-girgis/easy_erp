@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/core/helper/pdf_helper.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
+import 'package:easy_erp/data/models/print_invoice_model/print_invoice_model/print_invoice_model.dart';
 import 'package:easy_erp/data/repositories/invoice_repository/invoice_repo.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:equatable/equatable.dart';
@@ -76,15 +78,47 @@ class InvoiceCubit extends Cubit<InvoiceState> {
     emit(GetInvoiceLoading());
     final result = await invoiceRepo.getInvoices();
     result.fold((error) {
+      emit(InvoiceInitial());
+
       debugPrint("🎈🎈🎈🎈" + error.errorMessage);
       emit(GetInvoiceFailure(error.errorMessage));
     }, (r) {
       /// r for List of customers
+      emit(InvoiceInitial());
       invoices = r;
-      removeInvoiceData();
-
       emit(GetInvoiceSuccess(r));
     });
+  }
+
+  // PrintInvoiceModel printInvoiceModel;
+  getInvoiceDataAndItems(context, {required String invNo}) async {
+    emit(InvoiceInitial());
+
+    emit(GetInvoiceDataLoading());
+    var result = await invoiceRepo.getInvoiceDataAndItems(invNo: invNo);
+    result.fold(
+      (l) {
+        emit(InvoiceInitial());
+        emit(GetInvoiceDataFailure(l.errorMessage));
+      },
+      (r) {
+        emit(InvoiceInitial());
+
+        PrintInvoiceModel printInvoiceModel = r;
+        debugPrint(printInvoiceModel.invoicedtls.toString());
+        emit(GetInvoiceDataSuccess(r));
+        generateAndPrintArabicPdf(context,
+            invNo: invNo,
+            custName: r.invoicehead![0].custInvname ?? 'Cash',
+            finalValue: r.invoicehead![0].finalValue!,
+            netvalue: r.invoicehead![0].netvalue!,
+            taxAdd: r.invoicehead![0].taxAdd!,
+            invoiceType: "نسخة من فاتورة ضريبية مبسطة",
+            items: r.invoicedtls ?? []);
+        getInvoices();
+        return printInvoiceModel;
+      },
+    );
   }
 
   removeInvoiceData() {

@@ -18,6 +18,9 @@ class AppConstants {
 
   ///Invoices
   static const String POST_INVOICE = "/api/Invsave/Post";
+  static const String PRINT_INVOICE_WITH_ITEMS =
+      "/api/Printinvoice/printinvoice";
+
   static String GET_INVOICES =
       "/api/Invoices/getinvoices?username=$userName&Branchid=$branchID";
 

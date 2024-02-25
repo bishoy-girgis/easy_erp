@@ -125,6 +125,10 @@ class CreateInvoiceView extends StatelessWidget {
                   context: context, router: AppRouters.kInvoices);
               generateAndPrintArabicPdf(context,
                   invNo: state.sendInvoiceModel.invno,
+                  netvalue: SharedPref.get(key: 'amountBeforeTex'),
+                  taxAdd: SharedPref.get(key: 'taxAmount'),
+                  finalValue: SharedPref.get(key: 'totalAmount'),
+                  custName: SharedPref.get(key: 'custName') ?? 'cash',
                   invoiceType: "فاتورة ضريبية مبسطة",
                   items: itemBox.values.toList());
             } else if (state is InvoiceNotSave) {
