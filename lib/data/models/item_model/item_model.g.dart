@@ -95,6 +95,26 @@ ItemModel _$ItemModelFromJson(Map<String, dynamic> json) => ItemModel(
       cost: (json['Cost'] as num?)?.toDouble(),
       quantity: json['quantity'] as num? ?? 1,
     );
+ItemModel _$ItemModelFromJsonToPrintInvoiceWithItems(
+        Map<String, dynamic> json) =>
+    // "Itemid": 1,
+    //     "itmcode": "1111120001",
+    //     "itmname": "شاي ",
+    //     "itmename": "tea",
+    //     "qty": 1.000,
+    //     "price": 15.00,
+    //     "discvalue": 0.00,
+    //     "netvalue": 15.00
+    ItemModel(
+      itmid: json['Itemid'] as int?,
+      itmcode: json['itmcode'] as String?,
+      itmname: json['itmname'] as String?,
+      itmename: json['itmename'] as String?,
+      salesprice: (json['price'] as num?)?.toDouble(),
+      discP: (json['discvalue'] as num?)?.toDouble(),
+      cost: (json['netvalue'] as num?)?.toDouble(),
+      quantity: json['qty'] as num? ?? 1,
+    );
 
 Map<String, dynamic> _$ItemModelToJson(ItemModel instance) => <String, dynamic>{
       "itemid": instance.itmid,

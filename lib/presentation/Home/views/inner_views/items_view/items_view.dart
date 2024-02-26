@@ -33,6 +33,7 @@ class _ItemsViewState extends State<ItemsView> {
       appBar: AppBar(
         title: TextBuilder(
           AppLocalizations.of(context)!.items.toLowerCase(),
+          color: AppColors.whiteColor,
         ),
       ),
       body: Padding(
@@ -41,7 +42,8 @@ class _ItemsViewState extends State<ItemsView> {
           children: [
             CustomTextFormField(
               labelText: AppLocalizations.of(context)!.search,
-              // hintText: "Search with Customer name",
+              hintText:
+                  AppLocalizations.of(context)!.search_with_id_code_barcode,
               controller: searchController,
               suffixIcon: Icons.search,
               backgroundOfTextFeild: Colors.white,

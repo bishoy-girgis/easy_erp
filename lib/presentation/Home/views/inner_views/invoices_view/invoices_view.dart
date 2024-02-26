@@ -89,9 +89,11 @@ class _InvoicesViewState extends State<InvoicesView> {
                           return InkWell(
                             onTap: () {
                               InvoiceCubit.get(context).getInvoiceDataAndItems(
-                                  context,
-                                  invNo: state.invoiceModels[index].invNo!);
-                              //InvoiceCubit.get(context).getInvoices();
+                                context,
+                                invNo: searchForInvoices.isNotEmpty
+                                    ? searchForInvoices[index].invNo!
+                                    : state.invoiceModels[index].invNo!,
+                              );
                             },
                             child: InvoiceWidget(
                               invoiceModel: searchForInvoices.isNotEmpty
@@ -119,125 +121,4 @@ class _InvoicesViewState extends State<InvoicesView> {
       ),
     );
   }
-  // Widget buildCubitWidget() {
-  //   return BlocBuilder<InvoiceCubit, InvoiceState>(
-  //     builder: (context, state) {
-  //       if (state is GetInvoiceSuccess) {
-  //         InvoiceCubit.get(context).getInvoices();
-  //         invoices = state.invoiceModels;
-
-  //         return _buildBody();
-  //       } else {
-  //         return Center(
-  //           child: CircularProgressIndicator(),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
-
-  // final invoiceModels = <InvoiceModel>[
-  //   InvoiceModel(
-  //     finalValue: 1,
-  //     invtype: 1,
-  //     netvalue: 1,
-  //     taxAdd: 1,
-  //     custInvname: "ddddddd",
-  //   ),
-  // ];
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: _buildAppBar(context),
-  //     body: _buildBody(),
-  //     floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-  //     floatingActionButton: FloatingActionButton(
-  //       onPressed: () {
-  //         GlobalMethods.navigateTo(
-  //           context,
-  //           CreateInvoiceView(),
-  //         );
-  //       },
-  //       elevation: 10,
-  //       child: const Icon(Icons.add),
-  //     ),
-  //   );
-  // }
-
-  // /// AppBar
-  // AppBar _buildAppBar(BuildContext context) {
-  //   return AppBar(
-  //     title: TextBuilder(
-  //       AppLocalizations.of(context)!.invoises.toLowerCase(),
-  //       isHeader: true,
-  //       color: Colors.white,
-  //     ),
-  //     foregroundColor: Colors.white,
-  //     actions: [
-  //       IconButton(
-  //           onPressed: () {},
-  //           icon: const Icon(
-  //             Icons.add_box,
-  //           ))
-  //     ],
-  //   );
-  // }
-
-  // /// Body
-  // Widget _buildBody() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(10.0),
-  //     child: Column(
-  //       children: [
-  //         CustomTextFormField(
-  //           labelText: AppLocalizations.of(context)!.search,
-  //           hintText: AppLocalizations.of(context)!.search_with_id_code_barcode,
-  //           suffixIcon: Icons.search,
-  //           controller: searchController,
-  //           prefixIcon: Icons.qr_code_rounded,
-  //           backgroundOfTextFeild: Colors.white,
-  //           onChange: (v) {
-  //             searchController.text = v;
-  //             searchForInvoices = invoices
-  //                 .where((invoice) =>
-  //                     invoice.custInvname!.toLowerCase().startsWith(v) ||
-  //                     invoice.invNo!.toString().startsWith(v))
-  //                 .toList();
-  //             setState(() {});
-  //           },
-  //         ),
-  //         // InvoiceWidget(),
-  //         Flexible(
-  //           child: Container(
-  //             padding: const EdgeInsets.symmetric(vertical: 10),
-  //             decoration: BoxDecoration(
-  //               color: AppColors.whiteColor,
-  //               borderRadius: BorderRadius.circular(16),
-  //             ),
-  //             child: ListView(
-  //               // itemCount: searchController.text.isEmpty
-  //               //     ? invoices.length
-  //               //     : searchForInvoices.length,
-  //               // itemBuilder: (context, index) {
-  //               //   return InvoiceWidget(
-  //               //     invoiceModel: searchController.text.isEmpty
-  //               //         ? invoices[index]
-  //               //         : searchForInvoices[index],
-  //               //   );
-  //               // },
-  //               children: [
-  //                 ...invoices
-  //                     .map(
-  //                       (invoice) => InvoiceWidget(invoiceModel: invoice),
-  //                     )
-  //                     .toList(),
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

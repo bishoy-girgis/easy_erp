@@ -15,7 +15,8 @@ class PrintInvoiceModel extends Equatable {
           ?.map((e) => InvoiceModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       invoicedtls: (json['invoicedtls'] as List<dynamic>?)
-          ?.map((e) => ItemModel.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ItemModel.fromJsonToPrintInvoiceWithItems(
+              e as Map<String, dynamic>))
           .toList(),
     );
   }

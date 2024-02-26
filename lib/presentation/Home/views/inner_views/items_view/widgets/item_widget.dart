@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +15,12 @@ class ItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = Utils(context: context).screenSize;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       padding: const EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.blueGrey,
+          color: AppColors.primaryColorBlue,
           boxShadow: const [
             BoxShadow(
               color: Colors.black45,
@@ -32,7 +33,7 @@ class ItemWidget extends StatelessWidget {
         Expanded(
           flex: 3,
           child: Card(
-            color: Colors.white,
+            color: AppColors.whiteColor,
             child: Image.asset(
               AppImages.logo,
               width: size.width * .25,
@@ -40,7 +41,7 @@ class ItemWidget extends StatelessWidget {
             ),
           ),
         ),
-        const GapW(w: 1),
+        const GapW(w: 2),
         Expanded(
           flex: 4,
           child: Column(
@@ -49,13 +50,22 @@ class ItemWidget extends StatelessWidget {
             children: [
               TextBuilder(
                 item.itmname ?? item.itmename ?? "none",
-                color: Colors.white,
-                fontSize: 22,
-                isHeader: true,
+                color: AppColors.whiteColor,
+                fontSize: 20,
               ),
-              TextBuilder(
-                item.itmcode ?? "00",
-                color: Colors.white,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextBuilder(
+                    item.itmcode ?? "00",
+                    color: AppColors.whiteColor,
+                  ),
+                  GapW(w: 1),
+                  Icon(
+                    Icons.perm_device_information_rounded,
+                    color: AppColors.whiteColor,
+                  ),
+                ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

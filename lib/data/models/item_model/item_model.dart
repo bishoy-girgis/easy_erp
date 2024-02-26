@@ -53,6 +53,9 @@ class ItemModel extends HiveObject {
 
   factory ItemModel.fromJson(Map<String, dynamic> json) =>
       _$ItemModelFromJson(json);
+  factory ItemModel.fromJsonToPrintInvoiceWithItems(
+          Map<String, dynamic> json) =>
+      _$ItemModelFromJsonToPrintInvoiceWithItems(json);
   Map<String, dynamic> toJson() => _$ItemModelToJson(this);
 
   @override

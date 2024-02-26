@@ -92,24 +92,25 @@ class InvoiceCubit extends Cubit<InvoiceState> {
 
   // PrintInvoiceModel printInvoiceModel;
   getInvoiceDataAndItems(context, {required String invNo}) async {
-    emit(InvoiceInitial());
+    // emit(InvoiceInitial());
 
     emit(GetInvoiceDataLoading());
     var result = await invoiceRepo.getInvoiceDataAndItems(invNo: invNo);
     result.fold(
       (l) {
-        emit(InvoiceInitial());
+        // emit(InvoiceInitial());
         emit(GetInvoiceDataFailure(l.errorMessage));
       },
       (r) {
-        emit(InvoiceInitial());
+        // emit(InvoiceInitial());
 
         PrintInvoiceModel printInvoiceModel = r;
-        debugPrint(printInvoiceModel.invoicedtls.toString());
+        debugPrint('❤️🐸❤️🐸❤️❤️${printInvoiceModel.invoicedtls.toString()}');
+        debugPrint('❤️🐸❤️🐸❤️❤️$invNo');
         emit(GetInvoiceDataSuccess(r));
         generateAndPrintArabicPdf(context,
             invNo: invNo,
-            custName: r.invoicehead![0].custInvname ?? 'Cash',
+            custName: r.invoicehead?[0].custInvname ?? 'Cash',
             finalValue: r.invoicehead![0].finalValue!,
             netvalue: r.invoicehead![0].netvalue!,
             taxAdd: r.invoicehead![0].taxAdd!,
