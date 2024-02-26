@@ -1,5 +1,4 @@
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:easy_erp/data/cubits/customer_cubit/customer_cubit.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
+import '../../../../../cubits/customer_cubit/customer_cubit.dart';
 import 'pick_date_widget.dart';
 import 'sellect_cash_or_postpon_section.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -195,71 +195,7 @@ class _SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
                 SharedPref.get(key: "custID"),
               );
             },
-            // selectedItem: itemSelected,
           ),
-          // child: TextFieldSearch(
-          //   decoration: InputDecoration(
-          //     alignLabelWithHint: true,
-          //     contentPadding:
-          //         const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-          //     floatingLabelBehavior: FloatingLabelBehavior.never,
-          //     floatingLabelStyle: TextStyle(
-          //       color: widget.focusedBorderColor,
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //     filled: true,
-          //     fillColor: widget.backgroundOfTextFeild,
-          //     border: const OutlineInputBorder(
-          //         // borderSide: BorderSide(width: 3, color: Colors.yellowAccent),
-          //         borderRadius: BorderRadius.all(Radius.circular(16))),
-          //     enabledBorder: OutlineInputBorder(
-          //         borderSide:
-          //             BorderSide(width: 2, color: widget.notFocusedBorderColor),
-          //         borderRadius: const BorderRadius.all(Radius.circular(16))),
-          //     focusedBorder: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(16.0),
-          //       borderSide:
-          //           BorderSide(color: widget.focusedBorderColor, width: 2),
-          //     ),
-          //     label: TextBuilder(
-          //       widget.labelText,
-          //       isHeader: widget.isLabelBold,
-          //       // textAlign: TextAlign.center,
-          //     ),
-          //     hintText: widget.hintText,
-          //     prefixIcon: widget.prefixIcon == null
-          //         ? null
-          //         : IconButton(
-          //             onPressed: widget.prefixPressed,
-          //             icon: Icon(
-          //               widget.prefixIcon,
-          //               color: widget.prefixIconColor,
-          //             ),
-          //           ),
-          //     suffixIcon: widget.suffixIcon == null
-          //         ? null
-          //         : IconButton(
-          //             onPressed: widget.suffixPressed,
-          //             icon: Icon(
-          //               widget.suffixIcon,
-          //               color: widget.suffixColor,
-          //             ),
-          //           ),
-          //   ),
-          //   initialList:
-          //       customersNames.length == 0 ? ["No Customers"] : customersNames,
-          //   label: widget.labelText,
-          //   textStyle: TextStyle(
-          //     fontFamily: "Cairo",
-          //     fontSize: widget.contentSize.sp,
-          //     fontWeight:
-          //         widget.isContentBold ? FontWeight.bold : FontWeight.normal,
-          //   ),
-          //   controller: myController,
-          //   getSelectedValue: (v) {
-          //     print(v);
-          //   },
-          // ),
         );
       },
     );

@@ -7,7 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/group_model/group_model.dart';
+import '../../../data/models/group_model/group_model.dart';
 
 part 'customer_state.dart';
 

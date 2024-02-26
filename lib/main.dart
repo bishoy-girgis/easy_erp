@@ -1,9 +1,6 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/bloc_observer.dart';
 import 'package:easy_erp/core/helper/locator.dart';
-import 'package:easy_erp/data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
-import 'package:easy_erp/data/cubits/item_cubit/item_cubit.dart';
-import 'package:easy_erp/data/cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/models/printerModel/printer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
@@ -23,14 +20,17 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'core/helper/app_routing.dart';
-import 'data/cubits/customer_cubit/customer_cubit.dart';
-import 'data/cubits/invoice_cubit/cubit/invoice_cubit.dart';
 import 'data/models/item_model/item_model.dart';
 import 'data/models/user/user_model.dart';
 import 'data/providers/localization/localization_provider.dart';
 import 'data/repositories/invoice_repository/invoice_repo_imp.dart';
 import 'data/repositories/payment_type_repository/payment_type_repo_implementation.dart';
 import 'data/services/local/shared_pref.dart';
+import 'presentation/cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import 'presentation/cubits/customer_cubit/customer_cubit.dart';
+import 'presentation/cubits/invoice_cubit/cubit/invoice_cubit.dart';
+import 'presentation/cubits/item_cubit/item_cubit.dart';
+import 'presentation/cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
 // import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {

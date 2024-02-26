@@ -11,10 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/helper/global_methods.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
-import '../../../../../data/cubits/invoice_cubit/cubit/invoice_cubit.dart';
-import '../../../../../data/cubits/item_cubit/item_cubit.dart';
 import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../cubits/invoice_cubit/cubit/invoice_cubit.dart';
+import '../../../../cubits/item_cubit/item_cubit.dart';
 
 class InvoicesView extends StatefulWidget {
   InvoicesView({Key? key}) : super(key: key);

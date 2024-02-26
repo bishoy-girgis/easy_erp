@@ -9,7 +9,7 @@ import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../../data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import '../../../../../cubits/addItem_cubit/cubit/add_item_cubit.dart';
 
 class SelectedItem extends StatelessWidget {
   const SelectedItem({
