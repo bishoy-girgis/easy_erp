@@ -1,3 +1,4 @@
+import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/helper/app_images.dart';
@@ -6,9 +7,8 @@ import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 
 class ItemWidget extends StatelessWidget {
-  const ItemWidget({
-    super.key,
-  });
+  const ItemWidget({super.key, required this.item});
+  final ItemModel item;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class ItemWidget extends StatelessWidget {
           ]),
       child: Row(children: [
         Expanded(
-          flex: 5,
+          flex: 3,
           child: Card(
             color: Colors.white,
             child: Image.asset(
@@ -41,31 +41,31 @@ class ItemWidget extends StatelessWidget {
           ),
         ),
         const GapW(w: 1),
-        const Expanded(
+        Expanded(
           flex: 4,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextBuilder(
-                "1.5",
+                item.itmname ?? item.itmename ?? "none",
                 color: Colors.white,
                 fontSize: 22,
                 isHeader: true,
               ),
               TextBuilder(
-                "LED",
+                item.itmcode ?? "00",
                 color: Colors.white,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextBuilder(
-                    "0.17",
+                    item.salesprice != null ? item.salesprice.toString() : "00",
                     color: Colors.white,
                   ),
                   TextBuilder(
-                    "Type",
+                    item.unitname ?? "none",
                     color: Colors.white,
                   ),
                 ],

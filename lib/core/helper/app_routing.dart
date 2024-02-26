@@ -52,7 +52,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kItems,
-        builder: (context, state) => const ItemsView(),
+        builder: (context, state) => ItemsView(),
       ),
       GoRoute(
         path: kInvoices,
