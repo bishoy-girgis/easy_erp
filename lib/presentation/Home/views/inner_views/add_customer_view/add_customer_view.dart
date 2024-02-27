@@ -19,16 +19,24 @@ import 'widgets/select_group_section.dart';
 
 class AddCustomerView extends StatelessWidget {
   AddCustomerView({super.key});
-  final TextEditingController _custNameArController = TextEditingController();
-  final TextEditingController _custNameEnController = TextEditingController();
-  final TextEditingController _faxController = TextEditingController();
-  final TextEditingController _mobileNumberController = TextEditingController();
-  final TextEditingController _managerNameArController =
-      TextEditingController();
-  final TextEditingController _managerNameEnController =
-      TextEditingController();
-  final TextEditingController _addressEnController = TextEditingController();
-  final TextEditingController _addressArController = TextEditingController();
+  TextEditingController custNameArController = TextEditingController();
+  // final TextEditingController? _custNameEnController = TextEditingController();
+  // final TextEditingController? _faxController = TextEditingController();
+  // final TextEditingController? _mobileNumberController =
+  //     TextEditingController();
+  // final TextEditingController? _managerNameArController =
+  //     TextEditingController();
+  // final TextEditingController? _managerNameEnController =
+  //     TextEditingController();
+  // final TextEditingController? _addressEnController = TextEditingController();
+  //nal TextEditingController? _addressArController = TextEditingController();
+  String? custNameEnController;
+  String? faxController;
+  String? mobileNumberController;
+  String? managerNameArController;
+  String? managerNameEnController;
+  String? addressEnController;
+  String? addressArController;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -62,6 +70,8 @@ class AddCustomerView extends StatelessWidget {
               context: context,
               router: AppRouters.kCustomers,
             );
+            print(
+                "${state.addCustomerResponseModel.customercode} ::::::::::::::::::::::::::::");
             SharedPref.remove(key: 'custCategoryId');
           } else if (state is AddCustomerFailure) {
             GlobalMethods.buildFlutterToast(
@@ -89,9 +99,9 @@ class AddCustomerView extends StatelessWidget {
                         CustomTextFormField(
                           labelText:
                               AppLocalizations.of(context)!.customer_name_ar,
-                          controller: _custNameArController,
                           onChange: (value) {
-                            _custNameArController.text = value;
+                            custNameArController.text = value;
+                            print(custNameArController.text);
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -104,104 +114,104 @@ class AddCustomerView extends StatelessWidget {
                         CustomTextFormField(
                           labelText:
                               AppLocalizations.of(context)!.customer_name_en,
-                          controller: _custNameEnController,
+                          //controller: _custNameEnController,
                           onChange: (value) {
-                            _custNameEnController.text = value;
+                            custNameEnController = value;
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppLocalizations.of(context)!
-                                  .please_enter_customer_name;
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return AppLocalizations.of(context)!
+                          //         .please_enter_customer_name;
+                          //   }
+                          //   return null;
+                          // },
                         ),
                         CustomTextFormField(
                           labelText: AppLocalizations.of(context)!.fax,
-                          controller: _faxController,
+                          //controller: _faxController,
                           onChange: (value) {
-                            _faxController.text = value;
+                            faxController = value;
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppLocalizations.of(context)!
-                                  .please_enter_fax;
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return AppLocalizations.of(context)!
+                          //         .please_enter_fax;
+                          //   }
+                          //   return null;
+                          // },
                         ),
                         CustomTextFormField(
                           labelText:
                               AppLocalizations.of(context)!.mobile_number,
-                          controller: _mobileNumberController,
+                          //controller: _mobileNumberController,
                           onChange: (value) {
-                            _mobileNumberController.text = value;
+                            mobileNumberController = value;
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppLocalizations.of(context)!
-                                  .please_enter_mobile_number;
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return AppLocalizations.of(context)!
+                          //         .please_enter_mobile_number;
+                          //   }
+                          //   return null;
+                          // },
                         ),
                         CustomTextFormField(
                           labelText: AppLocalizations.of(context)!.address_ar,
-                          controller: _addressArController,
+                          //controller: _addressArController,
                           onChange: (value) {
-                            _addressArController.text = value;
+                            addressArController = value;
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppLocalizations.of(context)!
-                                  .please_enter_address;
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return AppLocalizations.of(context)!
+                          //         .please_enter_address;
+                          //   }
+                          //   return null;
+                          // },
                         ),
                         CustomTextFormField(
                           labelText: AppLocalizations.of(context)!.address_en,
-                          controller: _addressEnController,
+                          //controller: _addressEnController,
                           onChange: (value) {
-                            _addressEnController.text = value;
+                            addressEnController = value;
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppLocalizations.of(context)!
-                                  .please_enter_address;
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return AppLocalizations.of(context)!
+                          //         .please_enter_address;
+                          //   }
+                          //   return null;
+                          // },
                         ),
                         CustomTextFormField(
                           labelText:
                               AppLocalizations.of(context)!.manager_name_ar,
-                          controller: _managerNameArController,
+                          //controller: _managerNameArController,
                           onChange: (value) {
-                            _managerNameArController.text = value;
+                            managerNameArController = value;
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppLocalizations.of(context)!
-                                  .please_enter_manager_name;
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return AppLocalizations.of(context)!
+                          //         .please_enter_manager_name;
+                          //   }
+                          //   return null;
+                          // },
                         ),
                         CustomTextFormField(
                           labelText:
                               AppLocalizations.of(context)!.manager_name_en,
-                          controller: _managerNameEnController,
+                          //controller: _managerNameEnController,
                           onChange: (value) {
-                            _managerNameEnController.text = value;
+                            managerNameEnController = value;
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppLocalizations.of(context)!
-                                  .please_enter_manager_name;
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return AppLocalizations.of(context)!
+                          //         .please_enter_manager_name;
+                          //   }
+                          //   return null;
+                          // },
                         ),
                         const GapH(h: 1),
                         const ChooseGroup()
@@ -215,20 +225,28 @@ class AddCustomerView extends StatelessWidget {
                       width: double.infinity,
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          var customer = await context
-                              .read<CustomerCubit>()
-                              .addCustomer(
-                                custNameAr: _custNameArController.text,
-                                custNameEn: _custNameEnController.text,
-                                fax: _faxController.text,
-                                mobileNumber: _mobileNumberController.text,
-                                addressAr: _addressArController.text,
-                                addressEn: _addressEnController.text,
-                                mangNameAr: _managerNameArController.text,
-                                mangNameEn: _managerNameEnController.text,
-                                groupID: SharedPref.get(key: 'custCategoryId'),
-                              );
-                          FocusScope.of(context).unfocus();
+                          if (SharedPref.get(key: 'custCategoryId') != null) {
+                            var customer =
+                                await context.read<CustomerCubit>().addCustomer(
+                                      custNameAr: custNameArController.text,
+                                      custNameEn: custNameEnController,
+                                      fax: faxController,
+                                      mobileNumber: mobileNumberController,
+                                      addressAr: addressArController,
+                                      addressEn: addressEnController,
+                                      mangNameAr: managerNameArController,
+                                      mangNameEn: managerNameEnController,
+                                      groupID:
+                                          SharedPref.get(key: 'custCategoryId'),
+                                    );
+                            FocusScope.of(context).unfocus();
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("please choose group"),
+                              ),
+                            );
+                          }
                         }
                       },
                       // backgroundColor: AppColors.whiteColor,

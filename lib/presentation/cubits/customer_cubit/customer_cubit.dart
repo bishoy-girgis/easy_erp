@@ -46,25 +46,25 @@ class CustomerCubit extends Cubit<CustomerState> {
 
   addCustomer({
     required String custNameAr,
-    required String custNameEn,
-    required String fax,
-    required String mobileNumber,
-    required String addressAr,
-    required String addressEn,
-    required String mangNameAr,
-    required String mangNameEn,
+    String? custNameEn,
+    String? fax,
+    String? mobileNumber,
+    String? addressAr,
+    String? addressEn,
+    String? mangNameAr,
+    String? mangNameEn,
     required int groupID,
   }) async {
     emit(AddCustomerLoading());
     var result = await customerRepo.addCustomer(
       custNameAr: custNameAr,
-      custNameEn: custNameEn,
-      fax: fax,
-      mobileNumber: mobileNumber,
-      addressAr: addressAr,
-      addressEn: addressEn,
-      mangNameAr: mangNameAr,
-      mangNameEn: mangNameEn,
+      custNameEn: custNameEn ?? "N/A",
+      fax: fax ?? "N/A",
+      mobileNumber: mobileNumber ?? "N/A",
+      addressAr: addressAr ?? "N/A",
+      addressEn: addressEn ?? "N/A",
+      mangNameAr: mangNameAr ?? "N/A",
+      mangNameEn: mangNameEn ?? "N/A",
       groupID: groupID,
     );
     result.fold(
@@ -77,6 +77,7 @@ class CustomerCubit extends Cubit<CustomerState> {
           addCustomerResponseModel: addCustomerResponseModel,
         ),
       );
+      print(" HHHHWEEEEEYYYYYYYYYYYYYYYY $custNameAr");
       getCustomers();
       return r;
     });

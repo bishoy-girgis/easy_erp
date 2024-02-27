@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final double? suffixIconSize;
+  final double? prefixIconSize;
   final TextEditingController? controller;
   final String labelText;
   final String? hintText;
@@ -48,6 +50,8 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.prefixIconColor = AppColors.primaryColorBlue,
     this.validator,
+    this.suffixIconSize,
+    this.prefixIconSize,
     this.suffixIcon,
     this.suffixColor = AppColors.primaryColorBlue,
     this.suffixPressed,
@@ -115,6 +119,7 @@ class CustomTextFormField extends StatelessWidget {
                   icon: Icon(
                     prefixIcon,
                     color: prefixIconColor,
+                    size: prefixIconSize,
                   ),
                 ),
           suffixIcon: suffixIcon == null
@@ -124,6 +129,7 @@ class CustomTextFormField extends StatelessWidget {
                   icon: Icon(
                     suffixIcon,
                     color: suffixColor,
+                    size: suffixIconSize,
                   ),
                 ),
         ),

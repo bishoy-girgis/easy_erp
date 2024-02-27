@@ -15,8 +15,18 @@ import '../../../../cubits/customer_cubit/customer_cubit.dart';
 import '../items_view/widgets/item_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CustomerView extends StatelessWidget {
-  const CustomerView({super.key});
+class CustomerView extends StatefulWidget {
+  CustomerView({super.key});
+
+  @override
+  State<CustomerView> createState() => _CustomerViewState();
+}
+
+class _CustomerViewState extends State<CustomerView> {
+  // List<CustomerModel> customers = [];
+  List<CustomerModel> searchForCustomers = [];
+
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,19 +55,31 @@ class CustomerView extends StatelessWidget {
         child: Column(
           children: [
             CustomTextFormField(
-              labelText: "Search",
+              labelText: AppLocalizations.of(context)!.search,
               hintText: "Search with Customer name",
               suffixIcon: Icons.search,
-              suffixColor: Colors.blueGrey,
+              controller: searchController,
               backgroundOfTextFeild: Colors.white,
-              suffixPressed: () {},
+              onChange: (v) {
+                searchController.text = v;
+                searchForCustomers = CustomerCubit.get(context)
+                    .customers
+                    .where((customer) =>
+                        customer.custname!.toLowerCase().startsWith(v) ||
+                        customer.custename!.toLowerCase().startsWith(v) ||
+                        customer.custcode!.toString().startsWith(v))
+                    .toList();
+                setState(() {});
+              },
             ),
             const GapH(h: 1),
             BlocConsumer<CustomerCubit, CustomerState>(
-              listener: (context, state) {},
+              listener: (context, state) {
+                if (state is GetCustomerSuccessState) {}
+              },
               builder: (context, state) {
-                var customers = CustomerCubit.get(context).customers;
-                if (customers.isNotEmpty) {
+                // customers = CustomerCubit.get(context).customers;
+                if (CustomerCubit.get(context).customers.isNotEmpty) {
                   return Expanded(
                       child: Container(
                     decoration: BoxDecoration(
@@ -68,10 +90,14 @@ class CustomerView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                           vertical: 10,
                         ),
-                        itemCount: customers.length,
+                        itemCount: searchForCustomers.isNotEmpty
+                            ? searchForCustomers.length
+                            : CustomerCubit.get(context).customers.length,
                         itemBuilder: (context, index) {
                           return CustomerWidget(
-                            customerModel: customers[index],
+                            customerModel: searchForCustomers.isNotEmpty
+                                ? searchForCustomers[index]
+                                : CustomerCubit.get(context).customers[index],
                           );
                         }),
                   ));

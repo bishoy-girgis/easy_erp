@@ -1,7 +1,9 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/helper/global_methods.dart';
@@ -71,7 +73,7 @@ class AddItemWidget extends StatelessWidget {
                       : "",
                   isHeader: true,
                   textAlign: TextAlign.center,
-                  fontSize: 20,
+                  fontSize: 17,
                   maxLines: 2,
                 ),
                 Row(
@@ -81,21 +83,26 @@ class AddItemWidget extends StatelessWidget {
                       itemModel.itmcode.toString(),
                       fontSize: 14,
                     ),
-                    TextBuilder(itemModel.unitname!),
+                    TextBuilder(
+                      itemModel.unitname!,
+                      fontSize: 14,
+                    ),
                   ],
                 ),
-                TextBuilder(
-                  AppLocalizations.of(context)!.price,
-                  isHeader: true,
-                  fontSize: 16,
-                ),
+                // TextBuilder(
+                //   AppLocalizations.of(context)!.price,
+                //   isHeader: true,
+                //   fontSize: 16,
+                // ),
                 Flexible(
                   child: CustomTextFormField(
+                    suffixIcon: FontAwesomeIcons.moneyBillWave,
+                    suffixIconSize: 22.sp,
                     labelText: priceController.text,
                     keyboardType: TextInputType.number,
                     // backgroundOfTextFeild: Colors.blueGrey,
                     centerContent: true,
-                    contentSize: 20,
+                    contentSize: 18,
                     controller: priceController,
                     isContentBold: true,
                     onChange: (value) {
@@ -106,7 +113,7 @@ class AddItemWidget extends StatelessWidget {
                 TextBuilder(
                   AppLocalizations.of(context)!.quantity,
                   isHeader: true,
-                  fontSize: 16,
+                  fontSize: 15,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -189,20 +196,23 @@ class AddItemWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextBuilder(
-                      AppLocalizations.of(context)!.discount,
-                      isHeader: true,
-                      fontSize: 16,
-                    ),
-                    TextBuilder(
-                      itemModel.discP.toString() + "%",
-                      isHeader: true,
-                      fontSize: 16,
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextBuilder(
+                        AppLocalizations.of(context)!.discount,
+                        isHeader: true,
+                        fontSize: 14,
+                      ),
+                      TextBuilder(
+                        itemModel.discP.toString() + "%",
+                        isHeader: true,
+                        fontSize: 14,
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -228,7 +238,7 @@ class AddItemWidget extends StatelessWidget {
                     TextBuilder(
                       AppLocalizations.of(context)!.add,
                       isHeader: true,
-                      fontSize: 16,
+                      fontSize: 14,
                     ),
                   ],
                 ),

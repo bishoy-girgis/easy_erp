@@ -10,13 +10,13 @@ abstract class CustomerRepo {
   Future<Either<Failures, List<GroupModel>>> getGroups();
   Future<Either<Failures, AddCustomerResponseModel>> addCustomer({
     required String custNameAr,
-    required String custNameEn,
-    required String fax,
-    required String mobileNumber,
-    required String addressAr,
-    required String addressEn,
-    required String mangNameAr,
-    required String mangNameEn,
+    String custNameEn,
+    String fax,
+    String mobileNumber,
+    String addressAr,
+    String addressEn,
+    String mangNameAr,
+    String mangNameEn,
     required int groupID,
   });
 }

@@ -131,7 +131,7 @@ class _AddItemsViewState extends State<AddItemsView> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10.w,
                   mainAxisSpacing: 10.h,
-                  childAspectRatio: 0.38.r,
+                  childAspectRatio: 0.47.r,
                 ),
                 itemCount: searchController.text.isEmpty
                     ? items.length

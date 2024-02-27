@@ -88,12 +88,12 @@ class SelectedItem extends StatelessWidget {
                             children: [
                               TextBuilder(
                                 AppLocalizations.of(context)!.price,
-                                fontSize: 14,
+                                fontSize: 13,
                                 color: Colors.black,
                               ),
                               TextBuilder(
-                                AppLocalizations.of(context)!.total,
-                                fontSize: 14,
+                                AppLocalizations.of(context)!.total_icludes_tax,
+                                fontSize: 11,
                                 color: Colors.black,
                               ),
                             ],

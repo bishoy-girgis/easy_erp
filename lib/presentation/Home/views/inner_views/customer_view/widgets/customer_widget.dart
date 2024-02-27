@@ -52,22 +52,21 @@ class CustomerWidget extends StatelessWidget {
               ],
             ),
           ),
-          (customerModel.custname != null &&
-                      customerModel.custname!.isNotEmpty) ||
-                  (customerModel.custename != null &&
-                      customerModel.custename!.isNotEmpty)
-              ? Row(
-                  children: [
-                    const Icon(
-                      Icons.person,
-                    ),
-                    const GapW(w: 2),
-                    customerModel.custname == null
-                        ? TextBuilder(customerModel.custename!)
-                        : TextBuilder(customerModel.custname!),
-                  ],
-                )
-              : Container(),
+          // (customerModel.custname != null &&
+          //             customerModel.custname!.isNotEmpty) ||
+          //         (customerModel.custename != null &&
+          //             customerModel.custename!.isNotEmpty)
+          // ?
+          Row(
+            children: [
+              const Icon(
+                Icons.person,
+              ),
+              const GapW(w: 2),
+              TextBuilder(customerModel.custename ?? "7777"),
+            ],
+          ),
+          // : Container(),
           customerModel.fax != null || customerModel.fax!.isNotEmpty
               ? Row(
                   children: [

@@ -71,13 +71,13 @@ class CustomerRepoImplementation extends CustomerRepo {
   @override
   Future<Either<Failures, AddCustomerResponseModel>> addCustomer({
     required String custNameAr,
-    required String custNameEn,
-    required String fax,
-    required String mobileNumber,
-    required String addressAr,
-    required String addressEn,
-    required String mangNameAr,
-    required String mangNameEn,
+    String? custNameEn,
+    String? fax,
+    String? mobileNumber,
+    String? addressAr,
+    String? addressEn,
+    String? mangNameAr,
+    String? mangNameEn,
     required int groupID,
   }) async {
     try {
@@ -86,13 +86,13 @@ class CustomerRepoImplementation extends CustomerRepo {
         endPoint: AppConstants.POST_CUSTOMER,
         queryParameters: {
           'custname': custNameAr,
-          'custename': custNameEn,
-          'fax': fax,
-          'Mobile': mobileNumber,
-          'address': addressAr,
-          'eaddress': addressEn,
-          'manager': mangNameAr,
-          'emanager': mangNameEn,
+          'custename': custNameEn ?? "N/A",
+          'fax': fax ?? "N/A",
+          'Mobile': mobileNumber ?? "N/A",
+          'address': addressAr ?? "N/A",
+          'eaddress': addressEn ?? "N/A",
+          'manager': mangNameAr ?? "N/A",
+          'emanager': mangNameEn ?? "N/A",
           'CustCategoryID': groupID,
         },
       );

@@ -29,13 +29,13 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bloc: ^8.1.2
-  # build_runner: ^2.4.8
+  build_runner: ^2.4.8
   cupertino_icons: ^1.0.2
-  # dart_mappable: ^4.2.0
   dartz: ^0.10.1
   dio: ^5.4.0
   dropdown_search: ^5.0.6
   equatable: ^2.0.5
+  eva_icons_flutter: ^3.1.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
@@ -43,6 +43,7 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.9.0
   fluttertoast: ^8.2.4
+  font_awesome_flutter: ^10.7.0
   get_it: ^7.6.7
   go_router: ^13.1.0
   hive: ^2.2.3
@@ -54,18 +55,16 @@ dependencies:
   pdf: any
   printing: any
   provider: ^6.1.1
+  qr_flutter: ^4.1.0
   shared_preferences: ^2.2.2
   textfield_search: ^0.10.0
-  build_runner: ^2.4.8
-  qr_flutter: ^4.1.0
 
 dev_dependencies:
-  # dart_mappable_builder: ^4.2.0
   flutter_lints: ^2.0.0
-  json_serializable: any
   flutter_test:
     sdk: flutter
   hive_generator: ^2.0.1
+  json_serializable: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

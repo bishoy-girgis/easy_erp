@@ -29,9 +29,9 @@ Future<void> generateAndPrintArabicPdf(
     var length = items.length;
     for (int i = 0; i < length; i++) {
       finalItems.add([
-        items[i].salesprice.toString(),
+        (items[i].salesprice! * items[i].quantity).toString(),
         items[i].discP.toString(),
-        items[i].cost.toString(),
+        items[i].salesprice.toString(),
         items[i].quantity.toString(),
         items[i].itmname ?? items[i].itmename ?? "None",
       ]);

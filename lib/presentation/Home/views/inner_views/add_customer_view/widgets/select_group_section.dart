@@ -15,7 +15,6 @@ class ChooseGroup extends StatelessWidget {
   const ChooseGroup({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CustomerCubit, CustomerState>(
@@ -24,6 +23,13 @@ class ChooseGroup extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: DropdownSearch<GroupModel>(
+              validator: (value) {
+                if (value == null) {
+                  print("pleaseee enteeeeeeeeeeerrrrr");
+                  return "please enter group name";
+                }
+                return null;
+              },
               items: state.groups,
               itemAsString: (GroupModel group) =>
                   group.custCategoryName ?? group.custCategoryEname ?? 'None',

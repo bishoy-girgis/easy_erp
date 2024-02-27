@@ -125,6 +125,5 @@ Map<String, dynamic> _$ItemModelToJson(ItemModel instance) => <String, dynamic>{
       "price": instance.salesprice,
       "Value": (instance.salesprice! * instance.quantity),
       "DiscVal": instance.salesprice! * (instance.discP! / 100),
-      "NetValue": instance.salesprice! -
-          (instance.salesprice! * (instance.discP! / 100)),
+      "NetValue": (instance.salesprice! * instance.quantity) - instance.discP!,
     };
