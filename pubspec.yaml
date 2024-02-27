@@ -57,8 +57,9 @@ dependencies:
   provider: ^6.1.1
   qr_flutter: ^4.1.0
   shared_preferences: ^2.2.2
+  syncfusion_flutter_barcodes: ^24.2.8
   textfield_search: ^0.10.0
-
+  syncfusion_flutter_pdf: ^24.2.8
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
