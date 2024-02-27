@@ -18,26 +18,25 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var l = AppLocalizations.of(context)!;
-    final List<CategoryWidget> categories =
-        CategoriesViewModel.getCategories(context);
-    var name = AppConstants.userName;
+
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(10.0),
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(child: HomeViewHeaderCard(name: name)),
-            const SliverToBoxAdapter(child: const GapH(h: 3)),
+            SliverToBoxAdapter(
+                child: HomeViewHeaderCard(name: AppConstants.userName)),
+            const SliverToBoxAdapter(child: GapH(h: 3)),
             SliverGrid.builder(
-              itemCount: categories.length,
+              itemCount: CategoriesViewModel.getCategories(context).length,
               itemBuilder: (context, index) {
-                return categories[index];
+                return CategoriesViewModel.getCategories(context)[index];
               },
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 20.w,
-                childAspectRatio: 1.9.r,
+                childAspectRatio: 1.34.r,
                 mainAxisSpacing: 20.h,
               ),
             ),

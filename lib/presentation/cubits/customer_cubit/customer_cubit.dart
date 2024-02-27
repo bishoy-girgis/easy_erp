@@ -77,6 +77,7 @@ class CustomerCubit extends Cubit<CustomerState> {
           addCustomerResponseModel: addCustomerResponseModel,
         ),
       );
+      getCustomers();
       return r;
     });
   }

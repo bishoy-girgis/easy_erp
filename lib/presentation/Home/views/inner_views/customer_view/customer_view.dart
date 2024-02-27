@@ -11,7 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/helper/app_colors.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
-import '../../../../../data/cubits/customer_cubit/customer_cubit.dart';
+import '../../../../cubits/customer_cubit/customer_cubit.dart';
 import '../items_view/widgets/item_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -56,7 +56,8 @@ class CustomerView extends StatelessWidget {
             BlocConsumer<CustomerCubit, CustomerState>(
               listener: (context, state) {},
               builder: (context, state) {
-                if (state is GetCustomerSuccessState) {
+                var customers = CustomerCubit.get(context).customers;
+                if (customers.isNotEmpty) {
                   return Expanded(
                       child: Container(
                     decoration: BoxDecoration(
@@ -67,24 +68,58 @@ class CustomerView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                           vertical: 10,
                         ),
-                        itemCount: state.customers.length,
+                        itemCount: customers.length,
                         itemBuilder: (context, index) {
                           return CustomerWidget(
-                            customerModel: state.customers[index],
+                            customerModel: customers[index],
                           );
                         }),
                   ));
-                } else if (state is GetCustomerFailureState) {
-                  debugPrint(state.error);
-                  return Center(
-                    child: TextBuilder(
-                        "Sorry there is error , we will work on it "),
-                  );
                 } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return const Center(
+                    child: Text(
+                      "No Customers Found",
+                      style: TextStyle(
+                        color: AppColors.primaryColorBlue,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   );
                 }
+                // if (state is GetCustomerSuccessState) {
+                //   return Expanded(
+                //       child: Container(
+                //     decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(16),
+                //       color: AppColors.whiteColor,
+                //     ),
+                //     child: ListView.builder(
+                //         padding: const EdgeInsets.symmetric(
+                //           vertical: 10,
+                //         ),
+                //         itemCount: state.customers.length,
+                //         itemBuilder: (context, index) {
+                //           return CustomerWidget(
+                //             customerModel: state.customers[index],
+                //           );
+                //         }),
+                //   ));
+                // } else if (state is GetCustomerFailureState) {
+                //   debugPrint(state.error);
+                //   return const Center(
+                //     child: TextBuilder(
+                //         "Sorry there is error , we will work on it "),
+                //   );
+                // } else if (state is GetCustomerLoadingState) {
+                //   return const Center(
+                //     child: CircularProgressIndicator(),
+                //   );
+                // } else {
+                //   return const Center(
+                //     child: TextBuilder("SMTH WEN WRONG"),
+                //   );
+                // }
               },
             )
           ],

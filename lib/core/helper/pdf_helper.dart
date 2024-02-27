@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/presentation/cubits/invoice_cubit/cubit/invoice_cubit.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -9,9 +10,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
-
-import '../../data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../../data/models/item_model/item_model.dart';
+import '../../presentation/cubits/addItem_cubit/cubit/add_item_cubit.dart';
 
 Future<void> generateAndPrintArabicPdf(
   context, {
@@ -38,6 +39,7 @@ Future<void> generateAndPrintArabicPdf(
     return finalItems;
   }
 
+// final qrCodeImage = await generateQrCode();
   var itemsList = getItems();
   final Document pdf = Document();
   var arabicFont = Font.ttf(
@@ -119,6 +121,7 @@ Future<void> generateAndPrintArabicPdf(
   debugPrint("itemBox is clear now 🐸🐸");
   Hive.box<ItemModel>('itemBox').clear();
   getIt.get<AddItemCubit>().addedItems.clear();
+  getIt.get<InvoiceCubit>().removeInvoiceData();
 }
 
 Directionality buildPDFText(String text, {double fontSize = 18}) {

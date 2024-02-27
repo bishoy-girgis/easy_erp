@@ -125,6 +125,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   removeInvoiceData() {
     SharedPref.remove(key: 'invoiceDate');
     SharedPref.remove(key: 'custID');
+    SharedPref.remove(key: 'custName');
     SharedPref.remove(key: 'invoiceTypeID');
     SharedPref.remove(key: 'amountBeforeTex');
     SharedPref.remove(key: 'taxAmount');

@@ -14,8 +14,8 @@ import '../../../../../core/helper/app_colors.dart';
 import '../../../../../core/helper/locator.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
-import '../../../../../data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
-import '../../../../../data/cubits/item_cubit/item_cubit.dart';
+import '../../../../cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import '../../../../cubits/item_cubit/item_cubit.dart';
 import 'widgets/item_widget.dart';
 
 class AddItemsView extends StatefulWidget {

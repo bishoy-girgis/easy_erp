@@ -81,25 +81,41 @@ class CreateInvoiceView extends StatelessWidget {
     //   }
     //   return "nine";
     // }
-    checkCustomer() {
+    bool checkCustomer() {
       if ((SharedPref.get(key: 'custID') == null ||
               SharedPref.get(key: 'custID') == 0) &&
           (SharedPref.get(key: 'invoiceTypeID')) == 2) {
-        GlobalMethods.navigatePOP(context);
         GlobalMethods.buildFlutterToast(
             message:
                 'Cant save invoice  please choose your invoice type and Customer to Save',
             state: ToastStates.ERROR);
+        return false;
       }
+      return true;
     }
 
-    checkItems() {
+    bool checkItems() {
       if (getIt.get<AddItemCubit>().addedItems.isEmpty) {
-        GlobalMethods.navigatePOP(context);
         GlobalMethods.buildFlutterToast(
             message: 'Cant save invoice please choose your Items to Save',
             state: ToastStates.ERROR);
+        return false;
       }
+
+      return true;
+    }
+
+    bool checkPaymentTypes() {
+      if (SharedPref.get(key: 'paymentTypeID') == null ||
+          SharedPref.get(key: 'paymentTypeID') == 0) {
+        GlobalMethods.buildFlutterToast(
+          message: 'Check your Payment Type',
+          state: ToastStates.ERROR,
+        );
+        return false;
+      }
+
+      return true;
     }
 
     return AppBar(
@@ -143,22 +159,25 @@ class CreateInvoiceView extends StatelessWidget {
           builder: (context, state) {
             return IconButton(
               onPressed: () async {
-                GlobalMethods.showAlertAdressDialog(
-                  context,
-                  title: "Save Invoice ?",
-                  titleButton1: "Save",
-                  titleButton2: "No",
-                  onPressedButton1: () async {
-                    checkCustomer();
-                    checkItems();
-                    await BlocProvider.of<InvoiceCubit>(context).saveInvoice(
-                      items: getIt.get<AddItemCubit>().addedItems,
-                    );
-                  },
-                  onPressedButton2: () {
-                    GlobalMethods.navigatePOP(context);
-                  },
-                );
+                // checkCustomer();
+                // checkItems();
+                checkCustomer() && checkItems() && checkPaymentTypes()
+                    ? GlobalMethods.showAlertAdressDialog(
+                        context,
+                        title: "Save Invoice ?",
+                        titleButton1: "Save",
+                        titleButton2: "No",
+                        onPressedButton1: () async {
+                          await BlocProvider.of<InvoiceCubit>(context)
+                              .saveInvoice(
+                            items: getIt.get<AddItemCubit>().addedItems,
+                          );
+                        },
+                        onPressedButton2: () {
+                          GlobalMethods.navigatePOP(context);
+                        },
+                      )
+                    : Container();
               },
               icon: Icon(
                 Icons.done,

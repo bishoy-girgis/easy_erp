@@ -1,8 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
-import 'package:easy_erp/data/cubits/addItem_cubit/cubit/add_item_cubit.dart';
-import 'package:easy_erp/data/cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/models/payment_type_model/pay_ment_type_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
@@ -21,6 +19,8 @@ import '../../../../../../core/widgets/text_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../data/models/customer_model/customer_model.dart';
+import '../../../../../cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import '../../../../../cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
 
 class PricingSection extends StatelessWidget {
   PricingSection({
@@ -144,8 +144,8 @@ class PricingSection extends StatelessWidget {
   }
 }
 
-class ChoocePaymentType extends StatefulWidget {
-  const ChoocePaymentType({
+class ChoocePaymentType extends StatelessWidget {
+  ChoocePaymentType({
     super.key,
     required this.totalAmount,
     required this.payTypes,
@@ -153,93 +153,82 @@ class ChoocePaymentType extends StatefulWidget {
 
   final double totalAmount;
   final List<PaymentTypeModel> payTypes;
-  @override
-  State<ChoocePaymentType> createState() => _ChoocePaymentTypeState();
-}
 
-class _ChoocePaymentTypeState extends State<ChoocePaymentType> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   double price = 0;
   @override
   Widget build(BuildContext context) {
+    _controller.text = totalAmount.toString();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Flexible(
-          child: AbsorbPointer(
-            absorbing: price < widget.totalAmount,
-            child: DropdownSearch<PaymentTypeModel>(
-              items: widget.payTypes,
-              itemAsString: (PaymentTypeModel paymentTypeModel) =>
-                  paymentTypeModel.payname!,
-              popupProps: PopupProps.dialog(
-                itemBuilder: (context, item, isSelected) {
-                  return Container(
-                      padding: EdgeInsets.all(10),
-                      // alignment: Alignment.center,
-                      child: TextBuilder(
-                        item.payname!,
-                        textAlign: TextAlign.center,
-                        color: isSelected
-                            ? AppColors.secondColorOrange
-                            : AppColors.primaryColorBlue,
-                      ));
-                },
-              ),
-              dropdownButtonProps: DropdownButtonProps(
-                color: AppColors.primaryColorBlue,
-              ),
-
-              dropdownDecoratorProps: DropDownDecoratorProps(
-                textAlign: TextAlign.center,
-                baseStyle: TextStyle(
-                  fontFamily: 'Cairo',
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlignVertical: TextAlignVertical.center,
-                dropdownSearchDecoration: InputDecoration(
-                    label: TextBuilder(
-                      AppLocalizations.of(context)!.payment_types,
-                      fontSize: 14,
-                      maxLines: 2,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    )),
-              ),
-              onChanged: (PaymentTypeModel? data) {
-                print(data!.payid);
-                print(data.payname);
-                print(data.payename);
-
-                print(data.bankdtlId);
-
-                setState(() {
-                  SharedPref.set(key: "paymentTypeID", value: data.payid ?? 1);
-                  SharedPref.set(key: "bankdtlId", value: data.bankdtlId ?? 1);
-                });
-                print(
-                  SharedPref.get(key: "paymentTypeID"),
-                );
+          child: DropdownSearch<PaymentTypeModel>(
+            items: payTypes,
+            itemAsString: (PaymentTypeModel paymentTypeModel) =>
+                paymentTypeModel.payname!,
+            popupProps: PopupProps.dialog(
+              fit: FlexFit.loose, // << change this
+              itemBuilder: (context, item, isSelected) {
+                return Container(
+                    padding: EdgeInsets.all(10),
+                    // alignment: Alignment.center,
+                    child: TextBuilder(
+                      item.payname!,
+                      textAlign: TextAlign.center,
+                      color: isSelected
+                          ? AppColors.secondColorOrange
+                          : AppColors.primaryColorBlue,
+                    ));
               },
-              // selectedItem: itemSelected,
             ),
+            dropdownButtonProps: DropdownButtonProps(
+              color: AppColors.primaryColorBlue,
+            ),
+
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              textAlign: TextAlign.center,
+              baseStyle: TextStyle(
+                fontFamily: 'Cairo',
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlignVertical: TextAlignVertical.center,
+              dropdownSearchDecoration: InputDecoration(
+                  label: TextBuilder(
+                    AppLocalizations.of(context)!.payment_types,
+                    fontSize: 14,
+                    maxLines: 2,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  )),
+            ),
+            onChanged: (PaymentTypeModel? data) {
+              print(data!.payid);
+              print(data.payname);
+              print(data.payename);
+              print(data.bankdtlId);
+              SharedPref.set(key: "paymentTypeID", value: data.payid ?? 0);
+              SharedPref.set(key: "bankdtlId", value: data.bankdtlId ?? 1);
+              print(
+                SharedPref.get(key: "paymentTypeID"),
+              );
+            },
+            // selectedItem: itemSelected,
           ),
         ),
         GapW(w: 5),
         Flexible(
           child: CustomTextFormField(
             controller: _controller,
-            labelText: widget.totalAmount.toString(),
+            labelText: _controller.text,
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,9}')),
             ],
             onChange: (p0) {
-              setState(() {
-                _controller.text = p0;
-                price = p0 == "" || p0.isEmpty ? 0.0 : double.parse(p0);
-              });
+              _controller.text = p0;
+              price = p0 == "" || p0.isEmpty ? 0.0 : double.parse(p0);
             },
             keyboardType: TextInputType.numberWithOptions(decimal: true),
           ),

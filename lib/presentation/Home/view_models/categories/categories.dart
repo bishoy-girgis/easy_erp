@@ -10,10 +10,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/helper/locator.dart';
 
 class CategoriesViewModel {
-  // BuildContext context;
-  // CategoriesViewModel({
-  //   required this.context,
-  // });
   static List<CategoryWidget> getCategories(BuildContext context) {
     var l = AppLocalizations.of(context)!;
     return [
@@ -41,14 +37,6 @@ class CategoriesViewModel {
             GlobalMethods.goRouterNavigateTO(
               context: context,
               router: AppRouters.kInvoices,
-              // extraObject: [
-              //   InvoiceModel(
-              //     items: getIt.get<AddItemCubit>().addedItems,
-              //   ),
-              //   InvoiceModel(
-              //     items: getIt.get<AddItemCubit>().addedItems,
-              //   ),
-              // ],
             );
           }),
       CategoryWidget(

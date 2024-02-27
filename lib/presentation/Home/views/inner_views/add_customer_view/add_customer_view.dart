@@ -6,7 +6,6 @@ import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
-import 'package:easy_erp/data/cubits/customer_cubit/customer_cubit.dart';
 import 'package:easy_erp/data/models/group_model/group_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +14,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../data/models/payment_type_model/pay_ment_type_model.dart';
 import '../../../../../data/services/local/shared_pref.dart';
+import '../../../../cubits/customer_cubit/customer_cubit.dart';
 import 'widgets/select_group_section.dart';
 
 class AddCustomerView extends StatelessWidget {
@@ -38,12 +38,12 @@ class AddCustomerView extends StatelessWidget {
           AppLocalizations.of(context)!.add_customer,
           color: AppColors.whiteColor,
         ),
-        leading: IconButton(
-            onPressed: () {
-              CustomerCubit.get(context).getCustomers();
-              GlobalMethods.navigatePOP(context);
-            },
-            icon: Icon(Icons.arrow_back)),
+        // leading: IconButton(
+        //     onPressed: () {
+        //       CustomerCubit.get(context).getCustomers();
+        //       GlobalMethods.navigatePOP(context);
+        //     },
+        //     icon: Icon(Icons.arrow_back)),
       ),
       body: buildBody(),
     );
@@ -58,7 +58,6 @@ class AddCustomerView extends StatelessWidget {
               message: state.addCustomerResponseModel.massage!,
               state: ToastStates.SUCCESS,
             );
-            CustomerCubit.get(context).getCustomers();
             GlobalMethods.goRouterNavigateTOAndReplacement(
               context: context,
               router: AppRouters.kCustomers,
