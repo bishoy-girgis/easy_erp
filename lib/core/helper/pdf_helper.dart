@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/cubits/invoice_cubit/cubit/invoice_cubit.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -17,6 +19,8 @@ import '../../presentation/cubits/addItem_cubit/cubit/add_item_cubit.dart';
 Future<void> generateAndPrintArabicPdf(
   context, {
   invNo,
+  required String invoDate,
+  required String invoTime,
   required double netvalue,
   required double taxAdd,
   required double finalValue,
@@ -56,19 +60,33 @@ Future<void> generateAndPrintArabicPdf(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               buildPDFText(invoiceType, fontSize: 20),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                buildPDFText(invNo.toString()),
-                buildPDFText('رقم الفاتورة : '),
+              SizedBox(height: 10.h),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                BarcodeWidget(
+                    data: "Invoicment Number  : $invNo ",
+                    barcode: Barcode.qrCode(),
+                    height: 75.h,
+                    width: 90.w),
+                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    buildPDFText(invNo.toString()),
+                    buildPDFText('رقم الفاتورة : '),
+                  ]),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    buildPDFText(custName),
+                    buildPDFText('العميل : '),
+                  ]),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    buildPDFText(invoDate),
+                    buildPDFText('التاريخ : '),
+                  ]),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    buildPDFText(invoTime),
+                    buildPDFText('الوقت : '),
+                  ]),
+                ]),
               ]),
-              // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              //   buildPDFText(SharedPref.get(key: 'invoiceDate')),
-              //   buildPDFText('التاريخ : '),
-              // ]),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                buildPDFText(custName),
-                buildPDFText('العميل : '),
-              ]),
-              buildPDFText('الأصناف : '),
+              SizedBox(height: 18.h),
               Container(
                 margin: const EdgeInsets.fromLTRB(22, 5, 22, 5),
                 child: Directionality(

@@ -108,12 +108,25 @@ class InvoiceCubit extends Cubit<InvoiceState> {
         debugPrint('❤️🐸❤️🐸❤️❤️${printInvoiceModel.invoicedtls.toString()}');
         debugPrint('❤️🐸❤️🐸❤️❤️$invNo');
         emit(GetInvoiceDataSuccess(r));
+        DateTime dateTime =
+            DateTime.parse(r.invoicehead![0].invdate ?? "1/1/2001");
+        String formattedDate =
+            "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+        String? formattedTime;
+        if (r.invoicehead![0].invtime == null) {
+          DateTime parsedTime = DateFormat('HH:mm')
+              .parse("${r.invoicehead![0].invtime ?? "00:00:00"} ");
+          formattedTime = DateFormat('h:mm a').format(parsedTime);
+        }
+
         generateAndPrintArabicPdf(context,
             invNo: invNo,
+            invoTime: formattedTime ?? "0000",
             custName: r.invoicehead?[0].custInvname ?? 'Cash',
             finalValue: r.invoicehead![0].finalValue!,
             netvalue: r.invoicehead![0].netvalue!,
             taxAdd: r.invoicehead![0].taxAdd!,
+            invoDate: formattedDate,
             invoiceType: "نسخة من فاتورة ضريبية مبسطة",
             items: r.invoicedtls ?? []);
         getInvoices();

@@ -43,7 +43,7 @@ class SelectedItem extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.blueGrey,
+                        color: AppColors.secondColorOrange,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(

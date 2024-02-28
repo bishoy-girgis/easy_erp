@@ -31,6 +31,7 @@ final class ItemRemovedSuccess extends AddItemState {
 
 final class RemoveAllItemSuccess extends AddItemState {}
 
+final class ChangeQuantityState extends AddItemState {}
 // final class ItemFound extends AddItemState {}
 
 // final class ItemNotFound extends AddItemState {}

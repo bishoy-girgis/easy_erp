@@ -44,4 +44,9 @@ class AddItemCubit extends Cubit<AddItemState> {
     emit(AddItemAddedSuccess(addedItems));
     return addedItems;
   }
+
+  changeQuantity() {
+    emit(AddItemInitial());
+    emit(ChangeQuantityState());
+  }
 }

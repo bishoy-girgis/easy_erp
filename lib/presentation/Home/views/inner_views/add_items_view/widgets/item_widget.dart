@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/locator.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -135,6 +136,7 @@ class AddItemWidget extends StatelessWidget {
                               message: "You can't choose more than 4999 item",
                               state: ToastStates.WARNING);
                         }
+                        getIt.get<AddItemCubit>().changeQuantity();
                       },
                       icon: Icon(
                         Icons.arrow_circle_up_outlined,
@@ -169,6 +171,7 @@ class AddItemWidget extends StatelessWidget {
                             itemModel.quantity =
                                 int.parse(quantityController.text);
                           }
+                          getIt.get<AddItemCubit>().changeQuantity();
                         },
                       ),
                     ),
@@ -187,6 +190,7 @@ class AddItemWidget extends StatelessWidget {
                               message: "You can't choose less than 1 item",
                               state: ToastStates.WARNING);
                         }
+                        getIt.get<AddItemCubit>().changeQuantity();
                       },
                       icon: Icon(
                         Icons.arrow_circle_down_outlined,

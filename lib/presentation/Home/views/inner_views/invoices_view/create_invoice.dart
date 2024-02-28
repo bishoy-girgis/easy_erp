@@ -11,6 +11,7 @@ import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import '../../../../../core/helper/pdf_helper.dart';
 import '../../../../cubits/addItem_cubit/cubit/add_item_cubit.dart';
 import '../../../../cubits/invoice_cubit/cubit/invoice_cubit.dart';
@@ -119,6 +120,26 @@ class CreateInvoiceView extends StatelessWidget {
     }
 
     return AppBar(
+      leading: IconButton(
+          onPressed: () {
+            getIt.get<AddItemCubit>().addedItems.isNotEmpty
+                ? GlobalMethods.showAlertAdressDialog(
+                    context,
+                    title: "Are you sure to remove invoice ?",
+                    titleButton1: "yes",
+                    titleButton2: "No",
+                    onPressedButton1: () {
+                      GlobalMethods.goRouterNavigateTOAndReplacement(
+                          context: context, router: AppRouters.kInvoices);
+                      getIt.get<AddItemCubit>().addedItems.clear();
+                    },
+                    onPressedButton2: () {
+                      GlobalMethods.navigatePOP(context);
+                    },
+                  )
+                : GlobalMethods.navigatePOP(context);
+          },
+          icon: Icon(Icons.arrow_back)),
       title: TextBuilder(
         AppLocalizations.of(context)!.create_invoice,
         isHeader: true,
@@ -139,13 +160,17 @@ class CreateInvoiceView extends StatelessWidget {
               GlobalMethods.goRouterNavigateTOAndReplacement(
                   context: context, router: AppRouters.kInvoices);
               generateAndPrintArabicPdf(context,
+                  invoTime: SharedPref.get(key: 'invoiceTime') ??
+                      DateFormat('h:mm a').format(DateTime.now()),
                   invNo: state.sendInvoiceModel.invno,
                   netvalue: SharedPref.get(key: 'amountBeforeTex'),
                   taxAdd: SharedPref.get(key: 'taxAmount'),
                   finalValue: SharedPref.get(key: 'totalAmount'),
                   custName: SharedPref.get(key: 'custName') ?? 'cash',
+                  invoDate: SharedPref.get(key: 'invoiceDate') ??
+                      DateFormat('dd/MM/yyyy').format(DateTime.now()),
                   invoiceType: "فاتورة ضريبية مبسطة",
-                  items: itemBox.values.toList());
+                  items: getIt.get<AddItemCubit>().addedItems);
             } else if (state is InvoiceNotSave) {
               GlobalMethods.navigatePOP(context);
               GlobalMethods.buildFlutterToast(
