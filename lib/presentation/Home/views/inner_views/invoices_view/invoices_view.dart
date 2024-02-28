@@ -5,6 +5,7 @@ import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
+import 'package:easy_erp/presentation/cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +37,8 @@ class _InvoicesViewState extends State<InvoicesView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await GetItemCubit.get(context).getItems();
+          // await GetItemCubit.get(context).getItems();
+          await PaymentTypeCubit.get(context).getPaymentTypes();
           GlobalMethods.navigateTo(
             context,
             const CreateInvoiceView(),

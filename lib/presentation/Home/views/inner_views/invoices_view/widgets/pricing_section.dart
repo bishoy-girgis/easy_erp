@@ -4,6 +4,7 @@ import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/models/payment_type_model/pay_ment_type_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
+import 'package:easy_erp/presentation/cubits/item_cubit/item_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,24 +66,23 @@ class PricingSection extends StatelessWidget {
               children: [
                 CustomElevatedButton(
                   backgroundColor: Colors.white,
-                  borderColor: Colors.blueGrey,
+                  borderColor: AppColors.primaryColorBlue,
                   hasBorder: true,
                   borderWidth: 2,
                   title: TextBuilder(
                     AppLocalizations.of(context)!.select_items,
                     isHeader: true,
-                    color: Colors.black,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     GlobalMethods.goRouterNavigateTO(
                         context: context,
                         router: AppRouters.kAddItemsIntoInvoice);
+                    await GetItemCubit.get(context).getItems();
                   },
                 ),
                 const GapH(h: 1),
                 TextBuilder(
                   AppLocalizations.of(context)!.total_icludes_tax,
-                  color: Colors.black,
                 ),
                 const GapH(h: 1),
                 getIt.get<AddItemCubit>().addedItems.isEmpty

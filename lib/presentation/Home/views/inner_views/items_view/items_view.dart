@@ -31,84 +31,79 @@ class _ItemsViewState extends State<ItemsView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          GetItemCubit(itemRepo: getIt.get<ItemRepoImplementation>())
-            ..getItems(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: TextBuilder(
-            AppLocalizations.of(context)!.items.toLowerCase(),
-            color: AppColors.whiteColor,
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: TextBuilder(
+          AppLocalizations.of(context)!.items.toLowerCase(),
+          color: AppColors.whiteColor,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              CustomTextFormField(
-                labelText: AppLocalizations.of(context)!.search,
-                hintText:
-                    AppLocalizations.of(context)!.search_with_id_code_barcode,
-                controller: searchController,
-                suffixIcon: Icons.search,
-                backgroundOfTextFeild: Colors.white,
-                onChange: (v) {
-                  searchController.text = v;
-                  searchForItems = items
-                      .where(
-                        (item) =>
-                            item.itmname!.toLowerCase().startsWith(v) ||
-                            item.itmcode!.toLowerCase().startsWith(v) ||
-                            item.unitname!.toString().startsWith(v),
-                      )
-                      .toList();
-                  setState(() {});
-                },
-              ),
-              const GapH(h: 1),
-              BlocBuilder<GetItemCubit, GetItemState>(
-                builder: (context, state) {
-                  if (state is GetItemsSuccessState) {
-                    items = state.items;
-                    return Expanded(
-                        child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColors.whiteColor,
-                      ),
-                      child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10,
-                          ),
-                          itemCount: searchForItems.isNotEmpty
-                              ? searchForItems.length
-                              : state.items.length,
-                          itemBuilder: (context, index) {
-                            return ItemWidget(
-                              item: searchForItems.isNotEmpty
-                                  ? searchForItems[index]
-                                  : state.items[index],
-                            );
-                          }),
-                    ));
-                  } else if (state is GetItemsFailureState) {
-                    return Center(
-                      child: Text(state.error),
-                    );
-                  } else if (state is GetItemsLoadingState) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    return Center(
-                      child: Text(state.runtimeType.toString()),
-                    );
-                  }
-                },
-              )
-            ],
-          ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            CustomTextFormField(
+              labelText: AppLocalizations.of(context)!.search,
+              hintText:
+                  AppLocalizations.of(context)!.search_with_id_code_barcode,
+              controller: searchController,
+              suffixIcon: Icons.search,
+              backgroundOfTextFeild: Colors.white,
+              onChange: (v) {
+                searchController.text = v;
+                searchForItems = items
+                    .where(
+                      (item) =>
+                          item.itmname!.toLowerCase().startsWith(v) ||
+                          item.itmcode!.toLowerCase().startsWith(v) ||
+                          item.unitname!.toString().startsWith(v),
+                    )
+                    .toList();
+                setState(() {});
+              },
+            ),
+            const GapH(h: 1),
+            BlocBuilder<GetItemCubit, GetItemState>(
+              builder: (context, state) {
+                if (state is GetItemsSuccessState) {
+                  items = state.items;
+                  return Expanded(
+                      child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppColors.whiteColor,
+                    ),
+                    child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
+                        itemCount: searchForItems.isNotEmpty
+                            ? searchForItems.length
+                            : state.items.length,
+                        itemBuilder: (context, index) {
+                          return ItemWidget(
+                            item: searchForItems.isNotEmpty
+                                ? searchForItems[index]
+                                : state.items[index],
+                          );
+                        }),
+                  ));
+                } else if (state is GetItemsFailureState) {
+                  return Center(
+                    child: Text(state.error),
+                  );
+                } else if (state is GetItemsLoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return Center(
+                    child: Text(state.runtimeType.toString()),
+                  );
+                }
+              },
+            )
+          ],
         ),
       ),
     );
