@@ -109,7 +109,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
         debugPrint('❤️🐸❤️🐸❤️❤️$invNo');
         emit(GetInvoiceDataSuccess(r));
         DateTime dateTime =
-            DateTime.parse(r.invoicehead![0].invdate ?? "1/1/2001");
+            DateTime.parse(r.invoicehead?[0].invdate ?? "1/1/2000");
         String formattedDate =
             "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
         String? formattedTime;
