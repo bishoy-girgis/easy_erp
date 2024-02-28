@@ -106,6 +106,7 @@ class CreateInvoiceView extends StatelessWidget {
       return true;
     }
 
+// flutter
     bool checkPaymentTypes() {
       if (SharedPref.get(key: 'paymentTypeID') == null ||
           SharedPref.get(key: 'paymentTypeID') == 0) {
