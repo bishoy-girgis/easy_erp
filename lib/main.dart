@@ -87,24 +87,27 @@ class MyApp extends StatelessWidget {
             BlocProvider(
                 create: (context) => CustomerCubit(
                       customerRepo: getIt.get<CustomerRepoImplementation>(),
-                    )..getCustomers()),
+                    )),
+            BlocProvider(
+              create: (context) => GetItemCubit(
+                itemRepo: getIt.get<ItemRepoImplementation>(),
+              ),
+            ),
             BlocProvider(
               create: (context) =>
-                  GetItemCubit(itemRepo: getIt.get<ItemRepoImplementation>())
-                    ..getItems(),
+                  GetItemCubit(itemRepo: getIt.get<ItemRepoImplementation>()),
             ),
             BlocProvider(
               create: (context) => InvoiceCubit(
                 invoiceRepo: getIt.get<InvoiceRepoImplementation>(),
-              )..getInvoices(),
+              ),
             ),
             BlocProvider(
               create: (context) => getIt.get<AddItemCubit>(),
             ),
             BlocProvider(
                 create: (context) =>
-                    PaymentTypeCubit(getIt.get<PaymentTypeRepoImp>())
-                      ..getItems()),
+                    PaymentTypeCubit(getIt.get<PaymentTypeRepoImp>())),
           ],
           child: Builder(builder: (context) {
             var languagesProvider = Provider.of<LanguageProvider>(context);

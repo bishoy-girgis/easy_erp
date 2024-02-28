@@ -44,15 +44,6 @@ class _LoginViewState extends State<LoginView> {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          debugPrint("🎄🎄" + state.userModel.userName!);
-          debugPrint("🎄🎄" + state.userModel.accessToken!);
-          SharedPref.set(key: 'userName', value: state.userModel.userName);
-          SharedPref.set(
-              key: 'accessToken', value: state.userModel.accessToken);
-          SharedPref.set(key: 'whId', value: state.userModel.whId);
-          SharedPref.set(key: 'vat', value: state.userModel.vat);
-          SharedPref.set(key: 'ccid', value: state.userModel.ccId);
-          SharedPref.set(key: 'branchID', value: state.userModel.branchId);
           GlobalMethods.goRouterNavigateTOAndReplacement(
               context: context, router: AppRouters.kHome);
           GlobalMethods.buildFlutterToast(

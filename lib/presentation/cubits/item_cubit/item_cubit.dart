@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/repositories/item_repository/item_repo.dart';
 import 'package:equatable/equatable.dart';
@@ -14,7 +15,9 @@ class GetItemCubit extends Cubit<GetItemState> {
   List<ItemModel> items = [];
   getItems() async {
     emit(GetItemsLoadingState());
-    final result = await itemRepo.getItems();
+    final result = await itemRepo.getItems(
+      whId: AppConstants.whId,
+    );
     result.fold((error) {
       debugPrint("🎈🎈🎈🎈" + error.errorMessage);
       emit(GetItemsFailureState(error: error.errorMessage));

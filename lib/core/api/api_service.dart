@@ -16,12 +16,14 @@ class ApiService {
     Map<String, dynamic>? queryParameters,
     var body,
   }) async {
-    dio.options.headers['Authorization'] = 'Bearer ${AppConstants.accessToken}';
-    var response = await dio.get(
-      '$_baseUrl$endPoint',
-      queryParameters: queryParameters,
-      data: body,
-    );
+    var headers = {
+      'Authorization': 'Bearer ${AppConstants.accessToken}',
+    };
+    // dio.options.headers['Authorization'] = 'Bearer ${AppConstants.accessToken}';
+    var response = await dio.get('$_baseUrl$endPoint',
+        queryParameters: queryParameters,
+        data: body,
+        options: Options(headers: headers));
     return response.data;
   }
 

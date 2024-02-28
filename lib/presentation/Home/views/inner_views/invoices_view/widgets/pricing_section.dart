@@ -29,7 +29,9 @@ class PricingSection extends StatelessWidget {
   });
   final List<ItemModel> items;
   double totalAmount = 0.0;
-
+  //double totalbtob = 0.0;
+  double taxAmount = 0.0;
+  double amountBeforeTex = 0.0;
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -41,17 +43,24 @@ class PricingSection extends StatelessWidget {
         ),
         child: BlocBuilder<AddItemCubit, AddItemState>(
           builder: (context, state) {
-            for (int i = 0; i < items.length; i++) {
-              totalAmount += (items[i].salesprice! * items[i].quantity);
+            if (AppConstants.vatType == 2) {
+              for (int i = 0; i < items.length; i++) {
+                totalAmount += (items[i].salesprice! * items[i].quantity);
+              }
+              taxAmount =
+                  ((AppConstants.vat * totalAmount) / (100 + AppConstants.vat));
+              amountBeforeTex = totalAmount - taxAmount;
             }
-            double amountBeforeTex = totalAmount -
-                ((AppConstants.vat * totalAmount) / (100 + AppConstants.vat));
-            double taxAmount =
-                ((AppConstants.vat * totalAmount) / (100 + AppConstants.vat));
+            if (AppConstants.vatType == 1) {
+              for (int i = 0; i < items.length; i++) {
+                amountBeforeTex += (items[i].salesprice! * items[i].quantity);
+              }
+              taxAmount = amountBeforeTex * (AppConstants.vat / 100);
+              totalAmount = amountBeforeTex + taxAmount;
+            }
             SharedPref.set(key: 'totalAmount', value: totalAmount);
             SharedPref.set(key: 'amountBeforeTex', value: amountBeforeTex);
             SharedPref.set(key: 'taxAmount', value: taxAmount);
-
             return Column(
               children: [
                 CustomElevatedButton(

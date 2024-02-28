@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../../data/repositories/login_repository/login_Repo.dart';
+import '../../../../../data/services/local/shared_pref.dart';
 
 part 'login_state.dart';
 
@@ -20,7 +21,17 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginFailureState(error: error.errorMessage));
     }, (r) async {
       userModel = r;
+      SharedPref.set(key: 'accessToken', value: userModel.accessToken);
+      debugPrint("🎄🎄" + userModel.userName!);
+      debugPrint("🎄🎄" + userModel.accessToken!);
+      SharedPref.set(key: 'VATType', value: userModel.vatType);
+      SharedPref.set(key: 'userName', value: userModel.userName);
+      SharedPref.set(key: 'whId', value: userModel.whId);
+      SharedPref.set(key: 'vat', value: userModel.vat);
+      SharedPref.set(key: 'ccid', value: userModel.ccId);
+      SharedPref.set(key: 'branchID', value: userModel.branchId);
       emit(LoginSuccessState(userModel: r));
+
       return userModel;
     });
   }

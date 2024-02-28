@@ -9,6 +9,8 @@ class AppConstants {
   static final String userName = SharedPref.get(key: "userName");
   static final int branchID = SharedPref.get(key: "branchID");
   static final int ccid = SharedPref.get(key: "ccid");
+  static final int vatType = SharedPref.get(key: "VATType");
+
   static String baseUrl =
       SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
 
@@ -21,11 +23,10 @@ class AppConstants {
   static const String PRINT_INVOICE_WITH_ITEMS =
       "/api/Printinvoice/printinvoice";
 
-  static String GET_INVOICES =
-      "/api/Invoices/getinvoices?username=$userName&Branchid=$branchID";
+  static String GET_INVOICES = "/api/Invoices/getinvoices";
 
   ///Items
-  static String GET_ITEMS = "/api/Items/getitems?whid=$whId";
+  static String GET_ITEMS = "/api/Items/getitems";
   static const String GET_PAYMENT_TYPE = "/api/Payments/getpaymentstypes";
 
   ///Customers

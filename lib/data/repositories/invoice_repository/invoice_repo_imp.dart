@@ -80,8 +80,11 @@ class InvoiceRepoImplementation extends InvoiceRepo {
     try {
       debugPrint("DATA IN Customer REPO IMP ✨✨");
       var data = await apiService.get(
-        endPoint: AppConstants.GET_INVOICES,
-      );
+          endPoint: AppConstants.GET_INVOICES,
+          queryParameters: {
+            'Branchid': AppConstants.branchID,
+            'username': AppConstants.userName
+          });
 
       List<InvoiceModel> invoices = [];
       for (var customer in data) {

@@ -5,5 +5,5 @@ import '../../models/customer_model/customer_model.dart';
 import '../../models/item_model/item_model.dart';
 
 abstract class ItemRepo {
-  Future<Either<Failures, List<ItemModel>>> getItems();
+  Future<Either<Failures, List<ItemModel>>> getItems({required int whId});
 }

@@ -12,12 +12,12 @@ class ItemRepoImplementation extends ItemRepo {
   ItemRepoImplementation(this.apiService);
 
   @override
-  Future<Either<Failures, List<ItemModel>>> getItems() async {
+  Future<Either<Failures, List<ItemModel>>> getItems(
+      {required int whId}) async {
     try {
       print("DATA IN Customer REPO IMP ✨✨");
       var data = await apiService.get(
-        endPoint: AppConstants.GET_ITEMS,
-      );
+          endPoint: AppConstants.GET_ITEMS, queryParameters: {'whid': whId});
 
       List<ItemModel> items = [];
       for (var item in data) {

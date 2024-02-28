@@ -12,7 +12,7 @@ class PaymentTypeCubit extends Cubit<PaymentTypeState> {
   static PaymentTypeCubit get(context) => BlocProvider.of(context);
   final PaymentTypeRepo payTypeRepo;
   List<PaymentTypeModel> payModels = [];
-  getItems() async {
+  getPaymentTypes() async {
     emit(PaymentTypeLoading());
     final result = await payTypeRepo.getPaymentTypes();
     result.fold((error) {
