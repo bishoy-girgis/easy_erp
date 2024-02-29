@@ -16,7 +16,7 @@ class AppConstants {
 
   ///Authorization
   static const String LOGIN_AND_TOKEN = "/token";
-  static  String accessToken = SharedPref.get(key: "accessToken");
+  static  String accessToken = SharedPref.get(key: "accessToken") ?? "";
 
   ///Invoices
   static const String POST_INVOICE = "/api/Invsave/Post";
