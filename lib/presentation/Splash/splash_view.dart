@@ -59,7 +59,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
 
     Timer(const Duration(seconds: 3), () {
       setState(() {
-        String? accessToken = AppConstants.accessToken;
+        String accessToken = AppConstants.accessToken;
         if (accessToken.isNotEmpty) {
           GlobalMethods.goRouterNavigateTOAndReplacement(
               context: context, router: AppRouters.kHome);

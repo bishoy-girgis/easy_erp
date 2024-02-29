@@ -26,7 +26,7 @@ class HomeView extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-                child: HomeViewHeaderCard(name: AppConstants.userName)),
+                child: HomeViewHeaderCard(name: "${AppConstants.userName}")),
             const SliverToBoxAdapter(child: GapH(h: 3)),
             SliverGrid.builder(
               itemCount: CategoriesViewModel.getCategories(context).length,

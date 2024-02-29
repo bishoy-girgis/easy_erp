@@ -23,7 +23,7 @@ class WelcomeMrSection extends StatelessWidget {
           isHeader: true,
         ),
         TextBuilder(
-          name,
+          "$name",
           isHeader: true,
           color: Colors.blueGrey,
           fontSize: 20.sp,

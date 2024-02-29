@@ -27,8 +27,8 @@ class _HomeViewHeaderCardState extends State<HomeViewHeaderCard> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: AppColors.whiteColor,
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
               color: Colors.black45,
               spreadRadius: 1,
               blurRadius: 10,
@@ -52,7 +52,7 @@ class _HomeViewHeaderCardState extends State<HomeViewHeaderCard> {
                   // color: AppColors.primaryColorBlue,
                 ),
                 WelcomeMrSection(
-                  name: widget.name,
+                  name: "${widget.name}",
                 )
               ],
             ),

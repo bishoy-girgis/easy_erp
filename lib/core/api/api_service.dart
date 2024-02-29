@@ -6,6 +6,7 @@ import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:http/http.dart' as http;
 
 import '../../data/models/item_model/item_model.dart';
+import '../../data/services/local/shared_pref.dart';
 
 class ApiService {
   final _baseUrl = AppConstants.baseUrl;
@@ -18,6 +19,7 @@ class ApiService {
   }) async {
     var headers = {
       'Authorization': 'Bearer ${AppConstants.accessToken}',
+     // 'Authorization': 'Bearer ${SharedPref.get(key:"accessToken")}',
     };
     // dio.options.headers['Authorization'] = 'Bearer ${AppConstants.accessToken}';
     var response = await dio.get('$_baseUrl$endPoint',

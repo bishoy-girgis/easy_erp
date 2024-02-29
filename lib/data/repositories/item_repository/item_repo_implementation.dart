@@ -17,7 +17,7 @@ class ItemRepoImplementation extends ItemRepo {
     try {
       print("DATA IN Customer REPO IMP ✨✨");
       var data = await apiService.get(
-          endPoint: AppConstants.GET_ITEMS, queryParameters: {'whid': whId});
+          endPoint: AppConstants.GET_ITEMS, queryParameters: {'whid': 1});
 
       List<ItemModel> items = [];
       for (var item in data) {

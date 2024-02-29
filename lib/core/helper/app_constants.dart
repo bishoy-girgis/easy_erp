@@ -3,20 +3,20 @@ import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class AppConstants {
-  static final int whId = SharedPref.get(key: "whId");
-  static final int printerFormat = SharedPref.get(key: 'printerFormat');
-  static final double vat = SharedPref.get(key: "vat");
-  static final String userName = SharedPref.get(key: "userName");
-  static final int branchID = SharedPref.get(key: "branchID");
-  static final int ccid = SharedPref.get(key: "ccid");
-  static final int vatType = SharedPref.get(key: "VATType");
+  static  int whId = SharedPref.get(key: "whId");
+  static  int printerFormat = SharedPref.get(key: 'printerFormat');
+  static  double vat = SharedPref.get(key: "vat");
+  static  String userName = SharedPref.get(key: "userName");
+  static  int branchID = SharedPref.get(key: "branchID");
+  static  int ccid = SharedPref.get(key: "ccid");
+  static  int vatType = SharedPref.get(key: "VATType");
 
   static String baseUrl =
       SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
 
   ///Authorization
   static const String LOGIN_AND_TOKEN = "/token";
-  static final String accessToken = SharedPref.get(key: "accessToken") ?? "";
+  static  String accessToken = SharedPref.get(key: "accessToken");
 
   ///Invoices
   static const String POST_INVOICE = "/api/Invsave/Post";
@@ -33,4 +33,15 @@ class AppConstants {
   static const String GET_CUSTOMERS = "/api/Values/getcustomers";
   static const String GET_CUSTOMER_GROUPS = "/api/Groups/getgroups";
   static const String POST_CUSTOMER = "/api/custsave/Post";
+
+  static void updateValues() {
+    whId = SharedPref.get(key: "whId");
+    vat = SharedPref.get(key: "vat");
+    userName = SharedPref.get(key: "userName");
+    branchID = SharedPref.get(key: "branchID");
+    ccid = SharedPref.get(key: "ccid");
+    vatType = SharedPref.get(key: "VATType");
+    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
+    accessToken = SharedPref.get(key: "accessToken");
+  }
 }

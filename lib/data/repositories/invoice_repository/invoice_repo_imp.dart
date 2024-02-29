@@ -93,6 +93,7 @@ class InvoiceRepoImplementation extends InvoiceRepo {
       return right(invoices);
     } catch (e) {
       if (e is DioException) {
+        debugPrint("${e.response}  ,,,,,,,,,,,,,, ${e.message} ,,,,,,,,,,,,,,,  ${e.error}");
         return left(ServerError.fromDioError(e));
       } else {
         return left(

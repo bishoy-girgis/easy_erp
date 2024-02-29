@@ -55,7 +55,7 @@ class SelectedItem extends StatelessWidget {
                             textAlign: TextAlign.center,
                             fontSize: 14,
                           ),
-                          GapH(h: 5.4),
+                          const GapH(h: 5.4),
                           TextBuilder(
                             itemModel.unitname!,
                             color: Colors.white,
@@ -82,7 +82,7 @@ class SelectedItem extends StatelessWidget {
                             isHeader: true,
                             color: AppColors.blackColor,
                           ),
-                          GapH(h: 1),
+                          const GapH(h: 1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -92,13 +92,13 @@ class SelectedItem extends StatelessWidget {
                                 color: Colors.black,
                               ),
                               TextBuilder(
-                                AppLocalizations.of(context)!.total_icludes_tax,
+                                AppLocalizations.of(context)!.totalItemsInvoice,
                                 fontSize: 11,
                                 color: Colors.black,
                               ),
                             ],
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 2,
                             color: Colors.blueGrey,
                           ),
