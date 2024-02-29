@@ -16,9 +16,7 @@ class GetItemCubit extends Cubit<GetItemState> {
   getItems() async {
     emit(GetItemsLoadingState());
     print("[[[[[[[[[[]]]]]]]]]]]]");
-    final result = await itemRepo.getItems(
-      whId: AppConstants.whId,
-    );
+    final result = await itemRepo.getItems();
     print("[[[[[[[[[[222]]]]]]]]]]]]");
     result.fold((error) {
       debugPrint("🎈🎈🎈🎈" + error.errorMessage);

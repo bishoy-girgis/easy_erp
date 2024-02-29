@@ -21,11 +21,11 @@ class CategoriesViewModel {
         icon: Icons.category_rounded,
         categoryName: l.items,
         onTap: () async {
-          await GetItemCubit.get(context).getItems();
           GlobalMethods.goRouterNavigateTO(
             context: context,
             router: AppRouters.kItems,
           );
+          await GetItemCubit.get(context).getItems();
         },
       ),
       CategoryWidget(
