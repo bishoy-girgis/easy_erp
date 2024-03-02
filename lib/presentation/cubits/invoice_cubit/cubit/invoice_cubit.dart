@@ -63,10 +63,12 @@ class InvoiceCubit extends Cubit<InvoiceState> {
         emit(InvoiceNotSave(l.errorMessage));
       }, (r) {
         print(r);
-        var sendInvoiceModel = r; // This line should be within the null check
+        SendInvoiceModel sendInvoiceModel =
+            r; // This line should be within the null check
         print(sendInvoiceModel);
         print('DATACUBI(TTTT)' + r.toString());
         emit(InvoiceSavedSuccess(r));
+        return r;
       });
     } else {
       emit(InvoiceNotSave("Invoice data is null"));
@@ -98,6 +100,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
     var result = await invoiceRepo.getInvoiceDataAndItems(invNo: invNo);
     result.fold(
       (l) {
+        debugPrint('❤️🐸❤️🐸❤️❤️❤️🐸❤️🐸❤️❤️');
         // emit(InvoiceInitial());
         emit(GetInvoiceDataFailure(l.errorMessage));
       },
@@ -120,6 +123,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
         }
 
         generateAndPrintArabicPdf(context,
+            qrData: r.invoicehead![0].qr ?? "empty",
             invNo: invNo,
             invoTime: formattedTime ?? "0000",
             custName: r.invoicehead?[0].custInvname ?? 'Cash',

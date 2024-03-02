@@ -19,6 +19,7 @@ import '../../presentation/cubits/addItem_cubit/cubit/add_item_cubit.dart';
 Future<void> generateAndPrintArabicPdf(
   context, {
   invNo,
+  required String qrData,
   required String invoDate,
   required String invoTime,
   required double netvalue,
@@ -63,7 +64,7 @@ Future<void> generateAndPrintArabicPdf(
               SizedBox(height: 10.h),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 BarcodeWidget(
-                    data: "Invoicment Number  : $invNo ",
+                    data: "$qrData",
                     barcode: Barcode.qrCode(),
                     height: 75.h,
                     width: 90.w),

@@ -32,10 +32,14 @@ class LoginCubit extends Cubit<LoginState> {
       SharedPref.set(key: 'ccid', value: userModel.ccId);
       SharedPref.set(key: 'branchID', value: userModel.branchId);
       AppConstants.updateValues();
-      print("{{{{{{{{{{{{{{{{{{{{{ ${userModel.accessToken} }}}}}}}}}}}}}}}}}}}}}");
-      print("-NAMMMEEE--------------------${userModel.userName!}--------------------");
-      print("-NAMMMEEE22222--------------------${AppConstants.userName}--------------------");
-      print("-TOKKEENN--------------------${AppConstants.accessToken}--------------------");
+      print(
+          "{{{{{{{{{{{{{{{{{{{{{ ${userModel.accessToken} }}}}}}}}}}}}}}}}}}}}}");
+      print(
+          "-NAMMMEEE--------------------${userModel.userName!}--------------------");
+      print(
+          "-NAMMMEEE22222--------------------${AppConstants.userName}--------------------");
+      print(
+          "-TOKKEENN--------------------${AppConstants.accessToken}--------------------");
 
       emit(LoginSuccessState(userModel: r));
 

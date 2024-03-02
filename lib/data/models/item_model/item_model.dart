@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 part 'item_model.g.dart';
 
 ///this line to enable Hive for this class

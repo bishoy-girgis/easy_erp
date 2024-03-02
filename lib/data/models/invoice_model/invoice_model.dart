@@ -10,6 +10,9 @@ class InvoiceModel extends Equatable {
   final double? netvalue;
   final double? taxAdd;
   final double? finalValue;
+  final String? CompanyName;
+  final String? vat;
+  final String? qr;
 
   const InvoiceModel({
     this.invid,
@@ -21,6 +24,9 @@ class InvoiceModel extends Equatable {
     this.netvalue,
     this.taxAdd,
     this.finalValue,
+    this.CompanyName,
+    this.vat,
+    this.qr,
   });
 
   factory InvoiceModel.fromJson(Map<String, dynamic> json) => InvoiceModel(
@@ -33,6 +39,9 @@ class InvoiceModel extends Equatable {
         netvalue: json['netvalue'] as double?,
         taxAdd: json['TaxAdd'] as double?,
         finalValue: json['FinalValue'] as double?,
+        CompanyName: json['companyname'] as String?,
+        vat: json['VAT'] as String?,
+        qr: json['QR'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -45,6 +54,9 @@ class InvoiceModel extends Equatable {
         'netvalue': netvalue,
         'TaxAdd': taxAdd,
         'FinalValue': finalValue,
+        'companyname': CompanyName,
+        'VAT': vat,
+        'QR': qr,
       };
 
   @override
@@ -59,6 +71,9 @@ class InvoiceModel extends Equatable {
       netvalue,
       taxAdd,
       finalValue,
+      CompanyName,
+      vat,
+      qr,
     ];
   }
 }

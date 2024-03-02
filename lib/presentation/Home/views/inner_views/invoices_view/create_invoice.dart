@@ -163,6 +163,7 @@ class CreateInvoiceView extends StatelessWidget {
               GlobalMethods.goRouterNavigateTOAndReplacement(
                   context: context, router: AppRouters.kInvoices);
               generateAndPrintArabicPdf(context,
+                  qrData: state.sendInvoiceModel.qr ?? "",
                   invoTime: SharedPref.get(key: 'invoiceTime') ??
                       DateFormat('h:mm a').format(DateTime.now()),
                   invNo: state.sendInvoiceModel.invno,

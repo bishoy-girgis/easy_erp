@@ -93,7 +93,8 @@ class InvoiceRepoImplementation extends InvoiceRepo {
       return right(invoices);
     } catch (e) {
       if (e is DioException) {
-        debugPrint("${e.response}  ,,,,,,,,,,,,,, ${e.message} ,,,,,,,,,,,,,,,  ${e.error}");
+        debugPrint(
+            "${e.response}  ,,,,,,,,,,,,,, ${e.message} ,,,,,,,,,,,,,,,  ${e.error}");
         return left(ServerError.fromDioError(e));
       } else {
         return left(
@@ -121,6 +122,8 @@ class InvoiceRepoImplementation extends InvoiceRepo {
       return right(printInvoiceModel);
     } catch (e) {
       if (e is DioException) {
+        debugPrint(
+            "${e.response},,,,,,,,,,,,,, ${e.message},,,,,,,,,,,,,,,  ${e.error}");
         return left(ServerError.fromDioError(e));
       } else {
         return left(
