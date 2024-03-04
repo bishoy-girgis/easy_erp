@@ -9,8 +9,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import '../../../../../data/models/item_model/item_model.dart';
-import '../../../../../data/models/send_invoice_model/send_invoice_model.dart';
+import '../../../../data/models/item_model/item_model.dart';
+import '../../../../data/models/send_invoice_model/send_invoice_model.dart';
 
 part 'invoice_state.dart';
 
@@ -21,6 +21,9 @@ class InvoiceCubit extends Cubit<InvoiceState> {
 
   InvoiceRepo invoiceRepo;
   static InvoiceCubit get(context) => BlocProvider.of(context);
+
+  List<ItemModel> itemsInvoice = [];
+
   saveInvoice({
     required List<ItemModel> items,
   }) async {
@@ -130,6 +133,29 @@ class InvoiceCubit extends Cubit<InvoiceState> {
             items: r.invoicedtls ?? []);
         getInvoices();
         return printInvoiceModel;
+      },
+    );
+  }
+
+  getInvoiceItems(context, {required String invNo}) async {
+    // emit(InvoiceInitial());
+
+    emit(GetInvoiceDataLoading());
+    var result = await invoiceRepo.getInvoiceDataAndItems(invNo: invNo);
+    result.fold(
+      (l) {
+        debugPrint('❤️');
+        emit(GetInvoiceDataFailure(l.errorMessage));
+      },
+      (r) {
+        PrintInvoiceModel printInvoiceModel = r;
+        debugPrint('🐸🐸🐸🐸${printInvoiceModel.invoicedtls.toString()}');
+        debugPrint('🐸🐸$invNo');
+        emit(GetInvoiceDataSuccess(r));
+        itemsInvoice = r.invoicedtls ?? [];
+        print("🐸🐸 ${itemsInvoice.length}");
+        getInvoices();
+        return itemsInvoice;
       },
     );
   }

@@ -7,7 +7,8 @@ import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widge
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/pricing_section.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/selected_items_to_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/widgets/return_main_data.dart';
-import 'package:easy_erp/presentation/cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import 'package:easy_erp/presentation/cubits/addItem_cubit/add_item_cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -31,28 +32,28 @@ class CreateReturnView extends StatelessWidget {
         const SliverToBoxAdapter(
           child: GapH(h: 1),
         ),
-        // BlocBuilder<AddItemCubit, AddItemState>(
-        //   builder: (context, state) {
-        //     return PricingSection(
-        //         items: BlocProvider.of<AddItemCubit>(context).addedItems);
-        //   },
-        // ),
-        // const SliverToBoxAdapter(child: GapH(h: 1)),
-        // BlocBuilder<AddItemCubit, AddItemState>(builder: (context, state) {
-        //   debugPrint(state.runtimeType.toString());
-        //   return getIt.get<AddItemCubit>().addedItems.isEmpty
-        //       ? SliverToBoxAdapter(
-        //           child: Card(
-        //               elevation: 5,
-        //               child: TextBuilder(
-        //                 AppLocalizations.of(context)!.no_items_added,
-        //                 textAlign: TextAlign.center,
-        //               )),
-        //         )
-        //       : SelectedItemsToInvoice(
-        //           items: BlocProvider.of<AddItemCubit>(context).addedItems,
-        //         );
-        // })
+        BlocBuilder<AddItemCubit, AddItemState>(
+          builder: (context, state) {
+            return PricingSection(
+                items: BlocProvider.of<AddItemCubit>(context).addedItems);
+          },
+        ),
+        const SliverToBoxAdapter(child: GapH(h: 1)),
+        BlocBuilder<AddItemCubit, AddItemState>(builder: (context, state) {
+          debugPrint(state.runtimeType.toString());
+          return getIt.get<AddItemCubit>().addedItems.isEmpty
+              ? SliverToBoxAdapter(
+                  child: Card(
+                      elevation: 5,
+                      child: TextBuilder(
+                        AppLocalizations.of(context)!.no_items_added,
+                        textAlign: TextAlign.center,
+                      )),
+                )
+              : SelectedItemsToInvoice(
+                  items: BlocProvider.of<AddItemCubit>(context).addedItems,
+                );
+        })
       ],
     ));
   }

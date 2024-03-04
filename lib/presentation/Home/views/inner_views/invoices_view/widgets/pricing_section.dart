@@ -4,6 +4,7 @@ import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/models/payment_type_model/pay_ment_type_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
+import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:easy_erp/presentation/cubits/item_cubit/item_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,8 +18,8 @@ import '../../../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../../cubits/addItem_cubit/cubit/add_item_cubit.dart';
-import '../../../../../cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
+import '../../../../../cubits/addItem_cubit/add_item_cubit.dart';
+import '../../../../../cubits/payment_type_cubit/payment_type_cubit.dart';
 
 class PricingSection extends StatelessWidget {
   PricingSection({
@@ -73,6 +74,8 @@ class PricingSection extends StatelessWidget {
                     GlobalMethods.goRouterNavigateTO(
                         context: context,
                         router: AppRouters.kAddItemsIntoInvoice);
+                    await getIt.get<InvoiceCubit>().getInvoiceItems(context,
+                        invNo: SharedPref.get(key: "ReturnSelectedId"));
                     await GetItemCubit.get(context).getItems();
                   },
                 ),

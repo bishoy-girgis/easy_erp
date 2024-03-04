@@ -9,7 +9,7 @@ import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/Invoice-main_data_section.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/pick_date_widget.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/sellect_cash_or_postpon_section.dart';
-import 'package:easy_erp/presentation/cubits/invoice_cubit/cubit/invoice_cubit.dart';
+import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -124,6 +124,8 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
               onPressed: () {
                 setState(() {
                   _isInvoiceSelected = true;
+                  SharedPref.set(key: "withInvoiceSelected", value: true);
+                  print("${SharedPref.get(key: "withInvoiceSelected")}");
                 });
               },
               child: TextBuilder(
@@ -143,6 +145,8 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
               onPressed: () {
                 setState(() {
                   _isInvoiceSelected = false;
+                  SharedPref.set(key: "withInvoiceSelected", value: false);
+                  print("${SharedPref.get(key: "withInvoiceSelected")}");
                 });
               },
               child: TextBuilder(

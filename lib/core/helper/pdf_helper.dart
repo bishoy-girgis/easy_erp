@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_erp/core/helper/locator.dart';
-import 'package:easy_erp/presentation/cubits/invoice_cubit/cubit/invoice_cubit.dart';
+import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +11,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import '../../data/models/item_model/item_model.dart';
-import '../../presentation/cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import '../../presentation/cubits/addItem_cubit/add_item_cubit.dart';
 
 Future<void> generateAndPrintArabicPdf(
   context, {

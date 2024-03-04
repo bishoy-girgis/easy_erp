@@ -11,7 +11,7 @@ import '../../../../../../core/widgets/text_builder.dart';
 import '../../../../../../data/models/item_model/item_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import '../../../../../cubits/addItem_cubit/add_item_cubit.dart';
 
 class AddItemWidget extends StatelessWidget {
   final ItemModel itemModel;

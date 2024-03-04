@@ -23,11 +23,11 @@ import 'data/providers/localization/localization_provider.dart';
 import 'data/repositories/invoice_repository/invoice_repo_imp.dart';
 import 'data/repositories/payment_type_repository/payment_type_repo_implementation.dart';
 import 'data/services/local/shared_pref.dart';
-import 'presentation/cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import 'presentation/cubits/addItem_cubit/add_item_cubit.dart';
 import 'presentation/cubits/customer_cubit/customer_cubit.dart';
-import 'presentation/cubits/invoice_cubit/cubit/invoice_cubit.dart';
+import 'presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'presentation/cubits/item_cubit/item_cubit.dart';
-import 'presentation/cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
+import 'presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 // import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {

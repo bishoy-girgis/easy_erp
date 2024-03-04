@@ -8,7 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import '../../../../../../data/models/invoice_model/invoice_model.dart';
-import '../../../../../cubits/invoice_cubit/cubit/invoice_cubit.dart';
+import '../../../../../cubits/invoice_cubit/invoice_cubit.dart';
 
 class InvoiceWidget extends StatelessWidget {
   const InvoiceWidget({

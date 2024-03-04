@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
+import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
+import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../core/helper/app_colors.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
-import '../../../../cubits/addItem_cubit/cubit/add_item_cubit.dart';
+import '../../../../cubits/addItem_cubit/add_item_cubit.dart';
 import '../../../../cubits/item_cubit/item_cubit.dart';
 import 'widgets/item_widget.dart';
 
@@ -28,6 +31,10 @@ class _AddItemsViewState extends State<AddItemsView> {
   TextEditingController searchController = TextEditingController();
 
   Widget buildCubitWidget() {
+    // print("${SharedPref.get(key: "ReturnSelectedId")}");
+    // if (SharedPref.get(key: "ReturnSelectedId") != null) {
+    //   items = getItems();
+    // }
     return BlocBuilder<GetItemCubit, GetItemState>(
       builder: (context, state) {
         if (state is GetItemsSuccessState) {
@@ -147,4 +154,16 @@ class _AddItemsViewState extends State<AddItemsView> {
       ),
     ));
   }
+
+  // getItems() {
+  //   List<ItemModel> finalItems = [];
+  //   items = getIt.get<InvoiceCubit>().itemsInvoice;
+  //   var length = items.length;
+  //   for (int i = 0; i < length; i++) {
+  //     finalItems.add(
+  //       items[i],
+  //     );
+  //   }
+  //   return finalItems;
+  // }
 }

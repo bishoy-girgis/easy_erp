@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../../data/models/item_model/item_model.dart';
+import '../../../../data/models/item_model/item_model.dart';
 
 part 'add_item_state.dart';
 
