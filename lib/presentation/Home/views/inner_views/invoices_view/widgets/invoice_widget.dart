@@ -47,7 +47,7 @@ class InvoiceWidget extends StatelessWidget {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.secondColorOrange,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
@@ -72,19 +72,19 @@ class InvoiceWidget extends StatelessWidget {
                           Icons.inventory_2_outlined,
                           size: 25.sp,
                         ),
-                        GapW(w: 5),
+                        const GapW(w: 5),
                         TextBuilder(
                           invoiceModel.invNo!,
                           fontSize: 20,
                         ),
                       ],
                     ),
-                    Divider(),
+                    const Divider(),
                     TextBuilder(
                       invoiceModel.custInvname!,
                       fontSize: 20,
                     ),
-                    GapH(h: 3),
+                    const GapH(h: 3),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

@@ -1,17 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
-import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../../core/helper/app_colors.dart';
-import '../../../../../core/helper/locator.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
 import '../../../../cubits/addItem_cubit/cubit/add_item_cubit.dart';

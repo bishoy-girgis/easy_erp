@@ -4,8 +4,6 @@ import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:textfield_search/textfield_search.dart';
-
 import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../../core/widgets/gap.dart';
@@ -135,10 +133,10 @@ class SearchOnCustomerSection extends StatefulWidget {
 
   @override
   State<SearchOnCustomerSection> createState() =>
-      _SearchOnCustomerSectionState();
+      SearchOnCustomerSectionState();
 }
 
-class _SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
+class SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
   TextEditingController myController = TextEditingController();
   var customerKey = GlobalKey<DropdownSearchState>();
   // @override

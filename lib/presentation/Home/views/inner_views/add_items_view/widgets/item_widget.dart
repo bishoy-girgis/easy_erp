@@ -1,14 +1,11 @@
 import 'package:easy_erp/core/helper/locator.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/helper/global_methods.dart';
-import '../../../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import '../../../../../../data/models/item_model/item_model.dart';
@@ -50,7 +47,7 @@ class AddItemWidget extends StatelessWidget {
                   width: 3),
               color: BlocProvider.of<AddItemCubit>(context)
                       .checkItemInList(itemModel)
-                  ? AppColors.primaryColorBlue.withOpacity(.25)
+                  ? AppColors.primaryColorBlue.withOpacity(.22)
                   : Colors.white,
               boxShadow: BlocProvider.of<AddItemCubit>(context)
                       .checkItemInList(itemModel)
@@ -114,7 +111,7 @@ class AddItemWidget extends StatelessWidget {
                 TextBuilder(
                   AppLocalizations.of(context)!.quantity,
                   isHeader: true,
-                  fontSize: 15,
+                  fontSize: 13,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,7 +138,7 @@ class AddItemWidget extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_circle_up_outlined,
                         color: AppColors.primaryColorBlue,
-                        size: 35.sp,
+                        size: 30.sp,
                       ),
                     ),
                     Flexible(
@@ -195,7 +192,7 @@ class AddItemWidget extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_circle_down_outlined,
                         color: AppColors.secondColorOrange,
-                        size: 35.sp,
+                        size: 30.sp,
                       ),
                     ),
                   ],

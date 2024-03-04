@@ -6,9 +6,7 @@ import 'package:easy_erp/data/models/printerModel/printer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/item_repository/item_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/login_repository/login_repo_imp.dart';
-import 'package:easy_erp/data/repositories/payment_type_repository/payment_type_repo.dart';
 import 'package:easy_erp/l10n/l10n.dart';
-
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +16,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-
 import 'core/helper/app_routing.dart';
 import 'data/models/item_model/item_model.dart';
 import 'data/models/user/user_model.dart';
@@ -87,12 +84,14 @@ class MyApp extends StatelessWidget {
             BlocProvider(
                 create: (context) => CustomerCubit(
                       customerRepo: getIt.get<CustomerRepoImplementation>(),
-                    )..getCustomers()),
-            BlocProvider(
-              create: (context) => GetItemCubit(
-                itemRepo: getIt.get<ItemRepoImplementation>(),
-              ),
-            ),
+                    )
+                      ..getCustomerGroups()
+                      ..getCustomers()),
+            // BlocProvider(
+            //   create: (context) => GetItemCubit(
+            //     itemRepo: getIt.get<ItemRepoImplementation>(),
+            //   ),
+            // ),
             BlocProvider(
               create: (context) =>
                   GetItemCubit(itemRepo: getIt.get<ItemRepoImplementation>())

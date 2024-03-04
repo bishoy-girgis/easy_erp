@@ -1,12 +1,9 @@
 import 'package:easy_erp/data/models/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-
 import '../../../../../core/helper/app_constants.dart';
 import '../../../../../data/repositories/login_repository/login_Repo.dart';
 import '../../../../../data/services/local/shared_pref.dart';
-
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {

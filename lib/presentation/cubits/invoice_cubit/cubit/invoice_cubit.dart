@@ -1,22 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/pdf_helper.dart';
-import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
-import 'package:easy_erp/data/models/print_invoice_model/print_invoice_model/print_invoice_model.dart';
+import 'package:easy_erp/data/models/print_invoice_model/print_invoice_model.dart';
 import 'package:easy_erp/data/repositories/invoice_repository/invoice_repo.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
-
-import '../../../../../core/helper/locator.dart';
 import '../../../../../data/models/item_model/item_model.dart';
 import '../../../../../data/models/send_invoice_model/send_invoice_model.dart';
-import '../../../../../data/models/user/user_model.dart';
-import '../../addItem_cubit/cubit/add_item_cubit.dart';
 
 part 'invoice_state.dart';
 
@@ -121,9 +115,10 @@ class InvoiceCubit extends Cubit<InvoiceState> {
               .parse("${r.invoicehead![0].invtime ?? "00:00:00"} ");
           formattedTime = DateFormat('h:mm a').format(parsedTime);
         }
+        print("{qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqrrrrrrrrrrrrrr}  ${r.qr}");
 
         generateAndPrintArabicPdf(context,
-            qrData: r.invoicehead![0].qr ?? "empty",
+            qrData: r.qr ?? "empty",
             invNo: invNo,
             invoTime: formattedTime ?? "0000",
             custName: r.invoicehead?[0].custInvname ?? 'Cash',

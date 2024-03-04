@@ -40,7 +40,13 @@ class AddItemCubit extends Cubit<AddItemState> {
 
   List<ItemModel> addItem(ItemModel item) {
     emit(AddItemInitial());
-    addedItems.add(item);
+    int existingIndex = addedItems
+        .indexWhere((existingItem) => existingItem.itmid == item.itmid);
+    if (existingIndex != -1) {
+      addedItems[existingIndex].quantity += item.quantity;
+    } else {
+      addedItems.add(item);
+    }
     emit(AddItemAddedSuccess(addedItems));
     return addedItems;
   }

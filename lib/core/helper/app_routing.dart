@@ -1,5 +1,3 @@
-import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
-import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/add_customer_view/add_customer_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/add_items_view/add_items_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/customer_view.dart';

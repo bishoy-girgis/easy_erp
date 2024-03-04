@@ -1,24 +1,18 @@
-import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
-import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/core/helper/utils.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
-import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
 import 'package:easy_erp/presentation/Login/views/widgets/change_language_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
-
 import '../../../core/helper/app_colors.dart';
 import '../../../core/helper/app_images.dart';
 import '../../../core/widgets/custom_elevated_button.dart';
-import '../../../data/models/user/user_model.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});

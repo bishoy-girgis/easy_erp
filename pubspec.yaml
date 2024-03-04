@@ -61,7 +61,6 @@ dependencies:
   textfield_search: ^0.10.0
   syncfusion_flutter_pdf: ^24.2.8
 
-
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:

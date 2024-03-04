@@ -1,22 +1,16 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
-import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
-import 'package:easy_erp/data/models/customer_model/customer_model.dart';
-import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../core/helper/global_methods.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
 import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../cubits/invoice_cubit/cubit/invoice_cubit.dart';
-import '../../../../cubits/item_cubit/item_cubit.dart';
 
 class InvoicesView extends StatefulWidget {
   InvoicesView({Key? key}) : super(key: key);

@@ -1,9 +1,7 @@
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pdf/pdf.dart';
-
 import '../../../../core/helper/app_colors.dart';
 import '../../../../core/widgets/text_builder.dart';
 import '../../../../data/models/printerModel/printer_model.dart';

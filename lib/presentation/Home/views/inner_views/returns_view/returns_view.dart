@@ -1,12 +1,12 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
+import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
-import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/create_return.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/widgets/return_widget.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/helper/global_methods.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
-import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReturnsView extends StatelessWidget {
@@ -106,10 +106,10 @@ class ReturnsView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // GlobalMethods.navigateTo(
-          //   context,
-          //   const CreateInvoiceView(),
-          // );
+          GlobalMethods.navigateTo(
+            context,
+            const CreateReturnView(),
+          );
         },
         elevation: 10,
         child: const Icon(Icons.add),
@@ -125,14 +125,14 @@ class ReturnsView extends StatelessWidget {
         isHeader: true,
         color: Colors.white,
       ),
-      foregroundColor: Colors.white,
-      actions: [
-        IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.add_box,
-            ))
-      ],
+      // foregroundColor: Colors.white,
+      // actions: [
+      //   IconButton(
+      //       onPressed: () {},
+      //       icon: const Icon(
+      //         Icons.add_box,
+      //       ))
+      // ],
     );
   }
 
@@ -147,13 +147,21 @@ class ReturnsView extends StatelessWidget {
             hintText: "Search with ID , Code, or Barcode NO",
             suffixIcon: Icons.search,
             suffixColor: Colors.blueGrey,
-            prefixIcon: Icons.qr_code_rounded,
-            prefixIconColor: Colors.blueGrey,
             // backgroundOfTextFeild: Colors.white,
-            prefixPressed: () {},
-            suffixPressed: () {},
+            onChange: (v) {
+              // searchController.text = v;
+              // searchForInvoices = invoices
+              //     .where((invoice) =>
+              //         invoice.custInvname!.toLowerCase().startsWith(v) ||
+              //         invoice.invNo!.toLowerCase().startsWith(v) ||
+              //         invoice.invdate!.toString().startsWith(v))
+              //     .toList();
+              // setState(() {});
+            },
           ),
           // InvoiceWidget(),
+          const GapH(h: 1),
+
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -161,13 +169,13 @@ class ReturnsView extends StatelessWidget {
                 color: AppColors.whiteColor,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: ListView(
+              child: ListView.builder(
                 padding: const EdgeInsets.all(10),
-                children: [
-                  // ...bills.map((e) => InvoiceWidget(
-                  //       e: e,
-                  //     )),
-                ],
+                physics: const BouncingScrollPhysics(),
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return ReturnWidget();
+                },
               ),
             ),
           ),

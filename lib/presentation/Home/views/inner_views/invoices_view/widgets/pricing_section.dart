@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/helper/app_routing.dart';
 import '../../../../../../core/helper/global_methods.dart';
@@ -18,8 +17,6 @@ import '../../../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../../../data/models/customer_model/customer_model.dart';
 import '../../../../../cubits/addItem_cubit/cubit/add_item_cubit.dart';
 import '../../../../../cubits/payment_type_cubit/cubit/payment_type_cubit.dart';
 
@@ -30,7 +27,6 @@ class PricingSection extends StatelessWidget {
   });
   final List<ItemModel> items;
   double totalAmount = 0.0;
-  //double totalbtob = 0.0;
   double taxAmount = 0.0;
   double amountBeforeTex = 0.0;
   @override

@@ -7,8 +7,6 @@ import 'package:easy_erp/data/models/add_customer_response_model/add_customer_re
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/models/group_model/group_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo.dart';
-import 'package:easy_erp/data/services/local/shared_pref.dart';
-
 import '../../../core/api/api_service.dart';
 import '../../../core/helper/app_constants.dart';
 

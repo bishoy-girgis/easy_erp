@@ -1,4 +1,3 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
@@ -6,13 +5,9 @@ import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
-import 'package:easy_erp/data/models/group_model/group_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../../data/models/payment_type_model/pay_ment_type_model.dart';
 import '../../../../../data/services/local/shared_pref.dart';
 import '../../../../cubits/customer_cubit/customer_cubit.dart';
 import 'widgets/select_group_section.dart';

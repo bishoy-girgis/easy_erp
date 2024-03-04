@@ -1,8 +1,6 @@
 import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
-import 'package:easy_erp/data/models/customer_model/customer_model.dart';
-import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';

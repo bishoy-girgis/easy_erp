@@ -1,6 +1,4 @@
-import 'package:easy_erp/data/models/user/user_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class AppConstants {
   static int whId = SharedPref.get(key: "whId");
