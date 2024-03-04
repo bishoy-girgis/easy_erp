@@ -76,6 +76,7 @@ class _AddItemsViewState extends State<AddItemsView> {
         actions: [
           IconButton(
             onPressed: () {
+              BlocProvider.of<AddItemCubit>(context).checkAndMergeDuplicates();
               GlobalMethods.goRouterPOP(context);
             },
             icon: Icon(

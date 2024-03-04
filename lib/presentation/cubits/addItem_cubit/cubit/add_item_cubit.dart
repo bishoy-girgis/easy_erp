@@ -40,13 +40,7 @@ class AddItemCubit extends Cubit<AddItemState> {
 
   List<ItemModel> addItem(ItemModel item) {
     emit(AddItemInitial());
-    int existingIndex = addedItems
-        .indexWhere((existingItem) => existingItem.itmid == item.itmid);
-    if (existingIndex != -1) {
-      addedItems[existingIndex].quantity += item.quantity;
-    } else {
-      addedItems.add(item);
-    }
+    addedItems.add(item);
     emit(AddItemAddedSuccess(addedItems));
     return addedItems;
   }
@@ -54,5 +48,29 @@ class AddItemCubit extends Cubit<AddItemState> {
   changeQuantity() {
     emit(AddItemInitial());
     emit(ChangeQuantityState());
+  }
+
+  void checkAndMergeDuplicates() {
+    emit(AddItemInitial());
+
+    Map<int, ItemModel> itemMap = {}; // Map to store items by their ids
+
+    // Iterate through the addedItems list
+    for (ItemModel item in addedItems) {
+      if (itemMap.containsKey(item.itmid)) {
+        // If the item already exists in the map, update its quantity
+        ItemModel? existingItem = itemMap[item.itmid];
+        existingItem!.quantity += item.quantity;
+      } else {
+        // If the item does not exist, add it to the map
+        itemMap[item.itmid!] = item;
+      }
+    }
+
+    // Clear addedItems list and add items from the map with merged quantities
+    addedItems.clear();
+    addedItems.addAll(itemMap.values);
+
+    emit(AddItemAddedSuccess(addedItems));
   }
 }
