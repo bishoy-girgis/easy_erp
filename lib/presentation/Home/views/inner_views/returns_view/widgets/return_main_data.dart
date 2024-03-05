@@ -1,4 +1,5 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
@@ -9,6 +10,7 @@ import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/Invoice-main_data_section.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/pick_date_widget.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/sellect_cash_or_postpon_section.dart';
+import 'package:easy_erp/presentation/cubits/addItem_cubit/add_item_cubit.dart';
 import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -59,6 +61,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                         labelText: "Search",
                         hintText: "Search with ID, Code, or Barcode NO",
                         suffixIcon: Icons.search,
+                        suffixIconSize: 17.sp,
                         suffixColor: Colors.blueGrey,
                         controller: searchController,
                         suffixPressed: validateInvoice,
@@ -85,10 +88,10 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
               isHeader: true,
               fontSize: 16,
             ),
-            Row(
+            const Row(
               children: [
-                const Flexible(child: DatePickerWidget()),
-                const GapW(w: 1),
+                Flexible(child: DatePickerWidget()),
+                GapW(w: 1),
                 Flexible(child: HoursAndMinutes()),
               ],
             ),
@@ -122,6 +125,10 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
             color: _isInvoiceSelected ? AppColors.primaryColorBlue : null,
             child: TextButton(
               onPressed: () {
+                if (getIt.get<AddItemCubit>().addedItems.isNotEmpty) {
+                  getIt.get<AddItemCubit>().addedItems.clear();
+                  GlobalMethods.navigatePOP(context);
+                }
                 setState(() {
                   _isInvoiceSelected = true;
                   SharedPref.set(key: "withInvoiceSelected", value: true);
@@ -173,7 +180,8 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
         (invoice) =>
             invoice.custInvname!.toLowerCase().contains(searchText) ||
             invoice.invNo!.toLowerCase().contains(searchText) ||
-            invoice.invdate!.toString().contains(searchText),
+            invoice.invdate!.toString().contains(searchText) ||
+            invoice.invid!.toString().contains(searchText),
       );
     } catch (e) {
       selectedInvoice = emptyInvoice;
@@ -184,15 +192,14 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
         message: 'Invoice Selected Successfully',
         state: ToastStates.SUCCESS,
       );
-      SharedPref.set(key: 'ReturnSelectedId', value: selectedInvoice!.invNo);
+      SharedPref.set(key: 'ReturnSelectedId', value: selectedInvoice!.invid);
       setState(() {});
     } else {
       GlobalMethods.buildFlutterToast(
-        message: 'No invoice found for the entered text.',
+        message: 'No invoice found for the entered Number.',
         state: ToastStates.ERROR,
       );
     }
     print("invoicceeeeshared pref ${SharedPref.get(key: 'ReturnSelectedId')}");
-    print("invoicceeee ${selectedInvoice!.invNo}");
   }
 }

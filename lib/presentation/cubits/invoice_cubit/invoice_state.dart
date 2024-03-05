@@ -46,3 +46,15 @@ final class GetInvoiceDataFailure extends InvoiceState {
   final String error;
   const GetInvoiceDataFailure(this.error);
 }
+
+final class GetInvoiceItemsLoading extends InvoiceState {}
+
+final class GetInvoiceItemsSuccess extends InvoiceState {
+  final List<ItemModel> invoiceItems;
+  const GetInvoiceItemsSuccess(this.invoiceItems);
+}
+
+final class GetInvoiceItemsFailure extends InvoiceState {
+  final String error;
+  const GetInvoiceItemsFailure(this.error);
+}

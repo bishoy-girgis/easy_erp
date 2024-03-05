@@ -21,6 +21,9 @@ class AppConstants {
   static const String PRINT_INVOICE_WITH_ITEMS =
       "/api/Printinvoice/printinvoice";
 
+  /// Return
+  static const String POST_Return = "/api/RtnInvsave/Post";
+
   static String GET_INVOICES = "/api/Invoices/getinvoices";
 
   ///Items

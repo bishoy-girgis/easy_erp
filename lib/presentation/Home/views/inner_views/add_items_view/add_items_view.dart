@@ -31,18 +31,38 @@ class _AddItemsViewState extends State<AddItemsView> {
   TextEditingController searchController = TextEditingController();
 
   Widget buildCubitWidget() {
-    // print("${SharedPref.get(key: "ReturnSelectedId")}");
-    // if (SharedPref.get(key: "ReturnSelectedId") != null) {
-    //   items = getItems();
-    // }
     return BlocBuilder<GetItemCubit, GetItemState>(
       builder: (context, state) {
-        if (state is GetItemsSuccessState) {
-          items = state.items;
+        print("${SharedPref.get(key: "ReturnSelectedId")}");
 
+        if (state is GetItemsSuccessState) {
+          if (SharedPref.get(key: "ReturnSelectedId") != null) {
+            items = getIt.get<InvoiceCubit>().itemsInvoice;
+          } else {
+            items = state.items;
+          }
+          print("${items.length} lenngth lissttttt");
           return buildLoadedListWidgets();
         } else {
           return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  Widget buildCubitInvoWidget() {
+    return BlocBuilder<InvoiceCubit, InvoiceState>(
+      builder: (context, state) {
+        print("${SharedPref.get(key: "ReturnSelectedId")}");
+
+        if (state is GetInvoiceItemsSuccess) {
+          items = getIt.get<InvoiceCubit>().itemsInvoice;
+          print("${items.length} lenngth lissttttt");
+          return buildLoadedListWidgets();
+        } else {
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -70,7 +90,7 @@ class _AddItemsViewState extends State<AddItemsView> {
                   items[i].quantity = 1;
                 }
                 GlobalMethods.goRouterNavigateTOAndReplacement(
-                    context: context, router: AppRouters.kCreateInvoice);
+                    context: context, router: AppRouters.kHome);
               },
               titleButton2: "NO",
               onPressedButton2: () {

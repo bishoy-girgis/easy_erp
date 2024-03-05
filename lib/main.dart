@@ -6,8 +6,10 @@ import 'package:easy_erp/data/models/printerModel/printer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/item_repository/item_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/login_repository/login_repo_imp.dart';
+import 'package:easy_erp/data/repositories/return_repository/return_repo_imp.dart';
 import 'package:easy_erp/l10n/l10n.dart';
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
+import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -102,6 +104,10 @@ class MyApp extends StatelessWidget {
                 invoiceRepo: getIt.get<InvoiceRepoImplementation>(),
               )..getInvoices(),
             ),
+            BlocProvider(
+                create: (context) => Returncubit(
+                      returnRepo: getIt.get<ReturnRepoImplementation>(),
+                    )),
             BlocProvider(
               create: (context) => getIt.get<AddItemCubit>(),
             ),

@@ -1,4 +1,5 @@
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,8 +25,20 @@ class AddItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var priceController =
         TextEditingController(text: itemModel.salesprice.toString());
-    var quantityController =
-        TextEditingController(text: itemModel.quantity.toString());
+    // var quantityController = TextEditingController(text: 1.toString());
+    // var limitController = TextEditingController(text: "5000");
+    // if (SharedPref.get(key: "ReturnSelectedId") != null) {
+    //   quantityController = TextEditingController(text: 1.toString());
+    //   limitController =
+    //       TextEditingController(text: itemModel.quantity.toString());
+    // }
+    int quantityController = 1;
+    int limitController = 5000;
+    if (SharedPref.get(key: "ReturnSelectedId") != null) {
+      quantityController = 1;
+      limitController = int.parse(itemModel.quantity.toInt().toString());
+    }
+    var Controller = TextEditingController(text: quantityController.toString());
 
     return BlocBuilder<AddItemCubit, AddItemState>(
       builder: (context, state) {
@@ -82,7 +95,7 @@ class AddItemWidget extends StatelessWidget {
                       fontSize: 14,
                     ),
                     TextBuilder(
-                      itemModel.unitname!,
+                      itemModel.unitname ?? "",
                       fontSize: 14,
                     ),
                   ],
@@ -121,19 +134,18 @@ class AddItemWidget extends StatelessWidget {
                         padding: EdgeInsets.all(0),
                       ),
                       onPressed: () {
-                        if (itemModel.quantity < 5000) {
-                          itemModel.quantity =
-                              int.parse(quantityController.text);
-                          itemModel.quantity++;
-                          quantityController.text =
-                              itemModel.quantity.toString();
+                        if (quantityController < limitController) {
+                          quantityController++;
+                          itemModel.quantity = quantityController;
                         } else {
-                          quantityController.text = '4999';
+                          quantityController = limitController;
                           GlobalMethods.buildFlutterToast(
-                              message: "You can't choose more than 4999 item",
+                              message:
+                                  "You can't choose more than limit $limitController",
                               state: ToastStates.WARNING);
                         }
                         getIt.get<AddItemCubit>().changeQuantity();
+                        Controller.text = quantityController.toString();
                       },
                       icon: Icon(
                         Icons.arrow_circle_up_outlined,
@@ -143,31 +155,33 @@ class AddItemWidget extends StatelessWidget {
                     ),
                     Flexible(
                       child: CustomTextFormField(
-                        labelText: quantityController.text,
+                        labelText: quantityController.toString(),
                         // backgroundOfTextFeild: Colors.blueGrey,
                         centerContent: true,
-                        contentSize: 20,
-                        controller: quantityController,
+                        contentSize: 18,
+                        controller: Controller,
                         keyboardType: TextInputType.number,
                         isContentBold: true,
                         onChange: (value) {
                           if (value.isEmpty) {
-                            quantityController.text = '1';
-                          } else if (double.parse(quantityController.text) >=
-                              5000) {
-                            quantityController.text = '4999';
-                            itemModel.quantity =
-                                int.parse(quantityController.text);
+                            quantityController = 1;
+                          } else if (quantityController >= limitController) {
+                            quantityController = limitController;
+                            itemModel.quantity = quantityController;
                             GlobalMethods.buildFlutterToast(
                                 gravity: ToastGravity.CENTER,
-                                message: "You can't add more than 4999 items",
+                                message:
+                                    "You can't add more than limit $limitController",
                                 state: ToastStates.WARNING);
                           } else {
-                            quantityController.text.replaceAll('1', value);
-                            quantityController.text = value;
-                            itemModel.quantity =
-                                int.parse(quantityController.text);
+                            // quantityController.text.replaceAll('1', value);
+                            // quantityController.text = value;
+                            // itemModel.quantity =
+                            //     int.parse(quantityController.text);
+                            print("elseeeeeeeeeeeeeeeeeeeee");
                           }
+                          Controller.text = quantityController.toString();
+
                           getIt.get<AddItemCubit>().changeQuantity();
                         },
                       ),
@@ -177,16 +191,17 @@ class AddItemWidget extends StatelessWidget {
                         padding: EdgeInsets.all(0),
                       ),
                       onPressed: () {
-                        itemModel.quantity = int.parse(quantityController.text);
-                        if (itemModel.quantity > 1) {
-                          itemModel.quantity--;
-                          quantityController.text =
-                              itemModel.quantity.toString();
+                        // itemModel.quantity = int.parse(quantityController.text);
+                        if (quantityController > 1) {
+                          quantityController--;
+
+                          itemModel.quantity = quantityController;
                         } else {
                           GlobalMethods.buildFlutterToast(
                               message: "You can't choose less than 1 item",
                               state: ToastStates.WARNING);
                         }
+                        Controller.text = quantityController.toString();
                         getIt.get<AddItemCubit>().changeQuantity();
                       },
                       icon: Icon(

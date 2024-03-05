@@ -57,7 +57,7 @@ class SelectedItem extends StatelessWidget {
                           ),
                           const GapH(h: 5.4),
                           TextBuilder(
-                            itemModel.unitname!,
+                            itemModel.unitname ?? "",
                             color: Colors.white,
                             textAlign: TextAlign.center,
                             fontSize: 14,

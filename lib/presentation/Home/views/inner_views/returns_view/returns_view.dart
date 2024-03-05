@@ -5,6 +5,8 @@ import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/create_return.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/widgets/return_widget.dart';
+import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
+import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -106,6 +108,8 @@ class ReturnsView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          PaymentTypeCubit.get(context).getPaymentTypes();
+          InvoiceCubit.get(context).getInvoices();
           GlobalMethods.navigateTo(
             context,
             const CreateReturnView(),

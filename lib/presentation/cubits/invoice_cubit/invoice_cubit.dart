@@ -140,21 +140,20 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   getInvoiceItems(context, {required String invNo}) async {
     // emit(InvoiceInitial());
 
-    emit(GetInvoiceDataLoading());
+    emit(GetInvoiceItemsLoading());
     var result = await invoiceRepo.getInvoiceDataAndItems(invNo: invNo);
     result.fold(
       (l) {
         debugPrint('❤️');
-        emit(GetInvoiceDataFailure(l.errorMessage));
+        emit(GetInvoiceItemsFailure(l.errorMessage));
       },
       (r) {
         PrintInvoiceModel printInvoiceModel = r;
         debugPrint('🐸🐸🐸🐸${printInvoiceModel.invoicedtls.toString()}');
         debugPrint('🐸🐸$invNo');
-        emit(GetInvoiceDataSuccess(r));
         itemsInvoice = r.invoicedtls ?? [];
         print("🐸🐸 ${itemsInvoice.length}");
-        getInvoices();
+        emit(GetInvoiceItemsSuccess(r.invoicedtls!));
         return itemsInvoice;
       },
     );

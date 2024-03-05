@@ -74,9 +74,14 @@ class PricingSection extends StatelessWidget {
                     GlobalMethods.goRouterNavigateTO(
                         context: context,
                         router: AppRouters.kAddItemsIntoInvoice);
-                    await getIt.get<InvoiceCubit>().getInvoiceItems(context,
-                        invNo: SharedPref.get(key: "ReturnSelectedId"));
-                    await GetItemCubit.get(context).getItems();
+                    if (SharedPref.get(key: "ReturnSelectedId") != null) {
+                      await getIt.get<InvoiceCubit>().getInvoiceItems(context,
+                          invNo: SharedPref.get(key: "ReturnSelectedId"));
+                    } else {
+                      await GetItemCubit.get(context).getItems();
+                    }
+                    print(
+                        "${SharedPref.get(key: "ReturnSelectedId")}   invoice numberrr");
                   },
                 ),
                 const GapH(h: 1),

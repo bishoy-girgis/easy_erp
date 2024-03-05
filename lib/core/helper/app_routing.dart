@@ -2,6 +2,7 @@ import 'package:easy_erp/presentation/Home/views/inner_views/add_customer_view/a
 import 'package:easy_erp/presentation/Home/views/inner_views/add_items_view/add_items_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/customer_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/create_return.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/returns_view.dart';
 import 'package:easy_erp/presentation/Login/views/login_view.dart';
 import 'package:easy_erp/presentation/Settings/views/settings_view.dart';
@@ -16,12 +17,12 @@ abstract class AppRouters {
   // GoRouter configuration
   static const kLogin = "/loginView";
   static const kSplash = "/";
-
   static const kHome = "/home";
   static const kSettings = "/settings";
   static const kItems = "$kHome/items";
   static const kCustomers = "$kHome/customers";
   static const kReturns = "$kHome/returns";
+  static const kCreateReturn = "$kReturns/createReturn";
   static const kInvoices = "$kHome/invoices";
   static const kCreateInvoice = "$kInvoices/createInvoice";
   static const kAddItemsIntoInvoice =
@@ -80,6 +81,12 @@ abstract class AppRouters {
         path: kReturns,
         builder: (context, state) {
           return ReturnsView();
+        },
+      ),
+      GoRoute(
+        path: kCreateReturn,
+        builder: (context, state) {
+          return const CreateReturnView();
         },
       ),
       // GoRoute(
