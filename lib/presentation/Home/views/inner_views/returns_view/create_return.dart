@@ -65,6 +65,43 @@ class CreateReturnView extends StatelessWidget {
     ));
   }
 
+  bool checkCustomer() {
+    if ((SharedPref.get(key: 'custID') == null ||
+            SharedPref.get(key: 'custID') == 0)
+        // && (SharedPref.get(key: 'invoiceTypeID')) == 2
+        ) {
+      GlobalMethods.buildFlutterToast(
+          message: 'Cant save invoice  please choose your Customer to Save',
+          state: ToastStates.ERROR);
+      return false;
+    }
+    return true;
+  }
+
+  bool checkItems() {
+    if (getIt.get<AddItemCubit>().addedItems.isEmpty) {
+      GlobalMethods.buildFlutterToast(
+          message: 'Cant save invoice please choose your Items to Save',
+          state: ToastStates.ERROR);
+      return false;
+    }
+
+    return true;
+  }
+
+  bool checkPaymentTypes() {
+    if (SharedPref.get(key: 'paymentTypeID') == null ||
+        SharedPref.get(key: 'paymentTypeID') == 0) {
+      GlobalMethods.buildFlutterToast(
+        message: 'Check your Payment Type',
+        state: ToastStates.ERROR,
+      );
+      return false;
+    }
+
+    return true;
+  }
+
   AppBar _buildAppBar(context) {
     return AppBar(
       title: TextBuilder(
@@ -78,22 +115,6 @@ class CreateReturnView extends StatelessWidget {
             SharedPref.remove(key: "withInvoiceSelected");
             getIt.get<AddItemCubit>().addedItems.clear();
             GlobalMethods.navigatePOP(context);
-            // getIt.get<AddItemCubit>().addedItems.isNotEmpty
-            //     ? GlobalMethods.showAlertAdressDialog(
-            //         context,
-            //         title: "Are you sure to remove invoice ?",
-            //         titleButton1: "yes",
-            //         titleButton2: "No",
-            //         onPressedButton1: () {
-            //           GlobalMethods.goRouterNavigateTOAndReplacement(
-            //               context: context, router: AppRouters.kInvoices);
-            //           getIt.get<AddItemCubit>().addedItems.clear();
-            //         },
-            //         onPressedButton2: () {
-            //           GlobalMethods.navigatePOP(context);
-            //         },
-            //       )
-            //     : GlobalMethods.navigatePOP(context);
           },
           icon: Icon(Icons.arrow_back)),
       actions: [
@@ -102,10 +123,12 @@ class CreateReturnView extends StatelessWidget {
             if (state is ReturnSavedSuccess) {
               debugPrint("=============================");
               debugPrint(state.sendInvoiceModel.massage);
+              debugPrint("${state.sendInvoiceModel.invno}");
               GlobalMethods.buildFlutterToast(
                   message: state.sendInvoiceModel.massage!,
                   state: ToastStates.SUCCESS);
-              InvoiceCubit.get(context).getInvoices();
+              Returncubit.get(context).getReturns();
+
               GlobalMethods.goRouterNavigateTOAndReplacement(
                   context: context, router: AppRouters.kReturns);
               generateAndPrintArabicPdf(context,
@@ -121,6 +144,9 @@ class CreateReturnView extends StatelessWidget {
                       DateFormat('dd/MM/yyyy').format(DateTime.now()),
                   invoiceType: "فاتورة ضريبية مبسطة",
                   items: getIt.get<AddItemCubit>().addedItems);
+              SharedPref.remove(key: "ReturnSelectedId");
+              SharedPref.remove(key: "withInvoiceSelected");
+              getIt.get<AddItemCubit>().addedItems.clear();
             } else if (state is ReturnNotSave) {
               GlobalMethods.navigatePOP(context);
               GlobalMethods.buildFlutterToast(
@@ -134,22 +160,25 @@ class CreateReturnView extends StatelessWidget {
           builder: (context, state) {
             return IconButton(
               onPressed: () async {
-                // checkCustomer();
-                // checkItems();
-                GlobalMethods.showAlertAdressDialog(
-                  context,
-                  title: "Save Invoice ?",
-                  titleButton1: "Save",
-                  titleButton2: "No",
-                  onPressedButton1: () async {
-                    await BlocProvider.of<Returncubit>(context).saveReturn(
-                      items: getIt.get<AddItemCubit>().addedItems,
-                    );
-                  },
-                  onPressedButton2: () {
-                    GlobalMethods.navigatePOP(context);
-                  },
-                );
+                checkCustomer() && checkItems() && checkPaymentTypes()
+                    ? GlobalMethods.showAlertAdressDialog(
+                        context,
+                        title: "Save Return ?",
+                        titleButton1: "Save",
+                        titleButton2: "No",
+                        onPressedButton1: () async {
+                          await BlocProvider.of<Returncubit>(context)
+                              .saveReturn(
+                                  items: getIt.get<AddItemCubit>().addedItems,
+                                  invid:
+                                      SharedPref.get(key: "ReturnSelectedId") ??
+                                          0);
+                        },
+                        onPressedButton2: () {
+                          GlobalMethods.navigatePOP(context);
+                        },
+                      )
+                    : Container();
               },
               icon: Icon(
                 Icons.done,

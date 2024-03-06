@@ -20,11 +20,13 @@ class AppConstants {
   static const String POST_INVOICE = "/api/Invsave/Post";
   static const String PRINT_INVOICE_WITH_ITEMS =
       "/api/Printinvoice/printinvoice";
+  static String GET_INVOICES = "/api/Invoices/getinvoices";
 
   /// Return
   static const String POST_Return = "/api/RtnInvsave/Post";
-
-  static String GET_INVOICES = "/api/Invoices/getinvoices";
+  static String GET_Returns = "/api/RtnInvoices/getRtninvoices";
+  static const String PRINT_Return_WITH_ITEMS =
+      "/api/PrintRtninvoice/printRtninvoice";
 
   ///Items
   static String GET_ITEMS = "/api/Items/getitems";

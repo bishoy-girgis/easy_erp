@@ -34,10 +34,10 @@ class AddItemWidget extends StatelessWidget {
     // }
     int quantityController = 1;
     int limitController = 5000;
-    if (SharedPref.get(key: "ReturnSelectedId") != null) {
-      quantityController = 1;
-      limitController = int.parse(itemModel.quantity.toInt().toString());
-    }
+    // if (SharedPref.get(key: "ReturnSelectedId") != null) {
+    //quantityController = 1;
+    //limitController = int.parse(itemModel.quantity.toInt().toString());
+    // }
     var Controller = TextEditingController(text: quantityController.toString());
 
     return BlocBuilder<AddItemCubit, AddItemState>(
@@ -100,11 +100,6 @@ class AddItemWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                // TextBuilder(
-                //   AppLocalizations.of(context)!.price,
-                //   isHeader: true,
-                //   fontSize: 16,
-                // ),
                 Flexible(
                   child: CustomTextFormField(
                     suffixIcon: FontAwesomeIcons.moneyBillWave,
@@ -132,7 +127,9 @@ class AddItemWidget extends StatelessWidget {
                     IconButton(
                       style: IconButton.styleFrom(
                         padding: EdgeInsets.all(0),
-                      ),
+                      ), // mohmmmm
+                      // viiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                      //  sss
                       onPressed: () {
                         if (quantityController < limitController) {
                           quantityController++;
@@ -156,7 +153,6 @@ class AddItemWidget extends StatelessWidget {
                     Flexible(
                       child: CustomTextFormField(
                         labelText: quantityController.toString(),
-                        // backgroundOfTextFeild: Colors.blueGrey,
                         centerContent: true,
                         contentSize: 18,
                         controller: Controller,

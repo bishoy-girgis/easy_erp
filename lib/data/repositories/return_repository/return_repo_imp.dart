@@ -4,8 +4,11 @@ import 'package:easy_erp/core/api/api_service.dart';
 import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
+import 'package:easy_erp/data/models/return/print_return_model/print_return_model.dart';
+import 'package:easy_erp/data/models/return/return_model.dart';
 import 'package:easy_erp/data/models/send_invoice_model/send_invoice_model.dart';
 import 'package:easy_erp/data/repositories/return_repository/return_repo.dart';
+import 'package:flutter/material.dart';
 
 class ReturnRepoImplementation extends ReturnRepo {
   ApiService apiService;
@@ -52,7 +55,7 @@ class ReturnRepoImplementation extends ReturnRepo {
           'invid': invid ?? 0,
         },
       );
-      print('DATATA IN INV REPO' + data.toString());
+      print('DATATA IN return REPO' + data.toString());
       SendInvoiceModel sendInvoiceModel = SendInvoiceModel.fromJson(data);
       return right(sendInvoiceModel);
     } catch (e) {
@@ -61,6 +64,66 @@ class ReturnRepoImplementation extends ReturnRepo {
         return left(ServerError.fromDioError(e));
       } else {
         print(e.toString());
+        return left(
+          ServerError(
+            e.toString(),
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failures, List<ReturnModel>>> getReturns() async {
+    try {
+      debugPrint("DATA IN Return REPO IMP ✨✨");
+      var data = await apiService.get(
+          endPoint: AppConstants.GET_Returns,
+          queryParameters: {
+            'Branchid': AppConstants.branchID,
+            'username': AppConstants.userName
+          });
+
+      List<ReturnModel> returns = [];
+      for (var customer in data) {
+        returns.add(ReturnModel.fromJson(customer));
+      }
+      return right(returns);
+    } catch (e) {
+      if (e is DioException) {
+        debugPrint(
+            "${e.response}  ,,,,,,,,,,,,,, ${e.message} ,,,,,,,,,,,,,,,  ${e.error}");
+        return left(ServerError.fromDioError(e));
+      } else {
+        return left(
+          ServerError(
+            e.toString(),
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failures, PrintReturnModel>> getReturnDataAndItems(
+      {required String returnInvNo}) async {
+    try {
+      debugPrint("DATA IN Return REPO IMP ✨✨");
+      var data = await apiService.get(
+        endPoint: AppConstants.PRINT_Return_WITH_ITEMS,
+        queryParameters: {
+          'RTNInvNo': returnInvNo,
+        },
+      );
+      PrintReturnModel printReturnModel = PrintReturnModel.fromJson(data);
+      debugPrint(printReturnModel.toString());
+      return right(printReturnModel);
+    } catch (e) {
+      if (e is DioException) {
+        debugPrint(
+            "${e.response},,,,,,,,,,,,,, ${e.message},,,,,,,,,,,,,,,  ${e.error}");
+        return left(ServerError.fromDioError(e));
+      } else {
         return left(
           ServerError(
             e.toString(),

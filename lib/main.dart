@@ -89,11 +89,6 @@ class MyApp extends StatelessWidget {
                     )
                       ..getCustomerGroups()
                       ..getCustomers()),
-            // BlocProvider(
-            //   create: (context) => GetItemCubit(
-            //     itemRepo: getIt.get<ItemRepoImplementation>(),
-            //   ),
-            // ),
             BlocProvider(
               create: (context) =>
                   GetItemCubit(itemRepo: getIt.get<ItemRepoImplementation>())
@@ -107,7 +102,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(
                 create: (context) => Returncubit(
                       returnRepo: getIt.get<ReturnRepoImplementation>(),
-                    )),
+                    )..getReturns()),
             BlocProvider(
               create: (context) => getIt.get<AddItemCubit>(),
             ),

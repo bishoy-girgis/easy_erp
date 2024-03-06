@@ -51,8 +51,8 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const TextBuilder(
-                        "Invoice Number",
+                      TextBuilder(
+                        AppLocalizations.of(context)!.invoice_number,
                         isHeader: true,
                         fontSize: 15,
                       ),
@@ -70,7 +70,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                   )
                 : Container(),
             TextBuilder(
-              AppLocalizations.of(context)!.invoice_id,
+              AppLocalizations.of(context)!.return_id,
               isHeader: true,
               fontSize: 15,
             ),
@@ -84,7 +84,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
             ),
             const GapH(h: 1),
             TextBuilder(
-              AppLocalizations.of(context)!.invoice_date,
+              AppLocalizations.of(context)!.return_date,
               isHeader: true,
               fontSize: 16,
             ),
@@ -100,7 +100,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
             ),
             const GapH(h: 1),
             TextBuilder(
-              AppLocalizations.of(context)!.invoice_type,
+              AppLocalizations.of(context)!.return_type,
               isHeader: true,
               fontSize: 16,
             ),

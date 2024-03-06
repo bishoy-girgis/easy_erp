@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 
 import '../../../core/api/api_service.dart';
 import '../../../core/errors/failures.dart';
@@ -12,12 +13,14 @@ class ItemRepoImplementation extends ItemRepo {
   ItemRepoImplementation(this.apiService);
 
   @override
-  Future<Either<Failures, List<ItemModel>>> getItems() async {
+  Future<Either<Failures, List<ItemModel>>> getItems(int? invoId) async {
     try {
       print("DATA IN Customer REPO IMP ✨✨");
-      var data = await apiService.get(
-          endPoint: AppConstants.GET_ITEMS,
-          queryParameters: {'whid': AppConstants.whId});
+      var data = await apiService
+          .get(endPoint: AppConstants.GET_ITEMS, queryParameters: {
+        'whid': AppConstants.whId,
+        'invvid': invoId ?? 0,
+      });
 
       List<ItemModel> items = [];
       for (var item in data) {

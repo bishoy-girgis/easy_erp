@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../data/models/item_model/item_model.dart';
@@ -70,6 +71,36 @@ class AddItemCubit extends Cubit<AddItemState> {
     // Clear addedItems list and add items from the map with merged quantities
     addedItems.clear();
     addedItems.addAll(itemMap.values);
+
+    emit(AddItemAddedSuccess(addedItems));
+  }
+
+  void checkAndMergeDuplicatesList(List<ItemModel> newItems) {
+    emit(AddItemInitial());
+
+    Map<int, ItemModel> itemMap = {}; // Map to store items by their ids
+
+    // Populate the itemMap with the items from addedItems list
+    for (ItemModel item in addedItems) {
+      itemMap[item.itmid!] = item;
+    }
+
+    // Iterate through the newItems list
+    for (ItemModel newItem in newItems) {
+      num newItemQuantity = newItem.quantity;
+      if (itemMap.containsKey(newItem.itmid)) {
+        // If the item already exists in the map, update its quantity
+        ItemModel? existingItem = itemMap[newItem.itmid];
+        num totalQuantity = existingItem!.quantity + newItemQuantity;
+        if (totalQuantity <= existingItem.quantity) {
+          // If the total quantity doesn't exceed, update quantity
+          existingItem.quantity = totalQuantity;
+        } else {
+          // If the total quantity exceeds, set it to the maximum
+          existingItem.quantity = existingItem.quantity;
+        }
+      }
+    }
 
     emit(AddItemAddedSuccess(addedItems));
   }

@@ -2,103 +2,32 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/models/return/return_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/create_return.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/widgets/return_widget.dart';
 import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
+import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
+import 'package:easy_erp/presentation/cubits/return_cubit/return_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ReturnsView extends StatelessWidget {
+class ReturnsView extends StatefulWidget {
   ReturnsView({Key? key}) : super(key: key);
 
-  // final bills = <BillModel>[
-  //   BillModel(
-  //     customer: 'Alice Johnson',
-  //     address: '456 Mock Ave\nWonderland',
-  //     items: [
-  //       LineItem('Consultation Services', 150),
-  //       LineItem('Custom Software Development', 2500.75),
-  //       LineItem('Training Session', 180),
-  //     ],
-  //     name: 'Software Consultation and Development',
-  //   ),
-  //   BillModel(
-  //     customer: 'Bob Smith',
-  //     address: '789 Fiction St\nNeverland',
-  //     items: [
-  //       LineItem('Graphic Design', 90),
-  //       LineItem('Hosting Services', 120),
-  //       LineItem('Mobile App Development', 3500.25),
-  //     ],
-  //     name: 'Design and Development Services',
-  //   ),
-  //   BillModel(
-  //     customer: 'Eva Davis',
-  //     address: '101 Fantasy Blvd\nDreamland',
-  //     items: [
-  //       LineItem('System Integration', 200),
-  //       LineItem('Database Management', 300),
-  //       LineItem('Content Creation', 180.50),
-  //     ],
-  //     name: 'Integrated Solutions Package',
-  //   ),
-  //   BillModel(
-  //       customer: 'David Thomas',
-  //       address: '123 Fake St\r\nBermuda Triangle',
-  //       items: [
-  //         LineItem(
-  //           'Technical Engagement',
-  //           120,
-  //         ),
-  //         LineItem('Deployment Assistance', 200),
-  //         LineItem('Develop Software Solution', 3020.45),
-  //         LineItem('Produce Documentation', 840.50),
-  //       ],
-  //       name: 'Create and deploy software package'),
-  //   BillModel(
-  //     customer: 'Charlie Brown',
-  //     address: '321 Cartoon Lane\nToonville',
-  //     items: [
-  //       LineItem('Animation Services', 180),
-  //       LineItem('Storyboarding', 120),
-  //       LineItem('Character Design', 250.75),
-  //     ],
-  //     name: 'Animation and Design Package',
-  //   ),
-  //   BillModel(
-  //     customer: 'Grace Miller',
-  //     address: '567 Sci-Fi Blvd\nFuture City',
-  //     items: [
-  //       LineItem('Robotics Consultation', 300),
-  //       LineItem('AI Programming', 500),
-  //       LineItem('Virtual Reality Development', 1200.50),
-  //     ],
-  //     name: 'Future Tech Solutions',
-  //   ),
-  //   BillModel(
-  //     customer: 'Frank Johnson',
-  //     address: '876 Mystery St\nEnigma Town',
-  //     items: [
-  //       LineItem('Investigation Services', 150),
-  //       LineItem('Surveillance Equipment', 200),
-  //       LineItem('Evidence Analysis', 300.25),
-  //     ],
-  //     name: 'Private Investigation Package',
-  //   ),
-  //   BillModel(
-  //     customer: 'Olivia Green',
-  //     address: '432 Fairy Ave\nMagicland',
-  //     items: [
-  //       LineItem('Spell Casting Consultation', 100),
-  //       LineItem('Enchantment Services', 180),
-  //       LineItem('Magical Artifact Creation', 450.75),
-  //     ],
-  //     name: 'Magical Services Bundle',
-  //   ),
-  // ];
+  @override
+  State<ReturnsView> createState() => _ReturnsViewState();
+}
+
+class _ReturnsViewState extends State<ReturnsView> {
+  List<ReturnModel> returns = [];
+
+  List<ReturnModel> searchForReturnss = [];
+
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -151,38 +80,87 @@ class ReturnsView extends StatelessWidget {
             hintText: "Search with ID , Code, or Barcode NO",
             suffixIcon: Icons.search,
             suffixColor: Colors.blueGrey,
-            // backgroundOfTextFeild: Colors.white,
             onChange: (v) {
-              // searchController.text = v;
-              // searchForInvoices = invoices
-              //     .where((invoice) =>
-              //         invoice.custInvname!.toLowerCase().startsWith(v) ||
-              //         invoice.invNo!.toLowerCase().startsWith(v) ||
-              //         invoice.invdate!.toString().startsWith(v))
-              //     .toList();
-              // setState(() {});
+              searchController.text = v;
+              searchForReturnss = returns
+                  // ignore: non_constant_identifier_names
+                  .where((Return) =>
+                      Return.rtnInvNo!.toLowerCase().startsWith(v) ||
+                      Return.invNo!.toLowerCase().startsWith(v) ||
+                      Return.invid!.toString().startsWith(v))
+                  .toList();
+              setState(() {});
             },
           ),
           // InvoiceWidget(),
           const GapH(h: 1),
-
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: ListView.builder(
-                padding: const EdgeInsets.all(10),
-                physics: const BouncingScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return ReturnWidget();
-                },
-              ),
-            ),
+          BlocConsumer<Returncubit, ReturnState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              if (state is GetReturnSuccess) {
+                returns = state.returnModels;
+                return Expanded(
+                    child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppColors.whiteColor,
+                  ),
+                  child: ListView.builder(
+                      // reverse: true,
+                      physics: const BouncingScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      itemCount: searchForReturnss.isNotEmpty
+                          ? searchForReturnss.length
+                          : state.returnModels.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Returncubit.get(context).getReturnDataAndItems(
+                              context,
+                              returnInvNo: searchForReturnss.isNotEmpty
+                                  ? searchForReturnss[index].rtnInvNo!
+                                  : state.returnModels[index].rtnInvNo!,
+                            );
+                          },
+                          child: ReturnWidget(
+                            returnModel: searchForReturnss.isNotEmpty
+                                ? searchForReturnss[index]
+                                : state.returnModels[index],
+                          ),
+                        );
+                      }),
+                ));
+              } else if (state is GetReturnFailure) {
+                debugPrint(state.error);
+                return const Center(
+                  child:
+                      TextBuilder("Sorry there is error , we will work on it "),
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
           ),
+          // Expanded(
+          //   child: Container(
+          //     padding: const EdgeInsets.symmetric(vertical: 10),
+          //     decoration: BoxDecoration(
+          //       color: AppColors.whiteColor,
+          //       borderRadius: BorderRadius.circular(16),
+          //     ),
+          //     child: ListView.builder(
+          //       padding: const EdgeInsets.all(10),
+          //       physics: const BouncingScrollPhysics(),
+          //       itemCount: 10,
+          //       itemBuilder: (context, index) {
+          //         return ReturnWidget();
+          //       },
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
+import 'package:easy_erp/data/models/return/print_return_model/print_return_model.dart';
+import 'package:easy_erp/data/models/return/return_model.dart';
 import 'package:easy_erp/data/models/send_invoice_model/send_invoice_model.dart';
 
 abstract class ReturnRepo {
@@ -20,4 +22,9 @@ abstract class ReturnRepo {
     int? invid,
     required List<ItemModel> items,
   });
+
+  Future<Either<Failures, List<ReturnModel>>> getReturns();
+
+  Future<Either<Failures, PrintReturnModel>> getReturnDataAndItems(
+      {required String returnInvNo});
 }

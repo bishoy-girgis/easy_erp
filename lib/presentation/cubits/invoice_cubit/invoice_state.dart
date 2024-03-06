@@ -21,9 +21,9 @@ final class InvoiceNotSave extends InvoiceState {
   const InvoiceNotSave(this.error);
 }
 
-final class GetInvoiceLoading extends InvoiceState {}
-
 final class RemoveData extends InvoiceState {}
+
+final class GetInvoiceLoading extends InvoiceState {}
 
 final class GetInvoiceSuccess extends InvoiceState {
   final List<InvoiceModel> invoiceModels;

@@ -34,31 +34,8 @@ class _AddItemsViewState extends State<AddItemsView> {
     return BlocBuilder<GetItemCubit, GetItemState>(
       builder: (context, state) {
         print("${SharedPref.get(key: "ReturnSelectedId")}");
-
         if (state is GetItemsSuccessState) {
-          if (SharedPref.get(key: "ReturnSelectedId") != null) {
-            items = getIt.get<InvoiceCubit>().itemsInvoice;
-          } else {
-            items = state.items;
-          }
-          print("${items.length} lenngth lissttttt");
-          return buildLoadedListWidgets();
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
-  }
-
-  Widget buildCubitInvoWidget() {
-    return BlocBuilder<InvoiceCubit, InvoiceState>(
-      builder: (context, state) {
-        print("${SharedPref.get(key: "ReturnSelectedId")}");
-
-        if (state is GetInvoiceItemsSuccess) {
-          items = getIt.get<InvoiceCubit>().itemsInvoice;
+          items = state.items;
           print("${items.length} lenngth lissttttt");
           return buildLoadedListWidgets();
         } else {
@@ -85,6 +62,7 @@ class _AddItemsViewState extends State<AddItemsView> {
               title: "Exit and dont save ? ",
               titleButton1: "YES",
               onPressedButton1: () {
+                SharedPref.remove(key: "ReturnSelectedId");
                 BlocProvider.of<AddItemCubit>(context).removeAllItems();
                 for (int i = 0; i < items.length; i++) {
                   items[i].quantity = 1;
@@ -174,16 +152,4 @@ class _AddItemsViewState extends State<AddItemsView> {
       ),
     ));
   }
-
-  // getItems() {
-  //   List<ItemModel> finalItems = [];
-  //   items = getIt.get<InvoiceCubit>().itemsInvoice;
-  //   var length = items.length;
-  //   for (int i = 0; i < length; i++) {
-  //     finalItems.add(
-  //       items[i],
-  //     );
-  //   }
-  //   return finalItems;
-  // }
 }

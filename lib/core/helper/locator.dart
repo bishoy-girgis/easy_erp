@@ -37,10 +37,10 @@ void setupServiceLocatorByGetIt() {
   getIt.registerSingleton<InvoiceRepoImplementation>(
     InvoiceRepoImplementation(getIt.get<ApiService>()),
   );
-  getIt.registerSingleton<ReturnRepoImplementation>(
-    ReturnRepoImplementation(getIt.get<ApiService>()),
-  );
   getIt.registerSingleton<InvoiceCubit>(
     InvoiceCubit(invoiceRepo: getIt.get<InvoiceRepoImplementation>()),
+  );
+  getIt.registerSingleton<ReturnRepoImplementation>(
+    ReturnRepoImplementation(getIt.get<ApiService>()),
   );
 }

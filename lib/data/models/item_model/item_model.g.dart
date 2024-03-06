@@ -97,14 +97,6 @@ ItemModel _$ItemModelFromJson(Map<String, dynamic> json) => ItemModel(
     );
 ItemModel _$ItemModelFromJsonToPrintInvoiceWithItems(
         Map<String, dynamic> json) =>
-    // "Itemid": 1,
-    //     "itmcode": "1111120001",
-    //     "itmname": "شاي ",
-    //     "itmename": "tea",
-    //     "qty": 1.000,
-    //     "price": 15.00,
-    //     "discvalue": 0.00,
-    //     "netvalue": 15.00
     ItemModel(
       itmid: json['Itemid'] as int?,
       itmcode: json['itmcode'] as String?,

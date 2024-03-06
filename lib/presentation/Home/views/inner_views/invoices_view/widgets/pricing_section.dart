@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
@@ -6,6 +8,7 @@ import 'package:easy_erp/data/models/payment_type_model/pay_ment_type_model.dart
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:easy_erp/presentation/cubits/item_cubit/item_cubit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,17 +74,21 @@ class PricingSection extends StatelessWidget {
                     isHeader: true,
                   ),
                   onPressed: () async {
+                    // if (SharedPref.get(key: "ReturnSelectedId") != null) {
+                    //   await getIt.get<InvoiceCubit>().getInvoiceItems(context,
+                    //       invNo: SharedPref.get(key: "ReturnSelectedId"));
+                    // } else {
+                    //   await GetItemCubit.get(context).getItems();
+                    // }
+                    await GetItemCubit.get(context).getItems();
+
+                    if (kDebugMode) {
+                      print(
+                          "${SharedPref.get(key: "ReturnSelectedId")}   invoice IIDDDDDD");
+                    }
                     GlobalMethods.goRouterNavigateTO(
                         context: context,
                         router: AppRouters.kAddItemsIntoInvoice);
-                    if (SharedPref.get(key: "ReturnSelectedId") != null) {
-                      await getIt.get<InvoiceCubit>().getInvoiceItems(context,
-                          invNo: SharedPref.get(key: "ReturnSelectedId"));
-                    } else {
-                      await GetItemCubit.get(context).getItems();
-                    }
-                    print(
-                        "${SharedPref.get(key: "ReturnSelectedId")}   invoice numberrr");
                   },
                 ),
                 const GapH(h: 1),
