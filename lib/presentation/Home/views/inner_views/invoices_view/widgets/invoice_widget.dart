@@ -54,7 +54,7 @@ class InvoiceWidget extends StatelessWidget {
                 child: TextBuilder(
                   formatDate(invoiceModel.invdate!),
                   textAlign: TextAlign.center,
-                  fontSize: 18,
+                  fontSize: 15,
                   color: AppColors.whiteColor,
                   maxLines: 2,
                 ),
@@ -68,23 +68,27 @@ class InvoiceWidget extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(
-                          Icons.inventory_2_outlined,
-                          size: 25.sp,
+                        ImageIcon(
+                          AssetImage("assets/images/invoice.png"),
+                          size: 18.sp,
                         ),
+                        // Icon(
+                        //   Icons.inventory_2_outlined,
+                        //   size: 25.sp,
+                        // ),
                         const GapW(w: 5),
                         TextBuilder(
                           invoiceModel.invNo!,
-                          fontSize: 20,
+                          fontSize: 17,
                         ),
                       ],
                     ),
                     const Divider(),
                     TextBuilder(
                       invoiceModel.custInvname!,
-                      fontSize: 20,
+                      fontSize: 17,
                     ),
-                    const GapH(h: 3),
+                    const GapH(h: 1.5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -93,7 +97,7 @@ class InvoiceWidget extends StatelessWidget {
                             TextBuilder(
                               AppLocalizations.of(context)!.total_icludes_tax,
                               textAlign: TextAlign.center,
-                              fontSize: 14,
+                              fontSize: 13,
                             ),
                             TextBuilder(
                               invoiceModel.finalValue.toString(),
@@ -105,7 +109,7 @@ class InvoiceWidget extends StatelessWidget {
                             TextBuilder(
                               AppLocalizations.of(context)!.tax_amount,
                               textAlign: TextAlign.center,
-                              fontSize: 14,
+                              fontSize: 13,
                             ),
                             TextBuilder(invoiceModel.taxAdd.toString()),
                           ],

@@ -117,6 +117,7 @@ class Returncubit extends Cubit<ReturnState> {
         print("{qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqrrrrrrrrrrrrrr}  ${r.qr}");
 
         generateAndPrintArabicPdf(context,
+            isReturn: true,
             qrData: r.qr ?? "empty",
             invNo: returnInvNo,
             invoTime: formattedTime ?? "0000",
@@ -125,7 +126,7 @@ class Returncubit extends Cubit<ReturnState> {
             netvalue: r.rtninvoicehead![0].netvalue!,
             taxAdd: r.rtninvoicehead![0].taxAdd!,
             invoDate: formattedDate,
-            invoiceType: "نسخة من فاتورة ضريبية مبسطة",
+            invoiceType: "نسخة من مرتجع ضريبي مبسط",
             items: r.rtninvoicedtls ?? []);
         getReturns();
         return printReturnModel;

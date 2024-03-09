@@ -132,6 +132,7 @@ class CreateReturnView extends StatelessWidget {
               GlobalMethods.goRouterNavigateTOAndReplacement(
                   context: context, router: AppRouters.kReturns);
               generateAndPrintArabicPdf(context,
+                  isReturn: true,
                   qrData: state.sendInvoiceModel.qr ?? "",
                   invoTime: SharedPref.get(key: 'invoiceTime') ??
                       DateFormat('h:mm a').format(DateTime.now()),
@@ -142,7 +143,7 @@ class CreateReturnView extends StatelessWidget {
                   custName: SharedPref.get(key: 'custName') ?? 'cash',
                   invoDate: SharedPref.get(key: 'invoiceDate') ??
                       DateFormat('dd/MM/yyyy').format(DateTime.now()),
-                  invoiceType: "فاتورة ضريبية مبسطة",
+                  invoiceType: "مرتجع ضريبي مبسط",
                   items: getIt.get<AddItemCubit>().addedItems);
               SharedPref.remove(key: "ReturnSelectedId");
               SharedPref.remove(key: "withInvoiceSelected");

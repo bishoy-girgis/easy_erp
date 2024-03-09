@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_erp/presentation/Home/views/widgets/category_widget.dart';
 import '../../../../core/helper/app_routing.dart';
@@ -42,9 +43,10 @@ class CategoriesViewModel {
       CategoryWidget(
           icon: Icons.keyboard_return_rounded,
           categoryName: l.returns,
-          onTap: () {
+          onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kReturns);
+            await Returncubit.get(context).getReturns();
           }),
       CategoryWidget(icon: Icons.receipt_long, categoryName: l.recceipt),
       CategoryWidget(icon: Icons.payments_rounded, categoryName: l.exchange),

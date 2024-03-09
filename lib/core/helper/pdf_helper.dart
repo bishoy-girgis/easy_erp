@@ -16,6 +16,7 @@ import '../../presentation/cubits/addItem_cubit/add_item_cubit.dart';
 Future<void> generateAndPrintArabicPdf(
   context, {
   invNo,
+  bool isReturn = false,
   required String qrData,
   required String invoDate,
   required String invoTime,
@@ -68,7 +69,8 @@ Future<void> generateAndPrintArabicPdf(
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     buildPDFText(invNo.toString()),
-                    buildPDFText('رقم الفاتورة : '),
+                    buildPDFText(
+                        isReturn ? 'رقم المرتجع : ' : 'رقم الفاتورة : '),
                   ]),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     buildPDFText(custName),

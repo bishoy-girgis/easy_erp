@@ -43,7 +43,7 @@ class HomeView extends StatelessWidget {
                 icon: Icons.access_time_filled_rounded,
               ),
             ),
-            const SliverToBoxAdapter(child: GapH(h: 5)),
+            const SliverToBoxAdapter(child: GapH(h: 7)),
             const SliverToBoxAdapter(child: ChangeLanguagesSection()),
           ],
         ),

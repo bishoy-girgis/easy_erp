@@ -46,20 +46,20 @@ class ReturnWidget extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryColorBlue.withOpacity(0.75),
+                  color: AppColors.primaryColorBlue.withOpacity(0.72),
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(16)),
                 ),
                 child: TextBuilder(
                   formatDate(returnModel.rtnInvdate!),
                   textAlign: TextAlign.center,
-                  fontSize: 18,
+                  fontSize: 15,
                   color: AppColors.whiteColor,
                   maxLines: 2,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: 15,
                   vertical: 5,
                 ),
@@ -67,23 +67,27 @@ class ReturnWidget extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(
-                          Icons.inventory_2_outlined,
-                          size: 25.sp,
+                        ImageIcon(
+                          AssetImage("assets/images/product-returnn.png"),
+                          size: 20.sp,
                         ),
-                        const GapW(w: 5),
+                        // Icon(
+                        //   Icons.inventory_2_outlined,
+                        //   size: 20.sp,
+                        // ),
+                        GapW(w: 5),
                         TextBuilder(
                           returnModel.rtnInvNo!,
-                          fontSize: 20,
+                          fontSize: 17,
                         ),
                       ],
                     ),
-                    const Divider(),
+                    Divider(),
                     TextBuilder(
                       returnModel.custname!,
-                      fontSize: 20,
+                      fontSize: 17,
                     ),
-                    const GapH(h: 3),
+                    GapH(h: 1.5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -92,7 +96,7 @@ class ReturnWidget extends StatelessWidget {
                             TextBuilder(
                               AppLocalizations.of(context)!.total_icludes_tax,
                               textAlign: TextAlign.center,
-                              fontSize: 14,
+                              fontSize: 13,
                             ),
                             TextBuilder(
                               returnModel.finalValue.toString(),
@@ -104,7 +108,7 @@ class ReturnWidget extends StatelessWidget {
                             TextBuilder(
                               AppLocalizations.of(context)!.tax_amount,
                               textAlign: TextAlign.center,
-                              fontSize: 14,
+                              fontSize: 13,
                             ),
                             TextBuilder(returnModel.taxAdd.toString()),
                           ],

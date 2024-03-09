@@ -20,7 +20,7 @@ class ItemWidget extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: AppColors.primaryColorBlue,
+          color: AppColors.primaryColorBlue.withOpacity(0.83),
           boxShadow: const [
             BoxShadow(
               color: Colors.black45,
@@ -51,7 +51,7 @@ class ItemWidget extends StatelessWidget {
               TextBuilder(
                 item.itmname ?? item.itmename ?? "none",
                 color: AppColors.whiteColor,
-                fontSize: 20,
+                fontSize: 17,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -59,9 +59,10 @@ class ItemWidget extends StatelessWidget {
                   TextBuilder(
                     item.itmcode ?? "00",
                     color: AppColors.whiteColor,
+                    fontSize: 14,
                   ),
                   GapW(w: 1),
-                  Icon(
+                  const Icon(
                     Icons.perm_device_information_rounded,
                     color: AppColors.whiteColor,
                   ),
