@@ -73,5 +73,7 @@
     "invoice_number" : "رقم الفاتوره",
     "return_id" : "رقم المرتجع",
     "return_date": "تاريخ المرتجع",
-    "return_type" : "نوع المرتجع"
+    "return_type" : "نوع المرتجع",
+    "with_invoices" : "بفاتورة",
+    "without_invoice" : "بدون فاتوره"
 }

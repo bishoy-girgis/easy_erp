@@ -83,5 +83,7 @@
     "invoice_number" : "Invoice Number",
     "return_id" : "Return Id",
     "return_date": "Return Date",
-    "return_type" : "Return Type"
+    "return_type" : "Return Type",
+    "with_invoices" : "With Invoice",
+    "without_invoice" : "Without Invoice"
 }

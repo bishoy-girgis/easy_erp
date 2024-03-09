@@ -125,6 +125,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
             color: _isInvoiceSelected ? AppColors.primaryColorBlue : null,
             child: TextButton(
               onPressed: () {
+                getIt.get<InvoiceCubit>().getInvoices();
                 if (getIt.get<AddItemCubit>().addedItems.isNotEmpty) {
                   getIt.get<AddItemCubit>().addedItems.clear();
                   GlobalMethods.navigatePOP(context);
@@ -136,7 +137,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                 });
               },
               child: TextBuilder(
-                'With Invoice',
+                AppLocalizations.of(context)!.with_invoices,
                 color: _isInvoiceSelected
                     ? Colors.white
                     : AppColors.primaryColorBlue,
@@ -157,7 +158,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                 });
               },
               child: TextBuilder(
-                'Without Invoice',
+                AppLocalizations.of(context)!.without_invoice,
                 color: !_isInvoiceSelected
                     ? Colors.white
                     : AppColors.primaryColorBlue,
