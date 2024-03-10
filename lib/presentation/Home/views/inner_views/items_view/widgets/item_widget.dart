@@ -61,7 +61,7 @@ class ItemWidget extends StatelessWidget {
                     color: AppColors.whiteColor,
                     fontSize: 14,
                   ),
-                  GapW(w: 1),
+                  const GapW(w: 1),
                   const Icon(
                     Icons.perm_device_information_rounded,
                     color: AppColors.whiteColor,

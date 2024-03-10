@@ -28,12 +28,12 @@ class GlobalMethods {
                     width: double.infinity,
                     child: TextButton(
                       onPressed: onPressedButton1,
+                      style: TextButton.styleFrom(
+                        backgroundColor: AppColors.primaryColorBlue,
+                      ),
                       child: TextBuilder(
                         titleButton1,
                         color: AppColors.whiteColor,
-                      ),
-                      style: TextButton.styleFrom(
-                        backgroundColor: AppColors.primaryColorBlue,
                       ),
                     ),
                   )
@@ -43,12 +43,12 @@ class GlobalMethods {
                     width: double.infinity,
                     child: TextButton(
                       onPressed: onPressedButton2,
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.red,
+                      ),
                       child: TextBuilder(
                         titleButton2,
                         color: AppColors.whiteColor,
-                      ),
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.red,
                       ),
                     ),
                   )

@@ -59,7 +59,7 @@ class ReturnWidget extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 15,
                   vertical: 5,
                 ),
@@ -68,26 +68,26 @@ class ReturnWidget extends StatelessWidget {
                     Row(
                       children: [
                         ImageIcon(
-                          AssetImage("assets/images/product-returnn.png"),
+                          const AssetImage("assets/images/product-returnn.png"),
                           size: 20.sp,
                         ),
                         // Icon(
                         //   Icons.inventory_2_outlined,
                         //   size: 20.sp,
                         // ),
-                        GapW(w: 5),
+                        const GapW(w: 5),
                         TextBuilder(
                           returnModel.rtnInvNo!,
                           fontSize: 17,
                         ),
                       ],
                     ),
-                    Divider(),
+                    const Divider(),
                     TextBuilder(
                       returnModel.custname!,
                       fontSize: 17,
                     ),
-                    GapH(h: 1.5),
+                    const GapH(h: 1.5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

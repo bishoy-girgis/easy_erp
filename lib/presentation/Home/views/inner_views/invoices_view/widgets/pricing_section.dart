@@ -6,7 +6,6 @@ import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/models/payment_type_model/pay_ment_type_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
-import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:easy_erp/presentation/cubits/item_cubit/item_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -150,7 +149,7 @@ class PricingSection extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       );
                     } else {
-                      return Text(
+                      return const Text(
                           "There is no payment type , Tell us your problem!");
                     }
                   },
@@ -191,7 +190,7 @@ class ChoocePaymentType extends StatelessWidget {
               fit: FlexFit.loose, // << change this
               itemBuilder: (context, item, isSelected) {
                 return Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     // alignment: Alignment.center,
                     child: TextBuilder(
                       item.payname!,
@@ -202,7 +201,7 @@ class ChoocePaymentType extends StatelessWidget {
                     ));
               },
             ),
-            dropdownButtonProps: DropdownButtonProps(
+            dropdownButtonProps: const DropdownButtonProps(
               color: AppColors.primaryColorBlue,
             ),
 
@@ -238,7 +237,7 @@ class ChoocePaymentType extends StatelessWidget {
             // selectedItem: itemSelected,
           ),
         ),
-        GapW(w: 5),
+        const GapW(w: 5),
         Flexible(
           child: CustomTextFormField(
             controller: _controller,
@@ -250,7 +249,7 @@ class ChoocePaymentType extends StatelessWidget {
               _controller.text = p0;
               price = p0 == "" || p0.isEmpty ? 0.0 : double.parse(p0);
             },
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
           ),
         ),
       ],

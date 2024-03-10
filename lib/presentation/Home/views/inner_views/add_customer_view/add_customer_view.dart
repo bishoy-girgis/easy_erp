@@ -237,7 +237,7 @@ class AddCustomerView extends StatelessWidget {
                             FocusScope.of(context).unfocus();
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text("please choose group"),
                               ),
                             );

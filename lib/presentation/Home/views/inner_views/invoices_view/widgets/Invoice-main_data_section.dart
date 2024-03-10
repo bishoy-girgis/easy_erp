@@ -26,8 +26,8 @@ class InvoiceMainDataSection extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: AppColors.whiteColor,
-            boxShadow: [
-              const BoxShadow(
+            boxShadow: const [
+              BoxShadow(
                 color: Colors.black,
                 blurRadius: 5,
               )
@@ -53,10 +53,10 @@ class InvoiceMainDataSection extends StatelessWidget {
               isHeader: true,
               fontSize: 16,
             ),
-            Row(
+            const Row(
               children: [
-                const Flexible(child: DatePickerWidget()),
-                const GapW(w: 1),
+                Flexible(child: DatePickerWidget()),
+                GapW(w: 1),
                 Flexible(child: HoursAndMinutes()),
               ],
             ),
@@ -153,10 +153,10 @@ class SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
             key: customerKey,
             items: customers,
             itemAsString: (CustomerModel cust) => cust.custname!,
-            popupProps: PopupProps.menu(
+            popupProps: const PopupProps.menu(
               showSearchBox: true,
             ),
-            dropdownButtonProps: DropdownButtonProps(
+            dropdownButtonProps: const DropdownButtonProps(
               color: AppColors.primaryColorBlue,
             ),
             validator: (value) {

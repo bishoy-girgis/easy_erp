@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
@@ -103,7 +105,7 @@ class _InvoicesViewState extends State<InvoicesView> {
                 } else if (state is GetInvoiceFailure) {
                   debugPrint(state.error);
                   return const Center(
-                    child: const TextBuilder(
+                    child: TextBuilder(
                         "Sorry there is error , we will work on it "),
                   );
                 } else {

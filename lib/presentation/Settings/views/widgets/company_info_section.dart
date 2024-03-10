@@ -20,7 +20,7 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: AppColors.whiteColor,
           borderRadius: BorderRadius.circular(16),
@@ -28,13 +28,13 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextBuilder(
+            const TextBuilder(
               "Company information",
               isHeader: true,
             ),
-            Divider(),
+            const Divider(),
             // GapH(h: 1),
-            TextBuilder(
+            const TextBuilder(
               "Company logo",
               isHeader: true,
               fontSize: 16,
@@ -57,23 +57,23 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
               ),
             ),
 
-            CustomTextFormField(
+            const CustomTextFormField(
               labelText: "Branch name",
               focusedBorderColor: Colors.blueGrey,
             ),
-            CustomTextFormField(
+            const CustomTextFormField(
               labelText: "Branch adress",
             ),
-            CustomTextFormField(
+            const CustomTextFormField(
               labelText: "Tax number",
             ),
-            CustomTextFormField(
+            const CustomTextFormField(
               labelText: "Notes",
               maxLines: 5,
             ),
             CustomElevatedButton(
               width: double.infinity,
-              title: TextBuilder(
+              title: const TextBuilder(
                 "Submit",
                 color: AppColors.whiteColor,
               ),

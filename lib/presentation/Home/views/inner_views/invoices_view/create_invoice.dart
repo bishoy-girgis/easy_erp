@@ -140,7 +140,7 @@ class CreateInvoiceView extends StatelessWidget {
                   )
                 : GlobalMethods.navigatePOP(context);
           },
-          icon: Icon(Icons.arrow_back)),
+          icon: const Icon(Icons.arrow_back)),
       title: TextBuilder(
         AppLocalizations.of(context)!.create_invoice,
         isHeader: true,
@@ -206,7 +206,7 @@ class CreateInvoiceView extends StatelessWidget {
                       )
                     : Container();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.done,
               ),
             );

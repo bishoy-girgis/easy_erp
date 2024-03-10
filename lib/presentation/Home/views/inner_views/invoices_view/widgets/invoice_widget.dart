@@ -69,7 +69,7 @@ class InvoiceWidget extends StatelessWidget {
                     Row(
                       children: [
                         ImageIcon(
-                          AssetImage("assets/images/invoice.png"),
+                          const AssetImage("assets/images/invoice.png"),
                           size: 18.sp,
                         ),
                         // Icon(

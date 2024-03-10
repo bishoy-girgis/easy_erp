@@ -145,8 +145,8 @@ class PageTransition extends PageRouteBuilder {
               alignment: Alignment.bottomCenter,
               child: SizeTransition(
                 sizeFactor: animation,
-                child: page,
                 axisAlignment: 0,
+                child: page,
               ),
             );
           },

@@ -144,10 +144,14 @@ Future<void> generateAndPrintArabicPdf(
 
 Directionality buildPDFText(String text, {double fontSize = 18}) {
   return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Center(
-          child: Text(text,
-              style: TextStyle(
-                fontSize: fontSize,
-              ))));
+    textDirection: TextDirection.rtl,
+    child: Center(
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: fontSize,
+        ),
+      ),
+    ),
+  );
 }

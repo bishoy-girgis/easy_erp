@@ -123,7 +123,7 @@ class _LoginViewState extends State<LoginView> {
                         hintText: AppLocalizations.of(context)!.passwordHint,
                       ),
                       state is LoginLoadingState
-                          ? Center(
+                          ? const Center(
                               child: CircularProgressIndicator(),
                             )
                           : CustomElevatedButton(

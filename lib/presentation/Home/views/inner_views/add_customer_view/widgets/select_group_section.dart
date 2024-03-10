@@ -38,7 +38,7 @@ class ChooseGroup extends StatelessWidget {
 
                 itemBuilder: (context, group, isSelected) {
                   return Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       // alignment: Alignment.center,
                       child: TextBuilder(
                         group.custCategoryName ??
@@ -51,7 +51,7 @@ class ChooseGroup extends StatelessWidget {
                       ));
                 },
               ),
-              dropdownButtonProps: DropdownButtonProps(
+              dropdownButtonProps: const DropdownButtonProps(
                 color: AppColors.primaryColorBlue,
               ),
               dropdownDecoratorProps: DropDownDecoratorProps(

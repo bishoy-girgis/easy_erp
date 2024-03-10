@@ -6,12 +6,10 @@ import 'package:easy_erp/core/helper/pdf_helper.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
-import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/Invoice-main_data_section.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/pricing_section.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/selected_items_to_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/widgets/return_main_data.dart';
 import 'package:easy_erp/presentation/cubits/addItem_cubit/add_item_cubit.dart';
-import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
 import 'package:easy_erp/presentation/cubits/return_cubit/return_states.dart';
 
@@ -35,7 +33,7 @@ class CreateReturnView extends StatelessWidget {
     return SafeArea(
         child: CustomScrollView(
       slivers: [
-        ReturnMainDataWidget(),
+        const ReturnMainDataWidget(),
         const SliverToBoxAdapter(
           child: GapH(h: 1),
         ),
@@ -116,7 +114,7 @@ class CreateReturnView extends StatelessWidget {
             getIt.get<AddItemCubit>().addedItems.clear();
             GlobalMethods.navigatePOP(context);
           },
-          icon: Icon(Icons.arrow_back)),
+          icon: const Icon(Icons.arrow_back)),
       actions: [
         BlocConsumer<Returncubit, ReturnState>(
           listener: (context, state) {
@@ -181,7 +179,7 @@ class CreateReturnView extends StatelessWidget {
                       )
                     : Container();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.done,
               ),
             );

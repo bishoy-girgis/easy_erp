@@ -76,7 +76,7 @@ class _AddItemsViewState extends State<AddItemsView> {
               },
             );
           },
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
         ),
         actions: [
           IconButton(
@@ -84,7 +84,7 @@ class _AddItemsViewState extends State<AddItemsView> {
               BlocProvider.of<AddItemCubit>(context).checkAndMergeDuplicates();
               GlobalMethods.goRouterPOP(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.done,
             ),
           ),

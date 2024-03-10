@@ -38,6 +38,7 @@ class AddItemWidget extends StatelessWidget {
     //quantityController = 1;
     //limitController = int.parse(itemModel.quantity.toInt().toString());
     // }
+    // ignore: non_constant_identifier_names
     var Controller = TextEditingController(text: quantityController.toString());
 
     return BlocBuilder<AddItemCubit, AddItemState>(
@@ -126,7 +127,7 @@ class AddItemWidget extends StatelessWidget {
                   children: [
                     IconButton(
                       style: IconButton.styleFrom(
-                        padding: EdgeInsets.all(0),
+                        padding: const EdgeInsets.all(0),
                       ), // mohmmmm
                       // viiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                       //  sss
@@ -184,7 +185,7 @@ class AddItemWidget extends StatelessWidget {
                     ),
                     IconButton(
                       style: IconButton.styleFrom(
-                        padding: EdgeInsets.all(0),
+                        padding: const EdgeInsets.all(0),
                       ),
                       onPressed: () {
                         // itemModel.quantity = int.parse(quantityController.text);
@@ -219,6 +220,7 @@ class AddItemWidget extends StatelessWidget {
                         fontSize: 14,
                       ),
                       TextBuilder(
+                        // ignore: prefer_interpolation_to_compose_strings
                         itemModel.discP.toString() + "%",
                         isHeader: true,
                         fontSize: 14,
