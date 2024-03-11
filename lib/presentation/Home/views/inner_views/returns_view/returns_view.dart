@@ -49,7 +49,6 @@ class _ReturnsViewState extends State<ReturnsView> {
     );
   }
 
-  /// AppBar
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       title: TextBuilder(
@@ -57,18 +56,9 @@ class _ReturnsViewState extends State<ReturnsView> {
         isHeader: true,
         color: Colors.white,
       ),
-      // foregroundColor: Colors.white,
-      // actions: [
-      //   IconButton(
-      //       onPressed: () {},
-      //       icon: const Icon(
-      //         Icons.add_box,
-      //       ))
-      // ],
     );
   }
 
-  /// Body
   Widget _buildBody(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -143,23 +133,6 @@ class _ReturnsViewState extends State<ReturnsView> {
               }
             },
           ),
-          // Expanded(
-          //   child: Container(
-          //     padding: const EdgeInsets.symmetric(vertical: 10),
-          //     decoration: BoxDecoration(
-          //       color: AppColors.whiteColor,
-          //       borderRadius: BorderRadius.circular(16),
-          //     ),
-          //     child: ListView.builder(
-          //       padding: const EdgeInsets.all(10),
-          //       physics: const BouncingScrollPhysics(),
-          //       itemCount: 10,
-          //       itemBuilder: (context, index) {
-          //         return ReturnWidget();
-          //       },
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:easy_erp/data/models/add_customer_response_model/add_customer_response_model.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../data/models/group_model/group_model.dart';
-
 part 'customer_state.dart';
 
 class CustomerCubit extends Cubit<CustomerState> {

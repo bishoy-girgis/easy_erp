@@ -1,9 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:equatable/equatable.dart';
-
 import '../../../../data/models/item_model/item_model.dart';
-
 part 'add_item_state.dart';
 
 class AddItemCubit extends Cubit<AddItemState> {

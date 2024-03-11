@@ -17,37 +17,38 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-                child: HomeViewHeaderCard(name: "${AppConstants.userName}")),
-            const SliverToBoxAdapter(child: GapH(h: 3)),
-            SliverGrid.builder(
-              itemCount: CategoriesViewModel.getCategories(context).length,
-              itemBuilder: (context, index) {
-                return CategoriesViewModel.getCategories(context)[index];
-              },
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 20.w,
-                childAspectRatio: 1.34.r,
-                mainAxisSpacing: 20.h,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                  child: HomeViewHeaderCard(name: "${AppConstants.userName}")),
+              const SliverToBoxAdapter(child: GapH(h: 3)),
+              SliverGrid.builder(
+                itemCount: CategoriesViewModel.getCategories(context).length,
+                itemBuilder: (context, index) {
+                  return CategoriesViewModel.getCategories(context)[index];
+                },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20.w,
+                  childAspectRatio: 1.34.r,
+                  mainAxisSpacing: 20.h,
+                ),
               ),
-            ),
-            const SliverToBoxAdapter(child: GapH(h: 3)),
-            SliverToBoxAdapter(
-              child: CategoryWidget(
-                categoryName: l.close_shift,
-                icon: Icons.access_time_filled_rounded,
+              const SliverToBoxAdapter(child: GapH(h: 3)),
+              SliverToBoxAdapter(
+                child: CategoryWidget(
+                  categoryName: l.close_shift,
+                  icon: Icons.access_time_filled_rounded,
+                ),
               ),
-            ),
-            const SliverToBoxAdapter(child: GapH(h: 7)),
-            const SliverToBoxAdapter(child: ChangeLanguagesSection()),
-          ],
+              const SliverToBoxAdapter(child: GapH(h: 7)),
+              const SliverToBoxAdapter(child: ChangeLanguagesSection()),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

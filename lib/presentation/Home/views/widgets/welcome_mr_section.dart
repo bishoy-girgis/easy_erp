@@ -19,14 +19,14 @@ class WelcomeMrSection extends StatelessWidget {
         TextBuilder(
           AppLocalizations.of(context)!.welcome,
           color: AppColors.secondColorOrange,
-          fontSize: 16.sp,
+          fontSize: 14.sp,
           isHeader: true,
         ),
         TextBuilder(
           "$name",
           isHeader: true,
           color: Colors.blueGrey,
-          fontSize: 20.sp,
+          fontSize: 16.sp,
           textAlign: TextAlign.end,
         ),
       ],
