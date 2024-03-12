@@ -1,6 +1,10 @@
+import 'package:easy_erp/core/helper/global_methods.dart';
+import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
+import 'package:easy_erp/main.dart';
+import 'package:easy_erp/presentation/Login/views/login_view.dart';
 import 'package:easy_erp/presentation/Settings/views/widgets/choose_print_model_section.dart';
 import 'package:easy_erp/presentation/Settings/views/widgets/company_info_section.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +28,8 @@ class SettingsView extends StatelessWidget {
           IconButton(
             onPressed: () {
               SharedPref.remove(key: "accessToken");
-              SystemNavigator.pop();
+              navigatorKey.currentState!
+                  .pushNamedAndRemoveUntil(AppRouters.kLogin, (route) => false);
             },
             icon: const Icon(Icons.done),
           )

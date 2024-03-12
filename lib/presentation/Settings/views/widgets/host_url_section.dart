@@ -30,7 +30,6 @@ class HostUrlSection extends StatelessWidget {
             const Divider(),
             CustomTextFormField(
               labelText: AppConstants.baseUrl,
-              // hintText: AppConstants.baseUrl,
               controller: baseUrlController,
               onChange: (value) {
                 baseUrlController.text = value;

@@ -12,6 +12,11 @@ class AppConstants {
   static String baseUrl =
       SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
 
+  static String branchName = SharedPref.get(key: "branchName") ?? "";
+  static String branchAddress = SharedPref.get(key: "branchAddress") ?? "";
+  static String taxNumber = SharedPref.get(key: "taxNumber") ?? "";
+  static String notes = SharedPref.get(key: "notes") ?? "";
+
   ///Authorization
   static const String LOGIN_AND_TOKEN = "/token";
   static String accessToken = SharedPref.get(key: "accessToken") ?? "";
@@ -46,5 +51,13 @@ class AppConstants {
     vatType = SharedPref.get(key: "VATType");
     baseUrl = SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
     accessToken = SharedPref.get(key: "accessToken");
+  }
+
+  static void updateSettingValues() {
+    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
+    branchName = SharedPref.get(key: "branchName") ?? "";
+    branchAddress = SharedPref.get(key: "branchAddress") ?? "";
+    taxNumber = SharedPref.get(key: "taxNumber") ?? "";
+    notes = SharedPref.get(key: "notes") ?? "";
   }
 }

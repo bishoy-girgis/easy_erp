@@ -1,5 +1,14 @@
+import 'dart:io';
+
+import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
+import 'package:easy_erp/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../../core/helper/app_colors.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/text_builder.dart';
@@ -16,6 +25,16 @@ class CompanyInfoSection extends StatefulWidget {
 class _CompanyInfoSectionState extends State<CompanyInfoSection> {
   int selectedButtonIndex = -1;
 
+  final TextEditingController branchNameController =
+      TextEditingController(text: AppConstants.branchName);
+  final TextEditingController branchAddressController =
+      TextEditingController(text: AppConstants.branchAddress);
+  final TextEditingController taxNumberController =
+      TextEditingController(text: AppConstants.taxNumber);
+  final TextEditingController notesController =
+      TextEditingController(text: AppConstants.notes);
+  ImagePicker picker = ImagePicker();
+  XFile? image;
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -31,45 +50,114 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
             const TextBuilder(
               "Company information",
               isHeader: true,
+              fontSize: 15,
             ),
             const Divider(),
-            // GapH(h: 1),
-            const TextBuilder(
-              "Company logo",
-              isHeader: true,
-              fontSize: 16,
-            ),
-            Card(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: () {},
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const TextBuilder(
+                  "Company logo",
+                  isHeader: true,
+                  fontSize: 12,
+                ),
+                Card(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: IconButton(
+                      onPressed: () async {
+                        image =
+                            await picker.pickImage(source: ImageSource.gallery);
+
+                        setState(() {});
+                      },
                       icon: const Icon(
                         Icons.add_photo_alternate_rounded,
+                        size: 45,
                       )),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.visibility_sharp,
-                      )),
-                ],
-              ),
+                ),
+              ],
             ),
-
-            const CustomTextFormField(
-              labelText: "Branch name",
+            const Divider(),
+            const TextBuilder(
+              "Branch Name",
+              isHeader: true,
+              fontSize: 12,
+            ),
+            CustomTextFormField(
+              controller: branchNameController,
+              labelText: branchNameController.text.isEmpty
+                  ? "Branch Name"
+                  : branchNameController.text,
               focusedBorderColor: Colors.blueGrey,
+              onChange: (value) {
+                branchNameController.text = value;
+                SharedPref.set(key: "branchName", value: value);
+                debugPrint('😘😘' + branchNameController.text);
+                debugPrint('sharedddddd NAMEEEEEE' +
+                    SharedPref.get(key: 'branchName'));
+                setState(() {});
+              },
             ),
-            const CustomTextFormField(
-              labelText: "Branch adress",
+            const Divider(),
+            const TextBuilder(
+              "Branch Address",
+              isHeader: true,
+              fontSize: 12,
             ),
-            const CustomTextFormField(
-              labelText: "Tax number",
+            CustomTextFormField(
+              controller: branchAddressController,
+              labelText: branchAddressController.text.isEmpty
+                  ? "Branch Address"
+                  : branchAddressController.text,
+              onChange: (value) {
+                branchAddressController.text = value;
+                SharedPref.set(key: "branchAddress", value: value);
+                debugPrint('😘😘' + branchAddressController.text);
+                debugPrint('sharedddddd ADDRESSSSSSS' +
+                    SharedPref.get(key: 'branchAddress'));
+                setState(() {});
+              },
             ),
-            const CustomTextFormField(
-              labelText: "Notes",
-              maxLines: 5,
+            const Divider(),
+            const TextBuilder(
+              "Tax Number",
+              isHeader: true,
+              fontSize: 12,
+            ),
+            CustomTextFormField(
+              controller: taxNumberController,
+              labelText: taxNumberController.text.isEmpty
+                  ? "Tax Number"
+                  : taxNumberController.text,
+              onChange: (value) {
+                taxNumberController.text = value;
+                SharedPref.set(key: "taxNumber", value: value);
+                debugPrint('😘😘' + taxNumberController.text);
+                debugPrint('sharedddddd TAAXXXXXX NUMBERRR' +
+                    SharedPref.get(key: 'taxNumber'));
+                setState(() {});
+              },
+            ),
+            const Divider(),
+            const TextBuilder(
+              "Notes",
+              isHeader: true,
+              fontSize: 12,
+            ),
+            CustomTextFormField(
+              controller: notesController,
+              labelText:
+                  notesController.text.isEmpty ? "Notes" : notesController.text,
+              maxLines: 3,
+              onChange: (value) {
+                notesController.text = value;
+                SharedPref.set(key: "notes", value: value);
+                debugPrint('😘😘' + notesController.text);
+                debugPrint(
+                    'sharedddddd NOTEESSSSSS' + SharedPref.get(key: 'notes'));
+                setState(() {});
+              },
             ),
             CustomElevatedButton(
               width: double.infinity,
@@ -77,7 +165,17 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
                 "Submit",
                 color: AppColors.whiteColor,
               ),
-              onPressed: () {},
+              onPressed: () {
+                AppConstants.updateSettingValues();
+                debugPrint("supmiitttteeeddddddddddddddddddddddddddddddddddd");
+                debugPrint(AppConstants.branchName);
+                debugPrint(AppConstants.branchAddress);
+                debugPrint(AppConstants.taxNumber);
+                debugPrint(AppConstants.notes);
+                SharedPref.remove(key: "accessToken");
+                navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                    AppRouters.kLogin, (route) => false);
+              },
             )
           ],
         ),

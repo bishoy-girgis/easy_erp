@@ -1,6 +1,8 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/bloc_observer.dart';
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/core/helper/page_route_name.dart';
+import 'package:easy_erp/core/helper/routes.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/models/printerModel/printer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
@@ -30,8 +32,9 @@ import 'presentation/cubits/customer_cubit/customer_cubit.dart';
 import 'presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'presentation/cubits/item_cubit/item_cubit.dart';
 import 'presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
-// import 'package:path_provider/path_provider.dart' as path_provider;
 
+// import 'package:path_provider/path_provider.dart' as path_provider;
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
@@ -113,8 +116,10 @@ class MyApp extends StatelessWidget {
           child: Builder(builder: (context) {
             var languagesProvider = Provider.of<LanguageProvider>(context);
 
-            return MaterialApp.router(
-              routerConfig: AppRouters.router,
+            return MaterialApp(
+              navigatorKey: navigatorKey,
+              initialRoute: AppRouters.kSplash,
+              onGenerateRoute: Routes.generateRoute,
               debugShowCheckedModeBanner: false,
               supportedLocales: L10n.all,
               localizationsDelegates: const [

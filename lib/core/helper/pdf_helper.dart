@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/core/helper/app_images.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:flutter/foundation.dart';
@@ -43,6 +45,8 @@ Future<void> generateAndPrintArabicPdf(
   }
 
 // final qrCodeImage = await generateQrCode();
+  final ByteData image = await rootBundle.load(AppImages.logo);
+  Uint8List imageData = (image).buffer.asUint8List();
   var itemsList = getItems();
   final Document pdf = Document();
   var arabicFont = Font.ttf(
@@ -58,14 +62,31 @@ Future<void> generateAndPrintArabicPdf(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              buildPDFText(invoiceType, fontSize: 20),
-              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // imagggeeee
+                  Container(
+                      width: 50.w,
+                      height: 50.h,
+                      child: Image(MemoryImage(imageData))),
+                  Column(
+                    children: [
+                      buildPDFText(AppConstants.branchName, fontSize: 20),
+                      buildPDFText(AppConstants.taxNumber, fontSize: 20),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.h),
+              buildPDFText(invoiceType, fontSize: 18),
+              SizedBox(height: 12.h),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 BarcodeWidget(
                     data: "$qrData",
                     barcode: Barcode.qrCode(),
-                    height: 75.h,
-                    width: 90.w),
+                    height: 70.h,
+                    width: 85.w),
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     buildPDFText(invNo.toString()),
@@ -121,6 +142,10 @@ Future<void> generateAndPrintArabicPdf(
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 buildPDFText(finalValue.toStringAsFixed(2)),
                 buildPDFText("الإجمالي شامل الضريبة : "),
+              ]),
+              Spacer(),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                buildPDFText(AppConstants.notes, fontSize: 15),
               ]),
             ],
           ),

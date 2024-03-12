@@ -1,8 +1,8 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:go_router/go_router.dart';
 
 class GlobalMethods {
   static Future<void> showAlertAdressDialog(BuildContext context,
@@ -93,43 +93,43 @@ class GlobalMethods {
 
   static Future goRouterNavigateTO(
       {required BuildContext context, required String router}) {
-    return GoRouter.of(context).push(router);
+    return navigatorKey.currentState!.pushNamed(router);
   }
 
   static Future goRouterNavigateTOAndReplacement(
       {required BuildContext context, required String router}) {
-    return GoRouter.of(context).pushReplacement(router);
+    return navigatorKey.currentState!.pushReplacementNamed(router);
   }
 
-  static Future goRouterNavigateTOWithExtraObject(
-      {required BuildContext context,
-      required String router,
-      Object? extraObject}) {
-    return GoRouter.of(context).pushNamed(
-      router,
-      extra: extraObject,
-    );
-  }
+  // static Future goRouterNavigateTOWithExtraObject(
+  //     {required BuildContext context,
+  //     required String router,
+  //     Object? extraObject}) {
+  //   return GoRouter.of(context).pushNamed(
+  //     router,
+  //     extra: extraObject,
+  //   );
+  // }
 
   static goRouterPOP(
     BuildContext context,
   ) {
-    return GoRouter.of(context).pop();
+    return navigatorKey.currentState!.pop();
   }
 
-  static goRouterPOPWithData(BuildContext context, var data) {
-    return GoRouter.of(context).pop(data);
-  }
+  // static goRouterPOPWithData(BuildContext context, var data) {
+  //   return GoRouter.of(context).pop(data);
+  // }
 
-  static Future goRouterNavigateTOWithQueryParameters(
-      {required BuildContext context,
-      required String router,
-      required Map<String, dynamic> queryParameters}) {
-    return GoRouter.of(context).pushNamed(
-      router,
-      queryParameters: queryParameters,
-    );
-  }
+  // static Future goRouterNavigateTOWithQueryParameters(
+  //     {required BuildContext context,
+  //     required String router,
+  //     required Map<String, dynamic> queryParameters}) {
+  //   return GoRouter.of(context).pushNamed(
+  //     router,
+  //     queryParameters: queryParameters,
+  //   );
+  // }
 
   static navigateTo(context, Widget screen) {
     Navigator.of(context).push(
