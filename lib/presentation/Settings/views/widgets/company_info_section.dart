@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../../../core/helper/app_colors.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/text_builder.dart';
@@ -33,8 +34,29 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
       TextEditingController(text: AppConstants.taxNumber);
   final TextEditingController notesController =
       TextEditingController(text: AppConstants.notes);
-  ImagePicker picker = ImagePicker();
-  XFile? image;
+  String? imagePath;
+
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      final imageFile = File(pickedFile.path);
+      final directory = await getApplicationDocumentsDirectory();
+      final newPath = directory.path + '/${DateTime.now()}.png';
+
+      await imageFile.copy(newPath);
+
+      await SharedPref.set(key: 'logoPath', value: newPath); // Add this line
+
+      setState(() {
+        imagePath = newPath;
+      });
+      print("${SharedPref.get(key: "logoPath")}  IMAGE LOGOOOO PATHHH");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -61,16 +83,19 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
                   isHeader: true,
                   fontSize: 12,
                 ),
+                imagePath != null
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.h, horizontal: 15.w),
+                        child: Image.file(File(imagePath!),
+                            width: 100.w, height: 100.h),
+                      )
+                    : Container(),
                 Card(
                   margin:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: IconButton(
-                      onPressed: () async {
-                        image =
-                            await picker.pickImage(source: ImageSource.gallery);
-
-                        setState(() {});
-                      },
+                      onPressed: _pickImage,
                       icon: const Icon(
                         Icons.add_photo_alternate_rounded,
                         size: 45,
@@ -172,6 +197,8 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
                 debugPrint(AppConstants.branchAddress);
                 debugPrint(AppConstants.taxNumber);
                 debugPrint(AppConstants.notes);
+                debugPrint(
+                    "${SharedPref.get(key: "logoPath")}  IMAGE LOGOOOO PATHHH");
                 SharedPref.remove(key: "accessToken");
                 navigatorKey.currentState!.pushNamedAndRemoveUntil(
                     AppRouters.kLogin, (route) => false);

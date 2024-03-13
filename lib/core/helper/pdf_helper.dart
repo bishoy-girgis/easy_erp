@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/app_images.dart';
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -44,9 +45,21 @@ Future<void> generateAndPrintArabicPdf(
     return finalItems;
   }
 
-// final qrCodeImage = await generateQrCode();
-  final ByteData image = await rootBundle.load(AppImages.logo);
-  Uint8List imageData = (image).buffer.asUint8List();
+  Uint8List? imageData;
+  String? imagePath = await SharedPref.get(key: "logoPath");
+  if (imagePath != null) {
+    File imageFile = File(imagePath);
+    if (imageFile.existsSync()) {
+      imageData = await imageFile.readAsBytes();
+    } else {
+      final ByteData image = await rootBundle.load(AppImages.logo);
+      Uint8List imageData = (image).buffer.asUint8List();
+    }
+  } else {
+    final ByteData image = await rootBundle.load(AppImages.logo);
+    Uint8List imageData = (image).buffer.asUint8List();
+  }
+
   var itemsList = getItems();
   final Document pdf = Document();
   var arabicFont = Font.ttf(
@@ -69,7 +82,7 @@ Future<void> generateAndPrintArabicPdf(
                   Container(
                       width: 50.w,
                       height: 50.h,
-                      child: Image(MemoryImage(imageData))),
+                      child: Image(MemoryImage(imageData!))),
                   Column(
                     children: [
                       buildPDFText(AppConstants.branchName, fontSize: 20),
@@ -78,15 +91,15 @@ Future<void> generateAndPrintArabicPdf(
                   ),
                 ],
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 10.h),
               buildPDFText(invoiceType, fontSize: 18),
-              SizedBox(height: 12.h),
+              SizedBox(height: 8.h),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 BarcodeWidget(
                     data: "$qrData",
                     barcode: Barcode.qrCode(),
-                    height: 70.h,
-                    width: 85.w),
+                    height: 60.h,
+                    width: 75.w),
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     buildPDFText(invNo.toString()),
@@ -107,7 +120,7 @@ Future<void> generateAndPrintArabicPdf(
                   ]),
                 ]),
               ]),
-              SizedBox(height: 18.h),
+              SizedBox(height: 10.h),
               Container(
                 margin: const EdgeInsets.fromLTRB(22, 5, 22, 5),
                 child: Directionality(
