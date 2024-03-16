@@ -60,6 +60,7 @@ dependencies:
   textfield_search: ^0.10.0
   syncfusion_flutter_pdf: ^24.2.8
   image_picker: ^1.0.7
+  flutter_typeahead: ^5.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

@@ -47,10 +47,22 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kReturns);
-            await Returncubit.get(context).getReturns();
+            //await Returncubit.get(context).getReturns();
           }),
-      CategoryWidget(icon: Icons.receipt_long, categoryName: l.recceipt),
-      CategoryWidget(icon: Icons.payments_rounded, categoryName: l.exchange),
+      CategoryWidget(
+          icon: Icons.receipt_long,
+          categoryName: l.recceipt,
+          onTap: () async {
+            GlobalMethods.goRouterNavigateTO(
+                context: context, router: AppRouters.kReciept);
+          }),
+      CategoryWidget(
+          icon: Icons.payments_rounded,
+          categoryName: l.exchange,
+          onTap: () async {
+            GlobalMethods.goRouterNavigateTO(
+                context: context, router: AppRouters.kPaid);
+          }),
     ];
   }
 }

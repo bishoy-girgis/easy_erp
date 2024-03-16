@@ -45,7 +45,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.labelText,
     this.prefixPressed,
     this.hintText,
-    this.contentSize = 16,
+    this.contentSize = 14,
     this.keyboardType,
     this.prefixIcon,
     this.prefixIconColor = AppColors.primaryColorBlue,
@@ -91,6 +91,7 @@ class CustomTextFormField extends StatelessWidget {
               const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
           floatingLabelBehavior: FloatingLabelBehavior.never,
           floatingLabelStyle: TextStyle(
+            fontSize: 12,
             color: focusedBorderColor,
             fontWeight: FontWeight.bold,
             // fontSize: 16,

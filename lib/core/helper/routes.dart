@@ -6,6 +6,10 @@ import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/custo
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/invoices_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/items_view/items_view.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/paid_view/create_paid.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/paid_view/paid_view.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/create_reciept.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/receipt_view.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/create_return.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/returns_view.dart';
 import 'package:easy_erp/presentation/Login/views/login_view.dart';
@@ -52,6 +56,19 @@ class Routes {
         return MaterialPageRoute(
             builder: (context) => const CreateReturnView(),
             settings: routeSettings);
+      case AppRouters.kReciept:
+        return MaterialPageRoute(
+            builder: (context) => const ReceiptView(), settings: routeSettings);
+      case AppRouters.kCreateReciept:
+        return MaterialPageRoute(
+            builder: (context) => const CreateReciept(),
+            settings: routeSettings);
+      case AppRouters.kPaid:
+        return MaterialPageRoute(
+            builder: (context) => const PaidView(), settings: routeSettings);
+      case AppRouters.kCreatePaid:
+        return MaterialPageRoute(
+            builder: (context) => const CreatePaid(), settings: routeSettings);
       case AppRouters.kCreateNewCustomer:
         return MaterialPageRoute(
             builder: (context) => AddCustomerView(), settings: routeSettings);

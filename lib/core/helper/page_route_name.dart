@@ -7,6 +7,10 @@ class AppRouters {
   static const kCustomers = "$kHome/customers";
   static const kReturns = "$kHome/returns";
   static const kCreateReturn = "$kReturns/createReturn";
+  static const kReciept = "$kHome/reciept";
+  static const kCreateReciept = "$kReciept/createReciept";
+  static const kPaid = "$kHome/paid";
+  static const kCreatePaid = "$kPaid/createPaid";
   static const kInvoices = "$kHome/invoices";
   static const kCreateInvoice = "$kInvoices/createInvoice";
   static const kAddItemsIntoInvoice =
