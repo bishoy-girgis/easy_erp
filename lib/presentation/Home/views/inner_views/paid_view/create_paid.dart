@@ -2,6 +2,7 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/paid_view/widgets/voucher_valu_paid.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/notes_image_widget.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/reciept_main_data.dart';
@@ -21,15 +22,15 @@ class CreatePaid extends StatelessWidget {
   _buildCreatePaidBody() {
     return Container(
       color: const Color.fromARGB(255, 4, 90, 136),
-      child: SafeArea(
+      child: const SafeArea(
           child: CustomScrollView(
         slivers: [
-          const RecieptMainData(),
-          const SliverToBoxAdapter(
+          RecieptMainData(),
+          SliverToBoxAdapter(
             child: GapH(h: 1),
           ),
           VoucherValuepaid(),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: GapH(h: 1),
           ),
           NotesImageWidget(),
@@ -48,6 +49,7 @@ class CreatePaid extends StatelessWidget {
       leading: IconButton(
           onPressed: () {
             GlobalMethods.navigatePOP(context);
+            SharedPref.remove(key: "noteseVoucher");
           },
           icon: const Icon(Icons.arrow_back)),
       actions: [
@@ -58,7 +60,9 @@ class CreatePaid extends StatelessWidget {
               title: "Save Return ?",
               titleButton1: "Save",
               titleButton2: "No",
-              onPressedButton1: () async {},
+              onPressedButton1: () async {
+                SharedPref.remove(key: "noteseVoucher");
+              },
               onPressedButton2: () {
                 GlobalMethods.navigatePOP(context);
               },

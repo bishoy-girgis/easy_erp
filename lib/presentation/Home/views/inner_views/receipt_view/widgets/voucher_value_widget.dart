@@ -1,8 +1,9 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, prefer_interpolation_to_compose_strings
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/pricing_section.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,9 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
     setState(() {
       totalAmount =
           voucherValue.text.isEmpty ? 0 : double.parse(voucherValue.text);
+      SharedPref.set(key: "recieptVoucher", value: totalAmount);
+      debugPrint('sharedddd recieptVoucher  ' +
+          SharedPref.get(key: 'recieptVoucher').toString());
     });
   }
 
@@ -79,12 +83,15 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
                         onSelected(option);
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        color: const Color.fromRGBO(227, 227, 227, 1),
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 49, 101, 128),
+                            borderRadius: BorderRadius.circular(16)),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 14),
                         child: Text(
                           option,
                           style:
-                              TextStyle(fontSize: 11.sp, color: Colors.black),
+                              TextStyle(fontSize: 12.sp, color: Colors.white),
                         ),
                       ),
                     );

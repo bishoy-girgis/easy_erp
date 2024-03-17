@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/pricing_section.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +46,12 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
         totalPrice = totalAmount - taxAmount;
       }
     });
+    SharedPref.set(key: "paidVoucher", value: totalAmount);
+    SharedPref.set(key: "taxvoucher", value: taxAmount);
+    debugPrint('sharedddd paidddVoucher  ' +
+        SharedPref.get(key: 'paidVoucher').toString());
+    debugPrint('sharedddd TAXXXvoucher  ' +
+        SharedPref.get(key: 'taxVoucher').toString());
   }
 
   @override

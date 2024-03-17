@@ -2,6 +2,7 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/notes_image_widget.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/reciept_main_data.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/voucher_value_widget.dart';
@@ -20,16 +21,16 @@ class CreateReciept extends StatelessWidget {
 
   _buildCreateRecieptBody() {
     return Container(
-      color: Color.fromARGB(255, 49, 101, 128),
-      child: SafeArea(
+      color: const Color.fromARGB(255, 49, 101, 128),
+      child: const SafeArea(
           child: CustomScrollView(
         slivers: [
-          const RecieptMainData(),
-          const SliverToBoxAdapter(
+          RecieptMainData(),
+          SliverToBoxAdapter(
             child: GapH(h: 1),
           ),
-          const VoucherValuWidget(),
-          const SliverToBoxAdapter(
+          VoucherValuWidget(),
+          SliverToBoxAdapter(
             child: GapH(h: 1),
           ),
           NotesImageWidget()
@@ -48,6 +49,8 @@ class CreateReciept extends StatelessWidget {
       leading: IconButton(
           onPressed: () {
             GlobalMethods.navigatePOP(context);
+            SharedPref.remove(key: "noteseVoucher");
+            SharedPref.remove(key: "recieptVoucher");
           },
           icon: const Icon(Icons.arrow_back)),
       actions: [
@@ -58,7 +61,10 @@ class CreateReciept extends StatelessWidget {
               title: "Save Return ?",
               titleButton1: "Save",
               titleButton2: "No",
-              onPressedButton1: () async {},
+              onPressedButton1: () async {
+                SharedPref.remove(key: "noteseVoucher");
+                SharedPref.remove(key: "recieptVoucher");
+              },
               onPressedButton2: () {
                 GlobalMethods.navigatePOP(context);
               },
