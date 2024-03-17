@@ -124,7 +124,7 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Flexible(
+                Expanded(
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -146,13 +146,14 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                   ],
                 )),
                 const GapW(w: 10),
-                Flexible(
+                Expanded(
                   child: Column(
                     children: [
                       Row(
                         children: [
                           Checkbox(
-                            shape: const CircleBorder(),
+                            visualDensity: const VisualDensity(
+                                horizontal: -4, vertical: -4),
                             activeColor:
                                 const Color.fromARGB(255, 49, 101, 128),
                             value: withoutTax,
@@ -163,6 +164,7 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                               });
                             },
                           ),
+                          const GapW(w: 1),
                           const TextBuilder(
                             "Without Tax",
                             fontSize: 12,
@@ -170,10 +172,11 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                         ],
                       ),
                       Container(
+                        margin: const EdgeInsets.all(5),
                         width: double.infinity,
-                        padding: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18),
+                          borderRadius: BorderRadius.circular(16),
                           color: const Color.fromRGBO(227, 227, 227, 1),
                         ),
                         child: Row(

@@ -28,23 +28,6 @@ class _NotesImageWidgetState extends State<NotesImageWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextBuilder(
-                  "Image",
-                  isHeader: true,
-                  fontSize: 13,
-                ),
-                Card(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: Icon(
-                      Icons.add_photo_alternate_rounded,
-                      size: 45,
-                    )),
-              ],
-            ),
-            const Divider(),
             const TextBuilder(
               "Notes",
               isHeader: true,
@@ -61,6 +44,23 @@ class _NotesImageWidgetState extends State<NotesImageWidget> {
                     SharedPref.get(key: 'notesVoucher'));
                 setState(() {});
               },
+            ),
+            const Divider(),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextBuilder(
+                  "Image",
+                  isHeader: true,
+                  fontSize: 13,
+                ),
+                Card(
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    child: Icon(
+                      Icons.add_photo_alternate_rounded,
+                      size: 45,
+                    )),
+              ],
             ),
           ],
         ),

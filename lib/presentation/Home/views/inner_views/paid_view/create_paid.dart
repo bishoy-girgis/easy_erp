@@ -21,7 +21,7 @@ class CreatePaid extends StatelessWidget {
 
   _buildCreatePaidBody() {
     return Container(
-      color: const Color.fromARGB(255, 4, 90, 136),
+      color: AppColors.primaryColorBlue,
       child: const SafeArea(
           child: CustomScrollView(
         slivers: [
@@ -31,7 +31,7 @@ class CreatePaid extends StatelessWidget {
           ),
           VoucherValuepaid(),
           SliverToBoxAdapter(
-            child: GapH(h: 1),
+            child: GapH(h: 1.5),
           ),
           NotesImageWidget(),
         ],
