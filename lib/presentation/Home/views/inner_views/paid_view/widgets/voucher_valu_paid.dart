@@ -27,27 +27,22 @@ class VoucherValuepaid extends StatefulWidget {
 
 class _VoucherValuepaidState extends State<VoucherValuepaid> {
   TextEditingController price = TextEditingController();
-
-  double taxAmount = 0.0;
-
-  double totalPrice = 0.0;
-  bool withoutTax = false;
   double totalAmount = 0.0;
+  double taxAmount = 0.0;
+  bool withoutTax = false;
 
   void calculateTaxAndTotal(String value) {
     totalAmount = double.tryParse(value) ?? 0.0;
     setState(() {
       if (withoutTax) {
         taxAmount = 0.0;
-        totalPrice = totalAmount;
       } else {
         taxAmount =
             ((AppConstants.vat * totalAmount) / (100 + AppConstants.vat));
-        totalPrice = totalAmount - taxAmount;
       }
     });
     SharedPref.set(key: "paidVoucher", value: totalAmount);
-    SharedPref.set(key: "taxvoucher", value: taxAmount);
+    SharedPref.set(key: "taxVoucher", value: taxAmount);
     debugPrint('sharedddd paidddVoucher  ' +
         SharedPref.get(key: 'paidVoucher').toString());
     debugPrint('sharedddd TAXXXvoucher  ' +
@@ -126,100 +121,83 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
               },
             ),
             const GapH(h: 1),
-            const TextBuilder(
-              "price Include Tax ",
-              isHeader: true,
-              fontSize: 13,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Flexible(
                     child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const TextBuilder(
+                      "Price Include Tax ",
+                      isHeader: true,
+                      fontSize: 13,
+                    ),
                     CustomTextFormField(
                       keyboardType: TextInputType.number,
-                      labelText: "price include tax",
-                      hintText: "price include tax",
-                      prefixIcon: Icons.person_2_rounded,
+                      labelText: "Price include tax",
+                      hintText: "Price include tax",
+                      prefixIcon: Icons.attach_money_outlined,
                       prefixIconColor: const Color.fromARGB(255, 49, 101, 128),
-                      prefixIconSize: 16.sp,
+                      prefixIconSize: 17.sp,
                       controller: price,
                       onChange: calculateTaxAndTotal,
                     ),
-                    const GapH(h: 1),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: const Color.fromRGBO(227, 227, 227, 1),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  ],
+                )),
+                const GapW(w: 10),
+                Flexible(
+                  child: Column(
+                    children: [
+                      Row(
                         children: [
-                          const TextBuilder(
-                            "Tax",
-                            isHeader: true,
-                            fontSize: 12,
+                          Checkbox(
+                            shape: const CircleBorder(),
+                            activeColor:
+                                const Color.fromARGB(255, 49, 101, 128),
+                            value: withoutTax,
+                            onChanged: (value) {
+                              setState(() {
+                                withoutTax = value!;
+                                calculateTaxAndTotal(price.text);
+                              });
+                            },
                           ),
-                          TextBuilder(
-                            taxAmount.toStringAsFixed(2),
-                            isHeader: true,
-                            fontSize: 14,
+                          const TextBuilder(
+                            "Without Tax",
+                            fontSize: 12,
                           ),
                         ],
                       ),
-                    ),
-                    const GapH(h: 1),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: withoutTax,
-                          onChanged: (value) {
-                            setState(() {
-                              withoutTax = value!;
-                              price.text = '';
-                              calculateTaxAndTotal(price.text);
-                            });
-                          },
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          color: const Color.fromRGBO(227, 227, 227, 1),
                         ),
-                        const TextBuilder(
-                          "Without Tax",
-                          fontSize: 10,
-                        ),
-                      ],
-                    ),
-                  ],
-                )),
-                const GapW(w: 7),
-                Flexible(
-                    child: Column(
-                  children: [
-                    const TextBuilder(
-                      "price",
-                      fontSize: 11,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: const Color.fromRGBO(227, 227, 227, 1),
-                      ),
-                      child: Center(
-                        child: TextBuilder(
-                          totalPrice.toStringAsFixed(2),
-                          isHeader: true,
-                          fontSize: 15,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const TextBuilder(
+                              "Tax :",
+                              isHeader: true,
+                              fontSize: 13,
+                            ),
+                            TextBuilder(
+                              taxAmount.toStringAsFixed(2),
+                              isHeader: true,
+                              fontSize: 14,
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                )),
-                const GapW(w: 7),
+                    ],
+                  ),
+                ),
               ],
             ),
+            const GapH(h: 3),
             BlocBuilder<PaymentTypeCubit, PaymentTypeState>(
               builder: (context, state) {
                 if (state is PaymentTypeSuccess) {
