@@ -130,7 +130,6 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
               prefixIcon: Icons.attach_money,
               prefixIconColor: const Color.fromARGB(255, 49, 101, 128),
               prefixIconSize: 16.sp,
-              onChange: (v) {},
             ),
             const GapH(h: 1),
             const TextBuilder(

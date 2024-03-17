@@ -3,7 +3,10 @@ import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/pricing_section.dart';
+import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VoucherValuepaid extends StatefulWidget {
@@ -22,15 +25,14 @@ class VoucherValuepaid extends StatefulWidget {
 class _VoucherValuepaidState extends State<VoucherValuepaid> {
   TextEditingController price = TextEditingController();
 
-  TextEditingController priceController = TextEditingController();
-
   double taxAmount = 0.0;
 
   double totalPrice = 0.0;
   bool withoutTax = false;
+  double totalAmount = 0.0;
 
   void calculateTaxAndTotal(String value) {
-    double totalAmount = double.tryParse(value) ?? 0.0;
+    totalAmount = double.tryParse(value) ?? 0.0;
     setState(() {
       if (withoutTax) {
         taxAmount = 0.0;
@@ -62,7 +64,7 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const TextBuilder(
-              "Payer Account",
+              "Payer Account Type",
               isHeader: true,
               fontSize: 13,
             ),
@@ -129,7 +131,7 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                     CustomTextFormField(
                       keyboardType: TextInputType.number,
                       labelText: "price include tax",
-                      hintText: "Type Payer's Account",
+                      hintText: "price include tax",
                       prefixIcon: Icons.person_2_rounded,
                       prefixIconColor: const Color.fromARGB(255, 49, 101, 128),
                       prefixIconSize: 16.sp,
@@ -168,7 +170,8 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                           onChanged: (value) {
                             setState(() {
                               withoutTax = value!;
-                              calculateTaxAndTotal(priceController.text);
+                              price.text = '';
+                              calculateTaxAndTotal(price.text);
                             });
                           },
                         ),
@@ -207,7 +210,24 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                 )),
                 const GapW(w: 7),
               ],
-            )
+            ),
+            BlocBuilder<PaymentTypeCubit, PaymentTypeState>(
+              builder: (context, state) {
+                if (state is PaymentTypeSuccess) {
+                  return ChoocePaymentType(
+                    totalAmount: totalAmount,
+                    payTypes: state.payTypes,
+                  );
+                } else if (state is PaymentTypeLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return const Text(
+                      "There is no payment type , Tell us your problem!");
+                }
+              },
+            ),
           ],
         ),
       ),

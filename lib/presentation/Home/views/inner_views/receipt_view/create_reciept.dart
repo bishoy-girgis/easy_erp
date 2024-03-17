@@ -20,7 +20,7 @@ class CreateReciept extends StatelessWidget {
 
   _buildCreateRecieptBody() {
     return Container(
-      color: Color.fromARGB(255, 4, 90, 136),
+      color: Color.fromARGB(255, 49, 101, 128),
       child: SafeArea(
           child: CustomScrollView(
         slivers: [
