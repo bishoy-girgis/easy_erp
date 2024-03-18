@@ -11,6 +11,7 @@ import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cub
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VoucherValuepaid extends StatefulWidget {
   const VoucherValuepaid({super.key});
@@ -67,8 +68,8 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextBuilder(
-              "Payer Account Type",
+            TextBuilder(
+              AppLocalizations.of(context)!.payer_type,
               isHeader: true,
               fontSize: 13,
             ),
@@ -98,8 +99,8 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
               fieldViewBuilder: (context, textEditingController, focusNode,
                   onFieldSubmitted) {
                 return CustomTextFormField(
-                  labelText: "Payer",
-                  hintText: "Type Payer's Account",
+                  labelText: AppLocalizations.of(context)!.payer,
+                  hintText: AppLocalizations.of(context)!.payer_type,
                   prefixIcon: Icons.person_2_rounded,
                   prefixIconColor: const Color.fromARGB(255, 49, 101, 128),
                   prefixIconSize: 16.sp,
@@ -128,15 +129,15 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TextBuilder(
-                      "Price Include Tax ",
+                    TextBuilder(
+                      AppLocalizations.of(context)!.total_icludes_tax,
                       isHeader: true,
                       fontSize: 13,
                     ),
                     CustomTextFormField(
                       keyboardType: TextInputType.number,
-                      labelText: "Price include tax",
-                      hintText: "Price include tax",
+                      labelText: AppLocalizations.of(context)!.price,
+                      hintText: AppLocalizations.of(context)!.price,
                       prefixIcon: Icons.attach_money_outlined,
                       prefixIconColor: const Color.fromARGB(255, 49, 101, 128),
                       prefixIconSize: 17.sp,
@@ -165,8 +166,8 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                             },
                           ),
                           const GapW(w: 1),
-                          const TextBuilder(
-                            "Without Tax",
+                          TextBuilder(
+                            AppLocalizations.of(context)!.without_tax,
                             fontSize: 12,
                           ),
                         ],
@@ -182,8 +183,8 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            const TextBuilder(
-                              "Tax :",
+                            TextBuilder(
+                              AppLocalizations.of(context)!.tax_amount,
                               isHeader: true,
                               fontSize: 13,
                             ),

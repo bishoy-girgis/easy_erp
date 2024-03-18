@@ -9,6 +9,7 @@ import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/create
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/reciept_widget.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReceiptView extends StatefulWidget {
   const ReceiptView({super.key});
@@ -41,8 +42,8 @@ class _ReceiptViewState extends State<ReceiptView> {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      title: const TextBuilder(
-        "Receipts Vouchers",
+      title: TextBuilder(
+        AppLocalizations.of(context)!.reciept_vouchers,
         isHeader: true,
         color: Colors.white,
       ),

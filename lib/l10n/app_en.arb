@@ -85,5 +85,20 @@
     "return_date": "Return Date",
     "return_type" : "Return Type",
     "with_invoices" : "With Invoice",
-    "without_invoice" : "Without Invoice"
+    "without_invoice" : "Without Invoice",
+    "reciept_vouchers": "Reciepts Vouchers",
+    "create_reciept_vouchers" : "Create Reciepts Vouchers",
+    "voucher_id": "Voucher ID",
+    "voucher_date" : "Voucher Date",
+    "payer_account": "Payer Account",
+    "voucher_value" : "Voucher Value",
+    "notes" : "Notes",
+    "image" : "Image",
+    "payer" : "Payer",
+    "voucher" :"Voucher",
+    "auto" : "Auto",
+    "paid_voucher": "Paid Vouchers",
+    "create_paid_voucher": "Create Paid Voucher",
+    "payer_type": "Payer Account Type",
+    "without_tax": "Without Tax"
 }

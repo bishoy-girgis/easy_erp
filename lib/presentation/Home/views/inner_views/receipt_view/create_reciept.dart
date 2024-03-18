@@ -7,6 +7,7 @@ import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widget
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/reciept_main_data.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/voucher_value_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateReciept extends StatelessWidget {
   const CreateReciept({super.key});
@@ -41,8 +42,8 @@ class CreateReciept extends StatelessWidget {
 
   AppBar _buildAppBar(context) {
     return AppBar(
-      title: const TextBuilder(
-        "Create Reciept Voucher",
+      title: TextBuilder(
+        AppLocalizations.of(context)!.create_reciept_vouchers,
         isHeader: true,
         color: AppColors.whiteColor,
       ),

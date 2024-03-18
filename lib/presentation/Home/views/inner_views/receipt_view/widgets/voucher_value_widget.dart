@@ -9,6 +9,7 @@ import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cub
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VoucherValuWidget extends StatefulWidget {
   const VoucherValuWidget({super.key});
@@ -67,8 +68,8 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextBuilder(
-              "Payer Account",
+            TextBuilder(
+              AppLocalizations.of(context)!.payer_account,
               isHeader: true,
               fontSize: 13,
             ),
@@ -101,8 +102,8 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
               fieldViewBuilder: (context, textEditingController, focusNode,
                   onFieldSubmitted) {
                 return CustomTextFormField(
-                  labelText: "Payer",
-                  hintText: "Search by Payer Name",
+                  labelText: AppLocalizations.of(context)!.payer,
+                  hintText: AppLocalizations.of(context)!.payer,
                   prefixIcon: Icons.person_2_rounded,
                   prefixIconColor: const Color.fromARGB(255, 49, 101, 128),
                   prefixIconSize: 16.sp,
@@ -124,23 +125,23 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
               },
             ),
             const GapH(h: 1),
-            const TextBuilder(
-              "Voucher Value",
+            TextBuilder(
+              AppLocalizations.of(context)!.voucher_value,
               isHeader: true,
               fontSize: 13,
             ),
             CustomTextFormField(
               keyboardType: TextInputType.number,
               controller: voucherValue,
-              labelText: "Voucher",
-              hintText: "Voucher Value ...",
+              labelText: AppLocalizations.of(context)!.voucher,
+              hintText: AppLocalizations.of(context)!.voucher_value,
               prefixIcon: Icons.attach_money,
               prefixIconColor: const Color.fromARGB(255, 49, 101, 128),
               prefixIconSize: 16.sp,
             ),
             const GapH(h: 1),
-            const TextBuilder(
-              "Payment Types",
+            TextBuilder(
+              AppLocalizations.of(context)!.payment_types,
               isHeader: true,
               fontSize: 13,
             ),

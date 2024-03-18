@@ -5,6 +5,7 @@ import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotesImageWidget extends StatefulWidget {
   const NotesImageWidget({super.key});
@@ -28,14 +29,14 @@ class _NotesImageWidgetState extends State<NotesImageWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextBuilder(
-              "Notes",
+            TextBuilder(
+              AppLocalizations.of(context)!.notes,
               isHeader: true,
               fontSize: 13,
             ),
             CustomTextFormField(
               controller: notes,
-              labelText: "Notes",
+              labelText: AppLocalizations.of(context)!.notes,
               maxLines: 3,
               onChange: (value) {
                 notes.text = value;
@@ -46,15 +47,15 @@ class _NotesImageWidgetState extends State<NotesImageWidget> {
               },
             ),
             const Divider(),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextBuilder(
-                  "Image",
+                  AppLocalizations.of(context)!.image,
                   isHeader: true,
                   fontSize: 13,
                 ),
-                Card(
+                const Card(
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Icon(
                       Icons.add_photo_alternate_rounded,

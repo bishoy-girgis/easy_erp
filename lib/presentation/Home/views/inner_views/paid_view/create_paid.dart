@@ -7,6 +7,7 @@ import 'package:easy_erp/presentation/Home/views/inner_views/paid_view/widgets/v
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/notes_image_widget.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/reciept_main_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreatePaid extends StatelessWidget {
   const CreatePaid({super.key});
@@ -41,8 +42,8 @@ class CreatePaid extends StatelessWidget {
 
   AppBar _buildAppBar(context) {
     return AppBar(
-      title: const TextBuilder(
-        "Create Paid Voucher",
+      title: TextBuilder(
+        AppLocalizations.of(context)!.create_paid_voucher,
         isHeader: true,
         color: AppColors.whiteColor,
       ),

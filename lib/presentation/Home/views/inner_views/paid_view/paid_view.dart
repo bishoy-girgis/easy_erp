@@ -9,6 +9,7 @@ import 'package:easy_erp/presentation/Home/views/inner_views/paid_view/create_pa
 import 'package:easy_erp/presentation/Home/views/inner_views/paid_view/widgets/paid_widget.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaidView extends StatelessWidget {
   const PaidView({super.key});
@@ -35,8 +36,8 @@ class PaidView extends StatelessWidget {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      title: const TextBuilder(
-        "Paid Vouchers",
+      title: TextBuilder(
+        AppLocalizations.of(context)!.paid_voucher,
         isHeader: true,
         color: Colors.white,
       ),

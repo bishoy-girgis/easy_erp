@@ -4,6 +4,7 @@ import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/pick_date_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecieptMainData extends StatelessWidget {
   const RecieptMainData({super.key});
@@ -23,27 +24,27 @@ class RecieptMainData extends StatelessWidget {
                 blurRadius: 5,
               )
             ]),
-        child: const Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextBuilder(
-              "Voucher ID",
+              AppLocalizations.of(context)!.voucher_id,
               isHeader: true,
               fontSize: 13,
             ),
             CustomTextFormField(
-              labelText: "AUTO",
+              labelText: AppLocalizations.of(context)!.auto,
               centerContent: true,
               isLabelBold: true,
               isClickable: false,
             ),
-            GapH(h: 1),
+            const GapH(h: 1),
             TextBuilder(
-              "Voucher Date",
+              AppLocalizations.of(context)!.voucher_date,
               isHeader: true,
               fontSize: 13,
             ),
-            Row(
+            const Row(
               children: [
                 Flexible(child: DatePickerWidget()),
                 GapW(w: 1),

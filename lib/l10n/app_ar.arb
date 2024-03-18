@@ -75,5 +75,20 @@
     "return_date": "تاريخ المرتجع",
     "return_type" : "نوع المرتجع",
     "with_invoices" : "بفاتورة",
-    "without_invoice" : "بدون فاتوره"
+    "without_invoice" : "بدون فاتوره",
+    "reciept_vouchers": "سندات القبض",
+    "create_reciept_vouchers" : "انشاء سند قبض",
+    "voucher_id": "رقم السند",
+    "voucher_date" : "تاريخ السند",
+    "payer_account": "حساب المسدد",
+    "voucher_value" : "قيمه السند",
+    "notes" : "ملاحظات",
+    "image" : "الصوره",
+    "payer" : "المسدد",
+    "voucher" :"السند",
+    "auto" : "تلقائي",
+    "paid_voucher": "سندات الصرف",
+    "create_paid_voucher": "انشاء سند صرف",
+    "payer_type": "حساب المدفوع له",
+    "without_tax": "بدون ضريبه"
 }
