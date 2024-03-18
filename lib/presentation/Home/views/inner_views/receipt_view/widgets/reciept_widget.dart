@@ -57,8 +57,8 @@ class Recieptwidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    ImageIcon(
-                      const AssetImage("assets/images/product-returnn.png"),
+                    Icon(
+                      Icons.receipt_long,
                       size: 20.sp,
                     ),
                     const GapW(w: 5),

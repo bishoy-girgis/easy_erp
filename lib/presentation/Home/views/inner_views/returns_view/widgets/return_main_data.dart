@@ -73,9 +73,9 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
               isHeader: true,
               fontSize: 15,
             ),
-            const CustomTextFormField(
+            CustomTextFormField(
               contentSize: 14,
-              labelText: "AUTO",
+              labelText: AppLocalizations.of(context)!.auto,
               centerContent: true,
               isLabelBold: true,
               isClickable: false,

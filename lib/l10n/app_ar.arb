@@ -86,7 +86,6 @@
     "image" : "الصوره",
     "payer" : "المسدد",
     "voucher" :"السند",
-    "auto" : "تلقائي",
     "paid_voucher": "سندات الصرف",
     "create_paid_voucher": "انشاء سند صرف",
     "payer_type": "حساب المدفوع له",

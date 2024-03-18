@@ -37,7 +37,7 @@ class PaidWidget extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 4, 90, 136),
+              color: Color.fromARGB(255, 3, 62, 94),
               borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: TextBuilder(
@@ -57,8 +57,8 @@ class PaidWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    ImageIcon(
-                      const AssetImage("assets/images/product-returnn.png"),
+                    Icon(
+                      Icons.payments_rounded,
                       size: 20.sp,
                     ),
                     const GapW(w: 5),

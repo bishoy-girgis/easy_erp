@@ -41,7 +41,7 @@ class InvoiceMainDataSection extends StatelessWidget {
               fontSize: 16,
             ),
             CustomTextFormField(
-              labelText: "AUTO",
+              labelText: AppLocalizations.of(context)!.auto,
               centerContent: true,
               isLabelBold: true,
               isClickable: false,

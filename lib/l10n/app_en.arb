@@ -96,7 +96,6 @@
     "image" : "Image",
     "payer" : "Payer",
     "voucher" :"Voucher",
-    "auto" : "Auto",
     "paid_voucher": "Paid Vouchers",
     "create_paid_voucher": "Create Paid Voucher",
     "payer_type": "Payer Account Type",
