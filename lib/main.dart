@@ -8,9 +8,11 @@ import 'package:easy_erp/data/models/printerModel/printer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/item_repository/item_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/login_repository/login_repo_imp.dart';
+import 'package:easy_erp/data/repositories/payer_type_repository/payer_type_repo_imp.dart';
 import 'package:easy_erp/data/repositories/return_repository/return_repo_imp.dart';
 import 'package:easy_erp/l10n/l10n.dart';
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
+import 'package:easy_erp/presentation/cubits/payer_type_cubit/payer_type_cubit.dart';
 import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,6 +114,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(
                 create: (context) =>
                     PaymentTypeCubit(getIt.get<PaymentTypeRepoImp>())),
+            BlocProvider(
+                create: (context) =>
+                    PayerTypeCubit(getIt.get<PayerTypeRepoImp>())),
           ],
           child: Builder(builder: (context) {
             var languagesProvider = Provider.of<LanguageProvider>(context);

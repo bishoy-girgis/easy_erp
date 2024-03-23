@@ -37,6 +37,9 @@ class AppConstants {
   static String GET_ITEMS = "/api/Items/getitems";
   static const String GET_PAYMENT_TYPE = "/api/Payments/getpaymentstypes";
 
+  ///Payer Type
+  static const String GET_PAYER_TYPE = "/api/Charts/GetCharts";
+
   ///Customers
   static const String GET_CUSTOMERS = "/api/Values/getcustomers";
   static const String GET_CUSTOMER_GROUPS = "/api/Groups/getgroups";

@@ -55,16 +55,17 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                         isHeader: true,
                         fontSize: 15,
                       ),
-                      CustomTextFormField(
-                        contentSize: 14,
-                        labelText: "Search",
-                        hintText: "Search with ID, Code, or Barcode NO",
-                        suffixIcon: Icons.search,
-                        suffixIconSize: 17.sp,
-                        suffixColor: Colors.blueGrey,
-                        controller: searchController,
-                        suffixPressed: validateInvoice,
-                      ),
+                      // CustomTextFormField(
+                      //   contentSize: 14,
+                      //   labelText: "Search",
+                      //   hintText: "Search with ID, Code, or Barcode NO",
+                      //   suffixIcon: Icons.search,
+                      //   suffixIconSize: 17.sp,
+                      //   suffixColor: Colors.blueGrey,
+                      //   controller: searchController,
+                      //   suffixPressed: validateInvoice,
+                      // ),
+                      autoComplete(),
                     ],
                   )
                 : Container(),
@@ -167,6 +168,97 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
           )),
         ],
       ),
+    );
+  }
+
+  Widget autoComplete() {
+    InvoiceModel emptyInvoice = const InvoiceModel();
+    getIt.get<InvoiceCubit>().getInvoices();
+    invoices = getIt.get<InvoiceCubit>().invoices;
+    List<InvoiceModel> kOptions = invoices;
+
+    return Autocomplete<InvoiceModel>(
+      optionsViewBuilder: (context, onSelected, options) {
+        return ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
+          itemCount: options.length,
+          itemBuilder: (BuildContext context, int index) {
+            final InvoiceModel option = options.elementAt(index);
+            return GestureDetector(
+              onTap: () {
+                onSelected(option);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 1),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColorBlue.withOpacity(0.92),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 14.w),
+                child: Text(
+                  "Number: ${option.invNo!}    ID: ${option.invid!}    Name: ${option.custInvname!.isEmpty ? "N/A" : option.custInvname}",
+                  style: TextStyle(fontSize: 11.sp, color: Colors.white),
+                ),
+              ),
+            );
+          },
+        );
+      },
+      fieldViewBuilder:
+          (context, textEditingController, focusNode, onFieldSubmitted) {
+        return CustomTextFormField(
+          labelText: AppLocalizations.of(context)!.search,
+          hintText: AppLocalizations.of(context)!.search_with_id_code_barcode,
+          prefixIcon: Icons.receipt_long_rounded,
+          prefixIconColor: const Color.fromARGB(255, 49, 101, 128),
+          suffixIcon: Icons.search,
+          suffixIconSize: 16.sp,
+          suffixColor: Colors.blueGrey,
+          prefixIconSize: 17.sp,
+          controller: textEditingController,
+          focusNode: focusNode,
+          onSubmit: (_) => onFieldSubmitted(),
+        );
+      },
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text.isEmpty) {
+          return const Iterable<InvoiceModel>.empty();
+        }
+        List<InvoiceModel> filteredOptions = kOptions
+            .where(
+              (invoice) =>
+                  invoice.custInvname!
+                      .toLowerCase()
+                      .contains(textEditingValue.text.toLowerCase()) ||
+                  invoice.invNo!
+                      .toLowerCase()
+                      .contains(textEditingValue.text.toLowerCase()) ||
+                  invoice.invdate.toString().contains(textEditingValue.text) ||
+                  invoice.invid.toString().contains(textEditingValue.text),
+            )
+            .toList();
+
+        return filteredOptions
+            .take(10); // Limit the options to the first 10 items
+      },
+      onSelected: (InvoiceModel selectedInvoice) {
+        if (selectedInvoice != emptyInvoice) {
+          GlobalMethods.buildFlutterToast(
+            message: 'Invoice Selected Successfully',
+            state: ToastStates.SUCCESS,
+          );
+          SharedPref.set(key: 'ReturnSelectedId', value: selectedInvoice.invid);
+          setState(() {});
+        } else {
+          GlobalMethods.buildFlutterToast(
+            message: 'No invoice found for the entered Number.',
+            state: ToastStates.ERROR,
+          );
+        }
+        print(
+            "invoicceeeeshared pref ${SharedPref.get(key: 'ReturnSelectedId')}");
+      },
+      displayStringForOption: (option) => "${option.invid!}",
     );
   }
 

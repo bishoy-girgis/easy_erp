@@ -7,6 +7,7 @@ import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/create_reciept.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/reciept_widget.dart';
+import 'package:easy_erp/presentation/cubits/payer_type_cubit/payer_type_cubit.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,6 +29,8 @@ class _ReceiptViewState extends State<ReceiptView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          // await PayerTypeCubit.get(context).getPayerTypes(type: 1);
+          print("Cheecckkkkkkkkkkkkkkkkkkkkkkkkkkkk");
           await PaymentTypeCubit.get(context).getPaymentTypes();
           GlobalMethods.navigateTo(
             context,
