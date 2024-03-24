@@ -1,5 +1,4 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
-import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';

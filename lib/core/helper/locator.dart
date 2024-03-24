@@ -3,6 +3,7 @@ import 'package:easy_erp/data/repositories/customer_repository/customer_repo_imp
 import 'package:easy_erp/data/repositories/login_repository/login_repo_imp.dart';
 import 'package:easy_erp/data/repositories/payer_type_repository/payer_type_repo_imp.dart';
 import 'package:easy_erp/data/repositories/payment_type_repository/payment_type_repo_implementation.dart';
+import 'package:easy_erp/data/repositories/reciept_repository/reciept_repo_imp.dart';
 import 'package:easy_erp/data/repositories/return_repository/return_repo_imp.dart';
 import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:easy_erp/presentation/cubits/payer_type_cubit/payer_type_cubit.dart';
@@ -49,5 +50,8 @@ void setupServiceLocatorByGetIt() {
   );
   getIt.registerSingleton<ReturnRepoImplementation>(
     ReturnRepoImplementation(getIt.get<ApiService>()),
+  );
+  getIt.registerSingleton<RecieptRepoImplementation>(
+    RecieptRepoImplementation(getIt.get<ApiService>()),
   );
 }

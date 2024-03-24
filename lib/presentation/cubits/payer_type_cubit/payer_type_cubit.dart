@@ -18,7 +18,9 @@ class PayerTypeCubit extends Cubit<PayerTypeState> {
     }, (r) {
       /// r for List of payers type
       payerModels = r;
-      emit(PayerTypeSuccess(payTypes: r));
+      print("${payerModels.length}  cubit lengthhhhh");
+      print("${type}  Typeeeee");
+      emit(PayerTypeSuccess(payTypes: payerModels));
       return payerModels;
     });
   }

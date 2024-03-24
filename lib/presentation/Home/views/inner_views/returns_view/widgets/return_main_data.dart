@@ -12,6 +12,7 @@ import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widge
 import 'package:easy_erp/presentation/cubits/addItem_cubit/add_item_cubit.dart';
 import 'package:easy_erp/presentation/cubits/invoice_cubit/invoice_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -65,7 +66,23 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                       //   controller: searchController,
                       //   suffixPressed: validateInvoice,
                       // ),
-                      autoComplete(),
+                      BlocBuilder<InvoiceCubit, InvoiceState>(
+                        builder: (context, state) {
+                          if (state is GetInvoiceLoading) {
+                            // Show a loading indicator
+                            return CircularProgressIndicator();
+                          } else if (state is GetInvoiceSuccess) {
+                            // Use the data from state.invoices to populate your Autocomplete widget
+                            return autoComplete(state.invoiceModels);
+                          } else if (state is GetInvoiceFailure) {
+                            // Show an error message
+                            return Text(state.error);
+                          } else {
+                            // Handle other states if necessary
+                            return const Text('check error ');
+                          }
+                        },
+                      ),
                     ],
                   )
                 : Container(),
@@ -171,10 +188,10 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
     );
   }
 
-  Widget autoComplete() {
+  Widget autoComplete(List<InvoiceModel> invoices) {
     InvoiceModel emptyInvoice = const InvoiceModel();
-    getIt.get<InvoiceCubit>().getInvoices();
-    invoices = getIt.get<InvoiceCubit>().invoices;
+    // getIt.get<InvoiceCubit>().getInvoices();
+    // invoices = getIt.get<InvoiceCubit>().invoices;
     List<InvoiceModel> kOptions = invoices;
 
     return Autocomplete<InvoiceModel>(

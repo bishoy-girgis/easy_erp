@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_erp/core/helper/page_route_name.dart';
+import 'package:easy_erp/presentation/cubits/reciept_cubit/reciept_cubit.dart';
 import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_erp/presentation/Home/views/widgets/category_widget.dart';
@@ -53,6 +54,7 @@ class CategoriesViewModel {
           icon: Icons.receipt_long,
           categoryName: l.recceipt,
           onTap: () async {
+            //await Recieptcubit.get(context).getReciepts();
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kReciept);
           }),

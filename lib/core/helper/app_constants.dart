@@ -33,6 +33,10 @@ class AppConstants {
   static const String PRINT_Return_WITH_ITEMS =
       "/api/PrintRtninvoice/printRtninvoice";
 
+  /// Reciept
+  static const String POST_Reciept = "/api/RecIns/Post";
+  static String GET_Reciepts = "/api/GetRec/getrec";
+
   ///Items
   static String GET_ITEMS = "/api/Items/getitems";
   static const String GET_PAYMENT_TYPE = "/api/Payments/getpaymentstypes";

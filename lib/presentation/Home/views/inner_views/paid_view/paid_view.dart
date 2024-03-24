@@ -11,6 +11,8 @@ import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cub
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../cubits/payer_type_cubit/payer_type_cubit.dart';
+
 class PaidView extends StatelessWidget {
   const PaidView({super.key});
 
@@ -22,6 +24,7 @@ class PaidView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          await PayerTypeCubit.get(context).getPayerTypes(type: 2);
           await PaymentTypeCubit.get(context).getPaymentTypes();
           GlobalMethods.navigateTo(
             context,

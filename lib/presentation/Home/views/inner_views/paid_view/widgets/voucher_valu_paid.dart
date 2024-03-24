@@ -11,6 +11,7 @@ import 'package:easy_erp/data/models/payer_model/payer_type_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/pricing_section.dart';
 import 'package:easy_erp/presentation/cubits/payer_type_cubit/payer_type_cubit.dart';
+import 'package:easy_erp/presentation/cubits/payer_type_cubit/payer_type_state.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,12 +20,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VoucherValuepaid extends StatefulWidget {
   const VoucherValuepaid({super.key});
-
-  static const List<String> _kOptions = <String>[
-    'bishoy',
-    'youssef',
-    'ahmed',
-  ];
 
   @override
   State<VoucherValuepaid> createState() => _VoucherValuepaidState();
@@ -78,7 +73,22 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
               isHeader: true,
               fontSize: 13,
             ),
-            autoComplete(),
+            BlocBuilder<PayerTypeCubit, PayerTypeState>(
+              builder: (context, state) {
+                if (state is PayerTypeLoading) {
+                  return const CircularProgressIndicator();
+                } else if (state is PayerTypeSuccess) {
+                  // Use the data from state.payTypes to populate your Autocomplete widget
+                  return autoComplete(state.payTypes);
+                } else if (state is PayerTypeFail) {
+                  // Show an error message
+                  return Text(state.errorMessage);
+                } else {
+                  // Handle other states if necessary
+                  return const Text('Check your Payers Account');
+                }
+              },
+            ),
             const GapH(h: 1),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -183,10 +193,9 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
     );
   }
 
-  Widget autoComplete() {
+  Widget autoComplete(List<PayerTypeModel> payers) {
     PayerTypeModel emptyPayers = const PayerTypeModel();
-    getIt.get<PayerTypeCubit>().getPayerTypes(type: 2);
-    payers = getIt.get<PayerTypeCubit>().payerModels;
+    print("${payers.length}  payersLength");
     List<PayerTypeModel> kOptions = payers;
     return Autocomplete<PayerTypeModel>(
       optionsViewBuilder: (context, onSelected, options) {
