@@ -16,6 +16,7 @@ class RecieptRepoImplementation extends RecieptRepo {
   Future<Either<Failures, SendRecieptModel>> saveReciept({
     required DateTime date,
     required String user,
+    required String notes,
     required int? ccid,
     required int? branchid,
     required int? payid,
@@ -29,6 +30,7 @@ class RecieptRepoImplementation extends RecieptRepo {
         queryParameters: {
           'date': date,
           'user': user,
+          'notes': notes,
           'ccid': ccid,
           'branchid': branchid,
           'Payid': payid,

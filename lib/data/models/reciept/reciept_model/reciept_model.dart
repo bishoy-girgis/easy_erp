@@ -12,9 +12,11 @@ class RecieptModel extends Equatable {
   final double? recvalue;
   final int? payid;
   final String? payName;
+  final String? notes;
   final int? bankDtlId;
 
   const RecieptModel({
+    this.notes,
     this.cashinhdrId,
     this.cashinOrdno,
     this.date,
@@ -30,6 +32,7 @@ class RecieptModel extends Equatable {
   });
 
   factory RecieptModel.fromJson(Map<String, dynamic> json) => RecieptModel(
+        notes: json['Notes'] as String?,
         cashinhdrId: json['cashinhdr_id'] as int?,
         cashinOrdno: json['cashin_ordno'] as int?,
         date: json['date'] as String?,
@@ -45,6 +48,7 @@ class RecieptModel extends Equatable {
       );
 
   Map<String, dynamic> toJson() => {
+        'Notes': notes,
         'cashinhdr_id': cashinhdrId,
         'cashin_ordno': cashinOrdno,
         'date': date,
@@ -62,6 +66,7 @@ class RecieptModel extends Equatable {
   @override
   List<Object?> get props {
     return [
+      notes,
       cashinhdrId,
       cashinOrdno,
       date,

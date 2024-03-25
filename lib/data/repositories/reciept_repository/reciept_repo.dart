@@ -7,6 +7,7 @@ abstract class RecieptRepo {
   Future<Either<Failures, SendRecieptModel>> saveReciept({
     required DateTime date,
     required String user,
+    required String notes,
     required int? ccid,
     required int? branchid,
     required int? payid,

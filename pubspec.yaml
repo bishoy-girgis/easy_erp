@@ -61,6 +61,7 @@ dependencies:
   syncfusion_flutter_pdf: ^24.2.8
   image_picker: ^1.0.7
   flutter_typeahead: ^5.2.0
+  spelling_number: ^0.0.4
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -68,6 +69,7 @@ dev_dependencies:
     sdk: flutter
   hive_generator: ^2.0.1
   json_serializable: any
+  number_to_word_arabic: ^0.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -8,6 +8,7 @@ import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/models/reciept/reciept_model/reciept_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/create_reciept.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/pdf_reciept.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/reciept_widget.dart';
 import 'package:easy_erp/presentation/cubits/payer_type_cubit/payer_type_cubit.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
@@ -17,6 +18,7 @@ import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class ReceiptView extends StatefulWidget {
   const ReceiptView({super.key});
@@ -114,12 +116,23 @@ class _ReceiptViewState extends State<ReceiptView> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            // Returncubit.get(context).getReturnDataAndItems(
-                            //   context,
-                            //   returnInvNo: searchForReciepts.isNotEmpty
-                            //       ? searchForReciepts[index].rtnInvNo!
-                            //       : state.returnModels[index].rtnInvNo!,
-                            // );
+                            RecieptModel reciept = searchForReciepts.isNotEmpty
+                                ? searchForReciepts[index]
+                                : state.recieptModel[index];
+                            DateTime dateTime =
+                                DateTime.parse(reciept.date ?? "1/1/2000");
+                            String formattedDate =
+                                "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+
+                            generatePdfReciept(context,
+                                pdfType: "فاتوره سند قبض",
+                                voucherNo: reciept.cashinOrdno.toString(),
+                                voucherDate: formattedDate,
+                                voucherTime: "00:00:00",
+                                voucherValue: reciept.recvalue!,
+                                voucherNotes: reciept.notes ?? "--",
+                                payerName: reciept.custchartName!,
+                                voucherPaymentType: reciept.payName!);
                           },
                           child: Recieptwidget(
                             recieptModel: searchForReciepts.isNotEmpty

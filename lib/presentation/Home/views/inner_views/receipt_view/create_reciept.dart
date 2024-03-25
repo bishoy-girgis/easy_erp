@@ -76,9 +76,11 @@ class CreateReciept extends StatelessWidget {
       leading: IconButton(
           onPressed: () {
             GlobalMethods.navigatePOP(context);
-            SharedPref.remove(key: "noteseVoucher");
+            SharedPref.remove(key: "notesVoucher");
             SharedPref.remove(key: "recieptVoucher");
             SharedPref.remove(key: 'PayerChartId');
+            SharedPref.remove(key: 'PayerChartName');
+            SharedPref.remove(key: 'paymebtTypeName');
           },
           icon: const Icon(Icons.arrow_back)),
       actions: [
@@ -116,11 +118,12 @@ class CreateReciept extends StatelessWidget {
                         titleButton2: "No",
                         onPressedButton1: () async {
                           await BlocProvider.of<Recieptcubit>(context)
-                              .saveReciept();
-                          SharedPref.remove(key: "noteseVoucher");
+                              .saveReciept(context);
+                          SharedPref.remove(key: "notesVoucher");
                           SharedPref.remove(key: "recieptVoucher");
                           SharedPref.remove(key: 'PayerChartId');
-                          SharedPref.remove(key: 'recieptVoucher');
+                          SharedPref.remove(key: 'PayerChartName');
+                          SharedPref.remove(key: 'paymebtTypeName');
                         },
                         onPressedButton2: () {
                           GlobalMethods.navigatePOP(context);

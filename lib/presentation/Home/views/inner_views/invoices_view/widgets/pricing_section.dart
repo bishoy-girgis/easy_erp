@@ -231,6 +231,8 @@ class ChoocePaymentType extends StatelessWidget {
               print(data.bankdtlId);
               SharedPref.set(key: "paymentTypeID", value: data.payid ?? 0);
               SharedPref.set(key: "bankdtlId", value: data.bankdtlId ?? 1);
+              SharedPref.set(
+                  key: "paymebtTypeName", value: data.payname ?? "Cash");
               print(
                 SharedPref.get(key: "paymentTypeID"),
               );

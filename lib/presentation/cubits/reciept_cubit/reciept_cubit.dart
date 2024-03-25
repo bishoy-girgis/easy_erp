@@ -3,6 +3,7 @@ import 'package:easy_erp/data/models/reciept/reciept_model/reciept_model.dart';
 import 'package:easy_erp/data/models/reciept/send_return_model/send_reciept_model.dart';
 import 'package:easy_erp/data/repositories/reciept_repository/reciept_repo.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/pdf_reciept.dart';
 import 'package:easy_erp/presentation/cubits/reciept_cubit/reciept_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,10 +35,11 @@ class Recieptcubit extends Cubit<RecieptState> {
     });
   }
 
-  saveReciept() async {
+  saveReciept(context) async {
     emit(SaveRecieptLoading());
     print("ALL DATA IN Reciept CUBIT");
     var result = await recieptRepo.saveReciept(
+      notes: SharedPref.get(key: 'notesVoucher') ?? "--",
       date: DateFormat('dd/MM/yyyy').parse(SharedPref.get(key: 'invoiceDate') ??
           DateFormat('dd/MM/yyyy').format(DateTime.now())),
       user: SharedPref.get(key: 'userName'),
@@ -56,8 +58,19 @@ class Recieptcubit extends Cubit<RecieptState> {
       }, (r) {
         print(r);
         SendRecieptModel sendRecieptModel = r;
-        print(sendRecieptModel);
         print('DATACUBI(TTTT)' + r.toString());
+        generatePdfReciept(context,
+            pdfType: "فاتوره سند قبض",
+            voucherNo: sendRecieptModel.recNo.toString(),
+            voucherDate: DateFormat('dd/MM/yyyy').format(DateTime.now()),
+            voucherTime: DateFormat('h:mm a').format(DateTime.now()),
+            voucherValue:
+                SharedPref.get(key: 'recieptVoucher') ?? "recieptVoucher",
+            voucherNotes: SharedPref.get(key: 'notesVoucher') ?? "--",
+            payerName:
+                SharedPref.get(key: 'PayerChartName') ?? "payerChartName",
+            voucherPaymentType:
+                SharedPref.get(key: 'paymebtTypeName') ?? "paymebtTybename");
         emit(RecieptSavedSuccess(r));
         return r;
       });

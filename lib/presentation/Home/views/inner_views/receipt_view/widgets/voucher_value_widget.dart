@@ -200,7 +200,7 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
             state: ToastStates.SUCCESS,
           );
           SharedPref.set(key: 'PayerChartId', value: selectedPayer.chartid!);
-
+          SharedPref.set(key: 'PayerChartName', value: selectedPayer.accname!);
           setState(() {});
         } else {
           GlobalMethods.buildFlutterToast(
