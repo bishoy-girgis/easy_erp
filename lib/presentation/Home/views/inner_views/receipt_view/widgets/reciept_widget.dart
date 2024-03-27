@@ -1,7 +1,7 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
-import 'package:easy_erp/data/models/reciept/reciept_model/reciept_model.dart';
+import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:easy_erp/presentation/cubits/reciept_cubit/reciept_cubit.dart';
 import 'package:easy_erp/presentation/cubits/reciept_cubit/reciept_states.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Recieptwidget extends StatelessWidget {
   const Recieptwidget({super.key, required this.recieptModel});
-  final RecieptModel recieptModel;
+  final RecieptPaidModel recieptModel;
 
   String formatDate(String dateTimeString) {
     DateTime dateTime = DateTime.parse(dateTimeString);

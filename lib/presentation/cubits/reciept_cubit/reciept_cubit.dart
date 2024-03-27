@@ -1,5 +1,5 @@
 import 'package:easy_erp/core/helper/app_constants.dart';
-import 'package:easy_erp/data/models/reciept/reciept_model/reciept_model.dart';
+import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:easy_erp/data/models/reciept/send_return_model/send_reciept_model.dart';
 import 'package:easy_erp/data/repositories/reciept_repository/reciept_repo.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
@@ -18,7 +18,7 @@ class Recieptcubit extends Cubit<RecieptState> {
 
   static Recieptcubit get(context) => BlocProvider.of(context);
 
-  List<RecieptModel> reciepts = [];
+  List<RecieptPaidModel> reciepts = [];
   getReciepts() async {
     emit(GetRecieptLoading());
     final result = await recieptRepo.getReciepts();
@@ -70,7 +70,7 @@ class Recieptcubit extends Cubit<RecieptState> {
             payerName:
                 SharedPref.get(key: 'PayerChartName') ?? "payerChartName",
             voucherPaymentType:
-                SharedPref.get(key: 'paymebtTypeName') ?? "paymebtTybename");
+                SharedPref.get(key: 'paymebtTypeName') ?? "cash");
         emit(RecieptSavedSuccess(r));
         return r;
       });

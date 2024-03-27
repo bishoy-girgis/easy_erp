@@ -6,7 +6,7 @@ import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
-import 'package:easy_erp/data/models/reciept/reciept_model/reciept_model.dart';
+import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/create_reciept.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/pdf_reciept.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/receipt_view/widgets/reciept_widget.dart';
@@ -28,9 +28,9 @@ class ReceiptView extends StatefulWidget {
 }
 
 class _ReceiptViewState extends State<ReceiptView> {
-  List<RecieptModel> reciepts = [];
+  List<RecieptPaidModel> reciepts = [];
 
-  List<RecieptModel> searchForReciepts = [];
+  List<RecieptPaidModel> searchForReciepts = [];
 
   TextEditingController searchController = TextEditingController();
   @override
@@ -116,9 +116,10 @@ class _ReceiptViewState extends State<ReceiptView> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            RecieptModel reciept = searchForReciepts.isNotEmpty
-                                ? searchForReciepts[index]
-                                : state.recieptModel[index];
+                            RecieptPaidModel reciept =
+                                searchForReciepts.isNotEmpty
+                                    ? searchForReciepts[index]
+                                    : state.recieptModel[index];
                             DateTime dateTime =
                                 DateTime.parse(reciept.date ?? "1/1/2000");
                             String formattedDate =

@@ -8,11 +8,13 @@ import 'package:easy_erp/data/models/printerModel/printer_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/item_repository/item_repo_implementation.dart';
 import 'package:easy_erp/data/repositories/login_repository/login_repo_imp.dart';
+import 'package:easy_erp/data/repositories/paid_repository/paid_repo_imp.dart';
 import 'package:easy_erp/data/repositories/payer_type_repository/payer_type_repo_imp.dart';
 import 'package:easy_erp/data/repositories/reciept_repository/reciept_repo_imp.dart';
 import 'package:easy_erp/data/repositories/return_repository/return_repo_imp.dart';
 import 'package:easy_erp/l10n/l10n.dart';
 import 'package:easy_erp/presentation/Login/view_models/cubits/login_cubit/login_cubit.dart';
+import 'package:easy_erp/presentation/cubits/paid_cubit/paid_cubit.dart';
 import 'package:easy_erp/presentation/cubits/payer_type_cubit/payer_type_cubit.dart';
 import 'package:easy_erp/presentation/cubits/reciept_cubit/reciept_cubit.dart';
 import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
@@ -114,6 +116,10 @@ class MyApp extends StatelessWidget {
                 create: (context) => Recieptcubit(
                       recieptRepo: getIt.get<RecieptRepoImplementation>(),
                     )..getReciepts()),
+            BlocProvider(
+                create: (context) => Paidcubit(
+                      paidRepo: getIt.get<PaidRepoImplementation>(),
+                    )..getPaids()),
             BlocProvider(
               create: (context) => getIt.get<AddItemCubit>(),
             ),

@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_erp/core/api/api_service.dart';
 import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
-import 'package:easy_erp/data/models/reciept/reciept_model/reciept_model.dart';
+import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:easy_erp/data/models/reciept/send_return_model/send_reciept_model.dart';
 import 'package:easy_erp/data/repositories/reciept_repository/reciept_repo.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ class RecieptRepoImplementation extends RecieptRepo {
   }
 
   @override
-  Future<Either<Failures, List<RecieptModel>>> getReciepts() async {
+  Future<Either<Failures, List<RecieptPaidModel>>> getReciepts() async {
     try {
       debugPrint("DATA IN Reciept REPO IMP ✨✨");
       var data = await apiService.get(
@@ -68,9 +68,9 @@ class RecieptRepoImplementation extends RecieptRepo {
             'username': AppConstants.userName
           });
 
-      List<RecieptModel> reciepts = [];
+      List<RecieptPaidModel> reciepts = [];
       for (var customer in data) {
-        reciepts.add(RecieptModel.fromJson(customer));
+        reciepts.add(RecieptPaidModel.fromJson(customer));
       }
       return right(reciepts);
     } catch (e) {

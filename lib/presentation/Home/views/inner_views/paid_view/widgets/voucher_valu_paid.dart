@@ -121,6 +121,7 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                       Row(
                         children: [
                           Checkbox(
+                            checkColor: AppColors.primaryColorBlue,
                             visualDensity: const VisualDensity(
                                 horizontal: -4, vertical: -4),
                             activeColor:
@@ -143,7 +144,8 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                       Container(
                         margin: const EdgeInsets.all(5),
                         width: double.infinity,
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           color: const Color.fromRGBO(227, 227, 227, 1),
