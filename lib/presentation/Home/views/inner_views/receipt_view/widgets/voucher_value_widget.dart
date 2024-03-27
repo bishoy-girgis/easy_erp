@@ -104,12 +104,7 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
               prefixIconColor: const Color.fromARGB(255, 49, 101, 128),
               prefixIconSize: 16.sp,
             ),
-            const GapH(h: 1),
-            TextBuilder(
-              AppLocalizations.of(context)!.payment_types,
-              isHeader: true,
-              fontSize: 13,
-            ),
+            const GapH(h: 2),
             BlocBuilder<PaymentTypeCubit, PaymentTypeState>(
               builder: (context, state) {
                 if (state is PaymentTypeSuccess) {

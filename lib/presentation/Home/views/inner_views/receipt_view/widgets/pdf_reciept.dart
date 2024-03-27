@@ -29,11 +29,11 @@ Future<void> generatePdfReciept(
       imageData = await imageFile.readAsBytes();
     } else {
       final ByteData image = await rootBundle.load(AppImages.logo);
-      Uint8List imageData = (image).buffer.asUint8List();
+      imageData = (image).buffer.asUint8List();
     }
   } else {
     final ByteData image = await rootBundle.load(AppImages.logo);
-    Uint8List imageData = (image).buffer.asUint8List();
+    imageData = (image).buffer.asUint8List();
   }
   final Document pdf = Document();
   var arabicFont = Font.ttf(
