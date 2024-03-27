@@ -258,6 +258,8 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
       onSelected: (PayerTypeModel selectedPayer) {
         if (selectedPayer != emptyPayers) {
           SharedPref.set(key: 'PayerChartId', value: selectedPayer.chartid!);
+          SharedPref.set(key: 'PayerChartName', value: selectedPayer.accname!);
+
           GlobalMethods.buildFlutterToast(
             message: 'Payer Selected Successfully',
             state: ToastStates.SUCCESS,
