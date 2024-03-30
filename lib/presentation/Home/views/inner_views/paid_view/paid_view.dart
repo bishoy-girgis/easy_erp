@@ -6,6 +6,7 @@ import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/models/paid_model/paid_model.dart';
 import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/paid_view/create_paid.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/paid_view/widgets/paid_widget.dart';
@@ -27,9 +28,9 @@ class PaidView extends StatefulWidget {
 }
 
 class _PaidViewState extends State<PaidView> {
-  List<RecieptPaidModel> paids = [];
+  List<PaidModel> paids = [];
 
-  List<RecieptPaidModel> searchForPaids = [];
+  List<PaidModel> searchForPaids = [];
 
   TextEditingController searchController = TextEditingController();
   @override
@@ -83,9 +84,9 @@ class _PaidViewState extends State<PaidView> {
               searchController.text = v;
               searchForPaids = paids
                   .where((Paid) =>
-                      Paid.cashinOrdno!.toString().startsWith(v) ||
-                      Paid.cashinhdrId!.toString().startsWith(v) ||
-                      Paid.custchartName!.toLowerCase().startsWith(v))
+                      Paid.cashoutOrdno!.toString().startsWith(v) ||
+                      Paid.cashoutHdrid!.toString().startsWith(v) ||
+                      Paid.paymentchartName!.toLowerCase().startsWith(v))
                   .toList();
               setState(() {});
             },
@@ -113,7 +114,7 @@ class _PaidViewState extends State<PaidView> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            RecieptPaidModel paid = searchForPaids.isNotEmpty
+                            PaidModel paid = searchForPaids.isNotEmpty
                                 ? searchForPaids[index]
                                 : state.paidModel[index];
                             DateTime dateTime =
@@ -123,12 +124,13 @@ class _PaidViewState extends State<PaidView> {
 
                             generatePdfReciept(context,
                                 pdfType: "فاتوره سند صرف",
-                                voucherNo: paid.cashinOrdno.toString(),
+                                voucherNo: paid.cashoutOrdno.toString(),
                                 voucherDate: formattedDate,
                                 voucherTime: "00:00:00",
-                                voucherValue: paid.recvalue!,
+                                voucherValue: paid.payvalue!,
                                 voucherNotes: paid.notes ?? "--",
-                                payerName: paid.custchartName!,
+                                payerName: paid.paymentchartName!,
+                                vatValue: paid.vatvalue!,
                                 voucherPaymentType: paid.payName!);
                           },
                           child: Paidwidget(

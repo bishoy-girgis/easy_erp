@@ -18,7 +18,7 @@ class Recieptcubit extends Cubit<RecieptState> {
 
   static Recieptcubit get(context) => BlocProvider.of(context);
 
-  List<RecieptPaidModel> reciepts = [];
+  List<RecieptModel> reciepts = [];
   getReciepts() async {
     emit(GetRecieptLoading());
     final result = await recieptRepo.getReciepts();

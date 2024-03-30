@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class RecieptPaidModel extends Equatable {
+class RecieptModel extends Equatable {
   final int? cashinhdrId;
   final int? cashinOrdno;
   final String? date;
@@ -15,7 +15,7 @@ class RecieptPaidModel extends Equatable {
   final String? notes;
   final int? bankDtlId;
 
-  const RecieptPaidModel({
+  const RecieptModel({
     this.notes,
     this.cashinhdrId,
     this.cashinOrdno,
@@ -31,8 +31,7 @@ class RecieptPaidModel extends Equatable {
     this.bankDtlId,
   });
 
-  factory RecieptPaidModel.fromJson(Map<String, dynamic> json) =>
-      RecieptPaidModel(
+  factory RecieptModel.fromJson(Map<String, dynamic> json) => RecieptModel(
         notes: json['Notes'] as String?,
         cashinhdrId: json['cashinhdr_id'] as int?,
         cashinOrdno: json['cashin_ordno'] as int?,

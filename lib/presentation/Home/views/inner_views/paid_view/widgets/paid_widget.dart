@@ -1,6 +1,7 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
+import 'package:easy_erp/data/models/paid_model/paid_model.dart';
 import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:easy_erp/presentation/cubits/paid_cubit/paid_cubit.dart';
 import 'package:easy_erp/presentation/cubits/paid_cubit/paid_states.dart';
@@ -12,7 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Paidwidget extends StatelessWidget {
   const Paidwidget({super.key, required this.paidModel});
-  final RecieptPaidModel paidModel;
+  final PaidModel paidModel;
 
   String formatDate(String dateTimeString) {
     DateTime dateTime = DateTime.parse(dateTimeString);
@@ -72,7 +73,7 @@ class Paidwidget extends StatelessWidget {
                         ),
                         const GapW(w: 5),
                         TextBuilder(
-                          paidModel.cashinOrdno.toString(),
+                          paidModel.cashoutOrdno.toString(),
                           fontSize: 17,
                         ),
                       ],
@@ -84,7 +85,7 @@ class Paidwidget extends StatelessWidget {
                         Column(
                           children: [
                             TextBuilder(
-                              paidModel.custchartName!,
+                              paidModel.paymentchartName!,
                               fontSize: 17,
                             ),
                           ],
@@ -97,7 +98,7 @@ class Paidwidget extends StatelessWidget {
                               fontSize: 13,
                             ),
                             TextBuilder(
-                              paidModel.recvalue.toString(),
+                              paidModel.payvalue.toString(),
                             ),
                           ],
                         ),

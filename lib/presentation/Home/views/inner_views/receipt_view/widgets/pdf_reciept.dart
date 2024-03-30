@@ -12,6 +12,7 @@ import 'package:spelling_number/spelling_number.dart';
 
 Future<void> generatePdfReciept(
   context, {
+  double? vatValue,
   required String pdfType,
   required String voucherNo,
   required String voucherDate,
@@ -99,6 +100,22 @@ Future<void> generatePdfReciept(
                   'المبلغ   : ',
                 ),
               ]),
+              (vatValue != null)
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        buildPDFText(
+                          SpellingNumber(lang: 'ar').convert(vatValue),
+                          fontSize: 16,
+                        ),
+                        SizedBox(width: 5.w),
+                        buildPDFText(vatValue.toStringAsFixed(2)),
+                        buildPDFText(
+                          'الضريبه   : ',
+                        ),
+                      ],
+                    )
+                  : Container(),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 buildPDFText(voucherNotes),
                 buildPDFText(

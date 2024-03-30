@@ -39,7 +39,7 @@ class AppConstants {
 
   /// Paid
   static const String POST_Paid = "/api/payIns/Post";
-  static String GET_Paids = "/api/GetRec/getpay";
+  static String GET_Paids = "/api/getpay";
 
   ///Items
   static String GET_ITEMS = "/api/Items/getitems";

@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:easy_erp/core/api/api_service.dart';
 import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/data/models/paid_model/paid_model.dart';
 import 'package:easy_erp/data/models/paid_model/send_paid_model.dart';
-import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:easy_erp/data/repositories/paid_repository/paid_repo.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class PaidRepoImplementation extends PaidRepo {
   ApiService apiService;
   PaidRepoImplementation(this.apiService);
   @override
-  Future<Either<Failures, List<RecieptPaidModel>>> getPaids() async {
+  Future<Either<Failures, List<PaidModel>>> getPaids() async {
     try {
       debugPrint("DATA IN Paid REPO IMP ✨✨");
       var data = await apiService.get(
@@ -22,9 +22,9 @@ class PaidRepoImplementation extends PaidRepo {
             'username': AppConstants.userName
           });
 
-      List<RecieptPaidModel> paids = [];
+      List<PaidModel> paids = [];
       for (var paid in data) {
-        paids.add(RecieptPaidModel.fromJson(paid));
+        paids.add(PaidModel.fromJson(paid));
       }
       return right(paids);
     } catch (e) {

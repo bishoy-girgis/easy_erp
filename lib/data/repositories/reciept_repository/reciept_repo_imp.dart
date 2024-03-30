@@ -58,7 +58,7 @@ class RecieptRepoImplementation extends RecieptRepo {
   }
 
   @override
-  Future<Either<Failures, List<RecieptPaidModel>>> getReciepts() async {
+  Future<Either<Failures, List<RecieptModel>>> getReciepts() async {
     try {
       debugPrint("DATA IN Reciept REPO IMP ✨✨");
       var data = await apiService.get(
@@ -68,9 +68,9 @@ class RecieptRepoImplementation extends RecieptRepo {
             'username': AppConstants.userName
           });
 
-      List<RecieptPaidModel> reciepts = [];
+      List<RecieptModel> reciepts = [];
       for (var customer in data) {
-        reciepts.add(RecieptPaidModel.fromJson(customer));
+        reciepts.add(RecieptModel.fromJson(customer));
       }
       return right(reciepts);
     } catch (e) {

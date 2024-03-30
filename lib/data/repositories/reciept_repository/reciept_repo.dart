@@ -15,5 +15,5 @@ abstract class RecieptRepo {
     required int? custchartid,
     required double? recvalue,
   });
-  Future<Either<Failures, List<RecieptPaidModel>>> getReciepts();
+  Future<Either<Failures, List<RecieptModel>>> getReciepts();
 }

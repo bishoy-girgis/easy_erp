@@ -1,4 +1,5 @@
 import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/data/models/paid_model/paid_model.dart';
 import 'package:easy_erp/data/models/paid_model/send_paid_model.dart';
 import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:easy_erp/data/repositories/paid_repository/paid_repo.dart';
@@ -18,7 +19,7 @@ class Paidcubit extends Cubit<PaidState> {
 
   static Paidcubit get(context) => BlocProvider.of(context);
 
-  List<RecieptPaidModel> paids = [];
+  List<PaidModel> paids = [];
   getPaids() async {
     emit(GetPaidLoading());
     final result = await paidRepo.getPaids();
@@ -62,6 +63,7 @@ class Paidcubit extends Cubit<PaidState> {
         print('DATACUBI(TTTT)' + r.toString());
         generatePdfReciept(context,
             pdfType: "فاتوره سند صرف",
+            vatValue: SharedPref.get(key: 'taxVoucher'),
             voucherNo: sendPaidModel.payNo.toString(),
             voucherDate: DateFormat('dd/MM/yyyy').format(DateTime.now()),
             voucherTime: DateFormat('h:mm a').format(DateTime.now()),

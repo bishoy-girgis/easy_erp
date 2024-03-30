@@ -28,9 +28,9 @@ class ReceiptView extends StatefulWidget {
 }
 
 class _ReceiptViewState extends State<ReceiptView> {
-  List<RecieptPaidModel> reciepts = [];
+  List<RecieptModel> reciepts = [];
 
-  List<RecieptPaidModel> searchForReciepts = [];
+  List<RecieptModel> searchForReciepts = [];
 
   TextEditingController searchController = TextEditingController();
   @override
@@ -116,10 +116,9 @@ class _ReceiptViewState extends State<ReceiptView> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            RecieptPaidModel reciept =
-                                searchForReciepts.isNotEmpty
-                                    ? searchForReciepts[index]
-                                    : state.recieptModel[index];
+                            RecieptModel reciept = searchForReciepts.isNotEmpty
+                                ? searchForReciepts[index]
+                                : state.recieptModel[index];
                             DateTime dateTime =
                                 DateTime.parse(reciept.date ?? "1/1/2000");
                             String formattedDate =

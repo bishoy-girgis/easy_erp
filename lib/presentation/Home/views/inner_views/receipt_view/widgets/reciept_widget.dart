@@ -12,7 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Recieptwidget extends StatelessWidget {
   const Recieptwidget({super.key, required this.recieptModel});
-  final RecieptPaidModel recieptModel;
+  final RecieptModel recieptModel;
 
   String formatDate(String dateTimeString) {
     DateTime dateTime = DateTime.parse(dateTimeString);

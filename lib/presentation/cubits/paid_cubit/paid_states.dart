@@ -1,3 +1,4 @@
+import 'package:easy_erp/data/models/paid_model/paid_model.dart';
 import 'package:easy_erp/data/models/paid_model/send_paid_model.dart';
 import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:equatable/equatable.dart';
@@ -14,7 +15,7 @@ final class PaidInitial extends PaidState {}
 final class GetPaidLoading extends PaidState {}
 
 final class GetPaidSuccess extends PaidState {
-  final List<RecieptPaidModel> paidModel;
+  final List<PaidModel> paidModel;
   const GetPaidSuccess(this.paidModel);
 }
 

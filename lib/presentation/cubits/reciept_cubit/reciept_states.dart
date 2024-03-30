@@ -14,7 +14,7 @@ final class RecieptInitial extends RecieptState {}
 final class GetRecieptLoading extends RecieptState {}
 
 final class GetRecieptSuccess extends RecieptState {
-  final List<RecieptPaidModel> recieptModel;
+  final List<RecieptModel> recieptModel;
   const GetRecieptSuccess(this.recieptModel);
 }
 
