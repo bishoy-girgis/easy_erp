@@ -198,6 +198,7 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
                 debugPrint(AppConstants.branchAddress);
                 debugPrint(AppConstants.taxNumber);
                 debugPrint(AppConstants.notes);
+                debugPrint(AppConstants.baseUrl);
                 debugPrint(
                     "${SharedPref.get(key: "logoPath")}  IMAGE LOGOOOO PATHHH");
                 SharedPref.remove(key: "accessToken");

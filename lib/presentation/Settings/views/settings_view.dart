@@ -1,3 +1,4 @@
+import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
@@ -27,6 +28,15 @@ class SettingsView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              AppConstants.updateSettingValues();
+              debugPrint("supmiitttteeeddddddddddddddddddddddddddddddddddd");
+              debugPrint(AppConstants.branchName);
+              debugPrint(AppConstants.branchAddress);
+              debugPrint(AppConstants.taxNumber);
+              debugPrint(AppConstants.notes);
+              debugPrint(AppConstants.baseUrl);
+              debugPrint(
+                  "${SharedPref.get(key: "logoPath")}  IMAGE LOGOOOO PATHHH");
               SharedPref.remove(key: "accessToken");
               navigatorKey.currentState!
                   .pushNamedAndRemoveUntil(AppRouters.kLogin, (route) => false);

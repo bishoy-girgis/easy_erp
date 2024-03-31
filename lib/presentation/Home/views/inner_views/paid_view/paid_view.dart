@@ -123,7 +123,7 @@ class _PaidViewState extends State<PaidView> {
                                 "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
 
                             generatePdfReciept(context,
-                                pdfType: "فاتوره سند صرف",
+                                pdfType: " نسخه من سند صرف",
                                 voucherNo: paid.cashoutOrdno.toString(),
                                 voucherDate: formattedDate,
                                 voucherTime: "00:00:00",

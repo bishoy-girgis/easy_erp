@@ -72,7 +72,7 @@ Future<void> generatePdfReciept(
               SizedBox(height: 20.h),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 buildPDFText(voucherNo.toString()),
-                buildPDFText('الرقم السند : '),
+                buildPDFText('رقم السند : '),
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 buildPDFText(voucherDate),
@@ -84,7 +84,8 @@ Future<void> generatePdfReciept(
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 buildPDFText(payerName),
-                buildPDFText('اسم العميل : '),
+                buildPDFText(
+                    (vatValue != null) ? 'اسم المصروف : ' : 'اسم العميل : '),
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 buildPDFText(voucherPaymentType),
@@ -92,23 +93,19 @@ Future<void> generatePdfReciept(
               ]),
               SizedBox(height: 25.h),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                buildPDFText(SpellingNumber(lang: 'ar').convert(voucherValue),
-                    fontSize: 16),
                 SizedBox(width: 5.w),
                 buildPDFText(voucherValue.toStringAsFixed(2)),
                 buildPDFText(
                   'المبلغ   : ',
                 ),
               ]),
+              buildPDFText(
+                  "${SpellingNumber(lang: 'ar').convert(voucherValue)} ريال سعودى فقط لا غير",
+                  fontSize: 16),
               (vatValue != null)
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        buildPDFText(
-                          SpellingNumber(lang: 'ar').convert(vatValue),
-                          fontSize: 16,
-                        ),
-                        SizedBox(width: 5.w),
                         buildPDFText(vatValue.toStringAsFixed(2)),
                         buildPDFText(
                           'الضريبه   : ',

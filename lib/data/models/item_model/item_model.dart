@@ -23,7 +23,7 @@ class ItemModel extends HiveObject {
   @HiveField(7)
   final int? untItmIndx;
   @HiveField(8)
-  final double? salesprice;
+  double? salesprice;
   @HiveField(9)
   final int? balance;
   @HiveField(10)

@@ -11,6 +11,7 @@ class ApiService {
     Map<String, dynamic>? queryParameters,
     var body,
   }) async {
+    print(_baseUrl);
     var headers = {
       'Authorization': 'Bearer ${AppConstants.accessToken}',
       // 'Authorization': 'Bearer ${SharedPref.get(key:"accessToken")}',
@@ -29,6 +30,8 @@ class ApiService {
     Map<String, dynamic>? queryParameters,
     required var body,
   }) async {
+    print(_baseUrl);
+
     dio = Dio(BaseOptions(
       baseUrl: _baseUrl,
       headers: headers,
@@ -46,6 +49,8 @@ class ApiService {
     Map<String, dynamic>? queryParameters,
     required String endPoint,
   }) async {
+    print(_baseUrl);
+
     var dataa = json.encode(data);
     print('dataa');
     print(dataa);

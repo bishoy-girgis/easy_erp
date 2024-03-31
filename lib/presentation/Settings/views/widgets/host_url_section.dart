@@ -36,7 +36,7 @@ class HostUrlSection extends StatelessWidget {
                 SharedPref.set(key: "baseUrl", value: value);
                 debugPrint(AppConstants.baseUrl);
                 debugPrint('😘😘' + baseUrlController.text);
-                debugPrint('😘😘' + SharedPref.get(key: 'baseUrl'));
+                debugPrint('😘😘😘😘' + SharedPref.get(key: 'baseUrl'));
               },
               onSubmit: (value) {
                 baseUrlController.text = value;

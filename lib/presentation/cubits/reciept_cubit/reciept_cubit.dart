@@ -60,7 +60,7 @@ class Recieptcubit extends Cubit<RecieptState> {
         SendRecieptModel sendRecieptModel = r;
         print('DATACUBI(TTTT)' + r.toString());
         generatePdfReciept(context,
-            pdfType: "فاتوره سند قبض",
+            pdfType: " سند قبض",
             voucherNo: sendRecieptModel.recNo.toString(),
             voucherDate: DateFormat('dd/MM/yyyy').format(DateTime.now()),
             voucherTime: DateFormat('h:mm a').format(DateTime.now()),

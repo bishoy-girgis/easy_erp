@@ -125,7 +125,7 @@ class _ReceiptViewState extends State<ReceiptView> {
                                 "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
 
                             generatePdfReciept(context,
-                                pdfType: "فاتوره سند قبض",
+                                pdfType: " نسخه من سند قبض",
                                 voucherNo: reciept.cashinOrdno.toString(),
                                 voucherDate: formattedDate,
                                 voucherTime: "00:00:00",

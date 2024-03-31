@@ -62,7 +62,7 @@ class Paidcubit extends Cubit<PaidState> {
         SendPaidModel sendPaidModel = r;
         print('DATACUBI(TTTT)' + r.toString());
         generatePdfReciept(context,
-            pdfType: "فاتوره سند صرف",
+            pdfType: " سند صرف",
             vatValue: SharedPref.get(key: 'taxVoucher'),
             voucherNo: sendPaidModel.payNo.toString(),
             voucherDate: DateFormat('dd/MM/yyyy').format(DateTime.now()),
