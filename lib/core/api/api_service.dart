@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 
 class ApiService {
-  final _baseUrl = AppConstants.baseUrl;
+  String _baseUrl = AppConstants.baseUrl;
   Dio dio;
   ApiService(this.dio);
   Future<dynamic> get({

@@ -114,6 +114,7 @@ class AddItemWidget extends StatelessWidget {
                     onChange: (value) {
                       priceController.text = value;
                       itemModel.salesprice = double.parse(priceController.text);
+                      getIt.get<AddItemCubit>().changeQuantity();
                     },
                   ),
                 ),

@@ -48,6 +48,11 @@ class AddItemCubit extends Cubit<AddItemState> {
     emit(ChangeQuantityState());
   }
 
+  changePrice() {
+    emit(AddItemInitial());
+    emit(ChangePriceState());
+  }
+
   void checkAndMergeDuplicates() {
     emit(AddItemInitial());
 

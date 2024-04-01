@@ -60,12 +60,12 @@ class AppConstants {
     branchID = SharedPref.get(key: "branchID");
     ccid = SharedPref.get(key: "ccid");
     vatType = SharedPref.get(key: "VATType");
-    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
+    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:610";
     accessToken = SharedPref.get(key: "accessToken");
   }
 
   static void updateSettingValues() {
-    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
+    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:610";
     branchName = SharedPref.get(key: "branchName") ?? "";
     branchAddress = SharedPref.get(key: "branchAddress") ?? "";
     taxNumber = SharedPref.get(key: "taxNumber") ?? "";

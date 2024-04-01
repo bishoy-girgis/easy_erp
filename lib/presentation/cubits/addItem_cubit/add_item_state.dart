@@ -33,6 +33,8 @@ final class RemoveAllItemSuccess extends AddItemState {}
 
 final class ChangeQuantityState extends AddItemState {}
 
+final class ChangePriceState extends AddItemState {}
+
 final class ExceedLimitState extends AddItemState {}
 // final class ItemFound extends AddItemState {}
 
