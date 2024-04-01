@@ -107,7 +107,20 @@ Future<void> generateAndPrintArabicPdf(
                         isReturn ? 'رقم المرتجع : ' : 'رقم الفاتورة : '),
                   ]),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    buildPDFText(custName),
+                    // buildPDFText(custName),
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Center(
+                        child: Text(
+                          custName,
+                          maxLines: 2,
+                          overflow: TextOverflow.visible,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
                     buildPDFText('العميل : '),
                   ]),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
