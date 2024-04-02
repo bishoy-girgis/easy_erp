@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/widgets/gap.dart';
@@ -59,36 +60,68 @@ class CustomerWidget extends StatelessWidget {
           // ?
           Row(
             children: [
-              const Icon(
-                Icons.person,
-              ),
+              const Icon(Icons.person),
               const GapW(w: 2),
-              TextBuilder(customerModel.custename ?? "7777"),
+              Expanded(
+                child: Text(
+                  customerModel.custname ?? "N/A",
+                  textDirection: TextDirection.rtl,
+                  maxLines: 1,
+                  textAlign: TextAlign.end,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ],
           ),
-          // : Container(),
-          customerModel.fax != null || customerModel.fax!.isNotEmpty
-              ? Row(
-                  children: [
-                    const Icon(
-                      Icons.app_registration_rounded,
-                    ),
-                    const GapW(w: 2),
-                    TextBuilder(customerModel.fax!),
-                  ],
-                )
-              : Container(),
-          customerModel.address != null || customerModel.address!.isNotEmpty
-              ? Row(
-                  children: [
-                    const Icon(
-                      Icons.location_on_rounded,
-                    ),
-                    const GapW(w: 2),
-                    TextBuilder(customerModel.address!),
-                  ],
-                )
-              : Container(),
+          Row(
+            children: [
+              const Icon(
+                Icons.app_registration_rounded,
+              ),
+              const GapW(w: 2),
+              Expanded(
+                child: Text(
+                  customerModel.fax ?? "N/A",
+                  textDirection: TextDirection.rtl,
+                  maxLines: 1,
+                  textAlign: TextAlign.end,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              const Icon(
+                Icons.location_on_rounded,
+              ),
+              const GapW(w: 2),
+              Expanded(
+                child: Text(
+                  customerModel.address ?? "N/A",
+                  textDirection: TextDirection.rtl,
+                  maxLines: 1,
+                  textAlign: TextAlign.end,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

@@ -84,10 +84,14 @@ class ReturnWidget extends StatelessWidget {
                     ),
                     const Divider(),
                     TextBuilder(
-                      returnModel.custname!,
-                      fontSize: 17,
+                      
+                      returnMode
+                      
+                      fontSize: 
+                      
                     ),
-                    const GapH(h: 1.5),
+                    const GapH(h
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
