@@ -43,7 +43,13 @@ class _InvoicesViewState extends State<InvoicesView> {
         elevation: 10,
         child: const Icon(Icons.add),
       ),
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: TextBuilder(
+          AppLocalizations.of(context)!.invoises.toLowerCase(),
+          isHeader: true,
+          color: Colors.white,
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
