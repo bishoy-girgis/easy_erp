@@ -243,6 +243,7 @@ class ChoocePaymentType extends StatelessWidget {
         const GapW(w: 5),
         Flexible(
           child: CustomTextFormField(
+            centerContent: true,
             controller: _controller,
             labelText: _controller.text,
             inputFormatters: [

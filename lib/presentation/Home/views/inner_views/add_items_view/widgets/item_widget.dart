@@ -113,7 +113,11 @@ class AddItemWidget extends StatelessWidget {
                     isContentBold: true,
                     onChange: (value) {
                       priceController.text = value;
-                      itemModel.salesprice = double.parse(priceController.text);
+                      String price = priceController.text;
+                      if (value.isEmpty) {
+                        price = "0.0";
+                      }
+                      itemModel.salesprice = double.parse(price);
                       getIt.get<AddItemCubit>().changeQuantity();
                     },
                   ),
@@ -129,9 +133,7 @@ class AddItemWidget extends StatelessWidget {
                     IconButton(
                       style: IconButton.styleFrom(
                         padding: const EdgeInsets.all(0),
-                      ), // mohmmmm
-                      // viiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
-                      //  sss
+                      ),
                       onPressed: () {
                         if (quantityController < limitController) {
                           quantityController++;
@@ -162,7 +164,7 @@ class AddItemWidget extends StatelessWidget {
                         isContentBold: true,
                         onChange: (value) {
                           if (value.isEmpty) {
-                            quantityController = 1;
+                            quantityController = 0;
                           } else if (quantityController >= limitController) {
                             quantityController = limitController;
                             itemModel.quantity = quantityController;
@@ -172,14 +174,10 @@ class AddItemWidget extends StatelessWidget {
                                     "You can't add more than limit $limitController",
                                 state: ToastStates.WARNING);
                           } else {
-                            // quantityController.text.replaceAll('1', value);
-                            // quantityController.text = value;
-                            // itemModel.quantity =
-                            //     int.parse(quantityController.text);
-                            print("elseeeeeeeeeeeeeeeeeeeee");
+                            quantityController = int.parse(value);
+                            itemModel.quantity = quantityController;
                           }
                           Controller.text = quantityController.toString();
-
                           getIt.get<AddItemCubit>().changeQuantity();
                         },
                       ),
