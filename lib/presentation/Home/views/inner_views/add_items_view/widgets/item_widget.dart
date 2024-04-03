@@ -38,7 +38,7 @@ class AddItemWidget extends StatelessWidget {
     //limitController = int.parse(itemModel.quantity.toInt().toString());
     // }
     // ignore: non_constant_identifier_names
-    var Controller = TextEditingController(text: quantityController.toString());
+    var Controller = TextEditingController(text:itemModel.quantity.toString());
 
     return BlocBuilder<AddItemCubit, AddItemState>(
       builder: (context, state) {
@@ -111,6 +111,9 @@ class AddItemWidget extends StatelessWidget {
                     contentSize: 18,
                     controller: priceController,
                     isContentBold: true,
+                    onTap: () {
+                      priceController.text = "";
+                    },
                     onChange: (value) {
                       priceController.text = value;
                       String price = priceController.text;
@@ -162,6 +165,9 @@ class AddItemWidget extends StatelessWidget {
                         controller: Controller,
                         keyboardType: TextInputType.number,
                         isContentBold: true,
+                        onTap: () {
+                          Controller.text = "";
+                        },
                         onChange: (value) {
                           if (value.isEmpty) {
                             quantityController = 0;
