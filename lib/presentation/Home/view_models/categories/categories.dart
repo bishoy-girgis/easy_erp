@@ -8,6 +8,8 @@ import '../../../../core/helper/app_routing.dart';
 import '../../../../core/helper/global_methods.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../cubits/customer_cubit/customer_cubit.dart';
+
 class CategoriesViewModel {
   static List<CategoryWidget> getCategories(BuildContext context) {
     var l = AppLocalizations.of(context)!;
@@ -29,8 +31,8 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kCustomers);
-            // await CustomerCubit.get(context).getCustomers();
-            //  await CustomerCubit.get(context).getCustomerGroups();
+            await CustomerCubit.get(context).getCustomers();
+             await CustomerCubit.get(context).getCustomerGroups();
           }),
       CategoryWidget(
           icon: Icons.attach_money,

@@ -31,6 +31,7 @@ class ServerError extends Failures {
         return ServerError("Bad Certificate with Api Server");
       case DioExceptionType.badResponse:
         debugPrint("😡😡😡BAD Response😡😡😡");
+        debugPrint(dioError.response!.data);
         GlobalMethods.buildFlutterToast(
             message: dioError.response!.data, state: ToastStates.ERROR);
         return ServerError.fromBadResponse(
