@@ -86,7 +86,7 @@ class _PaidViewState extends State<PaidView> {
                   .where((Paid) =>
                       Paid.cashoutOrdno!.toString().startsWith(v) ||
                       Paid.cashoutHdrid!.toString().startsWith(v) ||
-                      Paid.paymentchartName!.toLowerCase().startsWith(v))
+                      Paid.paymentchartName!.toLowerCase().contains(v))
                   .toList();
               setState(() {});
             },

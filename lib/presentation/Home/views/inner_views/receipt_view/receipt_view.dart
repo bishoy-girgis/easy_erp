@@ -87,7 +87,7 @@ class _ReceiptViewState extends State<ReceiptView> {
                   .where((Reciept) =>
                       Reciept.cashinOrdno!.toString().startsWith(v) ||
                       Reciept.cashinhdrId!.toString().startsWith(v) ||
-                      Reciept.custchartName!.toLowerCase().startsWith(v))
+                      Reciept.custchartName!.toLowerCase().contains(v))
                   .toList();
               setState(() {});
             },

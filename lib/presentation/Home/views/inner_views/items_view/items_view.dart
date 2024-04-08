@@ -50,7 +50,7 @@ class _ItemsViewState extends State<ItemsView> {
                 searchForItems = items
                     .where(
                       (item) =>
-                          item.itmname!.toLowerCase().startsWith(v) ||
+                          item.itmname!.toLowerCase().contains(v) ||
                           item.itmcode!.toLowerCase().startsWith(v) ||
                           item.unitname!.toString().startsWith(v),
                     )

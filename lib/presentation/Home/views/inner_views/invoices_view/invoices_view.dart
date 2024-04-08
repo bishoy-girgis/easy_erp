@@ -63,7 +63,7 @@ class _InvoicesViewState extends State<InvoicesView> {
                 searchController.text = v;
                 searchForInvoices = invoices
                     .where((invoice) =>
-                        invoice.custInvname!.toLowerCase().startsWith(v) ||
+                        invoice.custInvname!.toLowerCase().contains(v) ||
                         invoice.invNo!.toLowerCase().startsWith(v) ||
                         invoice.invdate!.toString().startsWith(v))
                     .toList();

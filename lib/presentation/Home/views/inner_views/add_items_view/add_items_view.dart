@@ -110,7 +110,7 @@ class _AddItemsViewState extends State<AddItemsView> {
               searchController.text = v;
               searchForItems = items
                   .where((item) =>
-                      item.itmname!.toLowerCase().startsWith(v) ||
+                      item.itmname!.toLowerCase().contains(v) ||
                       item.itmename!.toLowerCase().startsWith(v) ||
                       item.itmid!.toString().startsWith(v))
                   .toList();

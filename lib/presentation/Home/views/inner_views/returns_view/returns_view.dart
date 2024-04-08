@@ -74,6 +74,7 @@ class _ReturnsViewState extends State<ReturnsView> {
               searchForReturnss = returns
                   // ignore: non_constant_identifier_names
                   .where((Return) =>
+              Return.custname!.toLowerCase().contains(v) ||
                       Return.rtnInvNo!.toLowerCase().startsWith(v) ||
                       Return.invNo!.toLowerCase().startsWith(v) ||
                       Return.invid!.toString().startsWith(v))
