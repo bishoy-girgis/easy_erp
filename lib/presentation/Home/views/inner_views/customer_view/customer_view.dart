@@ -63,8 +63,7 @@ class _CustomerViewState extends State<CustomerView> {
                 searchForCustomers = CustomerCubit.get(context)
                     .customers
                     .where((customer) =>
-                        customer.custname!.toLowerCase().startsWith(v) ||
-                        customer.custename!.toLowerCase().startsWith(v) ||
+                customer.custname!.toLowerCase().trim().contains(v) ||
                         customer.custcode!.toString().startsWith(v))
                     .toList();
                 setState(() {});
