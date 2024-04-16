@@ -19,11 +19,10 @@ class HomeView extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                  child: HomeViewHeaderCard(name: "${AppConstants.userName}")),
+                  child: HomeViewHeaderCard(name: AppConstants.userName)),
               const SliverToBoxAdapter(child: GapH(h: 3)),
               SliverGrid.builder(
                 itemCount: CategoriesViewModel.getCategories(context).length,
@@ -53,5 +52,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-// testtttt
-// testtttt

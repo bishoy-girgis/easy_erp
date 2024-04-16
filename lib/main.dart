@@ -26,7 +26,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'core/helper/app_routing.dart';
 import 'data/models/item_model/item_model.dart';
 import 'data/models/user/user_model.dart';
 import 'data/providers/localization/localization_provider.dart';
