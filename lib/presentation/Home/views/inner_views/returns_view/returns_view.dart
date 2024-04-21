@@ -1,6 +1,7 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
+import 'package:easy_erp/core/widgets/shimmer_invoice_widget.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/models/return/return_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/returns_view/create_return.dart';
@@ -13,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../core/widgets/shimmer_item_widget.dart';
 
 class ReturnsView extends StatefulWidget {
   ReturnsView({Key? key}) : super(key: key);
@@ -127,7 +130,25 @@ class _ReturnsViewState extends State<ReturnsView> {
                   child:
                       TextBuilder("Sorry there is error , we will work on it "),
                 );
-              } else {
+              }else if(state is GetReturnLoading){
+                return Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppColors.whiteColor,
+                    ),
+                    child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return const ShimmerInvoiceWidget();
+                        }),
+                  ),
+                );
+              }
+              else {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );

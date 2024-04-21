@@ -10,9 +10,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/helper/global_methods.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
+import '../../../../../core/widgets/shimmer_invoice_widget.dart';
 import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../cubits/invoice_cubit/invoice_cubit.dart';
+import '../../../../../core/widgets/shimmer_item_widget.dart';
 
 class InvoicesView extends StatefulWidget {
   InvoicesView({Key? key}) : super(key: key);
@@ -114,10 +116,25 @@ class _InvoicesViewState extends State<InvoicesView> {
                     child: TextBuilder(
                         "Sorry there is error , we will work on it "),
                   );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                } else if (state is GetInvoiceLoading) {
+                  return Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: AppColors.whiteColor,
+                      ),
+                      child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                          ),
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return const ShimmerInvoiceWidget();
+                          }),
+                    ),
                   );
+                } else{
+                  return const CircularProgressIndicator();
                 }
               },
             )

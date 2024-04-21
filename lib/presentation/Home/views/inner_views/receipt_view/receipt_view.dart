@@ -20,6 +20,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../core/widgets/shimmer_invoice_widget.dart';
+import '../../../../../core/widgets/shimmer_item_widget.dart';
+
 class ReceiptView extends StatefulWidget {
   const ReceiptView({super.key});
 
@@ -148,7 +151,25 @@ class _ReceiptViewState extends State<ReceiptView> {
                   child:
                       TextBuilder("Sorry there is error , we will work on it "),
                 );
-              } else {
+              } else if (state is GetRecieptLoading){
+                return Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppColors.whiteColor,
+                    ),
+                    child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return const ShimmerInvoiceWidget();
+                        }),
+                  ),
+                );
+              }
+              else {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );

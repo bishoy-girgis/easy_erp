@@ -30,7 +30,7 @@ class PaidRepoImplementation extends PaidRepo {
     } catch (e) {
       if (e is DioException) {
         debugPrint(
-            "${e.response}  ,,,,,,,,,,,,,, ${e.message} ,,,,,,,,,,,,,,,  ${e.error}");
+            "${e.response}  ,,,,,,,,,,,,,, ${e.error.toString()} ");
         return left(ServerError.fromDioError(e));
       } else {
         return left(

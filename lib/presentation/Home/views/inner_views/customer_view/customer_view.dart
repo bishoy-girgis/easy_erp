@@ -4,6 +4,7 @@ import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/widgets/customer_widget.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/customer_view/widgets/shimmer_customer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,7 +64,7 @@ class _CustomerViewState extends State<CustomerView> {
                 searchForCustomers = CustomerCubit.get(context)
                     .customers
                     .where((customer) =>
-                customer.custname!.toLowerCase().trim().contains(v) ||
+                        customer.custname!.toLowerCase().trim().contains(v) ||
                         customer.custcode!.toString().startsWith(v))
                     .toList();
                 setState(() {});
@@ -76,7 +77,7 @@ class _CustomerViewState extends State<CustomerView> {
               },
               builder: (context, state) {
                 // customers = CustomerCubit.get(context).customers;
-                if (CustomerCubit.get(context).customers.isNotEmpty) {
+                if (state is GetCustomerGroupSuccess) {
                   return Expanded(
                       child: Container(
                     decoration: BoxDecoration(
@@ -99,50 +100,22 @@ class _CustomerViewState extends State<CustomerView> {
                         }),
                   ));
                 } else {
-                  return const Center(
-                    child: Text(
-                      "No Customers Found",
-                      style: TextStyle(
-                        color: AppColors.primaryColorBlue,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  return Expanded(
+                      child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppColors.whiteColor,
                     ),
-                  );
+                    child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
+                        itemCount: 12,
+                        itemBuilder: (context, index) {
+                          return const ShimmerCustomerWidget();
+                        }),
+                  ));
                 }
-                // if (state is GetCustomerSuccessState) {
-                //   return Expanded(
-                //       child: Container(
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(16),
-                //       color: AppColors.whiteColor,
-                //     ),
-                //     child: ListView.builder(
-                //         padding: const EdgeInsets.symmetric(
-                //           vertical: 10,
-                //         ),
-                //         itemCount: state.customers.length,
-                //         itemBuilder: (context, index) {
-                //           return CustomerWidget(
-                //             customerModel: state.customers[index],
-                //           );
-                //         }),
-                //   ));
-                // } else if (state is GetCustomerFailureState) {
-                //   debugPrint(state.error);
-                //   return const Center(
-                //     child: TextBuilder(
-                //         "Sorry there is error , we will work on it "),
-                //   );
-                // } else if (state is GetCustomerLoadingState) {
-                //   return const Center(
-                //     child: CircularProgressIndicator(),
-                //   );
-                // } else {
-                //   return const Center(
-                //     child: TextBuilder("SMTH WEN WRONG"),
-                //   );
-                // }
               },
             )
           ],

@@ -1,9 +1,13 @@
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
+import 'package:easy_erp/core/widgets/shimmer_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../../../core/helper/app_colors.dart';
+import '../../../../../core/helper/utils.dart';
 import '../../../../../core/widgets/text_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../cubits/item_cubit/item_cubit.dart';
@@ -89,9 +93,21 @@ class _ItemsViewState extends State<ItemsView> {
                     child: Text(state.error),
                   );
                 } else if (state is GetItemsLoadingState) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return Expanded(
+                      child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppColors.whiteColor,
+                    ),
+                    child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return const ShimmerItemWidget();
+                        }),
+                  ));
                 } else {
                   return Center(
                     child: Text(state.runtimeType.toString()),
