@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/helper/app_colors.dart';
 import '../../../../core/helper/app_routing.dart';
 import '../../../../core/helper/global_methods.dart';
+import '../../../../main.dart';
 
 class MenuBarSection extends StatelessWidget {
   const MenuBarSection({
@@ -46,15 +47,11 @@ class MenuBarSection extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       SharedPref.remove(
-                        key: 'accessToken',
-                      );
-                      SharedPref.remove(
                         key: 'userName',
                       );
-                      GlobalMethods.goRouterNavigateTOAndReplacement(
-                        context: context,
-                        router: AppRouters.kLogin,
-                      );
+                      SharedPref.remove(key: "accessToken");
+                      navigatorKey.currentState!
+                          .pushNamedAndRemoveUntil(AppRouters.kLogin, (route) => false);
                     },
                     icon: const Icon(
                       Icons.logout,

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_erp/core/helper/page_route_name.dart';
+import 'package:easy_erp/presentation/cubits/paid_cubit/paid_cubit.dart';
 import 'package:easy_erp/presentation/cubits/reciept_cubit/reciept_cubit.dart';
 import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ import '../../../../core/helper/global_methods.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../cubits/customer_cubit/customer_cubit.dart';
+import '../../../cubits/invoice_cubit/invoice_cubit.dart';
+import '../../../cubits/item_cubit/item_cubit.dart';
 
 class CategoriesViewModel {
   static List<CategoryWidget> getCategories(BuildContext context) {
@@ -22,7 +25,7 @@ class CategoriesViewModel {
             context: context,
             router: AppRouters.kItems,
           );
-          // await GetItemCubit.get(context).getItems();
+          await GetItemCubit.get(context).getItems();
         },
       ),
       CategoryWidget(
@@ -32,7 +35,7 @@ class CategoriesViewModel {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kCustomers);
             await CustomerCubit.get(context).getCustomers();
-             await CustomerCubit.get(context).getCustomerGroups();
+            await CustomerCubit.get(context).getCustomerGroups();
           }),
       CategoryWidget(
           icon: Icons.attach_money,
@@ -42,7 +45,7 @@ class CategoriesViewModel {
               context: context,
               router: AppRouters.kInvoices,
             );
-            //  await InvoiceCubit.get(context).getInvoices();
+             await InvoiceCubit.get(context).getInvoices();
           }),
       CategoryWidget(
           icon: Icons.keyboard_return_rounded,
@@ -50,15 +53,15 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kReturns);
-            //await Returncubit.get(context).getReturns();
+            await Returncubit.get(context).getReturns();
           }),
       CategoryWidget(
           icon: Icons.receipt_long,
           categoryName: l.recceipt,
           onTap: () async {
-            //await Recieptcubit.get(context).getReciepts();
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kReciept);
+            await Recieptcubit.get(context).getReciepts();
           }),
       CategoryWidget(
           icon: Icons.payments_rounded,
@@ -66,6 +69,7 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kPaid);
+            await Paidcubit.get(context).getPaids();
           }),
     ];
   }

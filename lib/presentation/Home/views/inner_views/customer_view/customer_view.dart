@@ -77,7 +77,7 @@ class _CustomerViewState extends State<CustomerView> {
               },
               builder: (context, state) {
                 // customers = CustomerCubit.get(context).customers;
-                if (state is GetCustomerGroupSuccess) {
+                if (state is GetCustomerGroupSuccess || state is GetCustomerSuccessState) {
                   return Expanded(
                       child: Container(
                     decoration: BoxDecoration(
