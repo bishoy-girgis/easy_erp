@@ -2,8 +2,12 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 
+import '../../data/services/local/shared_pref.dart';
+
 class ApiService {
-  String _baseUrl = AppConstants.baseUrl;
+   String get _baseUrl {
+    return SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:610";
+  }
   Dio dio;
   ApiService(this.dio);
   Future<dynamic> get({

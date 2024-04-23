@@ -43,11 +43,7 @@ class ServerError extends Failures {
             DioExceptionType.connectionError.runtimeType.toString());
 
       case DioExceptionType.unknown:
-        if (dioError.message!.contains('Socket')) {
-          return ServerError("No Internet Connection");
-        } else {
-          return ServerError("TRY AGAIN");
-        }
+        return ServerError("Error Response =>  ${dioError.response}");
       default:
         return ServerError("DEFAULT ERROR TRY AGIAN LATER ");
     }
