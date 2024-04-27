@@ -31,7 +31,7 @@ class ReturnRepoImplementation extends ReturnRepo {
     int? invid,
     required List<ItemModel> items,
   }) async {
-    print("LIST OF ITEMS  === > ${items.map((e) => e.toJson()).toList()} \n");
+    debugPrint("LIST OF ITEMS  === > ${items.map((e) => e.toJson()).toList()} \n");
     List<Map<String, dynamic>> itemsJson =
         items.map((item) => item.toJson()).toList();
 
@@ -55,15 +55,15 @@ class ReturnRepoImplementation extends ReturnRepo {
           'invid': invid ?? 0,
         },
       );
-      print('DATATA IN return REPO' + data.toString());
+      debugPrint('DATATA IN return REPO$data');
       SendInvoiceModel sendInvoiceModel = SendInvoiceModel.fromJson(data);
       return right(sendInvoiceModel);
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       if (e is DioException) {
         return left(ServerError.fromDioError(e));
       } else {
-        print(e.toString());
+        debugPrint(e.toString());
         return left(
           ServerError(
             e.toString(),

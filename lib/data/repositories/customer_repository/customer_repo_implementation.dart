@@ -7,6 +7,7 @@ import 'package:easy_erp/data/models/add_customer_response_model/add_customer_re
 import 'package:easy_erp/data/models/customer_model/customer_model.dart';
 import 'package:easy_erp/data/models/group_model/group_model.dart';
 import 'package:easy_erp/data/repositories/customer_repository/customer_repo.dart';
+import 'package:flutter/cupertino.dart';
 import '../../../core/api/api_service.dart';
 import '../../../core/helper/app_constants.dart';
 
@@ -17,7 +18,7 @@ class CustomerRepoImplementation extends CustomerRepo {
   @override
   Future<Either<Failures, List<CustomerModel>>> getCustomers() async {
     try {
-      print("DATA IN Customer REPO IMP ✨getCustomers✨");
+      debugPrint("DATA IN Customer REPO IMP ✨getCustomers✨");
       var data = await apiService.get(
         endPoint: AppConstants.GET_CUSTOMERS,
       );
@@ -43,7 +44,7 @@ class CustomerRepoImplementation extends CustomerRepo {
   @override
   Future<Either<Failures, List<GroupModel>>> getGroups() async {
     try {
-      print("DATA IN Customer REPO IMP ✨getGroups✨");
+      debugPrint("DATA IN Customer REPO IMP ✨getGroups✨");
       var data = await apiService.get(
         endPoint: AppConstants.GET_CUSTOMER_GROUPS,
       );
@@ -79,7 +80,7 @@ class CustomerRepoImplementation extends CustomerRepo {
     required int groupID,
   }) async {
     try {
-      print("DATA IN Customer REPO IMP ✨getGroups✨");
+      debugPrint("DATA IN Customer REPO IMP ✨getGroups✨");
       var data = await apiService.postBody(
         endPoint: AppConstants.POST_CUSTOMER,
         queryParameters: {

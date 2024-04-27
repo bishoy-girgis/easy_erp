@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class GlobalMethods {
-  static Future<void> showAlertAdressDialog(BuildContext context,
+  static Future<void> showAlertAddressDialog(BuildContext context,
       {required String title,
       TextEditingController? controller,
       Function()? onPressedButton1,
@@ -101,15 +101,6 @@ class GlobalMethods {
     return navigatorKey.currentState!.pushReplacementNamed(router);
   }
 
-  // static Future goRouterNavigateTOWithExtraObject(
-  //     {required BuildContext context,
-  //     required String router,
-  //     Object? extraObject}) {
-  //   return GoRouter.of(context).pushNamed(
-  //     router,
-  //     extra: extraObject,
-  //   );
-  // }
 
   static goRouterPOP(
     BuildContext context,
@@ -117,19 +108,6 @@ class GlobalMethods {
     return navigatorKey.currentState!.pop();
   }
 
-  // static goRouterPOPWithData(BuildContext context, var data) {
-  //   return GoRouter.of(context).pop(data);
-  // }
-
-  // static Future goRouterNavigateTOWithQueryParameters(
-  //     {required BuildContext context,
-  //     required String router,
-  //     required Map<String, dynamic> queryParameters}) {
-  //   return GoRouter.of(context).pushNamed(
-  //     router,
-  //     queryParameters: queryParameters,
-  //   );
-  // }
 
   static navigateTo(context, Widget screen) {
     Navigator.of(context).push(

@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/repositories/item_repository/item_repo.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
@@ -16,17 +15,15 @@ class GetItemCubit extends Cubit<GetItemState> {
   getItems() async {
     int? invId = SharedPref.get(key: "ReturnSelectedId");
     emit(GetItemsLoadingState());
-    print("[[[[[[[[[[]]]]]]]]]]]]");
     final result = await itemRepo.getItems(invId ?? 0);
-    print("[[[[[[[[[[222]]]]]]]]]]]]");
     result.fold((error) {
-      debugPrint("🎈🎈🎈🎈" + error.errorMessage);
+      debugPrint("🎈🎈🎈🎈${error.errorMessage}");
       emit(GetItemsFailureState(error: error.errorMessage));
     }, (r) {
       /// r for List of items
-      print("${r.length} lengthhh in cubitttt");
+      debugPrint("${r.length} length in cubit");
       items = r;
-      print("${invId}");
+      debugPrint("$invId");
       emit(GetItemsSuccessState(items: r));
       return items;
     });

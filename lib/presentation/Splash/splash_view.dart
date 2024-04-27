@@ -1,6 +1,5 @@
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/app_images.dart';
-import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
@@ -123,11 +122,6 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
       ),
     );
   }
-
-  // Future<void> _checkToken(BuildContext context) async {
-  //   GoRouter.of(context).pushReplacement(
-  //       accessToken.isNotEmpty ? AppRouters.kHome : AppRouters.kLogin);
-  // }
 }
 
 class PageTransition extends PageRouteBuilder {

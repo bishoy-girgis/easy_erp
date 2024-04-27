@@ -52,8 +52,8 @@ void setupServiceLocatorByGetIt() {
   getIt.registerSingleton<ReturnRepoImplementation>(
     ReturnRepoImplementation(getIt.get<ApiService>()),
   );
-  getIt.registerSingleton<RecieptRepoImplementation>(
-    RecieptRepoImplementation(getIt.get<ApiService>()),
+  getIt.registerSingleton<ReceiptRepoImplementation>(
+    ReceiptRepoImplementation(getIt.get<ApiService>()),
   );
   getIt.registerSingleton<PaidRepoImplementation>(
     PaidRepoImplementation(getIt.get<ApiService>()),

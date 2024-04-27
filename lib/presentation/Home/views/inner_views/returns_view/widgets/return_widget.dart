@@ -22,7 +22,7 @@ class ReturnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<Returncubit, ReturnState>(
+    return BlocConsumer<ReturnCubit, ReturnState>(
       listener: (context, state) {},
       builder: (context, state) {
         return Container(

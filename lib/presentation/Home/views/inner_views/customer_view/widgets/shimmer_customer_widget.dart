@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/widgets/gap.dart';
-import '../../../../../../core/widgets/text_builder.dart';
 
 class ShimmerCustomerWidget extends StatelessWidget {
   const ShimmerCustomerWidget({

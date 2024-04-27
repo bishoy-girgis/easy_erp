@@ -2,7 +2,6 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/data/models/paid_model/paid_model.dart';
-import 'package:easy_erp/data/models/reciept/reciept_model/reciept_paid_model.dart';
 import 'package:easy_erp/presentation/cubits/paid_cubit/paid_cubit.dart';
 import 'package:easy_erp/presentation/cubits/paid_cubit/paid_states.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class Paidwidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<Paidcubit, PaidState>(
+    return BlocConsumer<PaidCubit, PaidState>(
       listener: (context, state) {},
       builder: (context, state) {
         return Container(

@@ -1,4 +1,3 @@
-import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
@@ -22,7 +21,6 @@ class CustomerView extends StatefulWidget {
 }
 
 class _CustomerViewState extends State<CustomerView> {
-  // List<CustomerModel> customers = [];
   List<CustomerModel> searchForCustomers = [];
 
   TextEditingController searchController = TextEditingController();

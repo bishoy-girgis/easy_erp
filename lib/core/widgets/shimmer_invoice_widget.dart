@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../helper/app_colors.dart';
 import 'gap.dart';
-import 'text_builder.dart';
 
 class ShimmerInvoiceWidget extends StatelessWidget {
   const ShimmerInvoiceWidget({super.key});

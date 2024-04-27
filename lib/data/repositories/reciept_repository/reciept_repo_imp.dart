@@ -8,9 +8,9 @@ import 'package:easy_erp/data/models/reciept/send_return_model/send_reciept_mode
 import 'package:easy_erp/data/repositories/reciept_repository/reciept_repo.dart';
 import 'package:flutter/material.dart';
 
-class RecieptRepoImplementation extends RecieptRepo {
+class ReceiptRepoImplementation extends RecieptRepo {
   ApiService apiService;
-  RecieptRepoImplementation(this.apiService);
+  ReceiptRepoImplementation(this.apiService);
 
   @override
   Future<Either<Failures, SendRecieptModel>> saveReciept({
@@ -39,15 +39,15 @@ class RecieptRepoImplementation extends RecieptRepo {
           'recvalue': recvalue,
         },
       );
-      print('DATAA IN RECIEEPRTT REPO');
+      debugPrint('DATAA IN RECIEEPRTT REPO');
       SendRecieptModel sendRecieptModel = SendRecieptModel.fromJson(data);
       return right(sendRecieptModel);
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       if (e is DioException) {
         return left(ServerError.fromDioError(e));
       } else {
-        print(e.toString());
+        debugPrint(e.toString());
         return left(
           ServerError(
             e.toString(),

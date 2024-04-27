@@ -14,7 +14,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/helper/app_colors.dart';
-import '../../../../../../core/helper/app_routing.dart';
 import '../../../../../../core/helper/global_methods.dart';
 import '../../../../../../core/helper/locator.dart';
 import '../../../../../../core/widgets/custom_elevated_button.dart';
@@ -74,12 +73,6 @@ class PricingSection extends StatelessWidget {
                     isHeader: true,
                   ),
                   onPressed: () async {
-                    // if (SharedPref.get(key: "ReturnSelectedId") != null) {
-                    //   await getIt.get<InvoiceCubit>().getInvoiceItems(context,
-                    //       invNo: SharedPref.get(key: "ReturnSelectedId"));
-                    // } else {
-                    //   await GetItemCubit.get(context).getItems();
-                    // }
                     await GetItemCubit.get(context).getItems();
 
                     if (kDebugMode) {
@@ -141,7 +134,7 @@ class PricingSection extends StatelessWidget {
                 BlocBuilder<PaymentTypeCubit, PaymentTypeState>(
                   builder: (context, state) {
                     if (state is PaymentTypeSuccess) {
-                      return ChoocePaymentType(
+                      return ChoosePaymentType(
                         totalAmount: totalAmount,
                         payTypes: state.payTypes,
                       );
@@ -164,8 +157,8 @@ class PricingSection extends StatelessWidget {
   }
 }
 
-class ChoocePaymentType extends StatelessWidget {
-  ChoocePaymentType({
+class ChoosePaymentType extends StatelessWidget {
+  ChoosePaymentType({
     super.key,
     required this.totalAmount,
     required this.payTypes,
@@ -225,15 +218,15 @@ class ChoocePaymentType extends StatelessWidget {
                   )),
             ),
             onChanged: (PaymentTypeModel? data) {
-              print(data!.payid);
-              print(data.payname);
-              print(data.payename);
-              print(data.bankdtlId);
+              debugPrint("${data!.payid}");
+              debugPrint(data.payname);
+              debugPrint(data.payename);
+              debugPrint("${data.bankdtlId}");
               SharedPref.set(key: "paymentTypeID", value: data.payid ?? 0);
               SharedPref.set(key: "bankdtlId", value: data.bankdtlId ?? 1);
               SharedPref.set(
-                  key: "paymebtTypeName", value: data.payname ?? "Cash");
-              print(
+                  key: "paymentTypeName", value: data.payname ?? "Cash");
+              debugPrint(
                 SharedPref.get(key: "paymentTypeID"),
               );
             },

@@ -116,7 +116,7 @@ class CreateReturnView extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back)),
       actions: [
-        BlocConsumer<Returncubit, ReturnState>(
+        BlocConsumer<ReturnCubit, ReturnState>(
           listener: (context, state) {
             if (state is ReturnSavedSuccess) {
               debugPrint("=============================");
@@ -125,7 +125,7 @@ class CreateReturnView extends StatelessWidget {
               GlobalMethods.buildFlutterToast(
                   message: state.sendInvoiceModel.massage!,
                   state: ToastStates.SUCCESS);
-              Returncubit.get(context).getReturns();
+              ReturnCubit.get(context).getReturns();
 
               GlobalMethods.goRouterNavigateTOAndReplacement(
                   context: context, router: AppRouters.kReturns);
@@ -160,13 +160,13 @@ class CreateReturnView extends StatelessWidget {
             return IconButton(
               onPressed: () async {
                 checkCustomer() && checkItems() && checkPaymentTypes()
-                    ? GlobalMethods.showAlertAdressDialog(
+                    ? GlobalMethods.showAlertAddressDialog(
                         context,
                         title: "Save Return ?",
                         titleButton1: "Save",
                         titleButton2: "No",
                         onPressedButton1: () async {
-                          await BlocProvider.of<Returncubit>(context)
+                          await BlocProvider.of<ReturnCubit>(context)
                               .saveReturn(
                                   items: getIt.get<AddItemCubit>().addedItems,
                                   invid:

@@ -15,12 +15,10 @@ class CustomerCubit extends Cubit<CustomerState> {
   getCustomers() async {
     emit(GetCustomerLoadingState());
     final result = await customerRepo.getCustomers();
-    // emit(GetCustomerSuccessState(customers: customers));
     result.fold((error) {
-      debugPrint("🎈🎈🎈🎈" + error.errorMessage);
+      debugPrint("🎈🎈🎈🎈${error.errorMessage}");
       emit(GetCustomerFailureState(error: error.errorMessage));
     }, (r) {
-      /// r for List of customers
       customers = r;
       emit(GetCustomerSuccessState(customers: r));
     });
@@ -31,7 +29,7 @@ class CustomerCubit extends Cubit<CustomerState> {
     emit(GetCustomerGroupLoading());
     final result = await customerRepo.getGroups();
     result.fold((error) {
-      debugPrint("🎈🎈🎈🎈" + error.errorMessage);
+      debugPrint("🎈🎈🎈🎈${error.errorMessage}");
       emit(GetCustomerGroupFailure(error: error.errorMessage));
     }, (r) {
       groups = r;
@@ -73,7 +71,7 @@ class CustomerCubit extends Cubit<CustomerState> {
           addCustomerResponseModel: addCustomerResponseModel,
         ),
       );
-      print(" HHHHWEEEEEYYYYYYYYYYYYYYYY $custNameAr");
+      debugPrint(" HHHHWEEEEEYYYYYYYYYYYYYYYY $custNameAr");
       getCustomers();
       return r;
     });

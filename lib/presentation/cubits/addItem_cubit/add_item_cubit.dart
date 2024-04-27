@@ -9,10 +9,8 @@ class AddItemCubit extends Cubit<AddItemState> {
   List<double> addItemsPrices = [];
   bool checkItemInList(ItemModel item) {
     if (addedItems.contains(item)) {
-      // emit(ItemFound());
       return true;
     } else {
-      // emit(ItemNotFound());
       return false;
     }
   }
@@ -56,21 +54,18 @@ class AddItemCubit extends Cubit<AddItemState> {
   void checkAndMergeDuplicates() {
     emit(AddItemInitial());
 
-    Map<int, ItemModel> itemMap = {}; // Map to store items by their ids
+    Map<int, ItemModel> itemMap = {};
 
-    // Iterate through the addedItems list
+
     for (ItemModel item in addedItems) {
       if (itemMap.containsKey(item.itmid)) {
-        // If the item already exists in the map, update its quantity
         ItemModel? existingItem = itemMap[item.itmid];
         existingItem!.quantity += item.quantity;
       } else {
-        // If the item does not exist, add it to the map
         itemMap[item.itmid!] = item;
       }
     }
 
-    // Clear addedItems list and add items from the map with merged quantities
     addedItems.clear();
     addedItems.addAll(itemMap.values);
 
@@ -80,25 +75,20 @@ class AddItemCubit extends Cubit<AddItemState> {
   void checkAndMergeDuplicatesList(List<ItemModel> newItems) {
     emit(AddItemInitial());
 
-    Map<int, ItemModel> itemMap = {}; // Map to store items by their ids
+    Map<int, ItemModel> itemMap = {};
 
-    // Populate the itemMap with the items from addedItems list
     for (ItemModel item in addedItems) {
       itemMap[item.itmid!] = item;
     }
 
-    // Iterate through the newItems list
     for (ItemModel newItem in newItems) {
       num newItemQuantity = newItem.quantity;
       if (itemMap.containsKey(newItem.itmid)) {
-        // If the item already exists in the map, update its quantity
         ItemModel? existingItem = itemMap[newItem.itmid];
         num totalQuantity = existingItem!.quantity + newItemQuantity;
         if (totalQuantity <= existingItem.quantity) {
-          // If the total quantity doesn't exceed, update quantity
           existingItem.quantity = totalQuantity;
         } else {
-          // If the total quantity exceeds, set it to the maximum
           existingItem.quantity = existingItem.quantity;
         }
       }

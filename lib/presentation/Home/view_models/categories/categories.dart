@@ -5,7 +5,6 @@ import 'package:easy_erp/presentation/cubits/reciept_cubit/reciept_cubit.dart';
 import 'package:easy_erp/presentation/cubits/return_cubit/return_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_erp/presentation/Home/views/widgets/category_widget.dart';
-import '../../../../core/helper/app_routing.dart';
 import '../../../../core/helper/global_methods.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -53,7 +52,7 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kReturns);
-            await Returncubit.get(context).getReturns();
+            await ReturnCubit.get(context).getReturns();
           }),
       CategoryWidget(
           icon: Icons.receipt_long,
@@ -69,7 +68,7 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kPaid);
-            await Paidcubit.get(context).getPaids();
+            await PaidCubit.get(context).getPaids();
           }),
     ];
   }

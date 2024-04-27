@@ -35,23 +35,23 @@ class Routes {
             settings: routeSettings);
       case AppRouters.kItems:
         return MaterialPageRoute(
-            builder: (context) => ItemsView(), settings: routeSettings);
+            builder: (context) => const ItemsView(), settings: routeSettings);
       case AppRouters.kInvoices:
         return MaterialPageRoute(
-            builder: (context) => InvoicesView(), settings: routeSettings);
+            builder: (context) => const InvoicesView(), settings: routeSettings);
       case AppRouters.kCreateInvoice:
         return MaterialPageRoute(
             builder: (context) => const CreateInvoiceView(),
             settings: routeSettings);
       case AppRouters.kAddItemsIntoInvoice:
         return MaterialPageRoute(
-            builder: (context) => AddItemsView(), settings: routeSettings);
+            builder: (context) => const AddItemsView(), settings: routeSettings);
       case AppRouters.kCustomers:
         return MaterialPageRoute(
             builder: (context) => CustomerView(), settings: routeSettings);
       case AppRouters.kReturns:
         return MaterialPageRoute(
-            builder: (context) => ReturnsView(), settings: routeSettings);
+            builder: (context) => const ReturnsView(), settings: routeSettings);
       case AppRouters.kCreateReturn:
         return MaterialPageRoute(
             builder: (context) => const CreateReturnView(),

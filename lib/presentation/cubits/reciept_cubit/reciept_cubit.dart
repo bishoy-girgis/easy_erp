@@ -25,7 +25,7 @@ class Recieptcubit extends Cubit<RecieptState> {
     result.fold((error) {
       emit(RecieptInitial());
 
-      debugPrint("🎈🎈🎈🎈" + error.errorMessage);
+      debugPrint("🎈🎈🎈🎈${error.errorMessage}");
       emit(GetRecieptFailure(error.errorMessage));
     }, (r) {
       /// r for List of customers
@@ -37,7 +37,7 @@ class Recieptcubit extends Cubit<RecieptState> {
 
   saveReciept(context) async {
     emit(SaveRecieptLoading());
-    print("ALL DATA IN Reciept CUBIT");
+    debugPrint("ALL DATA IN Reciept CUBIT");
     var result = await recieptRepo.saveReciept(
       notes: SharedPref.get(key: 'notesVoucher') ?? "--",
       date: DateFormat('dd/MM/yyyy').parse(SharedPref.get(key: 'invoiceDate') ??
@@ -53,12 +53,12 @@ class Recieptcubit extends Cubit<RecieptState> {
 
     if (result != null) {
       result.fold((l) {
-        print("ERROR IN Reciept CUBIT " + l.errorMessage);
+        debugPrint("ERROR IN Reciept CUBIT ${l.errorMessage}");
         emit(RecieptNotSave(l.errorMessage));
       }, (r) {
         print(r);
         SendRecieptModel sendRecieptModel = r;
-        print('DATACUBI(TTTT)' + r.toString());
+        debugPrint('DATACUBI(TTTT)$r');
         generatePdfReciept(context,
             pdfType: " سند قبض",
             voucherNo: sendRecieptModel.recNo.toString(),
@@ -75,7 +75,7 @@ class Recieptcubit extends Cubit<RecieptState> {
         return r;
       });
     } else {
-      emit(const RecieptNotSave("Reciept data is null"));
+      emit(const RecieptNotSave("Receipt data is null"));
     }
   }
 }

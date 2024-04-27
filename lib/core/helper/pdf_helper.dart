@@ -78,7 +78,6 @@ Future<void> generateAndPrintArabicPdf(
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // imagggeeee
                   Container(
                       width: 50.w,
                       height: 50.h,
@@ -96,7 +95,7 @@ Future<void> generateAndPrintArabicPdf(
               SizedBox(height: 8.h),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 BarcodeWidget(
-                    data: "$qrData",
+                    data: qrData,
                     barcode: Barcode.qrCode(),
                     height: 60.h,
                     width: 75.w),
@@ -107,7 +106,6 @@ Future<void> generateAndPrintArabicPdf(
                         isReturn ? 'رقم المرتجع : ' : 'رقم الفاتورة : '),
                   ]),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    // buildPDFText(custName),
                     Directionality(
                       textDirection: TextDirection.rtl,
                       child: Center(
@@ -115,7 +113,7 @@ Future<void> generateAndPrintArabicPdf(
                           custName,
                           maxLines: 2,
                           overflow: TextOverflow.visible,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                           ),
                         ),

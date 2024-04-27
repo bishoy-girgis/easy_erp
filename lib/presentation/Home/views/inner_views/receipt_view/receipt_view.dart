@@ -45,7 +45,6 @@ class _ReceiptViewState extends State<ReceiptView> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await PayerTypeCubit.get(context).getPayerTypes(type: 1);
-          print("Cheecckkkkkkkkkkkkkkkkkkkkkkkkkkkk");
           await PaymentTypeCubit.get(context).getPaymentTypes();
           GlobalMethods.navigateTo(
             context,
@@ -87,10 +86,10 @@ class _ReceiptViewState extends State<ReceiptView> {
             onChange: (v) {
               searchController.text = v;
               searchForReciepts = reciepts
-                  .where((Reciept) =>
-                      Reciept.cashinOrdno!.toString().startsWith(v) ||
-                      Reciept.cashinhdrId!.toString().startsWith(v) ||
-                      Reciept.custchartName!.toLowerCase().contains(v))
+                  .where((reciept) =>
+                      reciept.cashinOrdno!.toString().startsWith(v) ||
+                      reciept.cashinhdrId!.toString().startsWith(v) ||
+                      reciept.custchartName!.toLowerCase().contains(v))
                   .toList();
               setState(() {});
             },

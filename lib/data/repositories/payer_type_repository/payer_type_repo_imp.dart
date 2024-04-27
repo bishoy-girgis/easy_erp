@@ -5,6 +5,7 @@ import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/data/models/payer_model/payer_type_model.dart';
 import 'package:easy_erp/data/repositories/payer_type_repository/payer_type_repo.dart';
+import 'package:flutter/cupertino.dart';
 
 class PayerTypeRepoImp extends PayerTypeRepo {
   ApiService apiService;
@@ -15,7 +16,7 @@ class PayerTypeRepoImp extends PayerTypeRepo {
   Future<Either<Failures, List<PayerTypeModel>>> getPayerType(
       {required int type}) async {
     try {
-      print("DATA IN Payer Type REPO IMP ✨✨");
+      debugPrint("DATA IN Payer Type REPO IMP ✨✨");
       var data = await apiService.get(
           endPoint: AppConstants.GET_PAYER_TYPE,
           queryParameters: {"type": type});

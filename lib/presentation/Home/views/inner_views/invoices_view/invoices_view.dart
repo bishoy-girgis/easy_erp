@@ -14,10 +14,9 @@ import '../../../../../core/widgets/shimmer_invoice_widget.dart';
 import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../cubits/invoice_cubit/invoice_cubit.dart';
-import '../../../../../core/widgets/shimmer_item_widget.dart';
 
 class InvoicesView extends StatefulWidget {
-  InvoicesView({Key? key}) : super(key: key);
+  const InvoicesView({Key? key}) : super(key: key);
 
   @override
   State<InvoicesView> createState() => _InvoicesViewState();
@@ -30,6 +29,7 @@ class _InvoicesViewState extends State<InvoicesView> {
 
   TextEditingController searchController = TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

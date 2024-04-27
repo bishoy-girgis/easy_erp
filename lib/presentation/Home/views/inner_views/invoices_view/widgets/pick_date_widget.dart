@@ -43,7 +43,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
               String formatedDate =
                   DateFormat('dd/MM/yyyy').format(selectedDate!);
               SharedPref.set(key: 'invoiceDate', value: formatedDate);
-              print(formatedDate);
+              debugPrint(formatedDate);
             });
           } else {
             setState(() {
@@ -52,17 +52,13 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
               String formatedDate =
                   DateFormat('dd/MM/yyyy').format(selectedDate!);
               SharedPref.set(key: 'invoiceDate', value: formatedDate);
-              print(formatedDate);
+              debugPrint(formatedDate);
             });
             String period = DateTime.now().hour >= 12 ? 'PM' : 'AM';
             String formatedTime =
                 DateFormat('hh:mm $period').format(DateTime.now());
             SharedPref.set(key: 'invoiceTime', value: '$formatedTime $period');
-            print(formatedTime);
-            // String formatedDate =
-            //     DateFormat('dd/MM/yyyy').format(DateTime.now());
-            // SharedPref.set(key: 'invoiceDate', value: formatedDate);
-            // print("Date is not selected");
+            debugPrint(formatedTime);
           }
         },
       ),

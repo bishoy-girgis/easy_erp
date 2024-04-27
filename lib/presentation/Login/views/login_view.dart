@@ -1,4 +1,3 @@
-import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/helper/utils.dart';
@@ -46,7 +45,7 @@ class _LoginViewState extends State<LoginView> {
             state: ToastStates.SUCCESS,
           );
         } else if (state is LoginFailureState) {
-          debugPrint("🎐🎐" + state.error);
+          debugPrint("🎐🎐${state.error}");
           GlobalMethods.buildFlutterToast(
               message: state.error, state: ToastStates.ERROR);
         } else {
@@ -118,7 +117,7 @@ class _LoginViewState extends State<LoginView> {
                         suffixPressed: () {
                           // LoginCubit.get(context).isPasswordVisible !=
                           //     LoginCubit.get(context).isPasswordVisible;
-                          LoginCubit.get(context).changeVisability();
+                          LoginCubit.get(context).changeVisibility();
                         },
                         labelText: AppLocalizations.of(context)!.password,
                         hintText: AppLocalizations.of(context)!.passwordHint,

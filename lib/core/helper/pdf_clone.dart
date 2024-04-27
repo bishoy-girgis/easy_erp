@@ -11,24 +11,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // this byte data will be used to render the image
   Int8List? _bytes;
 
-  // get byte data from an image url
   void _getBytes(imageUrl) async {
     final ByteData data =
         await NetworkAssetBundle(Uri.parse(imageUrl)).load(imageUrl);
     setState(() {
       _bytes = data.buffer.asInt8List();
 
-      // see how byte date of the image looks like
       print(_bytes);
     });
   }
 
   @override
   void initState() {
-    // call the _getBytes() function
     _getBytes(
         'https://www.kindacode.com/wp-content/uploads/2022/07/KindaCode.jpg');
     super.initState();

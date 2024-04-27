@@ -30,7 +30,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
   TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    print("${SharedPref.get(key: "withInvoiceSelected")}");
+    debugPrint("${SharedPref.get(key: "withInvoiceSelected")}");
     return SliverToBoxAdapter(
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -46,7 +46,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            chooseWithInvoiseOrNot(),
+            chooseWithInvoiceOrNot(),
             _isInvoiceSelected
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,21 +56,11 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                         isHeader: true,
                         fontSize: 15,
                       ),
-                      // CustomTextFormField(
-                      //   contentSize: 14,
-                      //   labelText: "Search",
-                      //   hintText: "Search with ID, Code, or Barcode NO",
-                      //   suffixIcon: Icons.search,
-                      //   suffixIconSize: 17.sp,
-                      //   suffixColor: Colors.blueGrey,
-                      //   controller: searchController,
-                      //   suffixPressed: validateInvoice,
-                      // ),
                       BlocBuilder<InvoiceCubit, InvoiceState>(
                         builder: (context, state) {
                           if (state is GetInvoiceLoading) {
                             // Show a loading indicator
-                            return CircularProgressIndicator();
+                            return const CircularProgressIndicator();
                           } else if (state is GetInvoiceSuccess) {
                             // Use the data from state.invoices to populate your Autocomplete widget
                             return autoComplete(state.invoiceModels);
@@ -128,7 +118,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
     );
   }
 
-  chooseWithInvoiseOrNot() {
+  chooseWithInvoiceOrNot() {
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: AppColors.primaryColorBlue, width: 2),
@@ -150,7 +140,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                 setState(() {
                   _isInvoiceSelected = true;
                   SharedPref.set(key: "withInvoiceSelected", value: true);
-                  print("${SharedPref.get(key: "withInvoiceSelected")}");
+                  debugPrint("${SharedPref.get(key: "withInvoiceSelected")}");
                 });
               },
               child: TextBuilder(
@@ -171,7 +161,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
                 setState(() {
                   _isInvoiceSelected = false;
                   SharedPref.set(key: "withInvoiceSelected", value: false);
-                  print("${SharedPref.get(key: "withInvoiceSelected")}");
+                  debugPrint("${SharedPref.get(key: "withInvoiceSelected")}");
                 });
               },
               child: TextBuilder(
@@ -272,7 +262,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
             state: ToastStates.ERROR,
           );
         }
-        print(
+        debugPrint(
             "invoicceeeeshared pref ${SharedPref.get(key: 'ReturnSelectedId')}");
       },
       displayStringForOption: (option) => "${option.invid!}",
@@ -280,7 +270,7 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
   }
 
   void validateInvoice() {
-    InvoiceModel emptyInvoice = InvoiceModel();
+    InvoiceModel emptyInvoice = const InvoiceModel();
     getIt.get<InvoiceCubit>().getInvoices();
     invoices = getIt.get<InvoiceCubit>().invoices;
     String searchText = searchController.text.trim();
@@ -309,6 +299,6 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
         state: ToastStates.ERROR,
       );
     }
-    print("invoicceeeeshared pref ${SharedPref.get(key: 'ReturnSelectedId')}");
+    debugPrint("invoicceeeeshared pref ${SharedPref.get(key: 'ReturnSelectedId')}");
   }
 }

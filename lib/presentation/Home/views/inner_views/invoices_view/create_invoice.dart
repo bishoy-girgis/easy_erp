@@ -1,4 +1,3 @@
-import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';
@@ -125,7 +124,7 @@ class CreateInvoiceView extends StatelessWidget {
       leading: IconButton(
           onPressed: () {
             getIt.get<AddItemCubit>().addedItems.isNotEmpty
-                ? GlobalMethods.showAlertAdressDialog(
+                ? GlobalMethods.showAlertAddressDialog(
                     context,
                     title: "Are you sure to remove invoice ?",
                     titleButton1: "yes",
@@ -190,7 +189,7 @@ class CreateInvoiceView extends StatelessWidget {
                 // checkCustomer();
                 // checkItems();
                 checkCustomer() && checkItems() && checkPaymentTypes()
-                    ? GlobalMethods.showAlertAdressDialog(
+                    ? GlobalMethods.showAlertAddressDialog(
                         context,
                         title: "Save Invoice ?",
                         titleButton1: "Save",

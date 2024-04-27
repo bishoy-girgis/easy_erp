@@ -54,7 +54,7 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
       setState(() {
         imagePath = newPath;
       });
-      print("${SharedPref.get(key: "logoPath")}  IMAGE LOGOOOO PATHHH");
+      debugPrint("${SharedPref.get(key: "logoPath")}  IMAGE LOGOOOO PATHHH");
     }
   }
 

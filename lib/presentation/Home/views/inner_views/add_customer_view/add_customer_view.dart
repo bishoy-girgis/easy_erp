@@ -1,5 +1,4 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
-import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/custom_elevated_button.dart';
@@ -66,8 +65,8 @@ class AddCustomerView extends StatelessWidget {
               context: context,
               router: AppRouters.kCustomers,
             );
-            print(
-                "${state.addCustomerResponseModel.customercode} ::::::::::::::::::::::::::::");
+            debugPrint(
+                "${state.addCustomerResponseModel.customercode} :::");
             SharedPref.remove(key: 'custCategoryId');
           } else if (state is AddCustomerFailure) {
             GlobalMethods.buildFlutterToast(
@@ -97,7 +96,7 @@ class AddCustomerView extends StatelessWidget {
                               AppLocalizations.of(context)!.customer_name_ar,
                           onChange: (value) {
                             custNameArController.text = value;
-                            print(custNameArController.text);
+                            debugPrint(custNameArController.text);
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {

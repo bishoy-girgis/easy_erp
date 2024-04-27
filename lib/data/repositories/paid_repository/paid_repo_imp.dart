@@ -73,15 +73,15 @@ class PaidRepoImplementation extends PaidRepo {
           'pay_id': 0
         },
       );
-      print('DATAA IN PAiDD REPO');
+      debugPrint('DATAA IN PAiDD REPO');
       SendPaidModel sendPaidModel = SendPaidModel.fromJson(data);
       return right(sendPaidModel);
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       if (e is DioException) {
         return left(ServerError.fromDioError(e));
       } else {
-        print(e.toString());
+        debugPrint(e.toString());
         return left(
           ServerError(
             e.toString(),

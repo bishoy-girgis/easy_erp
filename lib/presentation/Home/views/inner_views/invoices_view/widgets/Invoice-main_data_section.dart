@@ -103,7 +103,7 @@ class SearchOnCustomerSection extends StatefulWidget {
   final int? maxLines;
   final FocusNode? focusNode;
 
-  SearchOnCustomerSection({
+  const SearchOnCustomerSection({
     super.key,
     this.centerContent = false,
     required this.labelText,
@@ -180,16 +180,16 @@ class SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
                   )),
             ),
             onChanged: (CustomerModel? data) {
-              print(data!.custid);
-              print(data.custname);
-              print(data.custename);
+              debugPrint("${data!.custid}");
+              debugPrint(data.custname);
+              debugPrint(data.custename);
               setState(() {
                 SharedPref.set(key: "custID", value: data.custid);
                 SharedPref.set(
                     key: "custName",
                     value: data.custname ?? data.custename ?? 'cash');
               });
-              print(
+              debugPrint(
                 SharedPref.get(key: "custID"),
               );
             },

@@ -85,7 +85,7 @@ class CreatePaid extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back)),
       actions: [
-        BlocConsumer<Paidcubit, PaidState>(
+        BlocConsumer<PaidCubit, PaidState>(
           listener: (context, state) {
             if (state is PaidSavedSuccess) {
               debugPrint("=============================");
@@ -94,7 +94,7 @@ class CreatePaid extends StatelessWidget {
               GlobalMethods.buildFlutterToast(
                   message: state.sendPaidModel.massage!,
                   state: ToastStates.SUCCESS);
-              Paidcubit.get(context).getPaids();
+              PaidCubit.get(context).getPaids();
 
               GlobalMethods.goRouterNavigateTOAndReplacement(
                   context: context, router: AppRouters.kPaid);
@@ -112,13 +112,13 @@ class CreatePaid extends StatelessWidget {
             return IconButton(
               onPressed: () async {
                 checkChoosePayer() && checkVoucherValue()
-                    ? GlobalMethods.showAlertAdressDialog(
+                    ? GlobalMethods.showAlertAddressDialog(
                         context,
                         title: "Save Paid ?",
                         titleButton1: "Save",
                         titleButton2: "No",
                         onPressedButton1: () async {
-                          await BlocProvider.of<Paidcubit>(context)
+                          await BlocProvider.of<PaidCubit>(context)
                               .savePaid(context);
                           SharedPref.remove(key: "notesVoucher");
                           SharedPref.remove(key: "paidVoucher");

@@ -70,8 +70,8 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
             selectedButtonIndex = printerModel.id;
             SharedPref.set(key: 'printerFormat', value: selectedButtonIndex);
           });
-          print(SharedPref.get(key: 'printerFormat'));
-          print("ppppppp" + selectedButtonIndex.toString());
+          debugPrint(SharedPref.get(key: 'printerFormat'));
+          debugPrint("ppppppp$selectedButtonIndex");
         },
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.resolveWith<Color>(

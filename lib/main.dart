@@ -110,15 +110,15 @@ class MyApp extends StatelessWidget {
               )..getInvoices(),
             ),
             BlocProvider(
-                create: (context) => Returncubit(
+                create: (context) => ReturnCubit(
                       returnRepo: getIt.get<ReturnRepoImplementation>(),
                     )..getReturns()),
             BlocProvider(
                 create: (context) => Recieptcubit(
-                      recieptRepo: getIt.get<RecieptRepoImplementation>(),
+                      recieptRepo: getIt.get<ReceiptRepoImplementation>(),
                     )..getReciepts()),
             BlocProvider(
-                create: (context) => Paidcubit(
+                create: (context) => PaidCubit(
                       paidRepo: getIt.get<PaidRepoImplementation>(),
                     )..getPaids()),
             BlocProvider(

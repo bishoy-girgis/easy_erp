@@ -52,7 +52,7 @@ class _HomeViewHeaderCardState extends State<HomeViewHeaderCard> {
                   // color: AppColors.primaryColorBlue,
                 ),
                 WelcomeMrSection(
-                  name: "${widget.name}",
+                  name: widget.name,
                 )
               ],
             ),

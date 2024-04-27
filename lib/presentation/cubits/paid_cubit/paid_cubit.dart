@@ -10,14 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class Paidcubit extends Cubit<PaidState> {
-  Paidcubit({
+class PaidCubit extends Cubit<PaidState> {
+  PaidCubit({
     required this.paidRepo,
   }) : super(PaidInitial());
 
   PaidRepo paidRepo;
 
-  static Paidcubit get(context) => BlocProvider.of(context);
+  static PaidCubit get(context) => BlocProvider.of(context);
 
   List<PaidModel> paids = [];
   getPaids() async {
@@ -26,10 +26,9 @@ class Paidcubit extends Cubit<PaidState> {
     result.fold((error) {
       emit(PaidInitial());
 
-      debugPrint("🎈🎈🎈🎈" + error.errorMessage);
+      debugPrint("🎈🎈🎈🎈${error.errorMessage}");
       emit(GetPaidFailure(error.errorMessage));
     }, (r) {
-      /// r for List of customers
       emit(PaidInitial());
       paids = r;
       emit(GetPaidSuccess(r));
@@ -38,7 +37,7 @@ class Paidcubit extends Cubit<PaidState> {
 
   savePaid(context) async {
     emit(SavePaidLoading());
-    print("ALL DATA IN Paidd CUBIT");
+    debugPrint("ALL DATA IN Paid CUBIT");
     var result = await paidRepo.savepaid(
       notes: SharedPref.get(key: 'notesVoucher') ?? "--",
       date: DateFormat('dd/MM/yyyy').parse(SharedPref.get(key: 'invoiceDate') ??
@@ -55,12 +54,12 @@ class Paidcubit extends Cubit<PaidState> {
 
     if (result != null) {
       result.fold((l) {
-        print("ERROR IN Paid CUBIT " + l.errorMessage);
+        debugPrint("ERROR IN Paid CUBIT ${l.errorMessage}");
         emit(PaidNotSave(l.errorMessage));
       }, (r) {
         print(r);
         SendPaidModel sendPaidModel = r;
-        print('DATACUBI(TTTT)' + r.toString());
+        debugPrint('DATACUBI(TTTT)$r');
         generatePdfReciept(context,
             pdfType: " سند صرف",
             vatValue: SharedPref.get(key: 'taxVoucher'),

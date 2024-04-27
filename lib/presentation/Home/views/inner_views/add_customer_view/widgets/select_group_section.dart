@@ -8,7 +8,6 @@ import '../../../../../../core/helper/app_colors.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import '../../../../../../data/services/local/shared_pref.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../../cubits/customer_cubit/customer_cubit.dart';
 
 class ChooseGroup extends StatelessWidget {
@@ -25,7 +24,7 @@ class ChooseGroup extends StatelessWidget {
             child: DropdownSearch<GroupModel>(
               validator: (value) {
                 if (value == null) {
-                  print("pleaseee enteeeeeeeeeeerrrrr");
+                  debugPrint("please enter");
                   return "please enter group name";
                 }
                 return null;

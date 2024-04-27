@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/pdf_helper.dart';
 import 'package:easy_erp/data/models/invoice_model/invoice_model.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../data/models/item_model/item_model.dart';
 import '../../../../data/models/send_invoice_model/send_invoice_model.dart';
-
 part 'invoice_state.dart';
 
 class InvoiceCubit extends Cubit<InvoiceState> {
@@ -28,10 +26,9 @@ class InvoiceCubit extends Cubit<InvoiceState> {
     required List<ItemModel> items,
   }) async {
     emit(SaveInvoiceLoading());
-    print("ALL DATA IN INVOICE CUBIT");
-    print('items:');
+    debugPrint("ALL DATA IN INVOICE CUBIT");
     items.forEach((item) {
-      print('  ${item.toJson()}');
+      debugPrint('  ${item.toJson()}');
     });
     var result = await invoiceRepo.saveInvoice(
       date: DateFormat('dd/MM/yyyy').parse(SharedPref.get(key: 'invoiceDate') ??
@@ -49,26 +46,26 @@ class InvoiceCubit extends Cubit<InvoiceState> {
       bankDtlId: SharedPref.get(key: 'bankdtlId') ?? 1,
       items: items,
     );
-    print(
-        'itemssssssssssssssssssssssssssssssssssssssssssssssssssssssss: 🎶🎶🎶');
+    debugPrint(
+        'items: 🎶🎶🎶');
     items.forEach((item) {
-      print('  ${item.toJson()}');
+      debugPrint('  ${item.toJson()}');
     });
     if (result != null) {
       result.fold((l) {
-        print("ERROR IN INV CUBIT " + l.errorMessage);
+        debugPrint("ERROR IN INV CUBIT ${l.errorMessage}");
         emit(InvoiceNotSave(l.errorMessage));
       }, (r) {
         print(r);
         SendInvoiceModel sendInvoiceModel =
             r; // This line should be within the null check
         print(sendInvoiceModel);
-        print('DATACUBI(TTTT)' + r.toString());
+        debugPrint('DATACUBI(TTTT)$r');
         emit(InvoiceSavedSuccess(r));
         return r;
       });
     } else {
-      emit(InvoiceNotSave("Invoice data is null"));
+      emit(const InvoiceNotSave("Invoice data is null"));
     }
   }
 
@@ -79,31 +76,25 @@ class InvoiceCubit extends Cubit<InvoiceState> {
     result.fold((error) {
       emit(InvoiceInitial());
 
-      debugPrint("🎈🎈🎈🎈" + error.errorMessage);
+      debugPrint("🎈🎈🎈🎈${error.errorMessage}");
       emit(GetInvoiceFailure(error.errorMessage));
     }, (r) {
-      /// r for List of customers
       emit(InvoiceInitial());
       invoices = r;
       emit(GetInvoiceSuccess(r));
     });
   }
 
-  // PrintInvoiceModel printInvoiceModel;
   getInvoiceDataAndItems(context, {required String invNo}) async {
-    // emit(InvoiceInitial());
 
     emit(GetInvoiceDataLoading());
     var result = await invoiceRepo.getInvoiceDataAndItems(invNo: invNo);
     result.fold(
       (l) {
         debugPrint('❤️🐸❤️🐸❤️❤️❤️🐸❤️🐸❤️❤️');
-        // emit(InvoiceInitial());
         emit(GetInvoiceDataFailure(l.errorMessage));
       },
       (r) {
-        // emit(InvoiceInitial());
-
         PrintInvoiceModel printInvoiceModel = r;
         debugPrint('❤️🐸❤️🐸❤️❤️${printInvoiceModel.invoicedtls.toString()}');
         debugPrint('❤️🐸❤️🐸❤️❤️$invNo');
@@ -118,8 +109,6 @@ class InvoiceCubit extends Cubit<InvoiceState> {
               .parse("${r.invoicehead![0].invtime ?? "00:00:00"} ");
           formattedTime = DateFormat('h:mm a').format(parsedTime);
         }
-        print("{qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqrrrrrrrrrrrrrr}  ${r.qr}");
-
         generateAndPrintArabicPdf(context,
             qrData: r.qr ?? "empty",
             invNo: invNo,
@@ -138,8 +127,6 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   }
 
   getInvoiceItems(context, {required String invNo}) async {
-    // emit(InvoiceInitial());
-
     emit(GetInvoiceItemsLoading());
     var result = await invoiceRepo.getInvoiceDataAndItems(invNo: invNo);
     result.fold(
@@ -152,7 +139,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
         debugPrint('🐸🐸🐸🐸${printInvoiceModel.invoicedtls.toString()}');
         debugPrint('🐸🐸$invNo');
         itemsInvoice = r.invoicedtls ?? [];
-        print("🐸🐸 ${itemsInvoice.length}");
+        debugPrint("🐸🐸 ${itemsInvoice.length}");
         emit(GetInvoiceItemsSuccess(r.invoicedtls!));
         return itemsInvoice;
       },

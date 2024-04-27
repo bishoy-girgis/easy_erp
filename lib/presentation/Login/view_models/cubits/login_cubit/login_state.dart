@@ -5,7 +5,7 @@ sealed class LoginState {}
 
 final class LoginInitial extends LoginState {}
 
-final class ChangePasswordVisability extends LoginState {}
+final class ChangePasswordVisibility extends LoginState {}
 
 final class LoginSuccessState extends LoginState {
   final UserModel userModel;

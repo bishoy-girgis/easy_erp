@@ -111,7 +111,7 @@ class CreateReciept extends StatelessWidget {
             return IconButton(
               onPressed: () async {
                 checkChoosePayer() && checkVoucherValue()
-                    ? GlobalMethods.showAlertAdressDialog(
+                    ? GlobalMethods.showAlertAddressDialog(
                         context,
                         title: "Save Reciept ?",
                         titleButton1: "Save",

@@ -16,10 +16,9 @@ class PaymentTypeCubit extends Cubit<PaymentTypeState> {
     emit(PaymentTypeLoading());
     final result = await payTypeRepo.getPaymentTypes();
     result.fold((error) {
-      debugPrint("🎈🎈🎈🎈" + error.errorMessage);
+      debugPrint("🎈🎈🎈🎈${error.errorMessage}");
       emit(PaymentTypeFail(errorMessage: error.errorMessage));
     }, (r) {
-      /// r for List of pay types
       payModels = r;
 
       emit(PaymentTypeSuccess(payTypes: r));

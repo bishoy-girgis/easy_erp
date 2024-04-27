@@ -175,7 +175,7 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
             BlocBuilder<PaymentTypeCubit, PaymentTypeState>(
               builder: (context, state) {
                 if (state is PaymentTypeSuccess) {
-                  return ChoocePaymentType(
+                  return ChoosePaymentType(
                     totalAmount: totalAmount,
                     payTypes: state.payTypes,
                   );
@@ -197,7 +197,7 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
 
   Widget autoComplete(List<PayerTypeModel> payers) {
     PayerTypeModel emptyPayers = const PayerTypeModel();
-    print("${payers.length}  payersLength");
+    debugPrint("${payers.length}  payersLength");
     List<PayerTypeModel> kOptions = payers;
     return Autocomplete<PayerTypeModel>(
       optionsViewBuilder: (context, onSelected, options) {
@@ -272,11 +272,11 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
             state: ToastStates.ERROR,
           );
         }
-        print(
-            "PAYYERRR CHARRT IDDD pref ${SharedPref.get(key: 'PayerChartId')}");
+        debugPrint(
+            "PAYER CHART ID pref ${SharedPref.get(key: 'PayerChartId')}");
       },
       displayStringForOption: (option) {
-        print("${option.accname!}  selecttttttttttt");
+        debugPrint("${option.accname!}  select");
         return option.accname!;
       },
     );

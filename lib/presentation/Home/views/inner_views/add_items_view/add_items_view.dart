@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:easy_erp/core/helper/app_routing.dart';
 import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
@@ -17,7 +16,7 @@ import '../../../../cubits/item_cubit/item_cubit.dart';
 import 'widgets/item_widget.dart';
 
 class AddItemsView extends StatefulWidget {
-  AddItemsView({super.key});
+  const AddItemsView({super.key});
 
   @override
   State<AddItemsView> createState() => _AddItemsViewState();
@@ -32,10 +31,10 @@ class _AddItemsViewState extends State<AddItemsView> {
   Widget buildCubitWidget() {
     return BlocBuilder<GetItemCubit, GetItemState>(
       builder: (context, state) {
-        print("${SharedPref.get(key: "ReturnSelectedId")}");
+        debugPrint("${SharedPref.get(key: "ReturnSelectedId")}");
         if (state is GetItemsSuccessState) {
           items = state.items;
-          print("${items.length} lenngth lissttttt");
+          debugPrint("${items.length} length list");
           return buildLoadedListWidgets();
         } else {
           return const Center(
@@ -56,7 +55,7 @@ class _AddItemsViewState extends State<AddItemsView> {
         ),
         leading: IconButton(
           onPressed: () {
-            GlobalMethods.showAlertAdressDialog(
+            GlobalMethods.showAlertAddressDialog(
               context,
               title: "Exit and dont save ? ",
               titleButton1: "YES",

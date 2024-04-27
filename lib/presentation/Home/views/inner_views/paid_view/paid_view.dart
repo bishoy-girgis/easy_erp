@@ -85,16 +85,16 @@ class _PaidViewState extends State<PaidView> {
             onChange: (v) {
               searchController.text = v;
               searchForPaids = paids
-                  .where((Paid) =>
-                      Paid.cashoutOrdno!.toString().startsWith(v) ||
-                      Paid.cashoutHdrid!.toString().startsWith(v) ||
-                      Paid.paymentchartName!.toLowerCase().contains(v))
+                  .where((paid) =>
+                      paid.cashoutOrdno!.toString().startsWith(v) ||
+                      paid.cashoutHdrid!.toString().startsWith(v) ||
+                      paid.paymentchartName!.toLowerCase().contains(v))
                   .toList();
               setState(() {});
             },
           ),
           const GapH(h: 1),
-          BlocConsumer<Paidcubit, PaidState>(
+          BlocConsumer<PaidCubit, PaidState>(
             listener: (context, state) {},
             builder: (context, state) {
               if (state is GetPaidSuccess) {

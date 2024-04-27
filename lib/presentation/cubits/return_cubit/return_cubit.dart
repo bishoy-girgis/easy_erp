@@ -12,14 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class Returncubit extends Cubit<ReturnState> {
-  Returncubit({
+class ReturnCubit extends Cubit<ReturnState> {
+  ReturnCubit({
     required this.returnRepo,
   }) : super(ReturnInitial());
 
   ReturnRepo returnRepo;
 
-  static Returncubit get(context) => BlocProvider.of(context);
+  static ReturnCubit get(context) => BlocProvider.of(context);
 
   List<ReturnModel> returns = [];
   getReturns() async {
@@ -28,10 +28,9 @@ class Returncubit extends Cubit<ReturnState> {
     result.fold((error) {
       emit(ReturnInitial());
 
-      debugPrint("🎈🎈🎈🎈" + error.errorMessage);
+      debugPrint("🎈🎈🎈🎈${error.errorMessage}");
       emit(GetReturnFailure(error.errorMessage));
     }, (r) {
-      /// r for List of customers
       emit(ReturnInitial());
       returns = r;
       emit(GetReturnSuccess(r));
@@ -40,10 +39,10 @@ class Returncubit extends Cubit<ReturnState> {
 
   saveReturn({required List<ItemModel> items, int? invid}) async {
     emit(SaveReturnLoading());
-    print("ALL DATA IN Return CUBIT");
-    print('items:');
+    debugPrint("ALL DATA IN Return CUBIT");
+    debugPrint('items:');
     items.forEach((item) {
-      print('  ${item.toJson()}');
+      debugPrint('  ${item.toJson()}');
     });
     var result = await returnRepo.saveReturn(
       date: DateFormat('dd/MM/yyyy').parse(SharedPref.get(key: 'invoiceDate') ??
@@ -62,43 +61,37 @@ class Returncubit extends Cubit<ReturnState> {
       items: items,
       invid: invid,
     );
-    print('itemsssssssssssssssssssss🎶🎶🎶🎶🎶🎶🎶🎶🎶');
+    debugPrint('items🎶🎶🎶🎶🎶🎶🎶🎶🎶');
     items.forEach((item) {
-      print('  ${item.toJson()}');
+      debugPrint('  ${item.toJson()}');
     });
     if (result != null) {
       result.fold((l) {
-        print("ERROR IN return CUBIT " + l.errorMessage);
+        debugPrint("ERROR IN return CUBIT ${l.errorMessage}");
         emit(ReturnNotSave(l.errorMessage));
       }, (r) {
         print(r);
-        SendInvoiceModel sendInvoiceModel =
-            r; // This line should be within the null check
+        SendInvoiceModel sendInvoiceModel = r;
         print(sendInvoiceModel);
-        print('DATACUBI(TTTT)' + r.toString());
+        debugPrint('DATACUBI(T)$r');
         emit(ReturnSavedSuccess(r));
         return r;
       });
     } else {
-      emit(ReturnNotSave("Invoice data is null"));
+      emit(const ReturnNotSave("Invoice data is null"));
     }
   }
 
   getReturnDataAndItems(context, {required String returnInvNo}) async {
-    // emit(InvoiceInitial());
-
     emit(GetReturnDataLoading());
     var result =
         await returnRepo.getReturnDataAndItems(returnInvNo: returnInvNo);
     result.fold(
       (l) {
         debugPrint('❤️🐸❤️🐸❤️❤️❤️🐸❤️🐸❤️❤️');
-        // emit(InvoiceInitial());
         emit(GetReturnDataFailure(l.errorMessage));
       },
       (r) {
-        // emit(InvoiceInitial());
-
         PrintReturnModel printReturnModel = r;
         debugPrint('❤️🐸❤️🐸❤️❤️${printReturnModel.rtninvoicedtls.toString()}');
         debugPrint('❤️🐸❤️🐸❤️❤️$returnInvNo');
@@ -113,8 +106,6 @@ class Returncubit extends Cubit<ReturnState> {
               .parse("${r.rtninvoicehead![0].invtime ?? "00:00:00"} ");
           formattedTime = DateFormat('h:mm a').format(parsedTime);
         }
-        print("{qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqrrrrrrrrrrrrrr}  ${r.qr}");
-
         generateAndPrintArabicPdf(context,
             isReturn: true,
             qrData: r.qr ?? "empty",

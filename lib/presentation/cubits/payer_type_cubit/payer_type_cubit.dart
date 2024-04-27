@@ -13,13 +13,12 @@ class PayerTypeCubit extends Cubit<PayerTypeState> {
     emit(PayerTypeLoading());
     final result = await payerTypeRepo.getPayerType(type: type);
     result.fold((error) {
-      debugPrint("🎈🎈🎈🎈" + error.errorMessage);
+      debugPrint("🎈🎈🎈🎈${error.errorMessage}");
       emit(PayerTypeFail(errorMessage: error.errorMessage));
     }, (r) {
-      /// r for List of payers type
       payerModels = r;
-      print("${payerModels.length}  cubit lengthhhhh");
-      print("${type}  Typeeeee");
+      debugPrint("${payerModels.length}  cubit length");
+      debugPrint("$type  Type");
       emit(PayerTypeSuccess(payTypes: payerModels));
       return payerModels;
     });

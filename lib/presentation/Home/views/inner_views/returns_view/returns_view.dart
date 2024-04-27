@@ -15,10 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../core/widgets/shimmer_item_widget.dart';
-
 class ReturnsView extends StatefulWidget {
-  ReturnsView({Key? key}) : super(key: key);
+  const ReturnsView({Key? key}) : super(key: key);
 
   @override
   State<ReturnsView> createState() => _ReturnsViewState();
@@ -87,7 +85,7 @@ class _ReturnsViewState extends State<ReturnsView> {
           ),
           // InvoiceWidget(),
           const GapH(h: 1),
-          BlocConsumer<Returncubit, ReturnState>(
+          BlocConsumer<ReturnCubit, ReturnState>(
             listener: (context, state) {},
             builder: (context, state) {
               if (state is GetReturnSuccess) {
@@ -109,7 +107,7 @@ class _ReturnsViewState extends State<ReturnsView> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            Returncubit.get(context).getReturnDataAndItems(
+                            ReturnCubit.get(context).getReturnDataAndItems(
                               context,
                               returnInvNo: searchForReturnss.isNotEmpty
                                   ? searchForReturnss[index].rtnInvNo!

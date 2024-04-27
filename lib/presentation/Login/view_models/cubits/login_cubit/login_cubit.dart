@@ -20,8 +20,8 @@ class LoginCubit extends Cubit<LoginState> {
     }, (r) async {
       userModel = r;
       SharedPref.set(key: 'accessToken', value: userModel.accessToken!);
-      debugPrint("🎄🎄***" + userModel.userName!);
-      debugPrint("🎄🎄" + userModel.accessToken!);
+      debugPrint("🎄🎄***${userModel.userName!}");
+      debugPrint("🎄🎄${userModel.accessToken!}");
       SharedPref.set(key: 'VATType', value: userModel.vatType);
       SharedPref.set(key: 'userName', value: userModel.userName!);
       SharedPref.set(key: 'whId', value: userModel.whId);
@@ -29,14 +29,6 @@ class LoginCubit extends Cubit<LoginState> {
       SharedPref.set(key: 'ccid', value: userModel.ccId);
       SharedPref.set(key: 'branchID', value: userModel.branchId);
       AppConstants.updateValues();
-      print(
-          "{{{{{{{{{{{{{{{{{{{{{ ${userModel.accessToken} }}}}}}}}}}}}}}}}}}}}}");
-      print(
-          "-NAMMMEEE--------------------${userModel.userName!}--------------------");
-      print(
-          "-NAMMMEEE22222--------------------${AppConstants.userName}--------------------");
-      print(
-          "-TOKKEENN--------------------${AppConstants.accessToken}--------------------");
 
       emit(LoginSuccessState(userModel: r));
 
@@ -45,9 +37,9 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   bool isPasswordVisible = true;
-  void changeVisability() {
+  void changeVisibility() {
     emit(LoginInitial());
     isPasswordVisible = !isPasswordVisible;
-    emit(ChangePasswordVisability());
+    emit(ChangePasswordVisibility());
   }
 }

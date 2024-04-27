@@ -5,6 +5,7 @@ import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/data/models/user/user_model.dart';
 import 'package:easy_erp/data/repositories/login_repository/login_Repo.dart';
+import 'package:flutter/cupertino.dart';
 
 class LoginRepoImplementation extends LoginRepo {
   ApiService apiService;
@@ -15,7 +16,7 @@ class LoginRepoImplementation extends LoginRepo {
     required String password,
   }) async {
     try {
-      print("DATA IN LOGIN REPO IMP ✨✨");
+      debugPrint("DATA IN LOGIN REPO IMP ✨✨");
       var data = await apiService.post(
         endPoint: AppConstants.LOGIN_AND_TOKEN,
         body: {

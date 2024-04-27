@@ -6,6 +6,7 @@ import 'package:easy_erp/core/api/api_service.dart';
 import 'package:easy_erp/core/errors/failures.dart';
 import 'package:easy_erp/data/models/payment_type_model/pay_ment_type_model.dart';
 import 'package:easy_erp/data/repositories/payment_type_repository/payment_type_repo.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../../core/helper/app_constants.dart';
 
@@ -17,7 +18,7 @@ class PaymentTypeRepoImp extends PaymentTypeRepo {
   @override
   Future<Either<Failures, List<PaymentTypeModel>>> getPaymentTypes() async {
     try {
-      print("DATA IN Customer REPO IMP ✨✨");
+      debugPrint("DATA IN Customer REPO IMP ✨✨");
       var data = await apiService.get(
         endPoint: AppConstants.GET_PAYMENT_TYPE,
       );
