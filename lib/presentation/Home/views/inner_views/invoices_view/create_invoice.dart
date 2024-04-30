@@ -133,6 +133,7 @@ class CreateInvoiceView extends StatelessWidget {
                       GlobalMethods.goRouterNavigateTOAndReplacement(
                           context: context, router: AppRouters.kInvoices);
                       getIt.get<AddItemCubit>().addedItems.clear();
+                      InvoiceCubit.get(context).getInvoices();
                     },
                     onPressedButton2: () {
                       GlobalMethods.navigatePOP(context);

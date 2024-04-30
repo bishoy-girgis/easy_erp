@@ -190,7 +190,7 @@ class SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
                     value: data.custname ?? data.custename ?? 'cash');
               });
               debugPrint(
-                SharedPref.get(key: "custID"),
+                "${SharedPref.get(key: "custID")}",
               );
             },
           ),

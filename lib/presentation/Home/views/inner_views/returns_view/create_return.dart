@@ -113,6 +113,7 @@ class CreateReturnView extends StatelessWidget {
             SharedPref.remove(key: "withInvoiceSelected");
             getIt.get<AddItemCubit>().addedItems.clear();
             GlobalMethods.navigatePOP(context);
+            ReturnCubit.get(context).getReturns();
           },
           icon: const Icon(Icons.arrow_back)),
       actions: [
