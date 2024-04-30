@@ -11,29 +11,30 @@ class CategoryWidget extends StatelessWidget {
     this.icon,
     this.onTap,
   });
+
   final IconData? icon;
   final String categoryName;
   final Function()? onTap;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
             color: AppColors.whiteColor,
           ),
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Row(
                 children: [
                   Icon(
                     icon,
-                    size: 35.spMax,
+                    size: 32.spMax,
                     color: Colors.blueGrey,
                   ),
                   const Spacer(),
@@ -46,7 +47,6 @@ class CategoryWidget extends StatelessWidget {
                     categoryName,
                     isHeader: true,
                     color: AppColors.blackColor,
-                    // fontSize: ,
                   ),
                 ],
               ),

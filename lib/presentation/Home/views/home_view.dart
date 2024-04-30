@@ -18,7 +18,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 8.h),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
@@ -31,7 +31,7 @@ class HomeView extends StatelessWidget {
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 20.w,
+                  crossAxisSpacing: 14.w,
                   childAspectRatio: 1.34.r,
                   mainAxisSpacing: 20.h,
                 ),
