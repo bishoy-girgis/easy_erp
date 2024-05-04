@@ -1,6 +1,7 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/helper/app_images.dart';
 import '../../../../../../core/helper/utils.dart';
@@ -15,8 +16,8 @@ class ItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = Utils(context: context).screenSize;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      padding: const EdgeInsets.all(10),
+      margin:  EdgeInsets.symmetric(horizontal: 5.w, vertical: 3.h),
+      padding: EdgeInsets.all(5.sp),
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -24,7 +25,7 @@ class ItemWidget extends StatelessWidget {
           boxShadow: const [
             BoxShadow(
               color: Colors.black45,
-              spreadRadius: 1,
+              spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(1, 1),
             ),
@@ -86,5 +87,6 @@ class ItemWidget extends StatelessWidget {
         ),
       ]),
     );
+
   }
 }

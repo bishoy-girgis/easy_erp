@@ -28,7 +28,7 @@ class InvoiceWidget extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Container(
-          margin: const EdgeInsets.symmetric(vertical: 5),
+          margin:  EdgeInsets.symmetric(vertical: 5.h),
           width: double.infinity,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -36,7 +36,7 @@ class InvoiceWidget extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black45,
-                  spreadRadius: 1,
+                  spreadRadius: 2,
                   blurRadius: 5,
                   offset: Offset(1, 1),
                 ),
@@ -46,7 +46,7 @@ class InvoiceWidget extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(10),
+                padding:  EdgeInsets.all(5.sp),
                 decoration: const BoxDecoration(
                   color: AppColors.secondColorOrange,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -60,9 +60,8 @@ class InvoiceWidget extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 5,
+                padding:  EdgeInsets.symmetric(
+                  horizontal: 10.w,
                 ),
                 child: Column(
                   children: [
@@ -72,10 +71,6 @@ class InvoiceWidget extends StatelessWidget {
                           const AssetImage("assets/images/invoice.png"),
                           size: 18.sp,
                         ),
-                        // Icon(
-                        //   Icons.inventory_2_outlined,
-                        //   size: 25.sp,
-                        // ),
                         const GapW(w: 5),
                         TextBuilder(
                           invoiceModel.invNo!,
@@ -88,7 +83,7 @@ class InvoiceWidget extends StatelessWidget {
                       invoiceModel.custInvname!,
                       fontSize: 17,
                     ),
-                    const GapH(h: 1.5),
+                    const GapH(h: 1),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

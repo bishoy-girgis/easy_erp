@@ -26,7 +26,7 @@ class ReturnWidget extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Container(
-          margin: const EdgeInsets.symmetric(vertical: 5),
+          margin:  EdgeInsets.symmetric(vertical: 5.h),
           width: double.infinity,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -34,7 +34,7 @@ class ReturnWidget extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black45,
-                  spreadRadius: 1,
+                  spreadRadius: 2,
                   blurRadius: 5,
                   offset: Offset(1, 1),
                 ),
@@ -44,7 +44,7 @@ class ReturnWidget extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(10),
+                padding:  EdgeInsets.all(5.sp),
                 decoration: BoxDecoration(
                   color: AppColors.primaryColorBlue.withOpacity(0.72),
                   borderRadius:
@@ -59,9 +59,8 @@ class ReturnWidget extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 5,
+                padding:  EdgeInsets.symmetric(
+                  horizontal: 15.w,
                 ),
                 child: Column(
                   children: [
@@ -71,10 +70,6 @@ class ReturnWidget extends StatelessWidget {
                           const AssetImage("assets/images/product-returnn.png"),
                           size: 20.sp,
                         ),
-                        // Icon(
-                        //   Icons.inventory_2_outlined,
-                        //   size: 20.sp,
-                        // ),
                         const GapW(w: 5),
                         TextBuilder(
                           returnModel.rtnInvNo!,
@@ -87,7 +82,7 @@ class ReturnWidget extends StatelessWidget {
                       returnModel.custname!,
                       fontSize: 17,
                     ),
-                    const GapH(h: 1.5),
+                    const GapH(h: 1),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

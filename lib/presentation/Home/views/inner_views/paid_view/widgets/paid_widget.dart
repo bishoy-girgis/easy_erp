@@ -26,7 +26,7 @@ class Paidwidget extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Container(
-          margin: const EdgeInsets.symmetric(vertical: 5),
+          margin:  EdgeInsets.symmetric(vertical: 5.h),
           width: double.infinity,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -34,7 +34,7 @@ class Paidwidget extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black45,
-                  spreadRadius: 1,
+                  spreadRadius: 2,
                   blurRadius: 5,
                   offset: Offset(1, 1),
                 ),
@@ -44,7 +44,7 @@ class Paidwidget extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(10),
+                padding:  EdgeInsets.all(5.sp),
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 3, 62, 94),
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -58,9 +58,9 @@ class Paidwidget extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 5,
+                padding:  EdgeInsets.symmetric(
+                  horizontal: 10.w,
+                  vertical: 3.h,
                 ),
                 child: Column(
                   children: [
