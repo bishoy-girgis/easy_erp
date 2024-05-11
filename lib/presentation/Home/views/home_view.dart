@@ -18,12 +18,12 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 8.h),
+          padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
                   child: HomeViewHeaderCard(name: AppConstants.userName)),
-              const SliverToBoxAdapter(child: GapH(h: 3)),
+              const SliverToBoxAdapter(child: GapH(h: 5)),
               SliverGrid.builder(
                 itemCount: CategoriesViewModel.getCategories(context).length,
                 itemBuilder: (context, index) {
@@ -33,17 +33,17 @@ class HomeView extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 14.w,
                   childAspectRatio: 1.34.r,
-                  mainAxisSpacing: 20.h,
+                  mainAxisSpacing: 22.h,
                 ),
               ),
-              const SliverToBoxAdapter(child: GapH(h: 3)),
-              SliverToBoxAdapter(
-                child: CategoryWidget(
-                  categoryName: l.close_shift,
-                  icon: Icons.access_time_filled_rounded,
-                ),
-              ),
-              const SliverToBoxAdapter(child: GapH(h: 7)),
+              // const SliverToBoxAdapter(child: GapH(h: 3)),
+              // SliverToBoxAdapter(
+              //   child: CategoryWidget(
+              //     categoryName: l.close_shift,
+              //     icon: Icons.access_time_filled_rounded,
+              //   ),
+              // ),
+              const SliverToBoxAdapter(child: GapH(h: 15)),
               const SliverToBoxAdapter(child: ChangeLanguagesSection()),
             ],
           ),
