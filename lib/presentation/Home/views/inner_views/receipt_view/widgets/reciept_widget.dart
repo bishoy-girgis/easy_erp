@@ -85,6 +85,7 @@ class Recieptwidget extends StatelessWidget {
                           children: [
                             TextBuilder(
                               recieptModel.custchartName!,
+                              isOverflow: true,
                               fontSize: 17,
                             ),
                           ],

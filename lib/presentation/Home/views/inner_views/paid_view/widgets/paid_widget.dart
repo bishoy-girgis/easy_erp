@@ -85,6 +85,7 @@ class Paidwidget extends StatelessWidget {
                           children: [
                             TextBuilder(
                               paidModel.paymentchartName!,
+                              isOverflow: true,
                               fontSize: 17,
                             ),
                           ],
