@@ -47,22 +47,22 @@ class _NotesImageWidgetState extends State<NotesImageWidget> {
               },
             ),
             const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextBuilder(
-                  AppLocalizations.of(context)!.image,
-                  isHeader: true,
-                  fontSize: 13,
-                ),
-                const Card(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: Icon(
-                      Icons.add_photo_alternate_rounded,
-                      size: 45,
-                    )),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     TextBuilder(
+            //       AppLocalizations.of(context)!.image,
+            //       isHeader: true,
+            //       fontSize: 13,
+            //     ),
+            //     const Card(
+            //         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            //         child: Icon(
+            //           Icons.add_photo_alternate_rounded,
+            //           size: 45,
+            //         )),
+            //   ],
+            // ),
           ],
         ),
       ),
