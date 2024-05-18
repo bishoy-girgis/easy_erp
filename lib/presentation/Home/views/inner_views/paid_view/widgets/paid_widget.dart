@@ -81,26 +81,32 @@ class Paidwidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          children: [
-                            TextBuilder(
-                              paidModel.paymentchartName!,
-                              isOverflow: true,
-                              fontSize: 17,
-                            ),
-                          ],
+                        Flexible(
+                          flex: 4,
+                          child: Column(
+                            children: [
+                              TextBuilder(
+                                paidModel.paymentchartName!,
+                                isOverflow: true,
+                                fontSize: 17,
+                              ),
+                            ],
+                          ),
                         ),
-                        Column(
-                          children: [
-                            TextBuilder(
-                              AppLocalizations.of(context)!.totalItemsInvoice,
-                              textAlign: TextAlign.center,
-                              fontSize: 13,
-                            ),
-                            TextBuilder(
-                              paidModel.payvalue.toString(),
-                            ),
-                          ],
+                        Flexible(
+
+                          flex: 1,child: Column(
+                            children: [
+                              TextBuilder(
+                                AppLocalizations.of(context)!.totalItemsInvoice,
+                                textAlign: TextAlign.center,
+                                fontSize: 13,
+                              ),
+                              TextBuilder(
+                                paidModel.payvalue.toString(),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

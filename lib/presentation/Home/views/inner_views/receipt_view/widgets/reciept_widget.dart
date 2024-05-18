@@ -81,29 +81,36 @@ class Recieptwidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          children: [
-                            TextBuilder(
-                              recieptModel.custchartName!,
-                              isOverflow: true,
-                              fontSize: 17,
-                            ),
-                          ],
+                        Flexible(
+                          flex: 4,
+                          child: Column(
+                            children: [
+                              TextBuilder(
+                                recieptModel.custchartName!,
+                                isOverflow: true,
+                                fontSize: 17,
+                              ),
+                            ],
+                          ),
                         ),
-                        Column(
-                          children: [
-                            TextBuilder(
-                              AppLocalizations.of(context)!.totalItemsInvoice,
-                              textAlign: TextAlign.center,
-                              fontSize: 13,
-                            ),
-                            TextBuilder(
-                              recieptModel.recvalue.toString(),
-                            ),
-                          ],
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              TextBuilder(
+                                AppLocalizations.of(context)!.totalItemsInvoice,
+                                textAlign: TextAlign.center,
+                                fontSize: 13,
+                              ),
+                              TextBuilder(
+                                recieptModel.recvalue.toString(),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
+
                   ],
                 ),
               ),
