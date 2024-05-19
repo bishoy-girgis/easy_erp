@@ -191,7 +191,7 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
       onSelected: (PayerTypeModel selectedPayer) {
         if (selectedPayer != emptyPayers) {
           GlobalMethods.buildFlutterToast(
-            message: 'Payer Selected Successfully',
+            message:  AppLocalizations.of(context)!.payerSelected,
             state: ToastStates.SUCCESS,
           );
           SharedPref.set(key: 'PayerChartId', value: selectedPayer.chartid!);
@@ -199,7 +199,7 @@ class _VoucherValuWidgetState extends State<VoucherValuWidget> {
           setState(() {});
         } else {
           GlobalMethods.buildFlutterToast(
-            message: 'No Payers found for the entered Code.',
+            message:  AppLocalizations.of(context)!.noPayerFound,
             state: ToastStates.ERROR,
           );
         }

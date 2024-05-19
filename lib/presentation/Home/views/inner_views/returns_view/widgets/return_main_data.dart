@@ -251,14 +251,14 @@ class _ReturnMainDataWidgetState extends State<ReturnMainDataWidget> {
       onSelected: (InvoiceModel selectedInvoice) {
         if (selectedInvoice != emptyInvoice) {
           GlobalMethods.buildFlutterToast(
-            message: 'Invoice Selected Successfully',
+            message: AppLocalizations.of(context)!.invoiceSelected,
             state: ToastStates.SUCCESS,
           );
           SharedPref.set(key: 'ReturnSelectedId', value: selectedInvoice.invid);
           setState(() {});
         } else {
           GlobalMethods.buildFlutterToast(
-            message: 'No invoice found for the entered Number.',
+            message:  AppLocalizations.of(context)!.noInvoiceFound,
             state: ToastStates.ERROR,
           );
         }

@@ -86,7 +86,7 @@ class CreateInvoiceView extends StatelessWidget {
           (SharedPref.get(key: 'invoiceTypeID')) == 2) {
         GlobalMethods.buildFlutterToast(
             message:
-                'Cant save invoice  please choose your invoice type and Customer to Save',
+            AppLocalizations.of(context)!.chooseInvoice,
             state: ToastStates.ERROR);
         return false;
       }
@@ -96,7 +96,7 @@ class CreateInvoiceView extends StatelessWidget {
     bool checkItems() {
       if (getIt.get<AddItemCubit>().addedItems.isEmpty) {
         GlobalMethods.buildFlutterToast(
-            message: 'Cant save invoice please choose your Items to Save',
+            message: AppLocalizations.of(context)!.chooseItem,
             state: ToastStates.ERROR);
         return false;
       }
@@ -111,7 +111,7 @@ class CreateInvoiceView extends StatelessWidget {
       if (SharedPref.get(key: 'paymentTypeID') == null ||
           SharedPref.get(key: 'paymentTypeID') == 0) {
         GlobalMethods.buildFlutterToast(
-          message: 'Check your Payment Type',
+          message: AppLocalizations.of(context)!.checkPayment,
           state: ToastStates.ERROR,
         );
         return false;
@@ -126,9 +126,9 @@ class CreateInvoiceView extends StatelessWidget {
             getIt.get<AddItemCubit>().addedItems.isNotEmpty
                 ? GlobalMethods.showAlertAddressDialog(
                     context,
-                    title: "Are you sure to remove invoice ?",
-                    titleButton1: "yes",
-                    titleButton2: "No",
+                    title:  AppLocalizations.of(context)!.removeInvoice,
+                    titleButton1: AppLocalizations.of(context)!.yes,
+                    titleButton2: AppLocalizations.of(context)!.no,
                     onPressedButton1: () {
                       GlobalMethods.goRouterNavigateTOAndReplacement(
                           context: context, router: AppRouters.kInvoices);
@@ -192,9 +192,9 @@ class CreateInvoiceView extends StatelessWidget {
                 checkCustomer() && checkItems() && checkPaymentTypes()
                     ? GlobalMethods.showAlertAddressDialog(
                         context,
-                        title: "Save Invoice ?",
-                        titleButton1: "Save",
-                        titleButton2: "No",
+                        title: AppLocalizations.of(context)!.saveInvoice,
+                        titleButton1: AppLocalizations.of(context)!.yes,
+                        titleButton2: AppLocalizations.of(context)!.no,
                         onPressedButton1: () async {
                           await BlocProvider.of<InvoiceCubit>(context)
                               .saveInvoice(

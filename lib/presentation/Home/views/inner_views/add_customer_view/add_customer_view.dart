@@ -75,7 +75,7 @@ class AddCustomerView extends StatelessWidget {
             );
           } else {
             GlobalMethods.buildFlutterToast(
-              message: "Loading ... ",
+              message: AppLocalizations.of(context)!.loading,
               state: ToastStates.WARNING,
             );
           }

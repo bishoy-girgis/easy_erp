@@ -79,8 +79,8 @@ class _ReceiptViewState extends State<ReceiptView> {
       child: Column(
         children: [
           CustomTextFormField(
-            labelText: "Search",
-            hintText: "Search with ID , Code, or Barcode NO",
+            labelText:AppLocalizations.of(context)!.search,
+            hintText: AppLocalizations.of(context)!.search_with_id_code_barcode,
             suffixIcon: Icons.search,
             suffixColor: Colors.blueGrey,
             onChange: (v) {

@@ -44,22 +44,22 @@ class CreatePaid extends StatelessWidget {
     );
   }
 
-  bool checkChoosePayer() {
+  bool checkChoosePayer(context) {
     if ((SharedPref.get(key: 'PayerChartId') == null ||
         SharedPref.get(key: 'PayerChartId') == 0)) {
       GlobalMethods.buildFlutterToast(
-          message: 'Cant save reciept  please choose your Payer to Save',
+          message: AppLocalizations.of(context)!.choosePayer,
           state: ToastStates.ERROR);
       return false;
     }
     return true;
   }
 
-  bool checkVoucherValue() {
+  bool checkVoucherValue(context) {
     if ((SharedPref.get(key: 'paidVoucher') == null ||
         SharedPref.get(key: 'paidVoucher') == 0)) {
       GlobalMethods.buildFlutterToast(
-          message: 'Cant save Paid  please Add Voucher Value',
+          message: AppLocalizations.of(context)!.paidAddVoucherValue,
           state: ToastStates.ERROR);
       return false;
     }
@@ -111,12 +111,12 @@ class CreatePaid extends StatelessWidget {
           builder: (context, state) {
             return IconButton(
               onPressed: () async {
-                checkChoosePayer() && checkVoucherValue()
+                checkChoosePayer(context) && checkVoucherValue(context)
                     ? GlobalMethods.showAlertAddressDialog(
                         context,
-                        title: "Save Paid ?",
-                        titleButton1: "Save",
-                        titleButton2: "No",
+                        title: AppLocalizations.of(context)!.savePaid,
+                        titleButton1: AppLocalizations.of(context)!.yes,
+                        titleButton2: AppLocalizations.of(context)!.no,
                         onPressedButton1: () async {
                           await BlocProvider.of<PaidCubit>(context)
                               .savePaid(context);

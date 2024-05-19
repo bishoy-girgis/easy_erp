@@ -41,7 +41,7 @@ class _LoginViewState extends State<LoginView> {
           GlobalMethods.goRouterNavigateTOAndReplacement(
               context: context, router: AppRouters.kHome);
           GlobalMethods.buildFlutterToast(
-            message: "Welcome to Easy ERP App",
+            message:AppLocalizations.of(context)!.welcomeEasy,
             state: ToastStates.SUCCESS,
           );
         } else if (state is LoginFailureState) {
@@ -50,7 +50,7 @@ class _LoginViewState extends State<LoginView> {
               message: state.error, state: ToastStates.ERROR);
         } else {
           GlobalMethods.buildFlutterToast(
-              message: 'Loading ... ', state: ToastStates.WARNING);
+              message: AppLocalizations.of(context)!.loading, state: ToastStates.WARNING);
         }
       },
       builder: (context, state) {

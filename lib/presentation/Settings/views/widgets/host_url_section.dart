@@ -1,7 +1,7 @@
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/helper/app_colors.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/text_builder.dart';
@@ -23,8 +23,8 @@ class HostUrlSection extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const TextBuilder(
-              "Host URL",
+             TextBuilder(
+              AppLocalizations.of(context)!.hostUrl,
               isHeader: true,
             ),
             const Divider(),
@@ -45,8 +45,8 @@ class HostUrlSection extends StatelessWidget {
                 debugPrint(AppConstants.baseUrl);
               },
             ),
-            const TextBuilder(
-              "Host URL that connect app with server data \n  ex: https//www.domain.com/",
+             TextBuilder(
+              "${AppLocalizations.of(context)!.hostDesc} \n  ex: https//www.domain.com/",
               isHeader: true,
               maxLines: 2,
               fontSize: 12,

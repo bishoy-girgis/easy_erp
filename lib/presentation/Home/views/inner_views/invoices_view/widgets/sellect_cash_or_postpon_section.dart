@@ -24,10 +24,10 @@ class _SellectCashOrCreditSectionState
 
         if (_dropdownValue == AppLocalizations.of(context)!.cash) {
           SharedPref.set(key: 'invoiceTypeID', value: 0);
-          debugPrint(SharedPref.get(key: 'invoiceTypeID'));
+          debugPrint("${SharedPref.get(key: 'invoiceTypeID')}");
         } else {
           SharedPref.set(key: 'invoiceTypeID', value: 2);
-          debugPrint(SharedPref.get(key: 'invoiceTypeID'));
+          debugPrint("${SharedPref.get(key: 'invoiceTypeID')}");
         }
       });
     }
@@ -41,7 +41,7 @@ class _SellectCashOrCreditSectionState
     ];
     return Center(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 8.h),
         width: double.infinity,
         child: DropdownButton(
           hint: TextBuilder(
@@ -53,8 +53,9 @@ class _SellectCashOrCreditSectionState
           onChanged: dropdownCallback,
           items: items.map((String items) {
             return DropdownMenuItem(
+              alignment: Alignment.centerRight,
               value: items,
-              child: TextBuilder(items),
+              child: TextBuilder(items,fontSize: 13),
             );
           }).toList(),
         ),

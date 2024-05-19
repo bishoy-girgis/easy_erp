@@ -53,7 +53,7 @@ class _CustomerViewState extends State<CustomerView> {
           children: [
             CustomTextFormField(
               labelText: AppLocalizations.of(context)!.search,
-              hintText: "Search with Customer name",
+              hintText: AppLocalizations.of(context)!.searchCstName,
               suffixIcon: Icons.search,
               controller: searchController,
               backgroundOfTextFeild: Colors.white,

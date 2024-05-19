@@ -59,6 +59,8 @@ dependencies:
   flutter_typeahead: ^5.2.0
   spelling_number: ^0.0.4
   shimmer: ^3.0.0
+  upgrader: ^10.3.0
+
 
 dev_dependencies:
   flutter_lints: ^2.0.0

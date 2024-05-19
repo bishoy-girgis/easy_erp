@@ -3,9 +3,9 @@
     "arLanguage": "Arabic",
     "@language": {
     "description": "The current Language"
-    } , 
+    } ,
     "welcome": "Welcome Mr",
-       
+
     "helloWorld": "Hello World!",
     "@helloWorld": {
     "description": "A programmer greeting"
@@ -23,8 +23,8 @@
     "passwordHint": "Enter your Password",
     "login": "Login",
     "nameHint": "Enter your name",
-    "login_username_required":"The login username is incorrect or does not exist" , 
-    "login_password_required":"The login Password is incorrect or does not exist" , 
+    "login_username_required":"The login username is incorrect or does not exist" ,
+    "login_password_required":"The login Password is incorrect or does not exist" ,
     "email": "Email",
     "emailHint": "Enter your email",
     "dateOfBirth": "Date of Birth",
@@ -71,11 +71,11 @@
     "address_en": "Address in English" ,
     "mobile_number": "Mobile Number" ,
     "group": "Group" ,
-    "please_enter_customer_name": "Please enter customer name", 
-    "please_enter_manager_name": "Please enter manager name", 
-    "please_enter_address": "Please enter address", 
-    "please_enter_fax": "Please enter fax", 
-    "please_enter_mobile_number": "Please enter Mobile Number", 
+    "please_enter_customer_name": "Please enter customer name",
+    "please_enter_manager_name": "Please enter manager name",
+    "please_enter_address": "Please enter address",
+    "please_enter_fax": "Please enter fax",
+    "please_enter_mobile_number": "Please enter Mobile Number",
     "close_shift": "CLOSE SHIFT",
     "about": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "totalItemsInvoice" : "Total",
@@ -99,5 +99,40 @@
     "paid_voucher": "Paid Vouchers",
     "create_paid_voucher": "Create Paid Voucher",
     "payer_type": "Payer Account Type",
-    "without_tax": "Without Tax"
+    "without_tax": "Without Tax",
+    "hostUrl": "Host URL",
+    "hostDesc": "Host URL that connect app with server data",
+    "printModel": "Choose Print Model",
+    "printDesc": "You have selected the Print Model",
+    "companyInfo": "Company Information",
+    "companyLogo": "Company Logo",
+    "branchName": "Branch Name",
+    "branchAddress": "Branch Address",
+    "taxNo": "Tax Number",
+    "submit": "Submit",
+
+    "welcomeEasy": "Welcome to Easy ERP App",
+    "loading": "Loading ... ",
+    "limitMore": "You can't choose more than limit",
+    "limitLess": "You can't choose less than 1 item",
+    "chooseInvoice": "Cant save invoice  please choose your invoice type or Customer to Save",
+    "chooseItem": "Cant save invoice please choose your Items to Save",
+    "checkPayment": "Check your Payment Type",
+    "choosePayer": "Cant save receipt  please choose your Payer to Save",
+    "paidAddVoucherValue": "Can't save Paid  please Add Voucher Value",
+    "payerSelected": "Payer Selected Successfully",
+    "noPayerFound": "No Payers found for the entered Code.",
+    "receiptAddVoucherValue": "Can't save receipt  please Add Voucher Value",
+    "invoiceSelected": "Invoice Selected Successfully",
+    "noInvoiceFound": "No invoice found for the entered Number.",
+    "saveInvoice": "Save Invoice",
+    "savePaid": "Save Paid",
+    "saveReceipt": "Save Receipt",
+    "saveReturn": "Save Return",
+    "yes": "Yes",
+    "no": "No",
+    "removeInvoice": "Are you sure to remove invoice ?",
+    "searchCstName": "Search with Customer name"
+
+
 }

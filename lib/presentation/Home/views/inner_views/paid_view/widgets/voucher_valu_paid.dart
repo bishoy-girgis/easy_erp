@@ -121,7 +121,7 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
                       Row(
                         children: [
                           Checkbox(
-                            checkColor: AppColors.primaryColorBlue,
+                            checkColor: Colors.white,
                             visualDensity: const VisualDensity(
                                 horizontal: -4, vertical: -4),
                             activeColor:
@@ -261,14 +261,14 @@ class _VoucherValuepaidState extends State<VoucherValuepaid> {
           SharedPref.set(key: 'PayerChartName', value: selectedPayer.accname!);
 
           GlobalMethods.buildFlutterToast(
-            message: 'Payer Selected Successfully',
+            message: AppLocalizations.of(context)!.payerSelected,
             state: ToastStates.SUCCESS,
           );
 
           setState(() {});
         } else {
           GlobalMethods.buildFlutterToast(
-            message: 'No Payers found for the entered Code.',
+            message:  AppLocalizations.of(context)!.noPayerFound,
             state: ToastStates.ERROR,
           );
         }

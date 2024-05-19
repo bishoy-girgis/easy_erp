@@ -5,6 +5,7 @@ import 'package:pdf/pdf.dart';
 import '../../../../core/helper/app_colors.dart';
 import '../../../../core/widgets/text_builder.dart';
 import '../../../../data/models/printerModel/printer_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChoosePrintModelSection extends StatefulWidget {
   const ChoosePrintModelSection({
@@ -30,8 +31,8 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
         ),
         child: Column(
           children: [
-            const TextBuilder(
-              "Choose Print Model",
+             TextBuilder(
+              AppLocalizations.of(context)!.printModel,
               isHeader: true,
             ),
             const Divider(),
@@ -50,8 +51,8 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
                 ],
               ),
             ),
-            const TextBuilder(
-              "You have selected the Print Model \n example : POS",
+             TextBuilder(
+              "${AppLocalizations.of(context)!.printDesc} \n ex : POS",
               maxLines: 2,
               fontSize: 12,
               textAlign: TextAlign.center,

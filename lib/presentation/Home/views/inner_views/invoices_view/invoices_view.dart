@@ -57,8 +57,8 @@ class _InvoicesViewState extends State<InvoicesView> {
         child: Column(
           children: [
             CustomTextFormField(
-              labelText: AppLocalizations.of(context)!.search,
-              // hintText: "Search with Customer name",
+              labelText:AppLocalizations.of(context)!.search,
+              hintText: AppLocalizations.of(context)!.search_with_id_code_barcode,
               suffixIcon: Icons.search,
               backgroundOfTextFeild: Colors.white,
               onChange: (v) {

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
 import 'dart:io';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:easy_erp/core/helper/app_constants.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';
@@ -70,8 +71,8 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextBuilder(
-              "Company information",
+             TextBuilder(
+              AppLocalizations.of(context)!.companyInfo,
               isHeader: true,
               fontSize: 15,
             ),
@@ -79,8 +80,8 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const TextBuilder(
-                  "Company logo",
+                 TextBuilder(
+                  AppLocalizations.of(context)!.companyLogo,
                   isHeader: true,
                   fontSize: 12,
                 ),
@@ -105,15 +106,15 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
               ],
             ),
             const Divider(),
-            const TextBuilder(
-              "Branch Name",
+             TextBuilder(
+              AppLocalizations.of(context)!.branchName,
               isHeader: true,
               fontSize: 12,
             ),
             CustomTextFormField(
               controller: branchNameController,
               labelText: branchNameController.text.isEmpty
-                  ? "Branch Name"
+                  ? AppLocalizations.of(context)!.branchName
                   : branchNameController.text,
               focusedBorderColor: Colors.blueGrey,
               onChange: (value) {
@@ -126,15 +127,15 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
               },
             ),
             const Divider(),
-            const TextBuilder(
-              "Branch Address",
+             TextBuilder(
+              AppLocalizations.of(context)!.branchAddress,
               isHeader: true,
               fontSize: 12,
             ),
             CustomTextFormField(
               controller: branchAddressController,
               labelText: branchAddressController.text.isEmpty
-                  ? "Branch Address"
+                  ? AppLocalizations.of(context)!.branchAddress
                   : branchAddressController.text,
               onChange: (value) {
                 branchAddressController.text = value;
@@ -146,16 +147,16 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
               },
             ),
             const Divider(),
-            const TextBuilder(
-              "Tax Number",
+             TextBuilder(
+              AppLocalizations.of(context)!.taxNo,
               isHeader: true,
               fontSize: 12,
             ),
             CustomTextFormField(
               controller: taxNumberController,
               labelText: taxNumberController.text.isEmpty
-                  ? "Tax Number"
-                  : taxNumberController.text,
+                  ? AppLocalizations.of(context)!.taxNo
+                : taxNumberController.text,
               onChange: (value) {
                 taxNumberController.text = value;
                 SharedPref.set(key: "taxNumber", value: value);
@@ -166,15 +167,15 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
               },
             ),
             const Divider(),
-            const TextBuilder(
-              "Notes",
+             TextBuilder(
+              AppLocalizations.of(context)!.notes,
               isHeader: true,
               fontSize: 12,
             ),
             CustomTextFormField(
               controller: notesController,
               labelText:
-                  notesController.text.isEmpty ? "Notes" : notesController.text,
+                  notesController.text.isEmpty ? AppLocalizations.of(context)!.notes : notesController.text,
               maxLines: 3,
               onChange: (value) {
                 notesController.text = value;
@@ -187,8 +188,8 @@ class _CompanyInfoSectionState extends State<CompanyInfoSection> {
             ),
             CustomElevatedButton(
               width: double.infinity,
-              title: const TextBuilder(
-                "Submit",
+              title:  TextBuilder(
+                AppLocalizations.of(context)!.submit,
                 color: AppColors.whiteColor,
               ),
               onPressed: () {

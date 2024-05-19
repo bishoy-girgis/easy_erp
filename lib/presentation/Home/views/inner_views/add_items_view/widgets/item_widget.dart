@@ -145,7 +145,7 @@ class AddItemWidget extends StatelessWidget {
                           quantityController = limitController;
                           GlobalMethods.buildFlutterToast(
                               message:
-                                  "You can't choose more than limit $limitController",
+                                  "${AppLocalizations.of(context)!.limitMore} $limitController",
                               state: ToastStates.WARNING);
                         }
                         getIt.get<AddItemCubit>().changeQuantity();
@@ -177,7 +177,7 @@ class AddItemWidget extends StatelessWidget {
                             GlobalMethods.buildFlutterToast(
                                 gravity: ToastGravity.CENTER,
                                 message:
-                                    "You can't add more than limit $limitController",
+                                    "${AppLocalizations.of(context)!.limitMore} $limitController",
                                 state: ToastStates.WARNING);
                           } else {
                             quantityController = int.parse(value);
@@ -200,7 +200,7 @@ class AddItemWidget extends StatelessWidget {
                           itemModel.quantity = quantityController;
                         } else {
                           GlobalMethods.buildFlutterToast(
-                              message: "You can't choose less than 1 item",
+                              message: AppLocalizations.of(context)!.limitLess,
                               state: ToastStates.WARNING);
                         }
                         Controller.text = quantityController.toString();

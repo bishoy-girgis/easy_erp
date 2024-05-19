@@ -63,23 +63,23 @@ class CreateReturnView extends StatelessWidget {
     ));
   }
 
-  bool checkCustomer() {
+  bool checkCustomer(context) {
     if ((SharedPref.get(key: 'custID') == null ||
             SharedPref.get(key: 'custID') == 0)
         // && (SharedPref.get(key: 'invoiceTypeID')) == 2
         ) {
       GlobalMethods.buildFlutterToast(
-          message: 'Cant save invoice  please choose your Customer to Save',
+          message:  AppLocalizations.of(context)!.chooseInvoice,
           state: ToastStates.ERROR);
       return false;
     }
     return true;
   }
 
-  bool checkItems() {
+  bool checkItems(context) {
     if (getIt.get<AddItemCubit>().addedItems.isEmpty) {
       GlobalMethods.buildFlutterToast(
-          message: 'Cant save invoice please choose your Items to Save',
+          message: AppLocalizations.of(context)!.chooseItem,
           state: ToastStates.ERROR);
       return false;
     }
@@ -87,11 +87,11 @@ class CreateReturnView extends StatelessWidget {
     return true;
   }
 
-  bool checkPaymentTypes() {
+  bool checkPaymentTypes(context) {
     if (SharedPref.get(key: 'paymentTypeID') == null ||
         SharedPref.get(key: 'paymentTypeID') == 0) {
       GlobalMethods.buildFlutterToast(
-        message: 'Check your Payment Type',
+        message:  AppLocalizations.of(context)!.checkPayment,
         state: ToastStates.ERROR,
       );
       return false;
@@ -160,12 +160,12 @@ class CreateReturnView extends StatelessWidget {
           builder: (context, state) {
             return IconButton(
               onPressed: () async {
-                checkCustomer() && checkItems() && checkPaymentTypes()
+                checkCustomer(context) && checkItems(context) && checkPaymentTypes(context)
                     ? GlobalMethods.showAlertAddressDialog(
                         context,
-                        title: "Save Return ?",
-                        titleButton1: "Save",
-                        titleButton2: "No",
+                        title: AppLocalizations.of(context)!.saveReturn,
+                        titleButton1: AppLocalizations.of(context)!.yes,
+                        titleButton2: AppLocalizations.of(context)!.no,
                         onPressedButton1: () async {
                           await BlocProvider.of<ReturnCubit>(context)
                               .saveReturn(

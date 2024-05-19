@@ -11,6 +11,7 @@ import 'package:easy_erp/presentation/Settings/views/widgets/choose_print_model_
 import 'package:easy_erp/presentation/Settings/views/widgets/company_info_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'widgets/host_url_section.dart';
 
@@ -21,8 +22,8 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const TextBuilder(
-          "Settings",
+        title:  TextBuilder(
+          AppLocalizations.of(context)!.settings,
           color: Colors.white,
           isHeader: true,
         ),
