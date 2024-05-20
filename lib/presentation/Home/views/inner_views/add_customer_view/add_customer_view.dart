@@ -12,27 +12,33 @@ import '../../../../../data/services/local/shared_pref.dart';
 import '../../../../cubits/customer_cubit/customer_cubit.dart';
 import 'widgets/select_group_section.dart';
 
-class AddCustomerView extends StatelessWidget {
+class AddCustomerView extends StatefulWidget {
   AddCustomerView({super.key});
+
+  @override
+  State<AddCustomerView> createState() => _AddCustomerViewState();
+}
+
+class _AddCustomerViewState extends State<AddCustomerView> {
   TextEditingController custNameArController = TextEditingController();
+
   // final TextEditingController? _custNameEnController = TextEditingController();
-  // final TextEditingController? _faxController = TextEditingController();
-  // final TextEditingController? _mobileNumberController =
-  //     TextEditingController();
-  // final TextEditingController? _managerNameArController =
-  //     TextEditingController();
-  // final TextEditingController? _managerNameEnController =
-  //     TextEditingController();
-  // final TextEditingController? _addressEnController = TextEditingController();
-  //nal TextEditingController? _addressArController = TextEditingController();
   String? custNameEnController;
+
   String? faxController;
+
   String? mobileNumberController;
+
   String? managerNameArController;
+
   String? managerNameEnController;
+
   String? addressEnController;
+
   String? addressArController;
+
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
