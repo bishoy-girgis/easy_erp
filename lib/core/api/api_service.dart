@@ -7,7 +7,7 @@ import '../../data/services/local/shared_pref.dart';
 
 class ApiService {
    String get _baseUrl {
-    return SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
+    return SharedPref.get(key: "baseUrl") ?? "http://sun.dyndns-office.com:600";
   }
   Dio dio;
   ApiService(this.dio);

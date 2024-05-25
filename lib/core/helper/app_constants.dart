@@ -10,7 +10,10 @@ class AppConstants {
   static int vatType = SharedPref.get(key: "VATType");
 
   static String baseUrl =
-      SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
+      SharedPref.get(key: "baseUrl") ?? "http://sun.dyndns-office.com:600";
+  //"http://sun.dyndns-office.com:600"
+  //"http://95.216.193.252:600"
+
 
   static String branchName = SharedPref.get(key: "branchName") ?? "";
   static String branchAddress = SharedPref.get(key: "branchAddress") ?? "";
@@ -60,12 +63,12 @@ class AppConstants {
     branchID = SharedPref.get(key: "branchID");
     ccid = SharedPref.get(key: "ccid");
     vatType = SharedPref.get(key: "VATType");
-    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
+    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://sun.dyndns-office.com:600";
     accessToken = SharedPref.get(key: "accessToken");
   }
 
   static void updateSettingValues() {
-    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
+    baseUrl = SharedPref.get(key: "baseUrl") ?? "http://sun.dyndns-office.com:600";
     branchName = SharedPref.get(key: "branchName") ?? "";
     branchAddress = SharedPref.get(key: "branchAddress") ?? "";
     taxNumber = SharedPref.get(key: "taxNumber") ?? "";
