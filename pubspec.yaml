@@ -24,6 +24,8 @@ environment:
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 dependencies:
+  package_info_plus: ^4.0.2
+
   bloc: ^8.1.2
   build_runner: ^2.4.8
   cupertino_icons: ^1.0.2
