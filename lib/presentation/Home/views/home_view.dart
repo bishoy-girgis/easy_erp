@@ -16,18 +16,20 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     var l = AppLocalizations.of(context)!;
 
-    return UpgradeAlert(
-      onUpdate: () => true,
-      upgrader: Upgrader(
-        debugLogging: true,
-        debugDisplayAlways: true,
-        durationUntilAlertAgain: const Duration(days: 1),
-      ),
-      dialogStyle: UpgradeDialogStyle.cupertino,
-      showIgnore: false,
-      showLater: false,
-      showReleaseNotes: false,
-      child: Scaffold(
+    return
+      // UpgradeAlert(
+      // onUpdate: () => true,
+      // upgrader: Upgrader(
+      //   debugLogging: true,
+      //   debugDisplayAlways: true,
+      //   durationUntilAlertAgain: const Duration(days: 1),
+      // ),
+      // dialogStyle: UpgradeDialogStyle.cupertino,
+      // showIgnore: false,
+      // showLater: false,
+      // showReleaseNotes: false,
+      // child:
+      Scaffold(
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
@@ -61,7 +63,7 @@ class HomeView extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      // ),
     );
   }
 }
