@@ -15,6 +15,7 @@ class AppConstants {
   //"http://95.216.193.252:600"
 
 
+
   static String branchName = SharedPref.get(key: "branchName") ?? "";
   static String branchAddress = SharedPref.get(key: "branchAddress") ?? "";
   static String taxNumber = SharedPref.get(key: "taxNumber") ?? "";
