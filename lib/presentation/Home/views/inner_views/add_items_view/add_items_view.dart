@@ -130,8 +130,8 @@ class _AddItemsViewState extends State<AddItemsView> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 10.w,
-                  mainAxisSpacing: 10.h,
-                  childAspectRatio: 0.47.r,
+                  mainAxisSpacing: 12.h,
+                  childAspectRatio: 0.43.r,
                 ),
                 itemCount: searchController.text.isEmpty
                     ? items.length

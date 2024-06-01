@@ -103,20 +103,17 @@ class CreateInvoiceView extends StatelessWidget {
 
       return true;
     }
-
-// flutte
-// flutter bystanders
-// flutter bystanders
     bool checkPaymentTypes() {
-      if (SharedPref.get(key: 'paymentTypeID') == null ||
-          SharedPref.get(key: 'paymentTypeID') == 0) {
-        GlobalMethods.buildFlutterToast(
-          message: AppLocalizations.of(context)!.checkPayment,
-          state: ToastStates.ERROR,
-        );
-        return false;
+      if(SharedPref.get(key: 'invoiceTypeID') == 0) {
+        if (SharedPref.get(key: 'paymentTypeID') == null ||
+            SharedPref.get(key: 'paymentTypeID') == 0) {
+          GlobalMethods.buildFlutterToast(
+            message: AppLocalizations.of(context)!.checkPayment,
+            state: ToastStates.ERROR,
+          );
+          return false;
+        }
       }
-
       return true;
     }
 

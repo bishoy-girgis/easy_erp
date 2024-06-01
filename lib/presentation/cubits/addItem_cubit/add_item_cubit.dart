@@ -54,15 +54,15 @@ class AddItemCubit extends Cubit<AddItemState> {
   void checkAndMergeDuplicates() {
     emit(AddItemInitial());
 
-    Map<int, ItemModel> itemMap = {};
-
+    Map<String, ItemModel> itemMap = {}; // Key is a combination of item ID and unit ID
 
     for (ItemModel item in addedItems) {
-      if (itemMap.containsKey(item.itmid)) {
-        ItemModel? existingItem = itemMap[item.itmid];
-        existingItem!.quantity += item.quantity;
+      String key = '${item.itmid}-${item.unitid}'; // Combine item ID and unit ID
+      if (itemMap.containsKey(key)) {
+        ItemModel existingItem = itemMap[key]!;
+        existingItem.quantity += item.quantity;
       } else {
-        itemMap[item.itmid!] = item;
+        itemMap[key] = item;
       }
     }
 
@@ -71,6 +71,7 @@ class AddItemCubit extends Cubit<AddItemState> {
 
     emit(AddItemAddedSuccess(addedItems));
   }
+
 
   void checkAndMergeDuplicatesList(List<ItemModel> newItems) {
     emit(AddItemInitial());

@@ -10,7 +10,7 @@ class AppConstants {
   static int vatType = SharedPref.get(key: "VATType");
 
   static String baseUrl =
-      SharedPref.get(key: "baseUrl") ?? "http://95.216.193.252:600";
+      SharedPref.get(key: "baseUrl") ?? "http://sun.dyndns-office.com:600";
   //"http://sun.dyndns-office.com:600"
   //"http://95.216.193.252:600"
 

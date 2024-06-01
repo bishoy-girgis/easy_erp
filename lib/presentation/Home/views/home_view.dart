@@ -41,6 +41,7 @@ class _HomeViewState extends State<HomeView> {
         debugDisplayAlways: true,
         durationUntilAlertAgain: const Duration(days: 1),
         minAppVersion: version,
+        debugDisplayOnce: true,
       ),
       dialogStyle: UpgradeDialogStyle.material,
       showIgnore: false,
