@@ -104,7 +104,9 @@ class CreateInvoiceView extends StatelessWidget {
       return true;
     }
     bool checkPaymentTypes() {
-      if(SharedPref.get(key: 'invoiceTypeID') == 0) {
+      if (SharedPref.get(key: 'invoiceTypeID') == 2) {
+        return true;
+      } else {
         if (SharedPref.get(key: 'paymentTypeID') == null ||
             SharedPref.get(key: 'paymentTypeID') == 0) {
           GlobalMethods.buildFlutterToast(
@@ -116,6 +118,7 @@ class CreateInvoiceView extends StatelessWidget {
       }
       return true;
     }
+
 
     return AppBar(
       leading: IconButton(
