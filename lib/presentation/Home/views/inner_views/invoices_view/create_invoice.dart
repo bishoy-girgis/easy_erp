@@ -172,7 +172,6 @@ class CreateInvoiceView extends StatelessWidget {
                   invoiceType: "فاتورة ضريبية مبسطة",
                   items: getIt.get<AddItemCubit>().addedItems);
             } else if (state is InvoiceNotSave) {
-              GlobalMethods.navigatePOP(context);
               GlobalMethods.buildFlutterToast(
                   message: state.error, state: ToastStates.ERROR);
               debugPrint(state.error);

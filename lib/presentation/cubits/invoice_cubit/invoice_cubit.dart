@@ -57,8 +57,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
         emit(InvoiceNotSave(l.errorMessage));
       }, (r) {
         print(r);
-        SendInvoiceModel sendInvoiceModel =
-            r; // This line should be within the null check
+        SendInvoiceModel sendInvoiceModel = r;
         print(sendInvoiceModel);
         debugPrint('DATACUBI(TTTT)$r');
         emit(InvoiceSavedSuccess(r));
