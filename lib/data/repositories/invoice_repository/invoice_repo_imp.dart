@@ -33,7 +33,6 @@ class InvoiceRepoImplementation extends InvoiceRepo {
     debugPrint("LIST OF ITEMS  === > ${items.map((e) => e.toJson()).toList()} \n");
     List<Map<String, dynamic>> itemsJson =
         items.map((item) => item.toJson()).toList();
-
     try {
       Map<String, dynamic> data = await apiService.postBody(
         data: itemsJson,
@@ -57,16 +56,18 @@ class InvoiceRepoImplementation extends InvoiceRepo {
       SendInvoiceModel sendInvoiceModel = SendInvoiceModel.fromJson(data);
       return right(sendInvoiceModel);
     } catch (e) {
-      debugPrint(e.toString());
-      if (e is DioException) {
-        return left(ServerError.fromDioError(e));
-      } else {
-        debugPrint(e.toString());
+      DioException error = e as DioException;
+      debugPrint("ERROR :::  ${error.response}");
+
+      if (error.response?.statusCode == 401) {
         return left(
           ServerError(
-            e.toString(),
+            error.response?.data,
           ),
         );
+      } else {
+        return left(ServerError(error.response?.data,
+        ));
       }
     }
   }
