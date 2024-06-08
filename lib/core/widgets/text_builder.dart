@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../helper/app_colors.dart';
+
 class TextBuilder extends StatelessWidget {
   final String text;
   final bool isHeader;
@@ -10,6 +12,7 @@ class TextBuilder extends StatelessWidget {
   final bool isOverflow;
   final double? fontSize;
   final TextAlign? textAlign;
+
   const TextBuilder(
     this.text, {
     super.key,
@@ -36,6 +39,56 @@ class TextBuilder extends StatelessWidget {
         fontSize: isCanceled ? 15.sp : fontSize?.sp,
         decoration:
             isCanceled ? TextDecoration.lineThrough : TextDecoration.none,
+      ),
+    );
+  }
+}
+
+class CustomText extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+  final double iconSize;
+  final String text;
+  final double contentSize;
+
+  const CustomText({
+    Key? key,
+    required this.icon,
+    this.iconColor = AppColors.primaryColorBlue,
+    this.iconSize = 24,
+    required this.text,
+    this.contentSize = 15,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: const Color.fromRGBO(227, 227, 227, 1),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              text,
+              textAlign: TextAlign.center, // Center the text content
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: "Cairo",
+                fontSize: contentSize.sp,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8), // Adjust the spacing between icon and text
+          Icon(
+            icon,
+            color: iconColor,
+            size: iconSize,
+          ),
+        ],
       ),
     );
   }

@@ -18,7 +18,7 @@ class ChoosePrintModelSection extends StatefulWidget {
 }
 
 class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
-  int selectedButtonIndex = -1;
+  int selectedButtonIndex = SharedPref.get(key: 'printerFormat') ?? 0;
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +71,7 @@ class _ChoosePrintModelSectionState extends State<ChoosePrintModelSection> {
             selectedButtonIndex = printerModel.id;
             SharedPref.set(key: 'printerFormat', value: selectedButtonIndex);
           });
-          debugPrint(SharedPref.get(key: 'printerFormat'));
-          debugPrint("ppppppp$selectedButtonIndex");
+          debugPrint("print type $selectedButtonIndex");
         },
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.resolveWith<Color>(

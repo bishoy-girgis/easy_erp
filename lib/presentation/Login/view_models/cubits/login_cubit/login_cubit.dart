@@ -25,10 +25,12 @@ class LoginCubit extends Cubit<LoginState> {
       SharedPref.set(key: 'VATType', value: userModel.vatType);
       SharedPref.set(key: 'userName', value: userModel.userName!);
       SharedPref.set(key: 'whId', value: userModel.whId);
+      SharedPref.set(key: 'changePrice', value: userModel.changePrice);
       SharedPref.set(key: 'vat', value: userModel.vat);
       SharedPref.set(key: 'ccid', value: userModel.ccId);
       SharedPref.set(key: 'branchID', value: userModel.branchId);
       AppConstants.updateValues();
+      debugPrint("ChANGE PRICE : ${SharedPref.get(key: 'changePrice')}");
 
       emit(LoginSuccessState(userModel: r));
 

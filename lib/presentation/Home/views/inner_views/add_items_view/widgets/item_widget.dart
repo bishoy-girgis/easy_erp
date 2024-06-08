@@ -1,5 +1,6 @@
 import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
+import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,7 @@ import '../../../../../cubits/addItem_cubit/add_item_cubit.dart';
 
 class AddItemWidget extends StatelessWidget {
   final ItemModel itemModel;
+
   const AddItemWidget({
     Key? key,
     required this.itemModel,
@@ -22,6 +24,7 @@ class AddItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool changePrice = SharedPref.get(key: 'changePrice') ?? true;
     var priceController =
         TextEditingController(text: itemModel.salesprice.toString());
     // var quantityController = TextEditingController(text: 1.toString());
@@ -38,7 +41,7 @@ class AddItemWidget extends StatelessWidget {
     //limitController = int.parse(itemModel.quantity.toInt().toString());
     // }
     // ignore: non_constant_identifier_names
-    var Controller = TextEditingController(text:itemModel.quantity.toString());
+    var Controller = TextEditingController(text: itemModel.quantity.toString());
 
     return BlocBuilder<AddItemCubit, AddItemState>(
       builder: (context, state) {
@@ -100,31 +103,37 @@ class AddItemWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Flexible(
-                  child: CustomTextFormField(
-                    suffixIcon: FontAwesomeIcons.moneyBillWave,
-                    suffixIconSize: 22.sp,
-                    labelText: priceController.text,
-                    keyboardType: TextInputType.number,
-                    // backgroundOfTextFeild: Colors.blueGrey,
-                    centerContent: true,
-                    contentSize: 18,
-                    controller: priceController,
-                    isContentBold: true,
-                    onTap: () {
-                      priceController.text = "";
-                    },
-                    onChange: (value) {
-                      priceController.text = value;
-                      String price = priceController.text;
-                      if (value.isEmpty) {
-                        price = "0.0";
-                      }
-                      itemModel.salesprice = double.parse(price);
-                      getIt.get<AddItemCubit>().changeQuantity();
-                    },
-                  ),
-                ),
+                changePrice == true
+                    ? Flexible(
+                        child: CustomTextFormField(
+                          suffixIcon: FontAwesomeIcons.moneyBillWave,
+                          suffixIconSize: 22.sp,
+                          labelText: priceController.text,
+                          keyboardType: TextInputType.number,
+                          // backgroundOfTextFeild: Colors.blueGrey,
+                          centerContent: true,
+                          contentSize: 18,
+                          controller: priceController,
+                          isContentBold: true,
+                          onTap: () {
+                            priceController.text = "";
+                          },
+                          onChange: (value) {
+                            priceController.text = value;
+                            String price = priceController.text;
+                            if (value.isEmpty) {
+                              price = "0.0";
+                            }
+                            itemModel.salesprice = double.parse(price);
+                            getIt.get<AddItemCubit>().changeQuantity();
+                          },
+                        ),
+                      )
+                    : CustomText(
+                        icon: FontAwesomeIcons.moneyBillWave,
+                        iconSize: 22.sp,
+                        text: itemModel.salesprice.toString(),
+                      ),
                 TextBuilder(
                   AppLocalizations.of(context)!.quantity,
                   isHeader: true,

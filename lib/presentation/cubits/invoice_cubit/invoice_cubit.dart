@@ -95,17 +95,17 @@ class InvoiceCubit extends Cubit<InvoiceState> {
       },
       (r) {
         PrintInvoiceModel printInvoiceModel = r;
-        debugPrint('❤️🐸❤️🐸❤️❤️${printInvoiceModel.invoicedtls.toString()}');
+        debugPrint('❤️🐸❤️🐸❤️❤️${printInvoiceModel.invoicehead.toString()}');
         debugPrint('❤️🐸❤️🐸❤️❤️$invNo');
         emit(GetInvoiceDataSuccess(r));
         DateTime dateTime =
-            DateTime.parse(r.invoicehead?[0].invdate ?? "1/1/2000");
+            DateTime.parse(r.invoicehead?[0].invdate ?? "2024-03-03T12:00:00");
         String formattedDate =
             "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
         String? formattedTime;
-        if (r.invoicehead![0].invtime == null) {
+        if (r.invoicehead?[0].invtime == null) {
           DateTime parsedTime = DateFormat('HH:mm')
-              .parse("${r.invoicehead![0].invtime ?? "00:00:00"} ");
+              .parse("${r.invoicehead?[0].invtime ?? "00:00:00"} ");
           formattedTime = DateFormat('h:mm a').format(parsedTime);
         }
         generateAndPrintArabicPdf(context,

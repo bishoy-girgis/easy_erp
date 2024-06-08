@@ -115,7 +115,7 @@ class InvoiceRepoImplementation extends InvoiceRepo {
         },
       );
       PrintInvoiceModel printInvoiceModel = PrintInvoiceModel.fromJson(data);
-      debugPrint(printInvoiceModel.toString());
+      debugPrint("Printt ${printInvoiceModel.toString()}");
       return right(printInvoiceModel);
     } catch (e) {
       if (e is DioException) {
