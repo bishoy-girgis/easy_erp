@@ -88,8 +88,8 @@ Future<void> generateAndPrintArabicPdf(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                      width: 50.w,
-                      height: 50.h,
+                      width: 45.w,
+                      height: 45.h,
                       child: Image(MemoryImage(imageData!))),
                   Container()
                 ],
@@ -126,7 +126,7 @@ Future<void> generateAndPrintArabicPdf(
                         maxLines: 2,
                         overflow: TextOverflow.visible,
                         style: TextStyle(
-                          fontSize: 11.sp,
+                          fontSize: 10.sp,
                         ),
                       ),
                     ),
@@ -138,11 +138,11 @@ Future<void> generateAndPrintArabicPdf(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Row(children: [
-                    buildPDFText(invoTime),
-                    buildPDFText('الوقت :'),
+                    buildPDFText(invoTime ,fontSize: 8,),
+                    buildPDFText('  الوقت :',fontSize: 8,),
                   ]),
-                  buildPDFText(invoDate),
-                  buildPDFText('التاريخ :'),
+                  buildPDFText(invoDate,fontSize: 8,),
+                  buildPDFText('التاريخ :',fontSize: 8,),
                 ],
               ),
               SizedBox(height: 8.h),
@@ -222,8 +222,8 @@ Future<void> generateAndPrintArabicPdf(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   buildPDFText(
-                    "${SpellingNumber(lang: 'ar').convert(780)} ريال سعودى\n${SpellingNumber(lang: 'ar').convert(22)} هلله فقط لا غير",
-                    fontSize: 9,
+                    "${SpellingNumber(lang: 'ar').convert(finalValue.floor())} ريال سعودى\n${SpellingNumber(lang: 'ar').convert(((finalValue - finalValue.floor()) * 100).round())} هلله فقط لا غير",
+                    fontSize: 8,
                   ),
                 ],
               ),
