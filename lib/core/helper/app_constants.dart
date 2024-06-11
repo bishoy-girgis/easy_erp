@@ -16,9 +16,9 @@ class AppConstants {
 
 
 
-  static String branchName = SharedPref.get(key: "branchName") ?? "";
+  static String branchName = SharedPref.get(key: "branchName") ?? "شركه شمس القهوه";
   static String branchAddress = SharedPref.get(key: "branchAddress") ?? "";
-  static String taxNumber = SharedPref.get(key: "taxNumber") ?? "";
+  static String taxNumber = SharedPref.get(key: "taxNumber") ?? "22569874310";
   static String notes = SharedPref.get(key: "notes") ?? "";
 
   ///Authorization
@@ -72,9 +72,9 @@ class AppConstants {
 
   static void updateSettingValues() {
     baseUrl = SharedPref.get(key: "baseUrl") ?? "http://sun.dyndns-office.com:600";
-    branchName = SharedPref.get(key: "branchName") ?? "";
+    branchName = SharedPref.get(key: "branchName") ?? "شركه شمس القهوه";
     branchAddress = SharedPref.get(key: "branchAddress") ?? "";
-    taxNumber = SharedPref.get(key: "taxNumber") ?? "";
+    taxNumber = SharedPref.get(key: "taxNumber") ?? "22569874310";
     notes = SharedPref.get(key: "notes") ?? "";
   }
 }
