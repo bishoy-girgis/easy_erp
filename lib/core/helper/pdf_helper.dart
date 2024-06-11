@@ -177,7 +177,7 @@ Future<void> generateAndPrintArabicPdf(
                             child: Container(
                               width: 50.w,
                               child: Text(
-                                item[4].toString(), // الصنف
+                                item[4].toString(),
                                 style: TextStyle(fontSize: 8.sp),
                                 maxLines: 3,
                                 overflow: TextOverflow.visible,
@@ -385,6 +385,9 @@ Future<void> generateAndPrintArabicPdf(
                       buildPDFText(finalValue.toStringAsFixed(2)),
                       buildPDFText("الإجمالي شامل الضريبة : "),
                     ]),
+                buildPDFText(
+                  "${SpellingNumber(lang: 'ar').convert(780)} ريال سعودى\n${SpellingNumber(lang: 'ar').convert(22)} هلله فقط لا غير",
+                ),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   buildPDFText(
                     AppConstants.notes,
