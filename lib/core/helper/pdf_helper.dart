@@ -63,8 +63,7 @@ Future<void> generateAndPrintArabicPdf(
     imageData = (image).buffer.asUint8List();
   }
 
-  int printType = SharedPref.get(key: 'printerFormat') ??
-      0; // 0 = A4 print \\\\ 1,2 = RECEIPT POS print
+  int printType = SharedPref.get(key: 'printerFormat') ?? 0;
   var itemsList = getItems();
   final Document pdf = Document();
   var arabicFont = Font.ttf(
