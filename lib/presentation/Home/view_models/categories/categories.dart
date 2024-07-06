@@ -24,7 +24,7 @@ class CategoriesViewModel {
             context: context,
             router: AppRouters.kItems,
           );
-          await GetItemCubit.get(context).getItems();
+          // await GetItemCubit.get(context).getItems();
         },
       ),
       CategoryWidget(
@@ -33,8 +33,8 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kCustomers);
-            await CustomerCubit.get(context).getCustomers();
-            await CustomerCubit.get(context).getCustomerGroups();
+            // await CustomerCubit.get(context).getCustomers();
+            // await CustomerCubit.get(context).getCustomerGroups();
           }),
       CategoryWidget(
           icon: Icons.attach_money,
@@ -44,7 +44,7 @@ class CategoriesViewModel {
               context: context,
               router: AppRouters.kInvoices,
             );
-             await InvoiceCubit.get(context).getInvoices();
+             // await InvoiceCubit.get(context).getInvoices();
           }),
       CategoryWidget(
           icon: Icons.keyboard_return_rounded,
@@ -52,7 +52,7 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kReturns);
-            await ReturnCubit.get(context).getReturns();
+            // await ReturnCubit.get(context).getReturns();
           }),
       CategoryWidget(
           icon: Icons.receipt_long,
@@ -60,7 +60,7 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kReciept);
-            await Recieptcubit.get(context).getReciepts();
+            // await Recieptcubit.get(context).getReciepts();
           }),
       CategoryWidget(
           icon: Icons.payments_rounded,
@@ -68,7 +68,7 @@ class CategoriesViewModel {
           onTap: () async {
             GlobalMethods.goRouterNavigateTO(
                 context: context, router: AppRouters.kPaid);
-            await PaidCubit.get(context).getPaids();
+            // await PaidCubit.get(context).getPaids();
           }),
     ];
   }
