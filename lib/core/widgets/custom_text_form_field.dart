@@ -1,4 +1,5 @@
 import 'package:easy_erp/core/helper/app_colors.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -111,6 +112,7 @@ class CustomTextFormField extends StatelessWidget {
           label: TextBuilder(
             labelText,
             isHeader: isLabelBold,
+            fontSize: GlobalMethods.isLandscape(context) ? 12 : 14,
           ),
           hintText: hintText,
           prefixIcon: prefixIcon == null

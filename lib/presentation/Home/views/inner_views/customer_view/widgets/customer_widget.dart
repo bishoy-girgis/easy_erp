@@ -71,7 +71,7 @@ class CustomerWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontFamily: 'Cairo',
-                    fontSize: 15.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -93,7 +93,7 @@ class CustomerWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontFamily: 'Cairo',
-                    fontSize: 14.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -115,7 +115,7 @@ class CustomerWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontFamily: 'Cairo',
-                    fontSize: 14.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

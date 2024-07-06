@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/helper/app_images.dart';
+import '../../../../../../core/helper/global_methods.dart';
 import '../../../../../../core/helper/utils.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
@@ -32,19 +33,19 @@ class ItemWidget extends StatelessWidget {
           ]),
       child: Row(children: [
         Expanded(
-          flex: 3,
+          flex:  3,
           child: Card(
             color: AppColors.whiteColor,
             child: Image.asset(
               AppImages.logo,
-              width: size.width * .25,
-              height: size.width * .25,
+              width: size.width * .2,
+              height: size.width * .15,
             ),
           ),
         ),
         const GapW(w: 2),
         Expanded(
-          flex: 4,
+          flex: GlobalMethods.isLandscape(context) ? 5 : 4,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +53,6 @@ class ItemWidget extends StatelessWidget {
               TextBuilder(
                 item.itmname ?? item.itmename ?? "none",
                 color: AppColors.whiteColor,
-                fontSize: 17,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -60,7 +60,6 @@ class ItemWidget extends StatelessWidget {
                   TextBuilder(
                     item.itmcode ?? "00",
                     color: AppColors.whiteColor,
-                    fontSize: 14,
                   ),
                   const GapW(w: 1),
                   const Icon(

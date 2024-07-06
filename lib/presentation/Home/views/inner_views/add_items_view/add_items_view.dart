@@ -127,7 +127,12 @@ class _AddItemsViewState extends State<AddItemsView> {
               ),
               child: GridView.builder(
                 padding: const EdgeInsets.all(10),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate:  GlobalMethods.isLandscape(context) ?  SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10.w,
+                  mainAxisSpacing: 12.h,
+                  childAspectRatio: 1.24.r,
+                )  : SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 10.w,
                   mainAxisSpacing: 12.h,

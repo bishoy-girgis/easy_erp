@@ -22,7 +22,7 @@ class CategoryWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: AppColors.whiteColor,
@@ -34,7 +34,7 @@ class CategoryWidget extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    size: 32.spMax,
+                    size: 30.spMax,
                     color: Colors.blueGrey,
                   ),
                   const Spacer(),

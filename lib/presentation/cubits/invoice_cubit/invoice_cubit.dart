@@ -69,7 +69,6 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   }
 
 
-
   List<InvoiceModel> invoices = [];
   getInvoices() async {
     emit(GetInvoiceLoading());
