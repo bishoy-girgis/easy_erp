@@ -1,4 +1,5 @@
 import 'package:easy_erp/core/helper/app_constants.dart';
+import 'package:easy_erp/core/helper/global_methods.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,12 +62,19 @@ class _HomeViewState extends State<HomeView> {
                   itemBuilder: (context, index) {
                     return CategoriesViewModel.getCategories(context)[index];
                   },
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 14.w,
-                    childAspectRatio: 1.34.r,
-                    mainAxisSpacing: 22.h,
-                  ),
+                  gridDelegate: GlobalMethods.isLandscape(context)
+                      ? SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 18.w,
+                          childAspectRatio: 2.3.r,
+                          mainAxisSpacing: 22.h,
+                        )
+                      : SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 14.w,
+                          childAspectRatio: 1.34.r,
+                          mainAxisSpacing: 22.h,
+                        ),
                 ),
                 // const SliverToBoxAdapter(child: GapH(h: 3)),
                 // SliverToBoxAdapter(

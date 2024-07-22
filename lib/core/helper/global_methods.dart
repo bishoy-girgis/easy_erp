@@ -59,6 +59,12 @@ class GlobalMethods {
     );
   }
 
+ static bool isLandscape(BuildContext context) {
+    Orientation currentOrientation = MediaQuery.of(context).orientation;
+    return currentOrientation == Orientation.landscape;
+  }
+
+
   static Future<bool?> buildFlutterToast({
     required String message,
     required ToastStates state,

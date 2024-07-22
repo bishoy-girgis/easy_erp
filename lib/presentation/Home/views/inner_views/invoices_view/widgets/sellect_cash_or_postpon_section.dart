@@ -41,7 +41,7 @@ class _SellectCashOrCreditSectionState
     ];
     return Center(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 14.w,vertical: 5.h),
         width: double.infinity,
         child: DropdownButton(
           hint: TextBuilder(
@@ -55,7 +55,7 @@ class _SellectCashOrCreditSectionState
             return DropdownMenuItem(
               alignment: Alignment.centerRight,
               value: items,
-              child: TextBuilder(items,fontSize: 13),
+              child: TextBuilder(items,fontSize: 11),
             );
           }).toList(),
         ),

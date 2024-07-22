@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helper/app_colors.dart';
 import 'app_name_and_menu_button_section.dart';
@@ -22,10 +23,11 @@ class _HomeViewHeaderCardState extends State<HomeViewHeaderCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding:  EdgeInsets.all(10.sp),
+      margin:  EdgeInsets.all(10.sp),
       width: double.infinity,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(28),
           color: AppColors.whiteColor,
           boxShadow: const [
             BoxShadow(

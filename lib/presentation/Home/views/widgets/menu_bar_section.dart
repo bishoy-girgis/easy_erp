@@ -17,7 +17,6 @@ class MenuBarSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      // opacity: isMenuOpen ? 1.0 : 0.0,
       width: isMenuOpen ? 55.w : 0,
 
       duration: const Duration(milliseconds: 200),
@@ -29,35 +28,35 @@ class MenuBarSection extends StatelessWidget {
         ),
         child: isMenuOpen
             ? Column(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      GlobalMethods.goRouterNavigateTOAndReplacement(
-                        context: context,
-                        router: AppRouters.kSettings,
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.settings,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      SharedPref.remove(
-                        key: 'userName',
-                      );
-                      SharedPref.remove(key: "accessToken");
-                      navigatorKey.currentState!
-                          .pushNamedAndRemoveUntil(AppRouters.kLogin, (route) => false);
-                    },
-                    icon: const Icon(
-                      Icons.logout,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ],
-              )
+          children: [
+            IconButton(
+              onPressed: () {
+                GlobalMethods.goRouterNavigateTOAndReplacement(
+                  context: context,
+                  router:AppRouters.kSettings,
+                );
+              },
+              icon: const Icon(
+                Icons.settings,
+                color: AppColors.whiteColor,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                SharedPref.remove(
+                  key: 'userName',
+                );
+                SharedPref.remove(key: "accessToken");
+                navigatorKey.currentState!
+                    .pushNamedAndRemoveUntil(AppRouters.kLogin, (route) => false);
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: AppColors.whiteColor,
+              ),
+            ),
+          ],
+        )
             : null,
       ),
     );

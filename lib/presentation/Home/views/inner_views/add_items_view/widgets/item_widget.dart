@@ -87,7 +87,6 @@ class AddItemWidget extends StatelessWidget {
                       : "",
                   isHeader: true,
                   textAlign: TextAlign.center,
-                  fontSize: 17,
                   maxLines: 2,
                 ),
                 Row(
@@ -95,11 +94,9 @@ class AddItemWidget extends StatelessWidget {
                   children: [
                     TextBuilder(
                       itemModel.itmcode.toString(),
-                      fontSize: 14,
                     ),
                     TextBuilder(
                       itemModel.unitname ?? "",
-                      fontSize: 14,
                     ),
                   ],
                 ),
@@ -107,12 +104,11 @@ class AddItemWidget extends StatelessWidget {
                     ? Flexible(
                         child: CustomTextFormField(
                           suffixIcon: FontAwesomeIcons.moneyBillWave,
-                          suffixIconSize: 22.sp,
+                          suffixIconSize: 14.sp,
                           labelText: priceController.text,
                           keyboardType: TextInputType.number,
-                          // backgroundOfTextFeild: Colors.blueGrey,
                           centerContent: true,
-                          contentSize: 18,
+                          contentSize: 9,
                           controller: priceController,
                           isContentBold: true,
                           onTap: () {
@@ -131,13 +127,12 @@ class AddItemWidget extends StatelessWidget {
                       )
                     : CustomText(
                         icon: FontAwesomeIcons.moneyBillWave,
-                        iconSize: 22.sp,
+                        iconSize: 16.sp,
                         text: itemModel.salesprice.toString(),
                       ),
                 TextBuilder(
                   AppLocalizations.of(context)!.quantity,
                   isHeader: true,
-                  fontSize: 13,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,14 +158,14 @@ class AddItemWidget extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_circle_up_outlined,
                         color: AppColors.primaryColorBlue,
-                        size: 30.sp,
+                        size: 20.sp,
                       ),
                     ),
                     Flexible(
                       child: CustomTextFormField(
                         labelText: quantityController.toString(),
                         centerContent: true,
-                        contentSize: 18,
+                        contentSize: 12,
                         controller: Controller,
                         keyboardType: TextInputType.number,
                         isContentBold: true,
@@ -218,30 +213,29 @@ class AddItemWidget extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_circle_down_outlined,
                         color: AppColors.secondColorOrange,
-                        size: 30.sp,
+                        size: 20.sp,
                       ),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextBuilder(
-                        AppLocalizations.of(context)!.discount,
-                        isHeader: true,
-                        fontSize: 14,
-                      ),
-                      TextBuilder(
-                        // ignore: prefer_interpolation_to_compose_strings
-                        itemModel.discP.toString() + "%",
-                        isHeader: true,
-                        fontSize: 14,
-                      ),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 6),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       TextBuilder(
+                //         AppLocalizations.of(context)!.discount,
+                //         isHeader: true,
+                //
+                //       ),
+                //       TextBuilder(
+                //         // ignore: prefer_interpolation_to_compose_strings
+                //         itemModel.discP.toString() + "%",
+                //         isHeader: true,
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -266,7 +260,17 @@ class AddItemWidget extends StatelessWidget {
                     TextBuilder(
                       AppLocalizations.of(context)!.add,
                       isHeader: true,
-                      fontSize: 14,
+                    ),
+                    const TextBuilder("||"),
+                    TextBuilder(
+                      AppLocalizations.of(context)!.discount,
+                      isHeader: true,
+
+                    ),
+                    TextBuilder(
+                      // ignore: prefer_interpolation_to_compose_strings
+                      itemModel.discP.toString() + "%",
+                      isHeader: true,
                     ),
                   ],
                 ),

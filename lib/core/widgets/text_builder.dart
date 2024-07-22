@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../helper/app_colors.dart';
+import '../helper/global_methods.dart';
 
 class TextBuilder extends StatelessWidget {
   final String text;
@@ -36,7 +37,11 @@ class TextBuilder extends StatelessWidget {
         fontFamily: 'Cairo',
         color: color,
         fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
-        fontSize: isCanceled ? 15.sp : fontSize?.sp,
+        fontSize: isCanceled
+            ? 15.sp
+            : GlobalMethods.isLandscape(context)
+                ? 11.sp
+                : fontSize?.sp,
         decoration:
             isCanceled ? TextDecoration.lineThrough : TextDecoration.none,
       ),
@@ -55,9 +60,9 @@ class CustomText extends StatelessWidget {
     Key? key,
     required this.icon,
     this.iconColor = AppColors.primaryColorBlue,
-    this.iconSize = 24,
+    this.iconSize = 20,
     required this.text,
-    this.contentSize = 15,
+    this.contentSize = 12,
   }) : super(key: key);
 
   @override

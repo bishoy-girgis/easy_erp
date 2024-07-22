@@ -17,16 +17,16 @@ class WelcomeMrSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextBuilder(
-          AppLocalizations.of(context)!.welcome,
+          "${AppLocalizations.of(context)!.welcome} ...",
           color: AppColors.secondColorOrange,
-          fontSize: 14.sp,
+          fontSize: 16,
           isHeader: true,
         ),
         TextBuilder(
           name,
           isHeader: true,
           color: Colors.blueGrey,
-          fontSize: 16.sp,
+          fontSize: 18,
           textAlign: TextAlign.end,
         ),
       ],

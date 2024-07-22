@@ -38,10 +38,11 @@ class InvoiceMainDataSection extends StatelessWidget {
             TextBuilder(
               AppLocalizations.of(context)!.invoice_id,
               isHeader: true,
-              fontSize: 16,
+              fontSize: 12,
             ),
             CustomTextFormField(
               labelText: AppLocalizations.of(context)!.auto,
+              contentSize: 11,
               centerContent: true,
               isLabelBold: true,
               isClickable: false,
@@ -51,7 +52,7 @@ class InvoiceMainDataSection extends StatelessWidget {
             TextBuilder(
               AppLocalizations.of(context)!.invoice_date,
               isHeader: true,
-              fontSize: 16,
+              fontSize: 12,
             ),
             const Row(
               children: [
@@ -67,7 +68,7 @@ class InvoiceMainDataSection extends StatelessWidget {
             TextBuilder(
               AppLocalizations.of(context)!.invoice_type,
               isHeader: true,
-              fontSize: 16,
+              fontSize: 12,
             ),
             const SellectCashOrCreditSection(),
           ],
@@ -109,7 +110,7 @@ class SearchOnCustomerSection extends StatefulWidget {
     required this.labelText,
     this.prefixPressed,
     this.hintText,
-    this.contentSize = 18,
+    this.contentSize = 12,
     this.keyboardType,
     this.prefixIcon,
     this.prefixIconColor,
@@ -169,12 +170,12 @@ class SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
               textAlign: TextAlign.center,
               baseStyle: TextStyle(
                 fontFamily: 'Cairo',
-                fontSize: 16.sp,
+                fontSize: 11.sp,
                 fontWeight: FontWeight.bold,
               ),
               textAlignVertical: TextAlignVertical.center,
               dropdownSearchDecoration: InputDecoration(
-                  label: TextBuilder(widget.labelText),
+                  label: TextBuilder(widget.labelText,fontSize: 11),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                   )),
