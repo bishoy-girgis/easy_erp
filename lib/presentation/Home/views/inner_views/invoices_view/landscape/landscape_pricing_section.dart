@@ -2,36 +2,38 @@
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_erp/core/helper/app_constants.dart';
-import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/core/widgets/custom_text_form_field.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/models/payment_type_model/pay_ment_type_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
-import 'package:easy_erp/presentation/cubits/item_cubit/item_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/helper/app_colors.dart';
-import '../../../../../../core/helper/global_methods.dart';
 import '../../../../../../core/helper/locator.dart';
-import '../../../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../cubits/addItem_cubit/add_item_cubit.dart';
 import '../../../../../cubits/payment_type_cubit/payment_type_cubit.dart';
 
-class PricingSection extends StatelessWidget {
-  PricingSection({
+
+class LandScapePricingSection extends StatelessWidget {
+  LandScapePricingSection({
     super.key,
     required this.items,
   });
+
   final List<ItemModel> items;
+
   double totalAmount = 0.0;
+
   double taxAmount = 0.0;
+
   double amountBeforeTex = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -45,7 +47,8 @@ class PricingSection extends StatelessWidget {
           builder: (context, state) {
             if (AppConstants.vatType == 2) {
               for (int i = 0; i < items.length; i++) {
-                totalAmount += (items[i].salesprice! * items[i].quantity);
+                totalAmount +=
+                    (items[i].salesprice! * items[i].quantity);
               }
               taxAmount =
                   ((AppConstants.vat * totalAmount) / (100 + AppConstants.vat));
@@ -53,7 +56,8 @@ class PricingSection extends StatelessWidget {
             }
             if (AppConstants.vatType == 1) {
               for (int i = 0; i < items.length; i++) {
-                amountBeforeTex += (items[i].salesprice! * items[i].quantity);
+                amountBeforeTex +=
+                    (items[i].salesprice! * items[i].quantity);
               }
               taxAmount = amountBeforeTex * (AppConstants.vat / 100);
               totalAmount = amountBeforeTex + taxAmount;
@@ -63,26 +67,9 @@ class PricingSection extends StatelessWidget {
             SharedPref.set(key: 'taxAmount', value: taxAmount);
             return Column(
               children: [
-                CustomElevatedButton(
-                  backgroundColor: Colors.white,
-                  borderColor: AppColors.primaryColorBlue,
-                  hasBorder: true,
-                  borderWidth: 2,
-                  title: TextBuilder(
-                    AppLocalizations.of(context)!.select_items,
-                    isHeader: true,
-                  ),
-                  onPressed: () async {
-                    await GetItemCubit.get(context).getItems();
-
-                    if (kDebugMode) {
-                      print(
-                          "${SharedPref.get(key: "ReturnSelectedId")}   invoice IIDDDDDD");
-                    }
-                    GlobalMethods.goRouterNavigateTO(
-                        context: context,
-                        router: AppRouters.kAddItemsIntoInvoice);
-                  },
+                Divider(
+                  thickness: 3,
+                  height: 15.h,
                 ),
                 const GapH(h: 1),
                 TextBuilder(
@@ -103,6 +90,7 @@ class PricingSection extends StatelessWidget {
                   children: [
                     Column(
                       children: [
+
                         TextBuilder(
                           AppLocalizations.of(context)!.amount_before_tax,
                           fontSize: 16,
@@ -169,6 +157,7 @@ class ChoosePaymentType extends StatelessWidget {
 
   final TextEditingController _controller = TextEditingController();
   double price = 0;
+
   @override
   Widget build(BuildContext context) {
     _controller.text = totalAmount.toString();

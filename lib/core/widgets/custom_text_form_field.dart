@@ -83,7 +83,9 @@ class CustomTextFormField extends StatelessWidget {
         textAlign: centerContent ? TextAlign.center : TextAlign.justify,
         style: TextStyle(
           fontFamily: "Cairo",
-          fontSize: contentSize.sp,
+          fontSize: GlobalMethods.isLandscape(context)
+              ? 7.sp
+              : contentSize.sp,
           fontWeight: isContentBold ? FontWeight.bold : FontWeight.normal,
         ),
         decoration: InputDecoration(

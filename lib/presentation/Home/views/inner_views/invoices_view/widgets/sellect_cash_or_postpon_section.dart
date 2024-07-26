@@ -55,7 +55,7 @@ class _SellectCashOrCreditSectionState
             return DropdownMenuItem(
               alignment: Alignment.centerRight,
               value: items,
-              child: TextBuilder(items,fontSize: 11),
+              child: TextBuilder(items),
             );
           }).toList(),
         ),

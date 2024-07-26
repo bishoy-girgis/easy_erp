@@ -50,7 +50,7 @@ dependencies:
   json_annotation: any
   path_provider: ^2.1.2
   pdf: any
-  printing: any
+  printing: ^5.11.1
   provider: ^6.1.1
   qr_flutter: ^4.1.0
   shared_preferences: ^2.2.2

@@ -3,6 +3,8 @@ import 'package:easy_erp/core/helper/locator.dart';
 import 'package:easy_erp/core/helper/page_route_name.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/landscape/Landscape_Invoice_maindata.dart.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/landscape/landscape_invoice_items.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/gap.dart';
@@ -13,6 +15,8 @@ import 'package:intl/intl.dart';
 import '../../../../../core/helper/pdf_helper.dart';
 import '../../../../cubits/addItem_cubit/add_item_cubit.dart';
 import '../../../../cubits/invoice_cubit/invoice_cubit.dart';
+import '../../../../cubits/item_cubit/item_cubit.dart';
+import 'landscape/landscape_pricing_section.dart';
 import 'widgets/Invoice-main_data_section.dart';
 import 'widgets/pricing_section.dart';
 import 'widgets/selected_items_to_invoice.dart';
@@ -25,7 +29,58 @@ class CreateInvoiceView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: _buildCreateInvoiceBody(),
+      body: GlobalMethods.isLandscape(context)
+          ? _landScapeInvoiceBody()
+          : _buildCreateInvoiceBody(),
+    );
+  }
+
+  SafeArea _landScapeInvoiceBody() {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: CustomScrollView(
+          slivers: [
+            LandscapeInvoiceMainDataSection(),
+            const SliverToBoxAdapter(
+              child: GapH(h: 1),
+            ),
+            BlocBuilder<GetItemCubit, GetItemState>(
+              builder: (context, state) {
+                return const LandscapeInvoiceItems();
+                },
+            ),
+            const SliverToBoxAdapter(
+              child: GapH(h: 1),
+            ),
+            BlocBuilder<AddItemCubit, AddItemState>(
+              builder: (context, state) {
+                return LandScapePricingSection(
+                    items: BlocProvider.of<AddItemCubit>(context).addedItems);
+              },
+            ),
+            const SliverToBoxAdapter(child: GapH(h: 1)),
+            BlocBuilder<AddItemCubit, AddItemState>(
+              builder: (context, state) {
+                debugPrint(state.runtimeType.toString());
+                return getIt.get<AddItemCubit>().addedItems.isEmpty
+                    ? SliverToBoxAdapter(
+                        child: Card(
+                            elevation: 5,
+                            child: TextBuilder(
+                              AppLocalizations.of(context)!.no_items_added,
+                              textAlign: TextAlign.center,
+                            )),
+                      )
+                    : SelectedItemsToInvoice(
+                        items:
+                            BlocProvider.of<AddItemCubit>(context).addedItems,
+                      );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -85,8 +140,7 @@ class CreateInvoiceView extends StatelessWidget {
               SharedPref.get(key: 'custID') == 0) &&
           (SharedPref.get(key: 'invoiceTypeID')) == 2) {
         GlobalMethods.buildFlutterToast(
-            message:
-            AppLocalizations.of(context)!.chooseInvoice,
+            message: AppLocalizations.of(context)!.chooseInvoice,
             state: ToastStates.ERROR);
         return false;
       }
@@ -103,6 +157,7 @@ class CreateInvoiceView extends StatelessWidget {
 
       return true;
     }
+
     bool checkPaymentTypes() {
       if (SharedPref.get(key: 'invoiceTypeID') == 2) {
         return true;
@@ -119,14 +174,13 @@ class CreateInvoiceView extends StatelessWidget {
       return true;
     }
 
-
     return AppBar(
       leading: IconButton(
           onPressed: () {
             getIt.get<AddItemCubit>().addedItems.isNotEmpty
                 ? GlobalMethods.showAlertAddressDialog(
                     context,
-                    title:  AppLocalizations.of(context)!.removeInvoice,
+                    title: AppLocalizations.of(context)!.removeInvoice,
                     titleButton1: AppLocalizations.of(context)!.yes,
                     titleButton2: AppLocalizations.of(context)!.no,
                     onPressedButton1: () {

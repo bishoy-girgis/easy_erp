@@ -33,7 +33,6 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
         controller: dateController,
         readOnly: true,
         centerContent: true,
-        contentSize: 11,
         onTap: () async {
           selectedDate = await picktDate();
           if (selectedDate != null) {
@@ -81,7 +80,6 @@ class HoursAndMinutes extends StatelessWidget {
     return Center(
       child: CustomTextFormField(
         centerContent: true,
-        contentSize: 11,
         labelText: timeController.text,
         isContentBold: true,
         controller: timeController,
