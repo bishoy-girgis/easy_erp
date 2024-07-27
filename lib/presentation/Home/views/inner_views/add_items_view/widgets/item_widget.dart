@@ -1,4 +1,5 @@
 import 'package:easy_erp/core/helper/locator.dart';
+import 'package:easy_erp/core/widgets/gap.dart';
 import 'package:easy_erp/data/models/item_model/item_model.dart';
 import 'package:easy_erp/data/services/local/shared_pref.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class AddItemWidget extends StatelessWidget {
                 : BlocProvider.of<AddItemCubit>(context).addItem(itemModel);
           },
           child: Container(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
@@ -104,11 +105,10 @@ class AddItemWidget extends StatelessWidget {
                     ? Flexible(
                         child: CustomTextFormField(
                           suffixIcon: FontAwesomeIcons.moneyBillWave,
-                          suffixIconSize: 14.sp,
+                          suffixIconSize: 9.sp,
                           labelText: priceController.text,
                           keyboardType: TextInputType.number,
                           centerContent: true,
-                          contentSize: 9,
                           controller: priceController,
                           isContentBold: true,
                           onTap: () {
@@ -127,12 +127,14 @@ class AddItemWidget extends StatelessWidget {
                       )
                     : CustomText(
                         icon: FontAwesomeIcons.moneyBillWave,
-                        iconSize: 16.sp,
+                        iconSize: 9.sp,
                         text: itemModel.salesprice.toString(),
                       ),
-                TextBuilder(
+                GlobalMethods.isLandscape(context)
+                    ? Container()
+                    : TextBuilder(
                   AppLocalizations.of(context)!.quantity,
-                  isHeader: true,
+                  fontSize: 6,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,14 +160,14 @@ class AddItemWidget extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_circle_up_outlined,
                         color: AppColors.primaryColorBlue,
-                        size: 20.sp,
+                        size: 12.sp,
                       ),
                     ),
+                    const GapW(w: 1),
                     Flexible(
                       child: CustomTextFormField(
                         labelText: quantityController.toString(),
                         centerContent: true,
-                        contentSize: 12,
                         controller: Controller,
                         keyboardType: TextInputType.number,
                         isContentBold: true,
@@ -192,6 +194,7 @@ class AddItemWidget extends StatelessWidget {
                         },
                       ),
                     ),
+                    const GapW(w: 1),
                     IconButton(
                       style: IconButton.styleFrom(
                         padding: const EdgeInsets.all(0),
@@ -213,7 +216,7 @@ class AddItemWidget extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_circle_down_outlined,
                         color: AppColors.secondColorOrange,
-                        size: 20.sp,
+                        size: 12.sp,
                       ),
                     ),
                   ],
@@ -261,17 +264,17 @@ class AddItemWidget extends StatelessWidget {
                       AppLocalizations.of(context)!.add,
                       isHeader: true,
                     ),
-                    const TextBuilder("||"),
-                    TextBuilder(
-                      AppLocalizations.of(context)!.discount,
-                      isHeader: true,
-
-                    ),
-                    TextBuilder(
-                      // ignore: prefer_interpolation_to_compose_strings
-                      itemModel.discP.toString() + "%",
-                      isHeader: true,
-                    ),
+                    // const TextBuilder("||"),
+                    // TextBuilder(
+                    //   AppLocalizations.of(context)!.discount,
+                    //   isHeader: true,
+                    //
+                    // ),
+                    // TextBuilder(
+                    //   // ignore: prefer_interpolation_to_compose_strings
+                    //   itemModel.discP.toString() + "%",
+                    //   isHeader: true,
+                    // ),
                   ],
                 ),
               ],

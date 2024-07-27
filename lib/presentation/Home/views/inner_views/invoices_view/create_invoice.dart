@@ -34,7 +34,6 @@ class CreateInvoiceView extends StatelessWidget {
           : _buildCreateInvoiceBody(),
     );
   }
-
   SafeArea _landScapeInvoiceBody() {
     return SafeArea(
       child: Padding(
@@ -42,47 +41,23 @@ class CreateInvoiceView extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             LandscapeInvoiceMainDataSection(),
-            const SliverToBoxAdapter(
-              child: GapH(h: 1),
-            ),
-            BlocBuilder<GetItemCubit, GetItemState>(
-              builder: (context, state) {
-                return const LandscapeInvoiceItems();
-                },
-            ),
-            const SliverToBoxAdapter(
-              child: GapH(h: 1),
-            ),
-            BlocBuilder<AddItemCubit, AddItemState>(
-              builder: (context, state) {
-                return LandScapePricingSection(
-                    items: BlocProvider.of<AddItemCubit>(context).addedItems);
-              },
-            ),
+            const SliverToBoxAdapter(child: GapH(h: 1)),
+            const LandscapeInvoiceItems(),
             const SliverToBoxAdapter(child: GapH(h: 1)),
             BlocBuilder<AddItemCubit, AddItemState>(
               builder: (context, state) {
-                debugPrint(state.runtimeType.toString());
-                return getIt.get<AddItemCubit>().addedItems.isEmpty
-                    ? SliverToBoxAdapter(
-                        child: Card(
-                            elevation: 5,
-                            child: TextBuilder(
-                              AppLocalizations.of(context)!.no_items_added,
-                              textAlign: TextAlign.center,
-                            )),
-                      )
-                    : SelectedItemsToInvoice(
-                        items:
-                            BlocProvider.of<AddItemCubit>(context).addedItems,
-                      );
+                return LandScapePricingSection(
+                  items: BlocProvider.of<AddItemCubit>(context).addedItems,
+                );
               },
             ),
+            const SliverToBoxAdapter(child: GapH(h: 1)),
           ],
         ),
       ),
     );
   }
+
 
   SafeArea _buildCreateInvoiceBody() {
     return SafeArea(

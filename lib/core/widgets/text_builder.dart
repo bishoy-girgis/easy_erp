@@ -40,7 +40,7 @@ class TextBuilder extends StatelessWidget {
         fontSize: isCanceled
             ? 15.sp
             : GlobalMethods.isLandscape(context)
-                ? 8.sp
+                ? 7.sp
                 : fontSize?.sp,
         decoration:
             isCanceled ? TextDecoration.lineThrough : TextDecoration.none,
@@ -68,8 +68,8 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(vertical: 2),
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: const Color.fromRGBO(227, 227, 227, 1),
@@ -83,11 +83,13 @@ class CustomText extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: "Cairo",
-                fontSize: contentSize.sp,
+                fontSize:  GlobalMethods.isLandscape(context)
+                    ? 7.sp
+                    : contentSize.sp,
               ),
             ),
           ),
-          const SizedBox(width: 8), // Adjust the spacing between icon and text
+          const SizedBox(width: 6), // Adjust the spacing between icon and text
           Icon(
             icon,
             color: iconColor,

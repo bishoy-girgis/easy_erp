@@ -39,7 +39,7 @@ class SelectedItem extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
@@ -53,14 +53,14 @@ class SelectedItem extends StatelessWidget {
                             itemModel.quantity.toString(),
                             color: Colors.white,
                             textAlign: TextAlign.center,
-                            fontSize: 14,
+                            fontSize: 10,
                           ),
                           const GapH(h: 5.4),
                           TextBuilder(
                             itemModel.unitname ?? "",
                             color: Colors.white,
                             textAlign: TextAlign.center,
-                            fontSize: 14,
+                            fontSize: 10,
                             maxLines: 2,
                           ),
                         ],
@@ -68,11 +68,11 @@ class SelectedItem extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    flex: 4,
+                    flex: 7,
                     child: Container(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 5.h,
+                        horizontal: 4.w,
+                        vertical: 4.h,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,18 +82,16 @@ class SelectedItem extends StatelessWidget {
                             isHeader: true,
                             color: AppColors.blackColor,
                           ),
-                          const GapH(h: 1),
+                          const GapH(h: 2),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               TextBuilder(
                                 AppLocalizations.of(context)!.price,
-                                fontSize: 13,
                                 color: Colors.black,
                               ),
                               TextBuilder(
                                 AppLocalizations.of(context)!.totalItemsInvoice,
-                                fontSize: 11,
                                 color: Colors.black,
                               ),
                             ],
@@ -107,12 +105,10 @@ class SelectedItem extends StatelessWidget {
                             children: [
                               TextBuilder(
                                 itemModel.salesprice.toString(),
-                                fontSize: 14,
                                 color: Colors.black,
                               ),
                               TextBuilder(
                                 "${itemModel.quantity * itemModel.salesprice!}",
-                                fontSize: 14,
                                 color: Colors.black,
                               ),
                             ],
@@ -121,18 +117,16 @@ class SelectedItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: IconButton(
-                      onPressed: () {
-                        BlocProvider.of<AddItemCubit>(context)
-                            .removeItem(itemModel);
-                      },
-                      icon: Icon(
-                        Icons.delete_rounded,
-                        // fill: double.infinity,
-                        // opticalSize: double.maxFinite,
-                        size: 30.sp,
-                      ),
+                  IconButton(
+                    onPressed: () {
+                      BlocProvider.of<AddItemCubit>(context)
+                          .removeItem(itemModel);
+                    },
+                    icon: Icon(
+                      Icons.delete_rounded,
+                      // fill: double.infinity,
+                      // opticalSize: double.maxFinite,
+                      size: 15.sp,
                     ),
                   )
                 ],
