@@ -39,7 +39,7 @@ Future<void> generateAndPrintArabicPdf(
       int quantity = items[i].quantity.toInt();
       finalItems.add([
         (items[i].salesprice! * quantity).toString(),
-        items[i].discP.toString(),
+        // items[i].discP.toString(),
         items[i].salesprice.toString(),
         quantity.toString(), // Use the integer quantity
         items[i].itmname ?? items[i].itmename ?? "None",
@@ -346,8 +346,8 @@ Future<void> generateAndPrintArabicPdf(
                       columnWidths: {
                         0: const FixedColumnWidth(90),
                         2: const FixedColumnWidth(80),
-                        3: const FixedColumnWidth(80),
-                        4: const FixedColumnWidth(180),
+                        3: const FixedColumnWidth(90),
+                        4: const FixedColumnWidth(170),
                       },
                       headerStyle: TextStyle(fontSize: 5.sp),
                       headers: <dynamic>[
