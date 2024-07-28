@@ -52,12 +52,12 @@ class _SearchOnCategorySectionState extends State<SearchOnCategorySection> {
         textAlign: TextAlign.center,
         baseStyle: TextStyle(
           fontFamily: 'Cairo',
-          fontSize: 9.sp,
+          fontSize: 4.sp,
           fontWeight: FontWeight.bold,
         ),
         textAlignVertical: TextAlignVertical.center,
         dropdownSearchDecoration: InputDecoration(
-          label: TextBuilder(widget.labelText, fontSize: 11),
+          label: TextBuilder(widget.labelText, fontSize: 5.sp),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
           ),

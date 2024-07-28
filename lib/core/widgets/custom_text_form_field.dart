@@ -91,13 +91,14 @@ class CustomTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           alignLabelWithHint: true,
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+              const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
           floatingLabelBehavior: FloatingLabelBehavior.never,
           floatingLabelStyle: TextStyle(
-            fontSize: 12,
+            fontSize: GlobalMethods.isLandscape(context)
+                ? 7.sp
+                : 12.sp,
             color: focusedBorderColor,
             fontWeight: FontWeight.bold,
-            // fontSize: 16,
           ),
           filled: true,
           fillColor: backgroundOfTextFeild,
@@ -114,7 +115,7 @@ class CustomTextFormField extends StatelessWidget {
           label: TextBuilder(
             labelText,
             isHeader: isLabelBold,
-            fontSize: GlobalMethods.isLandscape(context) ? 12 : 14,
+            fontSize: GlobalMethods.isLandscape(context) ? 7 : 12,
           ),
           hintText: hintText,
           prefixIcon: prefixIcon == null

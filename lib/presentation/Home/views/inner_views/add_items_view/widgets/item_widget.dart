@@ -136,6 +136,7 @@ class AddItemWidget extends StatelessWidget {
                   AppLocalizations.of(context)!.quantity,
                   fontSize: 6,
                 ),
+                const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -239,11 +240,12 @@ class AddItemWidget extends StatelessWidget {
                 //     ],
                 //   ),
                 // ),
+                const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Transform.scale(
-                      scale: 1.5,
+                      scale: 1.2,
                       child: Checkbox(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6),

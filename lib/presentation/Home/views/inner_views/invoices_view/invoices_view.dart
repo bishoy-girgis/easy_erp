@@ -7,6 +7,7 @@ import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widge
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/helper/global_methods.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/gap.dart';
@@ -57,8 +58,9 @@ class _InvoicesViewState extends State<InvoicesView> {
         child: Column(
           children: [
             CustomTextFormField(
-              labelText:AppLocalizations.of(context)!.search,
-              hintText: AppLocalizations.of(context)!.search_with_id_code_barcode,
+              labelText: AppLocalizations.of(context)!.search,
+              hintText:
+                  AppLocalizations.of(context)!.search_with_id_code_barcode,
               suffixIcon: Icons.search,
               backgroundOfTextFeild: Colors.white,
               onChange: (v) {
@@ -84,31 +86,67 @@ class _InvoicesViewState extends State<InvoicesView> {
                       borderRadius: BorderRadius.circular(16),
                       color: AppColors.whiteColor,
                     ),
-                    child: ListView.builder(
-                        // reverse: true,
-                        physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        itemCount: searchForInvoices.isNotEmpty
-                            ? searchForInvoices.length
-                            : state.invoiceModels.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              InvoiceCubit.get(context).getInvoiceDataAndItems(
-                                context,
-                                invNo: searchForInvoices.isNotEmpty
-                                    ? searchForInvoices[index].invNo!
-                                    : state.invoiceModels[index].invNo!,
+                    child: GlobalMethods.isLandscape(context)
+                        ? GridView.builder(
+                            // reverse: true,
+                            physics: const BouncingScrollPhysics(),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            itemCount: searchForInvoices.isNotEmpty
+                                ? searchForInvoices.length
+                                : state.invoiceModels.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  InvoiceCubit.get(context)
+                                      .getInvoiceDataAndItems(
+                                    context,
+                                    invNo: searchForInvoices.isNotEmpty
+                                        ? searchForInvoices[index].invNo!
+                                        : state.invoiceModels[index].invNo!,
+                                  );
+                                },
+                                child: InvoiceWidget(
+                                  invoiceModel: searchForInvoices.isNotEmpty
+                                      ? searchForInvoices[index]
+                                      : state.invoiceModels[index],
+                                ),
                               );
                             },
-                            child: InvoiceWidget(
-                              invoiceModel: searchForInvoices.isNotEmpty
-                                  ? searchForInvoices[index]
-                                  : state.invoiceModels[index],
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 6.w,
+                              childAspectRatio: 2.0.r,
+                              mainAxisSpacing: 12.h,
                             ),
-                          );
-                        }),
+                          )
+                        : ListView.builder(
+                            // reverse: true,
+                            physics: const BouncingScrollPhysics(),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            itemCount: searchForInvoices.isNotEmpty
+                                ? searchForInvoices.length
+                                : state.invoiceModels.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  InvoiceCubit.get(context)
+                                      .getInvoiceDataAndItems(
+                                    context,
+                                    invNo: searchForInvoices.isNotEmpty
+                                        ? searchForInvoices[index].invNo!
+                                        : state.invoiceModels[index].invNo!,
+                                  );
+                                },
+                                child: InvoiceWidget(
+                                  invoiceModel: searchForInvoices.isNotEmpty
+                                      ? searchForInvoices[index]
+                                      : state.invoiceModels[index],
+                                ),
+                              );
+                            }),
                   ));
                 } else if (state is GetInvoiceFailure) {
                   debugPrint(state.error);
@@ -133,7 +171,7 @@ class _InvoicesViewState extends State<InvoicesView> {
                           }),
                     ),
                   );
-                } else{
+                } else {
                   return const CircularProgressIndicator();
                 }
               },

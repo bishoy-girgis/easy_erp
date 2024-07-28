@@ -54,7 +54,6 @@ class _LandscapeInvoiceItemsState extends State<LandscapeInvoiceItems> {
               setState(() {});
             },
           ),
-          const GapH(h: 1),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -79,10 +78,10 @@ class _LandscapeInvoiceItemsState extends State<LandscapeInvoiceItems> {
               child: GridView.builder(
                 padding: const EdgeInsets.all(8),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 4.w,
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 3.w,
                   mainAxisSpacing: 7.h,
-                  childAspectRatio: 0.75.r,
+                  childAspectRatio: 0.68.r,
                 ),
                 itemCount: searchController.text.isEmpty
                     ? allItems.length
@@ -106,7 +105,7 @@ class _LandscapeInvoiceItemsState extends State<LandscapeInvoiceItems> {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.9,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
@@ -120,7 +119,7 @@ class _LandscapeInvoiceItemsState extends State<LandscapeInvoiceItems> {
         child: Row(
           children: [
             Flexible(
-              flex: 5,
+              flex: 7,
               child: BlocBuilder<GetItemCubit, GetItemState>(
                 builder: (context, state) {
                   debugPrint("${SharedPref.get(key: "ReturnSelectedId")}");
@@ -144,7 +143,7 @@ class _LandscapeInvoiceItemsState extends State<LandscapeInvoiceItems> {
                   debugPrint(state.runtimeType.toString());
                   return Container(
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.9,
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),

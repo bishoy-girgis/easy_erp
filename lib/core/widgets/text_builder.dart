@@ -40,7 +40,7 @@ class TextBuilder extends StatelessWidget {
         fontSize: isCanceled
             ? 15.sp
             : GlobalMethods.isLandscape(context)
-                ? 7.sp
+                ? 5.sp
                 : fontSize?.sp,
         decoration:
             isCanceled ? TextDecoration.lineThrough : TextDecoration.none,

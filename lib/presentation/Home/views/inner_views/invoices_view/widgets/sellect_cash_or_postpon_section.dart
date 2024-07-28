@@ -41,7 +41,7 @@ class _SellectCashOrCreditSectionState
     ];
     return Center(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 14.w,vertical: 5.h),
+        padding: EdgeInsets.symmetric(horizontal: 7.w,vertical: 4.h),
         width: double.infinity,
         child: DropdownButton(
           hint: TextBuilder(

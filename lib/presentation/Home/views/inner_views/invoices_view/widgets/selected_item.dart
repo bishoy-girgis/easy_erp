@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/helper/global_methods.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -39,7 +40,7 @@ class SelectedItem extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
@@ -53,14 +54,18 @@ class SelectedItem extends StatelessWidget {
                             itemModel.quantity.toString(),
                             color: Colors.white,
                             textAlign: TextAlign.center,
-                            fontSize: 10,
+                            fontSize: GlobalMethods.isLandscape(context)
+                                ? 7.sp
+                                :  10.sp,
                           ),
                           const GapH(h: 5.4),
                           TextBuilder(
                             itemModel.unitname ?? "",
                             color: Colors.white,
                             textAlign: TextAlign.center,
-                            fontSize: 10,
+                            fontSize: GlobalMethods.isLandscape(context)
+                                ? 7.sp
+                                :  10.sp,
                             maxLines: 2,
                           ),
                         ],
@@ -68,7 +73,7 @@ class SelectedItem extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    flex: 7,
+                    flex: 8,
                     child: Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 4.w,
@@ -126,7 +131,9 @@ class SelectedItem extends StatelessWidget {
                       Icons.delete_rounded,
                       // fill: double.infinity,
                       // opticalSize: double.maxFinite,
-                      size: 15.sp,
+                      size: GlobalMethods.isLandscape(context)
+                          ? 10.sp
+                          :  15.sp,
                     ),
                   )
                 ],

@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/helper/app_colors.dart';
+import '../../../../../../core/helper/global_methods.dart';
 import '../../../../../../core/helper/locator.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
@@ -192,7 +193,9 @@ class ChoosePaymentType extends StatelessWidget {
               textAlign: TextAlign.center,
               baseStyle: TextStyle(
                 fontFamily: 'Cairo',
-                fontSize: 16.sp,
+                fontSize: GlobalMethods.isLandscape(context)
+                    ? 5.sp
+                    :  12.sp,
                 fontWeight: FontWeight.bold,
               ),
               textAlignVertical: TextAlignVertical.center,

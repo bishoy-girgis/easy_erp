@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/helper/app_colors.dart';
+import '../../../../../../core/helper/global_methods.dart';
 import '../../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../../core/widgets/gap.dart';
 import '../../../../../../core/widgets/text_builder.dart';
@@ -57,7 +58,7 @@ class LandscapeInvoiceMainDataSection extends StatelessWidget {
                     ],
                   ),
                 ),
-                const GapW(w: 2),
+                const GapW(w: 4),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +79,6 @@ class LandscapeInvoiceMainDataSection extends StatelessWidget {
                 ),
               ],
             ),
-            const GapH(h: 1),
             Row(
               children: [
                 Expanded(
@@ -86,7 +86,7 @@ class LandscapeInvoiceMainDataSection extends StatelessWidget {
                     labelText: AppLocalizations.of(context)!.customer,
                   ),
                 ),
-                const GapW(w: 2),
+                const GapW(w: 4),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +94,6 @@ class LandscapeInvoiceMainDataSection extends StatelessWidget {
                       TextBuilder(
                         AppLocalizations.of(context)!.invoice_type,
                         isHeader: true,
-                        fontSize: 12,
                       ),
                       const SellectCashOrCreditSection(),
                     ],
@@ -102,7 +101,6 @@ class LandscapeInvoiceMainDataSection extends StatelessWidget {
                 ),
               ],
             ),
-            const GapH(h: 1),
           ],
         ),
       ),
@@ -203,7 +201,9 @@ class SearchOnCustomerSectionState extends State<SearchOnCustomerSection> {
               textAlign: TextAlign.center,
               baseStyle: TextStyle(
                 fontFamily: 'Cairo',
-                fontSize: 11.sp,
+                fontSize:GlobalMethods.isLandscape(context)
+                    ? 5.sp
+                    :  11.sp,
                 fontWeight: FontWeight.bold,
               ),
               textAlignVertical: TextAlignVertical.center,

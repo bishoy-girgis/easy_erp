@@ -69,7 +69,7 @@ class InvoiceWidget extends StatelessWidget {
                       children: [
                         ImageIcon(
                           const AssetImage("assets/images/invoice.png"),
-                          size: 16.sp,
+                          size: 14.sp,
                         ),
                         const GapW(w: 5),
                         TextBuilder(
