@@ -151,11 +151,11 @@ Future<void> generateAndPrintArabicPdf(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       buildPDFText("الإجمالي", fontSize: 7),
-                      SizedBox(width: 4.w),
+                      SizedBox(width: 7.w),
                       buildPDFText("السعر", fontSize: 7),
-                      SizedBox(width: 4.w),
+                      SizedBox(width: 7.w),
                       buildPDFText("الكمية", fontSize: 7),
-                      SizedBox(width: 14.w),
+                      SizedBox(width: 15.w),
                       buildPDFText("الصنف", fontSize: 7),
                     ],
                   ),
@@ -164,20 +164,20 @@ Future<void> generateAndPrintArabicPdf(
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          buildPDFText(item[0].toString(), fontSize: 8),
-                          SizedBox(width: 14.w),
-                          buildPDFText(item[2].toString(), fontSize: 8),
-                          SizedBox(width: 14.w),
-                          buildPDFText(item[3].toString(), fontSize: 8),
-                          SizedBox(width: 8.w),
+                          SizedBox(child: buildPDFText(item[0].toString(), fontSize: 7),width: 22.w),
+                          SizedBox(width: 5.w),
+                          SizedBox(child: buildPDFText(item[1].toString(), fontSize: 7),width: 22.w),
+                          SizedBox(width: 5.w),
+                          SizedBox(child: buildPDFText(item[2].toString(), fontSize: 7),width: 22.w),
+                          // SizedBox(width: 5.w),
                           //buildPDFText(item[4].toString(), fontSize: 7),
                           Directionality(
                             textDirection: TextDirection.rtl,
                             child: Container(
-                              width: 50.w,
+                              width: 35.w,
                               child: Text(
-                                item[4].toString(),
-                                style: TextStyle(fontSize: 8.sp),
+                                item[3].toString(),
+                                style: TextStyle(fontSize: 7.sp),
                                 maxLines: 3,
                                 overflow: TextOverflow.visible,
                               ),
@@ -428,10 +428,10 @@ Directionality buildPDFText(String text, {double fontSize = 10}) {
 }
 
 buildDottedDivider() {
-  const double dashWidth = 5;
-  const double dashSpace = 3;
-  final numberOfDashes =
-      (PdfPageFormat.a4.width / (dashWidth + dashSpace)).floor();
+  const double dashWidth = 24; // Increase dash width here
+  const double dashSpace = 14; // Increase space between dashes here
+
+  final numberOfDashes = (PdfPageFormat.a4.width / (dashWidth + dashSpace)).floor();
 
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -440,7 +440,7 @@ buildDottedDivider() {
         width: dashWidth,
         height: 1,
         color: PdfColors.black,
-        //margin: const EdgeInsets.symmetric(horizontal: dashSpace),
+        margin: const EdgeInsets.symmetric(horizontal: dashSpace / 2), // Adjust margin for better spacing
       );
     }),
   );
