@@ -4,6 +4,7 @@ import 'package:easy_erp/core/helper/app_colors.dart';
 import 'package:easy_erp/core/widgets/text_builder.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/create_invoice.dart';
 import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/invoice_widget.dart';
+import 'package:easy_erp/presentation/Home/views/inner_views/invoices_view/widgets/printer_section.dart';
 import 'package:easy_erp/presentation/cubits/payment_type_cubit/payment_type_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +16,7 @@ import '../../../../../core/widgets/shimmer_invoice_widget.dart';
 import '../../../../../data/models/invoice_model/invoice_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../cubits/invoice_cubit/invoice_cubit.dart';
+import '../../widgets/menu_bar_section.dart';
 
 class InvoicesView extends StatefulWidget {
   const InvoicesView({Key? key}) : super(key: key);
@@ -29,6 +31,13 @@ class _InvoicesViewState extends State<InvoicesView> {
   List<InvoiceModel> searchForInvoices = [];
 
   TextEditingController searchController = TextEditingController();
+  bool isMenuOpen = false;
+
+  void toggleMenu() {
+    setState(() {
+      isMenuOpen = !isMenuOpen;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +56,26 @@ class _InvoicesViewState extends State<InvoicesView> {
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
+        toolbarHeight: isMenuOpen ? 70.h : 30.h,
+        actions: [
+          !isMenuOpen
+              ? IconButton(
+                  icon: const Icon(
+                    Icons.print,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isMenuOpen = !isMenuOpen;
+                    });
+                  },
+                )
+              : Container(),
+          PrinterSection(
+            isMenuOpen: isMenuOpen,
+            onPrinterFormatSelected: toggleMenu,
+          ),
+        ],
         title: TextBuilder(
           AppLocalizations.of(context)!.invoises.toLowerCase(),
           isHeader: true,
@@ -78,8 +107,10 @@ class _InvoicesViewState extends State<InvoicesView> {
             BlocConsumer<InvoiceCubit, InvoiceState>(
               listener: (context, state) {},
               builder: (context, state) {
-                if (state is GetInvoiceSuccess) {
-                  invoices = state.invoiceModels;
+                var cubit = InvoiceCubit.get(context);
+                if (state is GetInvoiceSuccess ||
+                    state is GetInvoiceDataSuccess) {
+                  invoices = cubit.invoices;
                   return Expanded(
                       child: Container(
                     decoration: BoxDecoration(
@@ -94,7 +125,7 @@ class _InvoicesViewState extends State<InvoicesView> {
                                 vertical: 10, horizontal: 10),
                             itemCount: searchForInvoices.isNotEmpty
                                 ? searchForInvoices.length
-                                : state.invoiceModels.length,
+                                : cubit.invoices.length,
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
@@ -103,13 +134,13 @@ class _InvoicesViewState extends State<InvoicesView> {
                                     context,
                                     invNo: searchForInvoices.isNotEmpty
                                         ? searchForInvoices[index].invNo!
-                                        : state.invoiceModels[index].invNo!,
+                                        : cubit.invoices[index].invNo!,
                                   );
                                 },
                                 child: InvoiceWidget(
                                   invoiceModel: searchForInvoices.isNotEmpty
                                       ? searchForInvoices[index]
-                                      : state.invoiceModels[index],
+                                      : cubit.invoices[index],
                                 ),
                               );
                             },
@@ -128,7 +159,7 @@ class _InvoicesViewState extends State<InvoicesView> {
                                 vertical: 10, horizontal: 10),
                             itemCount: searchForInvoices.isNotEmpty
                                 ? searchForInvoices.length
-                                : state.invoiceModels.length,
+                                : cubit.invoices.length,
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
@@ -137,13 +168,13 @@ class _InvoicesViewState extends State<InvoicesView> {
                                     context,
                                     invNo: searchForInvoices.isNotEmpty
                                         ? searchForInvoices[index].invNo!
-                                        : state.invoiceModels[index].invNo!,
+                                        : cubit.invoices[index].invNo!,
                                   );
                                 },
                                 child: InvoiceWidget(
                                   invoiceModel: searchForInvoices.isNotEmpty
                                       ? searchForInvoices[index]
-                                      : state.invoiceModels[index],
+                                      : cubit.invoices[index],
                                 ),
                               );
                             }),

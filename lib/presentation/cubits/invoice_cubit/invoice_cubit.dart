@@ -120,7 +120,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
             invoDate: formattedDate,
             invoiceType: "نسخة من فاتورة ضريبية مبسطة",
             items: r.invoicedtls ?? []);
-        getInvoices();
+        // getInvoices();
         return printInvoiceModel;
       },
     );
