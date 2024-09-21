@@ -117,6 +117,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
             finalValue: r.invoicehead![0].finalValue!,
             netvalue: r.invoicehead![0].netvalue!,
             taxAdd: r.invoicehead![0].taxAdd!,
+            fax: r.invoicehead![0].fax!,
             invoDate: formattedDate,
             invoiceType: "نسخة من فاتورة ضريبية مبسطة",
             items: r.invoicedtls ?? []);

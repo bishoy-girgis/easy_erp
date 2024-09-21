@@ -88,8 +88,8 @@ class _ReturnsViewState extends State<ReturnsView> {
           BlocConsumer<ReturnCubit, ReturnState>(
             listener: (context, state) {},
             builder: (context, state) {
-              if (state is GetReturnSuccess) {
-                returns = state.returnModels;
+              if (state is GetReturnSuccess || state is GetReturnDataSuccess) {
+                returns = ReturnCubit.get(context).returns;
                 return Expanded(
                     child: Container(
                   decoration: BoxDecoration(
@@ -103,7 +103,7 @@ class _ReturnsViewState extends State<ReturnsView> {
                           vertical: 10, horizontal: 10),
                       itemCount: searchForReturnss.isNotEmpty
                           ? searchForReturnss.length
-                          : state.returnModels.length,
+                          : returns.length,
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
@@ -111,13 +111,13 @@ class _ReturnsViewState extends State<ReturnsView> {
                               context,
                               returnInvNo: searchForReturnss.isNotEmpty
                                   ? searchForReturnss[index].rtnInvNo!
-                                  : state.returnModels[index].rtnInvNo!,
+                                  : returns[index].rtnInvNo!,
                             );
                           },
                           child: ReturnWidget(
                             returnModel: searchForReturnss.isNotEmpty
                                 ? searchForReturnss[index]
-                                : state.returnModels[index],
+                                : returns[index],
                           ),
                         );
                       }),

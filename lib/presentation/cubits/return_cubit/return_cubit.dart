@@ -107,6 +107,7 @@ class ReturnCubit extends Cubit<ReturnState> {
           formattedTime = DateFormat('h:mm a').format(parsedTime);
         }
         generateAndPrintArabicPdf(context,
+            fax: r.rtninvoicehead?[0].fax,
             isReturn: true,
             qrData: r.qr ?? "empty",
             invNo: returnInvNo,
@@ -118,7 +119,7 @@ class ReturnCubit extends Cubit<ReturnState> {
             invoDate: formattedDate,
             invoiceType: "نسخة من مرتجع ضريبي مبسط",
             items: r.rtninvoicedtls ?? []);
-        getReturns();
+        // getReturns();
         return printReturnModel;
       },
     );

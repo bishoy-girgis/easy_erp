@@ -134,9 +134,9 @@ class AddItemWidget extends StatelessWidget {
                     ? Container()
                     : TextBuilder(
                   AppLocalizations.of(context)!.quantity,
-                  fontSize: 6,
+                  fontSize: 12,
                 ),
-                const Spacer(),
+                // const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -161,7 +161,7 @@ class AddItemWidget extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_circle_up_outlined,
                         color: AppColors.primaryColorBlue,
-                        size: 12.sp,
+                        size: 20.sp,
                       ),
                     ),
                     const GapW(w: 1),
@@ -217,7 +217,7 @@ class AddItemWidget extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_circle_down_outlined,
                         color: AppColors.secondColorOrange,
-                        size: 12.sp,
+                        size: 20.sp,
                       ),
                     ),
                   ],
@@ -240,7 +240,7 @@ class AddItemWidget extends StatelessWidget {
                 //     ],
                 //   ),
                 // ),
-                const Spacer(),
+                // const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

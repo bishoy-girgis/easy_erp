@@ -12,6 +12,8 @@ class InvoiceModel extends Equatable {
   final double? finalValue;
   final String? CompanyName;
   final String? vat;
+  final String? fax;
+
   final String? qr;
 
   const InvoiceModel({
@@ -25,6 +27,7 @@ class InvoiceModel extends Equatable {
     this.taxAdd,
     this.finalValue,
     this.CompanyName,
+    this.fax,
     this.vat,
     this.qr,
   });
@@ -41,11 +44,13 @@ class InvoiceModel extends Equatable {
         finalValue: json['FinalValue'] as double?,
         CompanyName: json['companyname'] as String?,
         vat: json['VAT'] as String?,
+        fax: json['fax'] as String?,
         qr: json['QR'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
         'Invid': invid,
+        'fax': fax,
         'InvNo': invNo,
         'invdate': invdate,
         'invtime': invtime,
@@ -73,6 +78,7 @@ class InvoiceModel extends Equatable {
       finalValue,
       CompanyName,
       vat,
+      fax,
       qr,
     ];
   }

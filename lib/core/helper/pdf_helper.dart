@@ -14,7 +14,6 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:spelling_number/spelling_number.dart';
-import 'package:syncfusion_flutter_pdf/pdf.dart';
 import '../../data/models/item_model/item_model.dart';
 import '../../presentation/cubits/addItem_cubit/add_item_cubit.dart';
 
@@ -22,6 +21,7 @@ Future<void> generateAndPrintArabicPdf(
   context, {
   invNo,
   bool isReturn = false,
+      String? fax,
   required String qrData,
   required String invoDate,
   required String invoTime,
@@ -32,6 +32,8 @@ Future<void> generateAndPrintArabicPdf(
   required String invoiceType,
   required List<ItemModel> items,
 }) async {
+  int printType = SharedPref.get(key: 'printerFormat') ?? 0;
+
   List<dynamic> getItems() {
     List<dynamic> finalItems = [];
     var length = items.length;
@@ -41,8 +43,11 @@ Future<void> generateAndPrintArabicPdf(
         (items[i].salesprice! * quantity).toString(),
         // items[i].discP.toString(),
         items[i].salesprice.toString(),
+        // printType == 0 ? items[i].unitname : null ,
         quantity.toString(), // Use the integer quantity
         items[i].itmname ?? items[i].itmename ?? "None",
+        printType == 0 ? items[i].itmcode : null ,
+
       ]);
     }
     return finalItems;
@@ -63,7 +68,6 @@ Future<void> generateAndPrintArabicPdf(
     imageData = (image).buffer.asUint8List();
   }
 
-  int printType = SharedPref.get(key: 'printerFormat') ?? 0;
   var itemsList = getItems();
   final Document pdf = Document();
   var arabicFont = Font.ttf(
@@ -322,6 +326,12 @@ Future<void> generateAndPrintArabicPdf(
                                   ),
                                   buildPDFText('العميل : '),
                                 ]),
+                            fax != null ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  buildPDFText(fax),
+                                  buildPDFText('الرقم الضريبي : '),
+                                ]) : Container(),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -338,23 +348,27 @@ Future<void> generateAndPrintArabicPdf(
                     ]),
                 SizedBox(height: 10.h),
                 Container(
-                  width: 10 * PdfPageFormat.cm,
+                  width: 15 * PdfPageFormat.cm,
                   child: Directionality(
                     textDirection: TextDirection.rtl,
                     child: TableHelper.fromTextArray(
                       headerAlignment: Alignment.center,
                       columnWidths: {
                         0: const FixedColumnWidth(90),
-                        2: const FixedColumnWidth(80),
+                        1: const FixedColumnWidth(90),
+                        // 2: const FixedColumnWidth(80),
                         3: const FixedColumnWidth(90),
-                        4: const FixedColumnWidth(170),
+                        4: const FixedColumnWidth(100),
+                        5: const FixedColumnWidth(100),
                       },
                       headerStyle: TextStyle(fontSize: 5.sp),
                       headers: <dynamic>[
                         'الإجمالي',
                         'السعر',
+                        // "الوحده",
                         'الكمية',
-                        'الصنف'
+                        'الصنف',
+                        'كود'
                       ],
                       cellAlignment: Alignment.center,
                       cellStyle: TextStyle(fontSize: 7.sp),

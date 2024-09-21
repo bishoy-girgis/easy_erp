@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../data/services/local/shared_pref.dart';
 
 class PrinterSection extends StatelessWidget {
-  const PrinterSection({
+  PrinterSection({
     super.key,
     required this.isMenuOpen,
     required this.onPrinterFormatSelected,
@@ -13,6 +13,8 @@ class PrinterSection extends StatelessWidget {
 
   final bool isMenuOpen;
   final void Function() onPrinterFormatSelected;
+
+  var selected = SharedPref.get(key: 'printerFormat');
 
   @override
   Widget build(BuildContext context) {
@@ -28,33 +30,54 @@ class PrinterSection extends StatelessWidget {
         ),
         child: isMenuOpen
             ? Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            InkWell(
-              onTap: () {
-                SharedPref.set(key: 'printerFormat', value: 0);
-                onPrinterFormatSelected();
-              },
-              child: TextBuilder("A4", fontSize: 9),
-            ),
-            const Divider(color: Colors.white),
-            InkWell(
-              onTap: () {
-                SharedPref.set(key: 'printerFormat', value: 1);
-                onPrinterFormatSelected();
-              },
-              child: TextBuilder("POS", fontSize: 9),
-            ),
-            const Divider(color: Colors.white),
-            InkWell(
-              onTap: () {
-                SharedPref.set(key: 'printerFormat', value: 2);
-                onPrinterFormatSelected();
-              },
-              child: TextBuilder("RECEIPT", fontSize: 9),
-            ),
-          ],
-        )
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      color: selected == 0 ? Colors.white : Colors.grey,
+                      child: InkWell(
+                        onTap: () {
+                          SharedPref.set(key: 'printerFormat', value: 0);
+                          onPrinterFormatSelected();
+                        },
+                        child:
+                            const Center(child: TextBuilder("A4", fontSize: 9)),
+                      ),
+                    ),
+                  ),
+                  // const Divider(color: Colors.white),
+                  Expanded(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      color: selected == 1 ? Colors.white : Colors.grey,
+                      child: InkWell(
+                        onTap: () {
+                          SharedPref.set(key: 'printerFormat', value: 1);
+                          onPrinterFormatSelected();
+                        },
+                        child: const Center(
+                            child: TextBuilder("POS", fontSize: 9)),
+                      ),
+                    ),
+                  ),
+                  // const Divider(color: Colors.white),
+                  Expanded(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      color: selected == 2 ? Colors.white : Colors.grey,
+                      child: InkWell(
+                        onTap: () {
+                          SharedPref.set(key: 'printerFormat', value: 2);
+                          onPrinterFormatSelected();
+                        },
+                        child: const Center(
+                            child: TextBuilder("RECEIPT", fontSize: 9)),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             : null,
       ),
     );

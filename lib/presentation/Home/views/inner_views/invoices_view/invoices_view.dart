@@ -56,7 +56,7 @@ class _InvoicesViewState extends State<InvoicesView> {
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
-        toolbarHeight: isMenuOpen ? 70.h : 30.h,
+        toolbarHeight: isMenuOpen ? 75.h : 30.h,
         actions: [
           !isMenuOpen
               ? IconButton(
